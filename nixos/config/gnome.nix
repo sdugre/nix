@@ -5,7 +5,5 @@
   ]) ++ (with pkgs.gnome; [
     cheese
     geary
-    contacts
-    weather
   ]);
 }
