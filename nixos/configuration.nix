@@ -61,6 +61,13 @@
     };
   };
 
+  # Perform garbage collection weekly to maintain low disk usage
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 2w";
+ };
+
   # FIXME: Add the rest of your current configuration
   # Enable networking
   networking.networkmanager.enable = true;
@@ -127,6 +134,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
+  boot.loader.grub.configurationLimit = 10;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
