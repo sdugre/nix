@@ -97,9 +97,11 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = ([
+    inputs.agenix.packages.x86_64-linux.default
+  ]) ++ (with pkgs; [
     gnome.gnome-tweaks
-  ];
+  ]);
 
   # Configure keymap in X11
   services.xserver = {
