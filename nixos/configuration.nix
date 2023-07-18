@@ -90,7 +90,7 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  evironment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
   ];
 
