@@ -101,6 +101,7 @@
     inputs.agenix.packages.x86_64-linux.default
   ]) ++ (with pkgs; [
     gnome.gnome-tweaks
+    gnome.seahorse
   ]);
 
   # Configure keymap in X11
