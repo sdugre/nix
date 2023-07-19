@@ -76,6 +76,16 @@
 
   programs.firefox = {
     enable = true;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      ublock-origin
+      bitwarden
+    ];
+
+    profiles = {
+      default = {
+        isDefault = true;
+      }
+    }
   };
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
