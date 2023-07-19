@@ -9,6 +9,7 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
+    inputs.nur.hmModules.nur
 
     # You can also split up your configuration and import pieces of it here:
     ./config/gnome.nix
