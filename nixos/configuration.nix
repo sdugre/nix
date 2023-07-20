@@ -41,6 +41,11 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      packageOverrides = pkgs: {
+        nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+          inherit pkgs;
+        };
+      };
     };
   };
 
@@ -129,6 +134,8 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+
 
   # TODO: Set your hostname
   networking.hostName = "nixos";
