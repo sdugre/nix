@@ -178,4 +178,25 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
+
+  fileSystems."/mnt/video" = {
+    device = "192.168.1.16:/volume1/video";
+    fsType = "nfs";
+  };
+  fileSystems."/mnt/music" = {
+    device = "192.168.1.16:/volume1/music";
+    fsType = "nfs";
+  }; 
+  fileSystems."/mnt/photo" = {
+    device = "192.168.1.16:/volume1/photo";
+    fsType = "nfs";
+  }; 
+  fileSystems."/mnt/downloads" = {
+    device = "192.168.1.16:/volume1/downloads";
+    fsType = "nfs";
+  }; 
+  fileSystems."/mnt/homes" = {
+    device = "192.168.1.16:/volume1/homes";
+    fsType = "nfs";
+  }; 
 }
