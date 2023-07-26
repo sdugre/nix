@@ -123,6 +123,15 @@
     };
   };
   
+  # Enable zsh
+  programs.zsh.enable = true;
+
+  # Enable Oh-my-zsh
+  programs.zsh.oh-my-zsh = {
+    enable = true;
+    plugins = [ "git" "sudo" ];
+  };
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
