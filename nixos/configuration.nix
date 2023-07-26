@@ -146,6 +146,8 @@
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.configurationLimit = 10;
 
+  programs.zsh.enable = true;
+
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
     # FIXME: Replace with your username
@@ -156,6 +158,7 @@
       # initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
       description = "Sean Dugre";
+      shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
@@ -205,4 +208,10 @@
     fsType = "nfs";
     options = ["x-gvfs-show"];
   }; 
+  fileSystems."/mnt/docs" = {
+    device = "192.168.1.16:/volume1/docs";
+    fsType = "nfs";
+    options = ["x-gvfs-show"];
+  }; 
+
 }
