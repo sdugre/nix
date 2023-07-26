@@ -124,12 +124,17 @@
   };
   
   # Enable zsh
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    dotDir = ".config/zsh";
+    history = { };
+  };
 
   # Enable Oh-my-zsh
   programs.zsh.oh-my-zsh = {
     enable = true;
     plugins = [ "git" "sudo" ];
+    theme = "agnoster";
   };
 
   # Nicely reload system units when changing configs
