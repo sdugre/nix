@@ -127,7 +127,8 @@
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
-    history = { };
+    history = { }; # all defaults are OK.
+    enableAutosuggestions = true;
   };
 
   # Enable Oh-my-zsh
