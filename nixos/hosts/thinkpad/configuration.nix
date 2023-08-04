@@ -147,10 +147,15 @@
   networking.hostName = "thinkpad";
 
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.configurationLimit = 10;
+#  boot.loader.grub.enable = true;
+#  boot.loader.grub.device = "/dev/sda";
+#  boot.loader.grub.useOSProber = true;
+#  boot.loader.grub.configurationLimit = 10;
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+
 
   programs.zsh.enable = true;
 
