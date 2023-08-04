@@ -107,6 +107,7 @@
     gnome.gnome-tweaks
     gnome.seahorse
     lm_sensors
+    mnamer
     nmap
     tmux
     tree
