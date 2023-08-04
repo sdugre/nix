@@ -101,7 +101,9 @@
             nur.nixosModules.nur  
           ];
         };
+      };
 
+      homeConfigurations = {
         "sdugre@thinkpad" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires '>
           extraSpecialArgs = { inherit inputs outputs; };
@@ -111,8 +113,6 @@
             nur.nixosModules.nur  
           ];
         };
-
-
       };
     };
 }
