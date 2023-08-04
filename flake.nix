@@ -69,7 +69,19 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main nixos configuration file <
-            ./nixos/configuration.nix
+            ./nixos/hosts/nixos/configuration.nix
+            agenix.nixosModules.default
+            nur.nixosModules.nur
+          ];
+        };
+      };
+
+      nixosConfigurations = {
+        thinkpad = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            # > Our main nixos configuration file <
+            ./nixos/hosts/thinkpad/configuration.nix
             agenix.nixosModules.default
             nur.nixosModules.nur
           ];
@@ -85,10 +97,22 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/home.nix
+            ./home-manager/users/sdugre-nixos/home.nix
             nur.nixosModules.nur  
           ];
         };
+
+        "sdugre@thinkpad" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires '>
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            # > Our main home-manager configuration file <
+            ./home-manager/users/sdugre-thinkpad/home.nix
+            nur.nixosModules.nur  
+          ];
+        };
+
+
       };
     };
 }
