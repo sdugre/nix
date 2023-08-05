@@ -104,6 +104,7 @@
   environment.systemPackages = ([
     inputs.agenix.packages.x86_64-linux.default
   ]) ++ (with pkgs; [
+    gnome-connections
     gnome.gnome-tweaks
     gnome.seahorse
     lm_sensors
