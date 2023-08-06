@@ -145,6 +145,8 @@
 
   # TODO: Set your hostname
   networking.hostName = "nixos";
+  
+  networking.firewall.allowedTCPPorts = [ 3389 ]; 
 
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.grub.enable = true;
