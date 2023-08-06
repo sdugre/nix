@@ -69,7 +69,7 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main nixos configuration file <
-            ./nixos/hosts/nixos/configuration.nix
+            ./hosts/nixos/configuration.nix
             agenix.nixosModules.default
             nur.nixosModules.nur
           ];
