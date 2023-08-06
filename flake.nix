@@ -97,7 +97,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/users/sdugre-nixos/home.nix
+            ./home/sdugre/nixos/home.nix
             nur.nixosModules.nur  
           ];
         };
@@ -109,7 +109,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            ./home-manager/users/sdugre-thinkpad/home.nix
+            ./home/sdugre/thinkpad/home.nix
             nur.nixosModules.nur  
           ];
         };
