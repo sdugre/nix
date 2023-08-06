@@ -81,7 +81,7 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main nixos configuration file <
-            ./nixos/hosts/thinkpad/configuration.nix
+            ./hosts/thinkpad/configuration.nix
             agenix.nixosModules.default
             nur.nixosModules.nur
           ];
