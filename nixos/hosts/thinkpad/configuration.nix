@@ -147,6 +147,8 @@
   # TODO: Set your hostname
   networking.hostName = "thinkpad";
 
+  networking.firewall.allowedTCPPorts = [ 3389 ];
+
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
 #  boot.loader.grub.enable = true;
 #  boot.loader.grub.device = "/dev/sda";
@@ -155,8 +157,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-
 
   programs.zsh.enable = true;
 
