@@ -2,5 +2,6 @@
 { inputs, outputs, config, ... }: {
   imports = [
     ./nix.nix 
+    ./tailscale.nix
   ];
 }
