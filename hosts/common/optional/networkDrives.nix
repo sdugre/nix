@@ -6,7 +6,7 @@
     options = ["x-gvfs-show"];
   };
   fileSystems."/mnt/music" = {
-    device = "192.168.1.16:/volume1/music";
+    device = "100.84.193.57:/volume1/music";
     fsType = "nfs";
     options = ["x-gvfs-show"];
   }; 
