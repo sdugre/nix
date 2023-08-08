@@ -4,6 +4,7 @@
     ./locale.nix
     ./nix.nix 
     ./tailscale.nix
+    ./utils.nix
   ];
 
   nixpkgs = {
