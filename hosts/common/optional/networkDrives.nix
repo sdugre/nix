@@ -1,7 +1,7 @@
 {
 
   fileSystems."/mnt/video" = {
-    device = "192.168.1.16:/volume1/video";
+    device = "100.84.193.57:/volume1/video";
     fsType = "nfs";
     options = ["x-gvfs-show"];
   };
