@@ -2,28 +2,18 @@
 { inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other NixOS modules here
   imports = [
-    ../common/global
     ./hardware-configuration.nix
+    ../common/global
 
-    ./config/gnome.nix
+    ../common/optional/gnome.nix
   ];
 
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   environment.systemPackages = ([
     inputs.agenix.packages.x86_64-linux.default
   ]) ++ (with pkgs; [
-    gnome-connections
-    gnome.gnome-tweaks
-    gnome.seahorse
     mnamer
     wireshark
  
