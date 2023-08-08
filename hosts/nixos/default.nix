@@ -3,33 +3,19 @@
 
 { inputs, outputs, lib, config, pkgs, ... }: {
   imports = [
-    ../common/global
     ./hardware-configuration.nix
+    ../common/global
 
-    ./config/gnome.nix
-
+    ../common/optional/networkDrives.nix
+    ../common/optional/gnome.nix
   ];
 
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   environment.systemPackages = ([
     inputs.agenix.packages.x86_64-linux.default
   ]) ++ (with pkgs; [
-    gnome.gnome-tweaks
-    gnome.seahorse
-    lm_sensors
-    mnamer
-    nmap
-    tmux
-    tree
     wireshark
  
   ]);
@@ -106,36 +92,5 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
-
-  fileSystems."/mnt/video" = {
-    device = "192.168.1.16:/volume1/video";
-    fsType = "nfs";
-    options = ["x-gvfs-show"];
-  };
-  fileSystems."/mnt/music" = {
-    device = "192.168.1.16:/volume1/music";
-    fsType = "nfs";
-    options = ["x-gvfs-show"];
-  }; 
-  fileSystems."/mnt/photo" = {
-    device = "192.168.1.16:/volume1/photo";
-    fsType = "nfs";
-    options = ["x-gvfs-show"];
-  }; 
-  fileSystems."/mnt/downloads" = {
-    device = "192.168.1.16:/volume1/downloads";
-    fsType = "nfs";
-    options = ["x-gvfs-show"];
-  };
-  fileSystems."/mnt/homes" = {
-    device = "192.168.1.16:/volume1/homes";
-    fsType = "nfs";
-    options = ["x-gvfs-show"];
-  }; 
-  fileSystems."/mnt/docs" = {
-    device = "192.168.1.16:/volume1/docs";
-    fsType = "nfs";
-    options = ["x-gvfs-show"];
-  }; 
 
 }
