@@ -37,5 +37,6 @@
     };
   };
 
-
+  programs.zsh.enable = true;
+  
 }
