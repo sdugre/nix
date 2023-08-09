@@ -2,7 +2,9 @@
     nasIP = "100.84.193.57";
     mountOptions = [
       "x-gvfs-show"
-    ]
+      "x-systemd.automount" 
+      "noauto"
+    ];
   in
 {
   # mount NAS drives via tailscale
