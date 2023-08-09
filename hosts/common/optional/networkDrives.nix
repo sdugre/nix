@@ -14,28 +14,28 @@
     options = mountOptions;
   };
   fileSystems."/mnt/music" = {
-    device = "100.84.193.57:/volume1/music";
+    device = nasIP + ":/volume1/music";
     fsType = "nfs";
-    options = ["x-gvfs-show"];
+    options = mountOptions;
   }; 
   fileSystems."/mnt/photo" = {
-    device = "100.84.193.57:/volume1/photo";
+    device = nasIP + ":/volume1/photo";
     fsType = "nfs";
-    options = ["x-gvfs-show"];
+    options = mountOptions;
   }; 
   fileSystems."/mnt/downloads" = {
-    device = "100.84.193.57:/volume1/downloads";
+    device = nasIP + ":/volume1/downloads";
     fsType = "nfs";
-    options = ["x-gvfs-show"];
+    options = mountOptions;
   };
   fileSystems."/mnt/homes" = {
-    device = "100.84.193.57:/volume1/homes";
+    device = nasIP + ":/volume1/homes";
     fsType = "nfs";
-    options = ["x-gvfs-show"];
+    options = mountOptions;
   }; 
   fileSystems."/mnt/docs" = {
-    device = "100.84.193.57:/volume1/docs";
+    device = nasIP + ":/volume1/docs";
     fsType = "nfs";
-    options = ["x-gvfs-show"];
+    options = mountOptions;
   }; 
 }
