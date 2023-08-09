@@ -1,10 +1,15 @@
+  let 
+    nasIP = "100.84.193.57";
+    mountOptions = [
+      "x-gvfs-show"
+    ]
+  in
 {
-
   # mount NAS drives via tailscale
   fileSystems."/mnt/video" = {
-    device = "100.84.193.57:/volume1/video";
+    device = nasIP + ":/volume1/video";
     fsType = "nfs";
-    options = ["x-gvfs-show"];
+    options = mountOptions;
   };
   fileSystems."/mnt/music" = {
     device = "100.84.193.57:/volume1/music";
@@ -31,5 +36,4 @@
     fsType = "nfs";
     options = ["x-gvfs-show"];
   }; 
-
 }
