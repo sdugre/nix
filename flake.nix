@@ -16,6 +16,11 @@
 
     # Nix User Repository (NUR)
     nur.url = "github:nix-community/NUR";
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, nur, ... }@inputs:
@@ -89,9 +94,10 @@
         "sdugre@thinkpad" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires '>
           extraSpecialArgs = { inherit inputs outputs; };
+          pkgs = pkgsFor.x86_64-linux;
           modules = [
             ./home/sdugre/thinkpad/home.nix
-            nur.nixosModules.nur  
+            nur.nixosModules.nur
           ];
         };
       };
