@@ -94,7 +94,6 @@
         "sdugre@thinkpad" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires '>
           extraSpecialArgs = { inherit inputs outputs; };
-          pkgs = pkgsFor.x86_64-linux;
           modules = [
             ./home/sdugre/thinkpad/home.nix
             nur.nixosModules.nur
