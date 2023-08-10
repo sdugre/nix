@@ -10,7 +10,7 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
     inputs.nur.hmModules.nur
-
+    ../features/cli
   ];
 
   nixpkgs = {
@@ -20,72 +20,21 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = (_: true);
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "sdugre";
     homeDirectory = "/home/sdugre";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
-
-  home.packages = with pkgs; [
-    htop
-    wget
-    obsidian
-    vlc
-    curl
-  ];  
-
-  # Enable home-manager and git
   programs.home-manager.enable = true;
-
-  programs.git = {
-    enable = true;
-    userName = "sdugre";
-    userEmail = "sdugre@gmail.com";
-    extraConfig = {
-      credential.helper = "${
-          pkgs.git.override { withLibsecret = true; }
-        }/bin/git-credential-libsecret";
-    };
-  };
-
-  # Enable zsh
-  programs.zsh = {
-    enable = true;
-    dotDir = ".config/zsh";
-    history = { }; # all defaults are OK.
-    enableAutosuggestions = true;
-  };
-
-  # Enable Oh-my-zsh
-  programs.zsh.oh-my-zsh = {
-    enable = true;
-    plugins = [ "git" "sudo" ];
-    theme = "agnoster";
-  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
