@@ -4,7 +4,6 @@ let
   addons = inputs.firefox-addons.packages.${pkgs.system};
 in
 {
-  programs.browserpass.enable = true;
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -12,8 +11,8 @@ in
       isDefault = true;
       extensions = with addons; [
         bitwarden
+        libredirect
         ublock-origin
-        browserpass
       ];
 
       settings = {
@@ -57,4 +56,6 @@ in
         "browser.shell.defaultBrowserCheckCount" = 1;
         "browser.startup.homepage" = "https://start.duckduckgo.com";
       };
+    };  
+  };
 }
