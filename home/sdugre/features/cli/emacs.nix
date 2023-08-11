@@ -8,6 +8,7 @@
     '';
     extraPackages = epkgs: [
       epkgs.nix-mode
+      epkgs.which-key
     ];
   };
 }
