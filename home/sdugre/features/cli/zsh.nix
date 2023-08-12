@@ -18,9 +18,7 @@
   };
 
   fonts.fontconfig.enable = true;
-  home.packages = [
-    (pkgs.nerdfonts.override {
-      fonts = [ "menslo-lgs-nf" ];
-    })
+  home.packages = with pkgs; [
+    menslo-lgs-nf
   ];
 }
