@@ -17,8 +17,8 @@
     theme = "agnoster";
   };
 
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
-    menslo-lgs-nf
-  ];
+#  fonts.fontconfig.enable = true;
+#  home.packages = with pkgs; [
+#    menslo-lgs-nf
+#  ];
 }
