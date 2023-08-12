@@ -8,7 +8,17 @@
 
   programs.zsh.oh-my-zsh = {
     enable = true;
-    plugins = [ "git" "sudo" ];
+    plugins = [ 
+      "git" 
+      "sudo"
+      "thefuck" 
+    ];
     theme = "agnoster";
   };
+
+  fonts.fontconfig.enable = true;
+  home.packages = [
+    (pkgs.nerdfonts.override {
+      fonts = [ "MensloNerdFont" ];
+    })
 }
