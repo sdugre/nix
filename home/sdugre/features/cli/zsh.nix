@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -16,9 +17,10 @@
     theme = "agnoster";
   };
 
-  fonts.fontconfig.enable = true;
-  home.packages = [
-    (pkgs.nerdfonts.override {
-      fonts = [ "MensloNerdFont" ];
-    })
+#  fonts.fontconfig.enable = true;
+#  home.packages = [
+#    (pkgs.nerdfonts.override {
+#      fonts = [ "" ];
+#    })
+#  ];
 }
