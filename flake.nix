@@ -93,7 +93,6 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/sdugre/thinkpad.nix
-            nur.nixosModules.nur
           ];
         };
       };
