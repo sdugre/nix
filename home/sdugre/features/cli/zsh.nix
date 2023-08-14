@@ -1,10 +1,23 @@
 { pkgs, ... }:
+let
+  p10kTheme = ./p10k.zsh;
+in
 {
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
     history = { }; # all defaults are OK.
     enableAutosuggestions = true;
+    initExtra = ''
+      [[ ! -f ${p10kTheme} ]] || source ${p10kTheme}
+    '';
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
   };
 
   programs.zsh.oh-my-zsh = {
@@ -18,8 +31,5 @@
     theme = "agnoster";
   };
 
-#  fonts.fontconfig.enable = true;
-#  home.packages = with pkgs; [
-#    menslo-lgs-nf
-#  ];
-}
+  
+}i
