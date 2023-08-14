@@ -12,7 +12,8 @@
     plugins = [ 
       "git" 
       "sudo"
-      "thefuck" 
+      "thefuck"
+      "autojump" 
     ];
     theme = "agnoster";
   };
