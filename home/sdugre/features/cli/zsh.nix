@@ -29,7 +29,5 @@ in
       "autojump" 
     ];
     theme = "agnoster";
-  };
-
-  
-}i
+  }; 
+}
