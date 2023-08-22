@@ -22,10 +22,10 @@
       primary-color = "#86b6ef";
     };
     "org/gnome/desktop/peripherals/touchpad" = {
-      natural-scroll = true;
+      natural-scroll = false;
     };
     "org/gnome/desktop/peripherals/mouse" = {
-      natural-scroll = true;
+      natural-scroll = false;
     };
   };
 }
