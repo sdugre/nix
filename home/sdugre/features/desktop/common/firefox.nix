@@ -14,6 +14,7 @@ in
         libredirect
         ublock-origin
       ];
+      search.default = "DuckDuckGo";
 
       settings = {
         # enable HTTPS-Only Mode
