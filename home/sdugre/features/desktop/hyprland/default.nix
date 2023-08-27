@@ -17,5 +17,6 @@
         border_size = 2.7;
         cursor_inactive_timeout = 4;
       };
+    };
   };
 }
