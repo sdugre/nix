@@ -7,8 +7,8 @@
     ../common/users/sdugre
 
     ../common/optional/networkDrives.nix
-#    ../common/optional/gnome.nix
-    ../common/optional/hyprland.nix
+    ../common/optional/gnome.nix
+#    ../common/optional/hyprland.nix
     ../common/optional/pipewire.nix
   ];
 
