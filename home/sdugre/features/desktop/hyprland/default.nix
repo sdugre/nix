@@ -7,7 +7,7 @@
   home.packages = with pkgs; [
   ];
 
-  wayland.windowManager.hyprland = {
-    xwayland.enable = true;
+#  wayland.windowManager.hyprland = {
+#    xwayland.enable = true;
   };
 }
