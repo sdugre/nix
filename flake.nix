@@ -95,8 +95,8 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/sdugre/thinkpad.nix
-            hyprland.homeManagerModules.default
-            {wayland.WindowManager.hyprland.enable = true;}
+#            hyprland.homeManagerModules.default
+#            {wayland.WindowManager.hyprland.enable = true;}
           ];
         };
       };
