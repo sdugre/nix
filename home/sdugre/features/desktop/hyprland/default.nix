@@ -2,12 +2,12 @@
   imports = [
     ../common
     ../common/wayland-wm
+    hyprland.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
   ];
 
-  hyprland.homeManagerModules.default;
   wayland.windowManager.hyprland = {
     xwayland.enable = true;
   };
