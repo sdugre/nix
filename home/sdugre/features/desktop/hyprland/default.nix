@@ -2,7 +2,6 @@
   imports = [
     ../common
     ../common/wayland-wm
-    hyprland.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
