@@ -9,7 +9,7 @@
     ../common/optional/networkDrives.nix
 #    ../common/optional/gnome.nix
     ../common/optional/hyprland.nix
-    inputs.hyprland.homeManagerModules.default
+    inputs.hyprland.nixosModules.default
 
     ../common/optional/pipewire.nix
   ];
