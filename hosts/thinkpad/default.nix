@@ -7,8 +7,10 @@
     ../common/users/sdugre
 
     ../common/optional/networkDrives.nix
-    ../common/optional/gnome.nix
-#    ../common/optional/hyprland.nix
+#    ../common/optional/gnome.nix
+    ../common/optional/hyprland.nix
+    inputs.hyprland.homeManagerModules.default
+
     ../common/optional/pipewire.nix
   ];
 
