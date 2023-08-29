@@ -10,5 +10,6 @@
       location = 0;
       disable-history = false;
       hide-scrollbar = false;
+    };
   };
 }
