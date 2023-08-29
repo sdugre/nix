@@ -4,7 +4,7 @@
     enable = true;
     package = pkgs.rofi-wayland;
     extraConfig = {
-      modi = "run,drun,window";
+      modi = "run,drun";
       show-icons = true;
       drun-display-format = "{icon} {name}";
       location = 0;
