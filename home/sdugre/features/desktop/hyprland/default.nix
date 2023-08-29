@@ -10,5 +10,8 @@
 
   wayland.windowManager.hyprland = {
     xwayland.enable = true;
+    extraConfig = import ./config.nix {
+
+    };
   };
 }
