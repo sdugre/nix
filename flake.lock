@@ -185,22 +185,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1690548937,
-        "narHash": "sha256-x3ZOPGLvtC0/+iFAg9Kvqm/8hTAIkGjc634SqtgaXTA=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "2a9d660ff0f7ffde9d73be328ee6e6f10ef66b28",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1692638711,
@@ -219,16 +203,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1690558459,
-        "narHash": "sha256-5W7y1l2cLYPkpJGNlAja7XW2X2o9rjf0O1mo9nxS9jQ=",
+        "lastModified": 1693377291,
+        "narHash": "sha256-vYGY9bnqEeIncNarDZYhm6KdLKgXMS+HA2mTRaWEc80=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "48e82fe1b1c863ee26a33ce9bd39621d2ada0a33",
+        "rev": "e7f38be3775bab9659575f192ece011c033655f0",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-23.05",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -255,7 +239,6 @@
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur"
       }
     },
