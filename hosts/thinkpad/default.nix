@@ -8,7 +8,7 @@
 
     ../common/optional/networkDrives.nix
 #    ../common/optional/gnome.nix
-    ../common/optional/hyprland.nix
+#    ../common/optional/hyprland.nix
     inputs.hyprland.nixosModules.default
 
     ../common/optional/pipewire.nix
