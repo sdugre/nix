@@ -33,6 +33,7 @@
     username = "sdugre";
     homeDirectory = "/home/sdugre";
     sessionVariables = {
+    sessionPath = [ /home/sdugre/.local/bin" ];
       TERMINAL = "kitty";
       EDITOR = "nano";
       BROWSER = "firefox";   
