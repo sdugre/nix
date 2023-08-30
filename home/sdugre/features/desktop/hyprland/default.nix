@@ -66,8 +66,6 @@
           "border,1,3,easeout"
         ];
       };
-    extraConfig = import ./config.nix {
-
     };
   };
 }
