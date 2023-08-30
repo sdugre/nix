@@ -6,6 +6,8 @@
   inherit (home.sessionVariables) TERMINAL BROWSER;
 in ''
   # ASCII Art from https://fsymbols.com/generators/carty/
+  monitor=eDP-1,1920x1080,0x0,1
+
   input {
     kb_layout = gb
     touchpad {
