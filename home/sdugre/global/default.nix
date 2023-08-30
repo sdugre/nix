@@ -11,7 +11,7 @@
     # inputs.nix-colors.homeManagerModules.default
     inputs.nur.hmModules.nur
     ../features/cli
-  ];
+  ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
     # You can add overlays here
