@@ -6,6 +6,7 @@
   ];
 
   home.packages = with pkgs; [
+    hyprland
     inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
   ];
 
