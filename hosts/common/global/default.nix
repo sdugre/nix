@@ -6,7 +6,7 @@
     ./nix.nix 
     ./tailscale.nix
     ./utils.nix
-  ];
+  ] ++ (builtins.attrValues outputs.nixosModules);
 
   nixpkgs = {
     # You can add overlays here
