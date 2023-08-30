@@ -33,6 +33,6 @@ in ''
   bind = SUPER, Return, exec, ${TERMINAL}
   bind = SUPER, b, exec, ${BROWSER}
 #  bind = SUPER_SHIFT, f, exec, thunar
-  bind = SUPER, a, exec, rofi -show drun -modi drun
+  bind = SUPER, r, exec, rofi -show drun -modi drun
 #  bind = SUPER, w, exec, makoctl dismiss
 ''
