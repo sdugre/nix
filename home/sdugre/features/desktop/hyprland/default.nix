@@ -10,7 +10,7 @@
   ];
 
   wayland.windowManager.hyprland = {
-#    xwayland.enable = true;
+    xwayland.enable = true;
     extraConfig = import ./config.nix {
       inherit (config) home;
     };
