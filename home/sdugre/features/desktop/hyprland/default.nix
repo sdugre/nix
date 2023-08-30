@@ -101,7 +101,6 @@
       ] ++
 
 #      monitor = map (m: let
-      monitor=eDP-1,1920x1080,0x0,1
 #        resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
 #        position = "${toString m.x}x${toString m.y}";
 #      in
@@ -110,6 +109,7 @@
 
     # This is order sensitive, so it has to come here.
     extraConfig = ''
+      monitor=eDP-1,1920x1080,0x0,1
       # Passthrough mode (e.g. for VNC)
       bind=SUPER,P,submap,passthrough
       submap=passthrough
