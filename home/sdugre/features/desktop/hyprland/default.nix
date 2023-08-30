@@ -67,54 +67,6 @@
           "border,1,3,easeout"
         ];
       };
-
-      bind = let
-        terminal = config.home.sessionVariables.TERMINAL;
-        browser = defaultApp "x-scheme-handler/https";
-        editor = defaultApp "text/plain";
-      in [
-        # Program bindings
-        "SUPER,Return,exec,${terminal}"
-        "SUPER,e,exec,${editor}"
-        "SUPER,v,exec,${editor}"
-        "SUPER,b,exec,${browser}"
-        # Brightness control (only works if the system has lightd)
-        ",XF86MonBrightnessUp,exec,light -A 10"
-        ",XF86MonBrightnessDown,exec,light -U 10"
-        # Volume
-#        ",XF86AudioRaiseVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
-#        ",XF86AudioLowerVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
-#        ",XF86AudioMute,exec,${pactl} set-sink-mute @DEFAULT_SINK@ toggle"
-#        "SHIFT,XF86AudioMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
-#        ",XF86AudioMicMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
-        # Screenshotting
-#        ",Print,exec,${grimblast} --notify copy output"
-#        "SHIFT,Print,exec,${grimblast} --notify copy active"
-#        "CONTROL,Print,exec,${grimblast} --notify copy screen"
-#        "SUPER,Print,exec,${grimblast} --notify copy window"
-#        "ALT,Print,exec,${grimblast} --notify copy area"
-        # Tally counter
-#        "SUPER,z,exec,${notify-send} -t 1000 $(${tly} time) && ${tly} add && ${gtk-play} -i dialog-information" # Add new entry
-#        "SUPERCONTROL,z,exec,${notify-send} -t 1000 $(${tly} time) && ${tly} undo && ${gtk-play} -i dialog-warning" # Undo last entry
-#        "SUPERCONTROLSHIFT,z,exec,${tly} reset && ${gtk-play} -i complete" # Reset
-#        "SUPERSHIFT,z,exec,${notify-send} -t 1000 $(${tly} time)" # Show current time
-      ] ++
-
-#      monitor = map (m: let
-#        resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
-#        position = "${toString m.x}x${toString m.y}";
-#      in
-#        "${m.name},${if m.enabled then "${resolution},${position},1" else "disable"}"
-#      ) (config.monitors);
-
-    # This is order sensitive, so it has to come here.
-    extraConfig = ''
-      monitor=eDP-1,1920x1080,0x0,1
-      # Passthrough mode (e.g. for VNC)
-      bind=SUPER,P,submap,passthrough
-      submap=passthrough
-      bind=SUPER,P,submap,reset
-      submap=reset
-    '';
+    }; 
   };
 }
