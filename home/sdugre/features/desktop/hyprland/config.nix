@@ -16,7 +16,7 @@ in ''
   general {
     gaps_in = 3
     gaps_out = 5
-    border_size = 3
+    border_size = 2
   #  col.active_border=0xff${colorscheme.colors.base07}
   #  col.inactive_border=0xff${colorscheme.colors.base02}
   #  col.group_border_active=0xff${colorscheme.colors.base0B}
