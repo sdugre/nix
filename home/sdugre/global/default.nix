@@ -32,6 +32,11 @@
   home = {
     username = "sdugre";
     homeDirectory = "/home/sdugre";
+    sessionVariables = {
+      TERMINAL = "kitty";
+      EDITOR = "nano";
+      BROWSER = "firefox";   
+    };
   };
 
   programs.home-manager.enable = true;

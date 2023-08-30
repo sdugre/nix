@@ -1,72 +1,38 @@
-#''
-#bind = SUPER, a, exec, rofi -show drun -modi drun
-#''
-{ lib, ... }:
-let
-  workspaces =
-    (map toString (lib.range 0 9)) ++
-    (map (n: "F${toString n}") (lib.range 1 12));
-  # Map keys to hyprland directions
-  directions = rec {
-    left = "l"; right = "r"; up = "u"; down = "d";
-    h = left; l = right; k = up; j = down;
-  };
-in {
-  wayland.windowManager.hyprland.settings = {
-    bindm = [
-      "SUPER,mouse:272,movewindow"
-      "SUPER,mouse:273,resizewindow"
-    ];
+{
+  home,
+  colorscheme,
+  wallpaper,
+}: let
+  inherit (home.sessionVariables) TERMINAL BROWSER;
+in ''
+  # ASCII Art from https://fsymbols.com/generators/carty/
+  input {
+    kb_layout = gb
+    touchpad {
+      disable_while_typing=false
+    }
+  }
 
-    bind = [
-      "SUPERSHIFT,q,killactive"
-      "SUPERSHIFT,e,exit"
+  general {
+    gaps_in = 3
+    gaps_out = 5
+    border_size = 3
+  #  col.active_border=0xff${colorscheme.colors.base07}
+  #  col.inactive_border=0xff${colorscheme.colors.base02}
+  #  col.group_border_active=0xff${colorscheme.colors.base0B}
+  #  col.group_border=0xff${colorscheme.colors.base04}
+  }
 
-      "SUPER,s,togglesplit"
-      "SUPER,f,fullscreen,1"
-      "SUPERSHIFT,f,fullscreen,0"
-      "SUPERSHIFT,space,togglefloating"
+  decoration {
+    rounding=5
+  }
+  $notifycmd = notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low
 
-      "SUPER,minus,splitratio,-0.25"
-      "SUPERSHIFT,minus,splitratio,-0.3333333"
-
-      "SUPER,equal,splitratio,0.25"
-      "SUPERSHIFT,equal,splitratio,0.3333333"
-
-      "SUPER,g,togglegroup"
-      "SUPER,apostrophe,changegroupactive,f"
-      "SUPERSHIFT,apostrophe,changegroupactive,b"
-
-      "SUPER,u,togglespecialworkspace"
-      "SUPERSHIFT,u,movetoworkspace,special"
-    ] ++
-    # Change workspace
-    (map (n:
-      "SUPER,${n},workspace,name:${n}"
-    ) workspaces) ++
-    # Move window to workspace
-    (map (n:
-      "SUPERSHIFT,${n},movetoworkspacesilent,name:${n}"
-    ) workspaces) ++
-    # Move focus
-    (lib.mapAttrsToList (key: direction:
-      "SUPER,${key},movefocus,${direction}"
-    ) directions) ++
-    # Swap windows
-    (lib.mapAttrsToList (key: direction:
-      "SUPERSHIFT,${key},swapwindow,${direction}"
-    ) directions) ++
-    # Move monitor focus
-    (lib.mapAttrsToList (key: direction:
-      "SUPERCONTROL,${key},focusmonitor,${direction}"
-    ) directions) ++
-    # Move window to other monitor
-    (lib.mapAttrsToList (key: direction:
-      "SUPERCONTROLSHIFT,${key},movewindow,mon:${direction}"
-    ) directions) ++
-    # Move workspace to other monitor
-    (lib.mapAttrsToList (key: direction:
-      "SUPERALT,${key},movecurrentworkspacetomonitor,${direction}"
-    ) directions);
-  };
-}
+  # █▀ █░█ █▀█ █▀█ ▀█▀ █▀▀ █░█ ▀█▀ █▀
+  # ▄█ █▀█ █▄█ █▀▄ ░█░ █▄▄ █▄█ ░█░ ▄█
+  bind = SUPER, Return, exec, ${TERMINAL}
+  bind = SUPER, b, exec, ${BROWSER}
+#  bind = SUPER_SHIFT, f, exec, thunar
+  bind = SUPER, a, exec, rofi -show drun -modi drun
+#  bind = SUPER, w, exec, makoctl dismiss
+''
