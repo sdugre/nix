@@ -32,8 +32,8 @@
   home = {
     username = "sdugre";
     homeDirectory = "/home/sdugre";
+    sessionPath = [ "/home/sdugre/.local/bin" ];
     sessionVariables = {
-    sessionPath = [ /home/sdugre/.local/bin" ];
       TERMINAL = "kitty";
       EDITOR = "nano";
       BROWSER = "firefox";   
