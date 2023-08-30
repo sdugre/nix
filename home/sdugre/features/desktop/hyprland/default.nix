@@ -15,4 +15,4 @@
       inherit (config) home;
     };
   };
-};
+}
