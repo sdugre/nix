@@ -37,4 +37,13 @@ in ''
   bind = SUPER, Return, exec, ${TERMINAL}
   bind = SUPER, b, exec, ${BROWSER}
   bind = SUPER, Space, exec, rofi -show drun -modi drun
+
+  # Basic Binds
+  bind = SUPERSHIFT, q, killactive
+  bind = SUPERSHIFT, e, exit
+  bind = SUPER, s, togglesplit
+  bind = SUPER, f, fullscreen, 1
+  bind = SUPERSHIFT, f, fullscreen, 0
+  bind = SUPERSHIFT, Space, togglefloating
+
 ''
