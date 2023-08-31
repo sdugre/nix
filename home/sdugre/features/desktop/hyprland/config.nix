@@ -1,8 +1,6 @@
 {
   home,
-  pkgs,
 }: let   
-  pactl = "${pkgs.pulseaudio}/bin/pactl";
   inherit (home.sessionVariables) TERMINAL BROWSER;
 in ''
   # ASCII Art from https://fsymbols.com/generators/carty/
@@ -65,11 +63,5 @@ in ''
   # Brightness control (only works if the system has lightd)
   ,XF86MonBrightnessUp,exec,light -A 10
   ,XF86MonBrightnessDown,exec,light -U 10"
-  # Volume
-  ,XF86AudioRaiseVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ +5%
-  ,XF86AudioLowerVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ -5%
-  ,XF86AudioMute,exec,${pactl} set-sink-mute @DEFAULT_SINK@ toggle
-  SHIFT,XF86AudioMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle
-  ,XF86AudioMicMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle
 
 ''
