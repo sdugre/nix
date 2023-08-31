@@ -1,7 +1,5 @@
 {
   home,
-  colorscheme,
-  wallpaper,
 }: let
   inherit (home.sessionVariables) TERMINAL BROWSER;
 in ''
@@ -9,7 +7,7 @@ in ''
   monitor=eDP-1,1920x1080,0x0,1
 
   input {
-    kb_layout = gb
+    kb_layout = us
     touchpad {
       disable_while_typing=false
     }
@@ -19,14 +17,25 @@ in ''
     gaps_in = 3
     gaps_out = 5
     border_size = 2
-  #  col.active_border=0xff${colorscheme.colors.base07}
-  #  col.inactive_border=0xff${colorscheme.colors.base02}
-  #  col.group_border_active=0xff${colorscheme.colors.base0B}
-  #  col.group_border=0xff${colorscheme.colors.base04}
   }
 
   decoration {
+    active_opacity = 0.94
+    inactive_opacity = 0.84
+    fullscreen_opacity = 1.0
     rounding=5
+    blur = {
+      enabled = true
+      size = 5
+      passes = 3
+      new_optimizations = true
+      ignore_opacity = true
+    }
+    drop_shadow = true
+    shadow_range = 12
+    shadow_offset = "3 3"
+    "col.shadow" = "0x44000000"
+    "col.shadow_inactive" = "0x66000000"
   }
   $notifycmd = notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low
 
@@ -34,7 +43,5 @@ in ''
   # ▄█ █▀█ █▄█ █▀▄ ░█░ █▄▄ █▄█ ░█░ ▄█
   bind = SUPER, Return, exec, ${TERMINAL}
   bind = SUPER, b, exec, ${BROWSER}
-#  bind = SUPER_SHIFT, f, exec, thunar
-  bind = SUPER, r, exec, rofi -show drun -modi drun
-#  bind = SUPER, w, exec, makoctl dismiss
+  bind = SUPER, Space, exec, rofi -show drun -modi drun
 ''
