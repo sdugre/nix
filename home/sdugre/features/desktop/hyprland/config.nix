@@ -24,18 +24,11 @@ in ''
     inactive_opacity = 0.84
     fullscreen_opacity = 1.0
     rounding=5
-    blur = {
-      enabled = true
-      size = 5
-      passes = 3
-      new_optimizations = true
-      ignore_opacity = true
-    }
     drop_shadow = true
     shadow_range = 12
-    shadow_offset = "3 3"
-    "col.shadow" = "0x44000000"
-    "col.shadow_inactive" = "0x66000000"
+    shadow_offset = [3 3]
+    col.shadow = 0x44000000
+    col.shadow_inactive = 0x66000000
   }
   $notifycmd = notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low
 

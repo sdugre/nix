@@ -3,6 +3,7 @@
     ../common
     ../common/wayland-wm
     inputs.hyprland.homeManagerModules.default
+    ./basic-binds.nix
   ];
 
   home.packages = with pkgs; [
