@@ -29,5 +29,10 @@ in
       "autojump" 
     ];
     theme = "agnoster";
+  };
+
+  programs.autojump = {
+    enable = true;
+    enableZshIntegration = true;
   }; 
 }
