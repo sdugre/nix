@@ -6,6 +6,7 @@
 #    ./qutebrowser.nix
     ./waybar.nix
     ./rofi.nix
+    ./gtk.nix
   ];
 
   home.packages = with pkgs; [
