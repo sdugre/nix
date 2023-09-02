@@ -61,7 +61,9 @@ in ''
   bind = SUPER, mouse_down, workspace, e+1
   bind = SUPER, mouse_up, workspace, e-1
   # Brightness control (only works if the system has lightd)
-  ,XF86MonBrightnessUp,exec,light -A 10
-  ,XF86MonBrightnessDown,exec,light -U 10"
-
+  bind=,XF86MonBrightnessUp,exec,light -A 10
+  bind=,XF86MonBrightnessDown,exec,light -U 10"
+  # Auto Start
+  exec-once = mako &
+  exec-once = waybar &
 ''
