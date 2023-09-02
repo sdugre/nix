@@ -5,4 +5,5 @@
   };
   environment.systemPackages = with pkgs; [
     gnome.seahorse
+  ];
 }
