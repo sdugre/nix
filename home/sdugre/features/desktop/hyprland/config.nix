@@ -52,6 +52,7 @@ in ''
   bind = SUPER, 2, workspace, 2
   bind = SUPER, 3, workspace, 3
   bind = SUPER, 4, workspace, 4
+  bind = SUPER, Tab, workspace, e+1
  # Move active window to a workspace with mainMod + SHIFT + [0-9]
   bind = SUPER SHIFT, 1, movetoworkspace, 1
   bind = SUPER SHIFT, 2, movetoworkspace, 2
