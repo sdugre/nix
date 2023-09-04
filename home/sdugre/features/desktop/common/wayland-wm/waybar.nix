@@ -19,6 +19,7 @@
           "network"
           "battery"
           "tray"
+          "cpu"
         ];
  
         modules-center = [
@@ -38,13 +39,15 @@
           onclick = "";
         };
 
-
         clock = {
           format = "{:%d/%m %H:%M}";
           tooltip-format = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
         };
+
+        cpu = {
+          format = "   {usage}%";
 
         "custom/hostname" = {
           exec = "echo $USER@$HOSTNAME";
