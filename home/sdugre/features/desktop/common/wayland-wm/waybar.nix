@@ -21,8 +21,12 @@
           "tray"
         ];
  
-        modueles-center = [
+        modules-center = [
           "clock"
+        ];
+
+        modules-right = [
+          "custom/hostname"
         ];
 
         battery = {
@@ -40,6 +44,10 @@
           tooltip-format = ''
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
+        };
+
+        "custom/hostname" = {
+          exec = "echo $USER@$HOSTNAME";
         };
 
         network = {
