@@ -48,6 +48,7 @@
 
         cpu = {
           format = "   {usage}%";
+        };
 
         "custom/hostname" = {
           exec = "echo $USER@$HOSTNAME";
