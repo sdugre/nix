@@ -1,7 +1,12 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{ inputs, outputs, lib, config, pkgs, ... }:
+let
+  inherit (inputs.nix-colors) colorSchemes;
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs; }) colorschemeFromPicture nixWallpaperFromScheme;
+in
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -10,6 +15,7 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
     inputs.nur.hmModules.nur
+    inputs.nix-colors.homeManagerModule
     ../features/cli
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
@@ -47,4 +53,21 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
+
+  colorscheme = lib.mkDefault colorSchemes.dracula;
+  wallpaper =
+    let
+      largest = f: xs: builtins.head (builtins.sort (a: b: a > b) (map f xs));
+      largestWidth = largest (x: x.width) config.monitors;
+      largestHeight = largest (x: x.height) config.monitors;
+    in
+    lib.mkDefault (nixWallpaperFromScheme
+      {
+        scheme = config.colorscheme;
+        width = largestWidth;
+        height = largestHeight;
+        logoScale = 4;
+      });
+  home.file.".colorscheme".text = config.colorscheme.slug;
+
 }
