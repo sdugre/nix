@@ -16,7 +16,7 @@ in
     settings = {
     
       primary = {
-        mode = "dock";
+        #mode = "dock";
         layer = "top";
         height = 40;
         margin = "6";
@@ -49,10 +49,11 @@ in
         };
 
         clock = {
-          format = "{:%d/%m %H:%M}";
-          tooltip-format = ''
-            <big>{:%Y %B}</big>
-            <tt><small>{calendar}</small></tt>'';
+          format = "{:%H:%M}  ";
+          tooltip-format = "{:%Y-%m-%d}";
+           #''
+           # <big>{:%Y %B}</big>
+           # <tt><small>{calendar}</small></tt>'';
         };
 
         cpu = {
