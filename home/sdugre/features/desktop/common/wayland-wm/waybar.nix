@@ -20,6 +20,8 @@
           "battery"
           "tray"
           "cpu"
+          "memory"
+          "pulseaudio"
         ];
  
         modules-center = [
@@ -65,6 +67,23 @@
             Up: {bandwidthUpBits}
             Down: {bandwidthDownBits}'';
           on-click = "";
+        };
+
+        memory = {
+          format = "󰍛  {}%";
+          interval = 5;
+        };
+
+        pulseaudio = {
+          format = "{icon}  {volume}%";
+          format-muted = "   0%";
+          format-icons = {
+            headphone = "󰋋";
+            headset = "󰋎";
+            portable = "";
+            default = [ "" "" "" ];
+          };
+          on-click = pavucontrol;
         };
       };
     };
