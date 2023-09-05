@@ -9,5 +9,4 @@
     obsidian
     vlc
   ];  
-
 }
