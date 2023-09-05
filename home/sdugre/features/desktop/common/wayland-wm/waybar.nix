@@ -1,4 +1,11 @@
 {pkgs, ... }:
+
+let
+  # Dependencies
+  pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
+
+in
+
 {
   programs.waybar = {
     enable = true;
