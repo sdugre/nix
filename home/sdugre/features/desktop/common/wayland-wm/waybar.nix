@@ -37,6 +37,7 @@ in
 
         modules-right = [
           "custom/hostname"
+          "custom/power"
         ];
 
         battery = {
@@ -62,6 +63,11 @@ in
 
         "custom/hostname" = {
           exec = "echo $USER@$HOSTNAME";
+        };
+
+        "custom/power" = {
+          format = " ";
+          on-click = "bash ~/Documents/nix-config/home/sdugre/features/desktop/common/wayland-wm/rofi-logout.sh";
         };
 
         network = {
