@@ -67,5 +67,5 @@ in ''
   bind=,XF86MonBrightnessDown,exec,light -U 10"
   # Auto Start
   exec-once = mako &
-  exec=once = swaybg -i ${wallpaper} --mode fill &
+  exec-once = swaybg -i ${wallpaper} --mode fill &
 ''
