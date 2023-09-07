@@ -10,6 +10,7 @@
   ];
 
   home.packages = with pkgs; [
+    swaybg
   ];
 
   home.sessionVariables = {
