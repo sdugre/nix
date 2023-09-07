@@ -110,7 +110,7 @@ in
     style = let inherit (config.colorscheme) colors; in /* css */ ''
       * {
         font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
-        font-size: 12pt;
+        font-size: 13pt;
         padding: 0 8px;
       }
 
