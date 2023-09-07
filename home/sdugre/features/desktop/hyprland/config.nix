@@ -1,5 +1,6 @@
 {
-  home,
+  home, 
+  wallpaper,
 }: let   
   inherit (home.sessionVariables) TERMINAL BROWSER;
 in ''
@@ -66,5 +67,5 @@ in ''
   bind=,XF86MonBrightnessDown,exec,light -U 10"
   # Auto Start
   exec-once = mako &
-  exec-once = waybar &
+  exec=once = swaybg -i ${wallpaper} --mode fill &
 ''

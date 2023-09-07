@@ -61,6 +61,8 @@
       # These are usually stuff you would upstream into home-manager
       homeManagerModules = import ./modules/home-manager;
 
+      wallpapers = import ./home/sdugre/wallpapers;
+
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };

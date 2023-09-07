@@ -6,14 +6,13 @@
   ];
 
   home.packages = with pkgs; [
-#    hyprland
     inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
   ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = import ./config.nix {
-      inherit (config) home;
+      inherit (config) home wallpaper;
     };
   };
 }
