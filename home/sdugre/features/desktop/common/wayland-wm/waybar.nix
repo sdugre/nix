@@ -112,18 +112,15 @@ in
     style = let inherit (config.colorscheme) colors; in /* css */ ''
       * {
         font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
-        font-size: 13pt;
+        font-size: 14pt;
         padding: 0 8px;
       }
-
       .modules-right {
         margin-right: -15px;
       }
-
       .modules-left {
         margin-left: -15px;
       }
-
       window#waybar.top {
         opacity: 0.95;
         padding: 0;
@@ -137,11 +134,9 @@ in
         border: 2px solid #${colors.base0C};
         border-radius: 10px;
       }
-
       window#waybar {
         color: #${colors.base05};
       }
-
       #workspaces button {
         background-color: #${colors.base02};
         color: #${colors.base05};
@@ -158,7 +153,7 @@ in
       }
 
       #clock {
-        background-color: #${colors.base0C};
+        background-color: #${colors.base02};
         color: #${colors.base00};
         padding-left: 15px;
         padding-right: 15px;
@@ -181,6 +176,5 @@ in
         color: #${colors.base05};
       }
     '';
-
   };	
 }
