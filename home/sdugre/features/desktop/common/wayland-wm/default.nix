@@ -7,10 +7,11 @@
     ./waybar.nix
     ./rofi.nix
     ./gtk.nix
+    ./rdp.nix
   ];
 
   home.packages = with pkgs; [
-    swaybg
+    swaybg # wallpaper utility
   ];
 
   home.sessionVariables = {
