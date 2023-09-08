@@ -7,5 +7,5 @@
   ];
 
   wallpaper = "~/Documents/nix-config/home/sdugre/wallpapers/landscape-morning.jpg";
-  colorscheme = inputs.nix-colors.colorSchemes.atelier-heath;
+  colorscheme = inputs.nix-colors.colorSchemes.atlas;
 }

@@ -23,6 +23,7 @@ in
         position = "top";
  
         modules-left = [
+          "custom/hostname"
           "network"
           "battery"
           "tray"
@@ -32,11 +33,12 @@ in
         ];
  
         modules-center = [
-          "clock"
+          "hyprland/workspaces"
+          "hyprland/submap"
         ];
 
         modules-right = [
-          "custom/hostname"
+          "clock"
           "custom/power"
         ];
 
@@ -50,8 +52,8 @@ in
         };
 
         clock = {
-          format = "{:%H:%M}  ";
-          tooltip-format = "{:%Y-%m-%d}";
+          format = "{:%H:%M}";
+          tooltip-format = "{:%Y-%m-%d %a}";
            #''
            # <big>{:%Y %B}</big>
            # <tt><small>{calendar}</small></tt>'';
@@ -141,7 +143,7 @@ in
       }
 
       #workspaces button {
-        background-color: #${colors.base01};
+        background-color: #${colors.base02};
         color: #${colors.base05};
         margin: 4px;
       }
@@ -151,7 +153,7 @@ in
       }
       #workspaces button.focused,
       #workspaces button.active {
-        background-color: #${colors.base0A};
+        background-color: #${colors.base0B};
         color: #${colors.base00};
       }
 
@@ -166,7 +168,7 @@ in
       }
 
       #custom-hostname {
-        background-color: #${colors.base0C};
+        background-color: #${colors.base02};
         color: #${colors.base00};
         padding-left: 15px;
         padding-right: 18px;
