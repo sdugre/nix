@@ -63,8 +63,13 @@ in ''
   bind = SUPER, mouse_down, workspace, e+1
   bind = SUPER, mouse_up, workspace, e-1
   # Brightness control (only works if the system has lightd)
-  bind=,XF86MonBrightnessUp,exec,light -A 10
-  bind=,XF86MonBrightnessDown,exec,light -U 10"
+  bind =,XF86MonBrightnessUp,exec,light -A 10
+  bind =,XF86MonBrightnessDown,exec,light -U 10"
+  # Volume
+  # Example volume button that allows press and hold, volume limited to 150%
+  bindle=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+  bindle=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+  bindl=, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
   # Auto Start
   exec-once = mako &
   exec-once = swaybg -i ${wallpaper} --mode fill &

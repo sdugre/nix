@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   # Ref:  https://nixos.wiki/wiki/Laptop
   services.thermald.enable = true;
