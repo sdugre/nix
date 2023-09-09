@@ -48,7 +48,7 @@ in
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           format = "{icon} {capacity}%";
           format-charging = "󰂄 {capacity}%";
-          onclick = "";
+          on-click = "";
         };
 
         clock = {

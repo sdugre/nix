@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-choice=$(printf "Logout\nSuspend\nReboot\nShutdown" | rofi -dmenu)
+choice=$(printf "Logout\nSuspend\nReboot\nShutdown" | rofi -dmenu -i)
 #if [[ $choice == "Lock" ]];then
 #    bash ~/.config/system_scripts/wayland_session_lock
 if [[ $choice == "Logout" ]];then
