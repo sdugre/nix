@@ -3,7 +3,6 @@
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
-    nixos-hardware.nixosModules.lenovo-thinkpad-t490
     ../common/global
     ../common/users/sdugre
 
