@@ -16,4 +16,6 @@
       };
     };
   };
+
+  programs.light.enable = true;
 }
