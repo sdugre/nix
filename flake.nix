@@ -5,7 +5,7 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";   
 
-    inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.05";
@@ -80,6 +80,7 @@
             ./hosts/thinkpad
             agenix.nixosModules.default
             nur.nixosModules.nur
+            nixos-hardware.nixosModules.lenovo-thinkpad-t490
           ];
         };
       };
