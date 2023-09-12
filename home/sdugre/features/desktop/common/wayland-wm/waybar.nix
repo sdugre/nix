@@ -47,7 +47,7 @@ in
            device = "intel_backlight";
            format = "{percent}% {icon}";
            format-icons = ["" ""];
-        }
+        };
 
         battery = {
           bat = "BAT0";
