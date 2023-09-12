@@ -13,6 +13,7 @@
 
   home.packages = with pkgs; [
     swaybg # wallpaper utility
+    galculator
   ];
 
   home.sessionVariables = {
