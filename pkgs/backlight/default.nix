@@ -9,7 +9,7 @@
         pkgs = import nixpkgs { inherit system; };
         my-name = "backlight";
         my-buildInputs = with pkgs; [ bc ];
-        my-script = (pkgs.writeScriptBin my-name (builtins.readFile ./simple-script.sh)).overrideAttrs(old: {
+        my-script = (pkgs.writeScriptBin my-name (builtins.readFile ./backlight.sh)).overrideAttrs(old: {
           buildCommand = "${old.buildCommand}\n patchShebangs $out";
         });
       in rec {
