@@ -32,6 +32,11 @@
     xkbVariant = "";
   };
 
+  # udev rule to allow adjusting brightness
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
+  '';
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
