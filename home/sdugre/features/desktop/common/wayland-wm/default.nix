@@ -14,6 +14,7 @@
   home.packages = with pkgs; [
     swaybg # wallpaper utility
     galculator
+    backlight
   ];
 
   home.sessionVariables = {
