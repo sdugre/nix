@@ -1,5 +1,5 @@
 # 
-{ lib, writeShellApplication }: (writeShellApplication {
+{ lib, writeShellApplication, bc }: (writeShellApplication {
   name = "backlight";
   runtimeInputs = [ bc ];
 
@@ -14,19 +14,19 @@
         val=$(echo "$2*$MAX/100" | bc)
     fi
     if [ "$1" = "-inc" ]; then
-        new=$(( current + $val ))
+        new=$( current + "$val" )
     elif [ "$1" = "-dec" ]; then
-        new=$(( current - $val ))
+        new=$( current - "$val" )
     fi
-    if [ $new -gt $MAX ]; then
+    if [ "$new" -gt $MAX ]; then
         new=$MAX
-    elif [ $new -lt $MIN ]; then
+    elif [ "$new" -lt $MIN ]; then
         new=$MIN
     fi
     if [ "$3" != "-q" ]; then
-        printf "%.0f%%\n" $(echo "$new/$MAX*100" | bc -l)
+        printf "%.0f%%\n" "$(echo "$new/$MAX*100" | bc -l)"
     fi
-    echo $new > "$file"
+    echo "$new" > "$file"
   '';
 }) // {
   meta = with lib; {
