@@ -63,8 +63,8 @@ in ''
   bind = SUPER, mouse_down, workspace, e+1
   bind = SUPER, mouse_up, workspace, e-1
   # Brightness control (only works if the system has lightd)
-  bind =,XF86MonBrightnessUp,exec,light -A 10
-  bind =,XF86MonBrightnessDown,exec,light -U 10"
+  bind =, XF86MonBrightnessUp, exec, backlight -inc 5
+  bind =, XF86MonBrightnessDown, exec, backlight -dec 5
   # Volume
   # Example volume button that allows press and hold, volume limited to 150%
   bindle=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
