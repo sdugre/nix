@@ -3,8 +3,6 @@
 let inherit (config.colorscheme) colors;
 in
 {
-  security.pam.services.swaylock = {};
-
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-effects;

@@ -13,4 +13,6 @@
       extraGroups = [ "networkmanager" "wheel" "video" ];
     };
   };
+
+  security.pam.services.swaylock = {};
 }
