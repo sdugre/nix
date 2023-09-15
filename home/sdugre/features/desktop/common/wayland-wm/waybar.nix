@@ -76,7 +76,7 @@ in
 
         "custom/power" = {
           format = " ";
-          on-click = "bash ~/Documents/nix-config/home/sdugre/features/desktop/common/wayland-wm/rofi-logout.sh";
+          on-click = "bash rofi-logout";
         };
 
         network = {

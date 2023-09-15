@@ -15,6 +15,7 @@
     swaybg # wallpaper utility
     galculator
     backlight
+    rofi-logout
   ];
 
   home.sessionVariables = {
