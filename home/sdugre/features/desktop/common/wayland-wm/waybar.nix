@@ -47,6 +47,7 @@ in
            device = "intel_backlight";
            format = "{percent}% {icon}";
            format-icons = ["" ""];
+           tooltip = false;
         };
 
         battery = {
@@ -72,11 +73,13 @@ in
 
         "custom/hostname" = {
           exec = "echo $USER@$HOSTNAME";
+          tooltip = false;
         };
 
         "custom/power" = {
           format = " ";
-          on-click = "bash rofi-logout";
+          on-click = "/home/sdugre/.nix-profile/bin/rofi-logout";
+          tooltip = false;
         };
 
         network = {
