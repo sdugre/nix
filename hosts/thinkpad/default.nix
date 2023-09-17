@@ -23,6 +23,7 @@
   ]) ++ (with pkgs; [
     mnamer
     wireshark
+    backlight
  
   ]);
 

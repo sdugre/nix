@@ -4,12 +4,11 @@ let
   swaylock = "${config.programs.swaylock.package}/bin/swaylock";
   pgrep = "${pkgs.procps}/bin/pgrep";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
-  backlight = "${pkgs.backlight}/bin/backlight";
+#  backlight = "${pkgs.backlight}/bin/backlight";
 
-  isLocked = "${pgrep} -x ${swaylock}";
-  lockTime = 1 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
+  lockTime = 5 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
   dimBeforeTime = 10; # seconds before lockTime to dim screen
-  suspendAfterTime = 1 * 60; # minuts after lockTime to suspend 
+  suspendAfterTime = 5 * 60; # minutes after lockTime to suspend 
 
 in
 {
@@ -20,8 +19,8 @@ in
       # Dim screen
       {
         timeout = lockTime - dimBeforeTime;
-        command = "${backlight} -dec 20";
-        resumeCommnad = "${backlight} -inc 20";
+        command = "/run/current-system/sw/bin/backlight -dec 20";
+        resumeCommand = "/run/current-system/sw/bin/backlight -inc 20";
       } 
       # Lock screen
       {
@@ -37,8 +36,8 @@ in
       # Suspend
       {
         timeout = lockTime + suspendAfterTime;
-        command = "systemctl suspend";
+        command = "${pkgs.systemd}/bin/systemctl suspend";
       }
-    ]
+    ];
   };
 }
