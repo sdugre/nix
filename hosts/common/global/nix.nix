@@ -21,7 +21,7 @@
   # Perform garbage collection weekly to maintain low disk usage
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 2w";
+    dates = "daily";
+    options = "--delete-older-than 14d";
   };
 }
