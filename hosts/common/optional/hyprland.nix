@@ -7,4 +7,6 @@
     gnome.seahorse
     gnome-connections
   ];
+
+  programs.thunar.enable = true;
 }
