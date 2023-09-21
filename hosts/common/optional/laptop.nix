@@ -17,5 +17,4 @@
     };
   };
 
-  programs.light.enable = true;
 }
