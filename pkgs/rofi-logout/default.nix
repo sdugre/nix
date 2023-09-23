@@ -1,14 +1,19 @@
 # logout / suspend / reboot / shutdown script for rofi
 
-{ lib, writeShellApplication, rofi }: (writeShellApplication {
+{ pkgs, lib, writeShellApplication, rofi, config, ... }: 
+
+#let
+#  swaylock = "${config.programs.swaylock.package}/bin/swaylock";
+#in
+(writeShellApplication {
   name = "rofi-logout";
   runtimeInputs = [ rofi ];
 
   text = /* bash */ ''
-    choice=$(printf "Logout\nSuspend\nReboot\nShutdown" | rofi -dmenu -i)
-    #if [[ $choice == "Lock" ]];then
-    #    bash ~/.config/system_scripts/wayland_session_lock
-    if [[ $choice == "Logout" ]];then
+    choice=$(printf "Lock\nLogout\nSuspend\nReboot\nShutdown" | rofi -dmenu -i)
+    if [[ $choice == "Lock" ]];then
+      echo "Can't do that"
+    elif [[ $choice == "Logout" ]];then
       pkill -KILL -u "$USER"
     elif [[ $choice == "Suspend" ]];then
       systemctl suspend
@@ -25,3 +30,4 @@
     platforms = platforms.all;
   };
 }
+
