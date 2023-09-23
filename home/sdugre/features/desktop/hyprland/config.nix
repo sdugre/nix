@@ -37,6 +37,7 @@ in ''
   bind = SUPER, Return, exec, ${TERMINAL}
   bind = SUPER, b, exec, ${BROWSER}
   bind = SUPER, Space, exec, rofi -show drun -modi drun
+  bind = SUPER, f, exec, nautilus &
 
   # Basic Binds
   bind = SUPER, q, killactive

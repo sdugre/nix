@@ -6,7 +6,8 @@
   environment.systemPackages = with pkgs; [
     gnome.seahorse
     gnome-connections
+    gnome.nautilus
   ];
 
-  programs.thunar.enable = true;
+  services.gvfs.enable = true;
 }
