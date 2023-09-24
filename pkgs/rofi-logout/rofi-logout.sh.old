@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-choice=$(printf "Logout\nSuspend\nReboot\nShutdown" | rofi -dmenu -i)
-#if [[ $choice == "Lock" ]];then
-#    bash ~/.config/system_scripts/wayland_session_lock
-if [[ $choice == "Logout" ]];then
+choice=$(printf "Lock\nLogout\nSuspend\nReboot\nShutdown" | rofi -dmenu -i)
+if [[ $choice == "Lock" ]];then
+    notify-send "$USER"
+elif [[ $choice == "Logout" ]];then
     pkill -KILL -u "$USER"
 elif [[ $choice == "Suspend" ]];then
     systemctl suspend

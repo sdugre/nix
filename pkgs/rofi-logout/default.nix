@@ -1,18 +1,18 @@
 # logout / suspend / reboot / shutdown script for rofi
 
-{ pkgs, lib, writeShellApplication, rofi, config, ... }: 
+{ pkgs, lib, writeShellApplication, rofi, config, libnotify, procps, ... }: 
 
 #let
 #  swaylock = "${config.programs.swaylock.package}/bin/swaylock";
 #in
 (writeShellApplication {
   name = "rofi-logout";
-  runtimeInputs = [ rofi ];
+  runtimeInputs = [ rofi libnotify procps];
 
   text = /* bash */ ''
     choice=$(printf "Lock\nLogout\nSuspend\nReboot\nShutdown" | rofi -dmenu -i)
     if [[ $choice == "Lock" ]];then
-      echo "Can't do that"
+      notify-send "User is $USER"
     elif [[ $choice == "Logout" ]];then
       pkill -KILL -u "$USER"
     elif [[ $choice == "Suspend" ]];then
