@@ -38,6 +38,7 @@ in ''
   bind = SUPER, b, exec, ${BROWSER}
   bind = SUPER, Space, exec, rofi -modes "drun,window,run" -show drun
   bind = SUPER, d, exec, nautilus &
+  bind = SUPER, l, exec, /home/sdugre/.nix-profile/bin/rofi-logout
 
   # Basic Binds
   bind = SUPER, q, killactive
