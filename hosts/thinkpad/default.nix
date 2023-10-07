@@ -13,6 +13,7 @@
    
     ../common/optional/pipewire.nix
     ../common/optional/laptop.nix
+    ../common/optional/electronics.nix
   ];
 
   # Enable networking
