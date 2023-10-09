@@ -6,6 +6,7 @@
     lm_sensors
     nano
     nmap
+    python3
     tmux
     thefuck
     tree

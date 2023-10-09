@@ -4,6 +4,5 @@
     pkgs.kicad
     pkgs.fritzing
     pkgs.ngspice
-    pkgs.platformio
   ];
 }
