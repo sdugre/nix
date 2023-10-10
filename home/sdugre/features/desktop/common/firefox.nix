@@ -13,6 +13,7 @@ in
         bitwarden
         libredirect
         ublock-origin
+        bypass-paywalls-clean
       ];
       search.default = "DuckDuckGo";
 
