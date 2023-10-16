@@ -11,6 +11,12 @@ in
     initExtra = ''
       [[ ! -f ${p10kTheme} ]] || source ${p10kTheme}
     '';
+    loginExtra = ''
+      if [ "$(tty)" = "/dev/tty1" ]; then
+        exec Hyprland
+      fi
+    '';
+
     plugins = [
       {
         name = "powerlevel10k";
