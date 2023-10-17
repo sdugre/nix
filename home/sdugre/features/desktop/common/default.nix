@@ -10,4 +10,6 @@
     obsidian
     vlc
   ];  
+  
+  programs.mpv.enable = true;
 }
