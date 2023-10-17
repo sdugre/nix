@@ -14,6 +14,7 @@ in
         libredirect
         ublock-origin
         bypass-paywalls-clean
+        istilldontcareaboutcookies
       ];
       search.default = "DuckDuckGo";
 
