@@ -10,6 +10,7 @@
     tmux
     thefuck
     tree
+    zathura
   ];
 
 }
