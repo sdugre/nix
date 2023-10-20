@@ -41,7 +41,7 @@ in
     sessionPath = [ "/home/sdugre/.local/bin" ];
     sessionVariables = {
       TERMINAL = "kitty";
-      EDITOR = "nano";
+      EDITOR = "nvim";
       BROWSER = "firefox";   
     };
   };
