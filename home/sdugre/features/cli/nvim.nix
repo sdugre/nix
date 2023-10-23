@@ -7,6 +7,7 @@
       "Use system clipboard
       set clipboard=unnamedplus
       '';
-
+    viAlias = true;
+    vimAlias = true;
   };
 }
