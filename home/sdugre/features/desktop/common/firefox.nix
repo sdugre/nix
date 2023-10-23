@@ -17,7 +17,7 @@ in
         istilldontcareaboutcookies
       ];
       search.default = "DuckDuckGo";
-
+      search.force = true;
       settings = {
         # enable HTTPS-Only Mode
         "dom.security.https_only_mode" = true;
