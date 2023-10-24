@@ -4,7 +4,7 @@ let
   addons = inputs.firefox-addons.packages.${pkgs.system};
 in
 {
-  imports = [inputs.arkenfox-nixos.hmModules.arkenfox];
+  imports = [inputs.arkenfox.hmModules.arkenfox];
 
   programs.firefox = {
     enable = true;
