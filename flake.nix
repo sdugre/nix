@@ -24,9 +24,12 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     nix-colors.url = "github:misterio77/nix-colors";
+  
+    arkenfox.url = "git+https://github.com/dwarfmaster/arkenfox-nixos?ref=main";
+    arkenfox.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, nur, hyprland, nix-colors, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, agenix, nur, hyprland, nix-colors, nixos-hardware, arkenfox, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
