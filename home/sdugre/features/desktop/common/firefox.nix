@@ -4,10 +4,13 @@ let
   addons = inputs.firefox-addons.packages.${pkgs.system};
 in
 {
+  imports = [inputs.arkenfox-nixos.hmModules.arkenfox];
+
   programs.firefox = {
     enable = true;
     profiles.default = {
       id = 0;
+      arkenfox.enable = true;
       isDefault = true;
       extensions = with addons; [
         bitwarden
