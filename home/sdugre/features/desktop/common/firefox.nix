@@ -8,13 +8,13 @@ in
 
   programs.firefox = {
     enable = true;
-    arkenfox {
+    arkenfox = {
       enable = true;
       version = "118.0";
     };
     profiles.default = {
       id = 0;
-      arkenfox {
+      arkenfox = {
         enable = true;
 	"0000".enable = true;
 	"0100".enable = true;
