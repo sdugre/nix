@@ -8,9 +8,19 @@ in
 
   programs.firefox = {
     enable = true;
+    arkenfox {
+      enable = true;
+      version = "118.0";
+    };
     profiles.default = {
       id = 0;
-      arkenfox.enable = true;
+      arkenfox {
+        enable = true;
+	"0000".enable = true;
+	"0100".enable = true;
+	"0200".enable = true;
+	"0300".enable = true;
+      };
       isDefault = true;
       extensions = with addons; [
         bitwarden
