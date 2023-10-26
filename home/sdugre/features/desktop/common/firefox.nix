@@ -23,7 +23,7 @@ in
 	"0600".enable = true; # Block Implicit Outbound
 	"0700".enable = true; # DNS
 	"0800".enable = true; # Location Bar
-	"0900".enable = true: # Passwords
+	"0900".enable = true; # Passwords
 	"1000".enable = true; # Disk Avoidance
       };
       isDefault = true;
