@@ -17,9 +17,14 @@ in
       arkenfox = {
         enable = true;
 	"0000".enable = true;
-	"0100".enable = true;
-	"0200".enable = true;
-	"0300".enable = true;
+	"0100".enable = true; # Startup
+	"0200".enable = true; # Geolocation
+	"0300".enable = true; # Quieter Fox
+	"0600".enable = true; # Block Implicit Outbound
+	"0700".enable = true; # DNS
+	"0800".enable = true; # Location Bar
+	"0900".enable = true: # Passwords
+	"1000".enable = true; # Disk Avoidance
       };
       isDefault = true;
       extensions = with addons; [
