@@ -26,6 +26,7 @@ in
 	"0900".enable = true; # Passwords
 	"1000".enable = true; # Disk Avoidance
       };
+
       isDefault = true;
       extensions = with addons; [
         bitwarden
@@ -34,8 +35,23 @@ in
         bypass-paywalls-clean
         istilldontcareaboutcookies
       ];
-      search.default = "DuckDuckGo";
-      search.force = true;
+
+      search = {
+        default = "DuckDuckGo";
+        force = true;
+	engines = {
+          "NixOS Packages" = {
+            urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
+            icon = ''${pkgs.fetchurl {
+              url = "https://nixos.org/favicon.png";
+              sha256 = "sha256-awcsDbbpRcDJnJpRavj/IcKMReEektRcqKbE35IJTKQ=";
+            }}'';
+            definedAliases = ["@nixpkgs" "@np"];
+          };
+	};
+      };
+
+
       settings = {
         # enable HTTPS-Only Mode
         "dom.security.https_only_mode" = true;
