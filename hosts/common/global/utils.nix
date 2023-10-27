@@ -11,6 +11,7 @@
     tmux
     thefuck
     tree
+    wl-clipboard
     zathura
   ];
 
