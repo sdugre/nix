@@ -11,7 +11,7 @@
     tmux
     thefuck
     tree
-    wl-clipboard
+    wl-clipboard # needed for copy/paste in wayland
     zathura
   ];
 
