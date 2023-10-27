@@ -48,6 +48,15 @@ in
             }}'';
             definedAliases = ["@nixpkgs" "@np"];
           };
+
+          "YouTube" = {
+            urls = [{template = "https://yewtu.be/search?q={}";}];
+	    icon = ''${pkgs.fetchurl {
+              url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
+              sha256 = "sha256-i7HQ+kOhdDbVndVG9vdMdtxEc13vdSLCLYAxFm24kR0=";
+            }}'';
+            definedAliases = ["@youtube" "@yt"];
+          };
 	};
       };
 
