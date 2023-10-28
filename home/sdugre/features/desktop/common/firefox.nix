@@ -25,6 +25,10 @@ in
 	"0800".enable = true; # Location Bar
 	"0900".enable = true; # Passwords
 	"1000".enable = true; # Disk Avoidance
+	"1200".enable = true; # HTTPS 
+	"1600".enable = true; # REFERERS
+	"2000".enable = true; # PLUGINS
+	"2600".enable = true; # MISC
       };
 
       isDefault = true;
