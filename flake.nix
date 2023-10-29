@@ -88,6 +88,17 @@
         };
       };
 
+      nixosConfigurations = {
+        chromebook = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/chromebook
+            agenix.nixosModules.default
+            nur.nixosModules.nur
+          ];
+        };
+      };  
+
       homeConfigurations = {
         "sdugre@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
@@ -102,6 +113,13 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/sdugre/thinkpad.nix
+          ];
+        };
+        "sdugre@chromebook" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/sdugre/chromebook.nix
           ];
         };
       };
