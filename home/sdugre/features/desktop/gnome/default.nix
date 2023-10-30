@@ -30,5 +30,14 @@
     "org/gnome/desktop/peripherals/mouse" = {
       natural-scroll = false;
     };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      home = ['<Super>d'];
+      www = ['<Super>b'];
+      volume-up = ['F10'];
+      volume-down = ['F9'];
+      volume-mute = ['F8'];
+      next = ['F2'];
+      previous = ['F1'];
+    };
   };
 }
