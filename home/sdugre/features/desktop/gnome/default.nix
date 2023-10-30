@@ -24,6 +24,9 @@
     "org/gnome/desktop/peripherals/touchpad" = {
       natural-scroll = false;
     };
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
+    };
     "org/gnome/desktop/peripherals/mouse" = {
       natural-scroll = false;
     };
