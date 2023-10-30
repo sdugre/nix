@@ -7,9 +7,10 @@
     ../common/users/sdugre
 
     ../common/optional/networkDrives.nix
-    ../common/optional/gnome.nix
+#    ../common/optional/gnome.nix
 #    ../common/optional/hyprland.nix
 #    inputs.hyprland.nixosModules.default
+    ../common/optional/xfce.nix
    
     ../common/optional/pipewire.nix
     ../common/optional/laptop.nix
