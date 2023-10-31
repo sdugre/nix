@@ -14,7 +14,7 @@
    
     ../common/optional/pipewire.nix
     ../common/optional/laptop.nix
-    ../common/optional/minecraft.nix
+#    ../common/optional/minecraft.nix # need to pay for the java version...
 #    ../common/optional/electronics.nix
   ];
 
