@@ -14,6 +14,7 @@
    
     ../common/optional/pipewire.nix
     ../common/optional/laptop.nix
+    ../common/optional/minecraft.nix
 #    ../common/optional/electronics.nix
   ];
 
