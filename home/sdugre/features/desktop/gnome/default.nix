@@ -38,6 +38,8 @@
       volume-mute = ["F8"];
       next = ["F2"];
       previous = ["F1"];
+      screen-brightness-up = ["F7"];
+      screen-brightness-down = ["F6"];
     };
   };
 }
