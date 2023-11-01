@@ -40,6 +40,20 @@
       previous = ["F1"];
       screen-brightness-up = ["F7"];
       screen-brightness-down = ["F6"];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+      ];
     };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Launch Terminal";
+      command = "kgx";
+      binding = "<Super>Return";
+    };   
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      name = "Launch Browser";
+      command = "firefox";
+      binding = "<Super>b";
+    };   
   };
 }
