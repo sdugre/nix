@@ -22,7 +22,7 @@ in ''
 
   decoration {
     active_opacity = 0.94
-    inactive_opacity = 0.84
+    inactive_opacity = 0.75
     fullscreen_opacity = 1.0
     rounding=5
     drop_shadow = true
