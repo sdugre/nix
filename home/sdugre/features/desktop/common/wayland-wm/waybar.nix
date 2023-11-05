@@ -46,7 +46,7 @@ in
 
         backlight = {
            device = "intel_backlight";
-           format = "{icon} {percent}% ";
+           format = "{icon}  {percent:3}% ";
            format-icons = ["" ""];
            tooltip = false;
         };
@@ -55,8 +55,8 @@ in
           bat = "BAT0";
           interval = 10;
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-          format = "{icon} {capacity}% ";
-          format-charging = "󰂄 {capacity}%";
+          format = "{icon} {capacity:2}% ";
+          format-charging = "󰂄 {capacity:2}% ";
           on-click = "";
         };
 
@@ -69,7 +69,7 @@ in
         };
 
         cpu = {
-          format = "   {usage}% ";
+          format = "   {usage:2}% ";
         };
 
         "custom/hostname" = {
@@ -101,12 +101,12 @@ in
         };
 
         memory = {
-          format = "󰍛  {}%";
+          format = "󰍛  {:3}%";
           interval = 5;
         };
 
         pulseaudio = {
-          format = "{icon}  {volume}%";
+          format = "{icon}  {volume:3}%";
           format-muted = "   0%";
           format-icons = {
             headphone = "󰋋";
