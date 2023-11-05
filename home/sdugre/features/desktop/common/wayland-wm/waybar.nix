@@ -26,7 +26,7 @@ in
           "custom/hostname"
           "network"
           "battery"
-          "tray"
+#         "tray"
           "cpu"
           "memory"
 	  "disk"
@@ -46,7 +46,7 @@ in
 
         backlight = {
            device = "intel_backlight";
-           format = "{percent}% {icon}";
+           format = "{icon} {percent}% ";
            format-icons = ["" ""];
            tooltip = false;
         };
@@ -55,7 +55,7 @@ in
           bat = "BAT0";
           interval = 10;
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-          format = "{icon} {capacity}%";
+          format = "{icon} {capacity}% ";
           format-charging = "󰂄 {capacity}%";
           on-click = "";
         };
@@ -69,7 +69,7 @@ in
         };
 
         cpu = {
-          format = "   {usage}%";
+          format = "   {usage}% ";
         };
 
         "custom/hostname" = {
@@ -84,13 +84,13 @@ in
         };
 
         disk = {
-	  format = "   {used}";
+	  format = "   {used} ";
 	};
 
         network = {
           interval = 3;
-          format-wifi = "   {essid}";
-          format-ethernet = "󰈁 Connected";
+          format-wifi = "   {essid} ";
+          format-ethernet = "󰈁 Connected ";
           format-disconnected = "";
           tooltip-format = ''
             {ifname}
