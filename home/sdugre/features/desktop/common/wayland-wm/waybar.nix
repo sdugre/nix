@@ -84,7 +84,7 @@ in
         };
 
         disk = {
-	  format = "{used}";
+	  format = "   {used}";
 	};
 
         network = {
