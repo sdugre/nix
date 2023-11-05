@@ -29,6 +29,7 @@ in
           "tray"
           "cpu"
           "memory"
+	  "disk"
           "backlight"
           "pulseaudio"
         ];
@@ -81,6 +82,10 @@ in
           on-click = "/home/sdugre/.nix-profile/bin/rofi-logout";
           tooltip = false;
         };
+
+        disk = {
+	  format = "{used}";
+	};
 
         network = {
           interval = 3;
