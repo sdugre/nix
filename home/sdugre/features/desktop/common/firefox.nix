@@ -1,5 +1,4 @@
 { pkgs, lib, inputs, ... }:
-
 let
   addons = inputs.firefox-addons.packages.${pkgs.system};
 in
@@ -29,6 +28,8 @@ in
 	"1600".enable = true; # REFERERS
 	"2000".enable = true; # PLUGINS
 	"2600".enable = true; # MISC
+	"2700".enable = true; # ENHANCED TRACKING PROTECTION
+
       };
 
       isDefault = true;
