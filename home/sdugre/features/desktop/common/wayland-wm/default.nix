@@ -16,6 +16,7 @@
     galculator
     backlight
     rofi-logout
+    test-pkg
   ];
 
   home.sessionVariables = {

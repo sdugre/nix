@@ -4,4 +4,5 @@
 { pkgs ? (import ../nixpkgs.nix) { } }: {
   backlight = pkgs.callPackage ./backlight { };
   rofi-logout = pkgs.callPackage ./rofi-logout { };
+  test-pkg = pkgs.callPackage ./test-pkg { };
 }
