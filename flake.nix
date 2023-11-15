@@ -25,7 +25,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     
     hyprland-contrib.url = "github:hyprwm/contrib";
-    hyprland-contrip.inputs.nixpkgs.follows = "nixpkgs";   
+    hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";   
 
     nix-colors.url = "github:misterio77/nix-colors";
   
