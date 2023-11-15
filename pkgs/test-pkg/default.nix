@@ -4,7 +4,8 @@
   runtimeInputs = [ ];
 
   text = /* bash */ ''
-    ${pkgs.libnotify}/bin/notify-send 'test-pkg output';
+    ${pkgs.libnotify}/bin/notify-send "USER is $(whoami)"
+    brillo -U 15
   '';
 }) // {
   meta = with lib; {

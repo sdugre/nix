@@ -23,6 +23,10 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+    
+    hyprland-contrib.url = "github:hyprwm/contrib";
+    hyprland-contrip.inputs.nixpkgs.follows = "nixpkgs";   
+
     nix-colors.url = "github:misterio77/nix-colors";
   
     arkenfox.url = "git+https://github.com/dwarfmaster/arkenfox-nixos?ref=main";
