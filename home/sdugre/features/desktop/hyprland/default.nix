@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 
   wayland.windowManager.hyprland = {

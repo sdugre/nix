@@ -7,7 +7,7 @@ let
   backlight = "${pkgs.backlight}/bin/backlight";
   notify = "${pkgs.libnotify}/bin/notify-send";
 
-  lockTime = 1 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
+  lockTime = 5 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
   dimBeforeTime = 10; # seconds before lockTime to dim screen
   suspendAfterTime = 5 * 60; # minutes after lockTime to suspend 
 
@@ -20,7 +20,7 @@ in
       # Dim screen
       {
         timeout = lockTime - dimBeforeTime;
-        command = "${notify} 'SLEEEEEP' && ${pkgs.backlight}/bin/backlight -dec 20"; 
+        command = "${pkgs.test-pkg}/bin/test-pkg"; 
 #        command = "${notify} 'GOING TO SLEEP'";
         resumeCommand = "${pkgs.backlight}/bin/backlight -inc 20";
       }

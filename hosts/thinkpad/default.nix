@@ -25,7 +25,7 @@
     mnamer
     wireshark
     backlight
- 
+    brillo
   ]);
 
   # Configure keymap in X11
