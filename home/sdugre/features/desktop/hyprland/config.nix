@@ -2,6 +2,7 @@
   home, 
   wallpaper,
   pkgs,
+  ...
 }: let   
   inherit (home.sessionVariables) TERMINAL BROWSER;
   grimblast = "${pkgs.inputs.hyprland-contrib.grimblast}/bin/grimblast";
