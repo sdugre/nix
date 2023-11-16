@@ -14,6 +14,7 @@
     enable = true;
     extraConfig = import ./config.nix {
       inherit (config) home wallpaper;
+      inherit pkgs;
     };
   };
 }
