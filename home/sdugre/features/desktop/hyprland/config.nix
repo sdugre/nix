@@ -1,6 +1,7 @@
 {
   home, 
   wallpaper,
+  pkgs,
   ...
 }: let   
   inherit (home.sessionVariables) TERMINAL BROWSER;
