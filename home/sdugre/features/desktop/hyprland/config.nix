@@ -5,7 +5,7 @@
   ...
 }: let   
   inherit (home.sessionVariables) TERMINAL BROWSER;
-  grimblast = "${pkgs.inputs.hyprland-contrib.grimblast}/bin/grimblast";
+  grimblast = "${pkgs.hyprland-contrib.grimblast}/bin/grimblast";
 in ''
   # ASCII Art from https://fsymbols.com/generators/carty/
   monitor=eDP-1,1920x1080,0x0,1
