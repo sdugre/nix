@@ -9,6 +9,7 @@
     ./gtk.nix
     ./swayidle.nix
     ./swaylock.nix
+    ./zathura.nix
   ];
 
   home.packages = with pkgs; [
