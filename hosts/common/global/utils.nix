@@ -12,7 +12,7 @@
     thefuck
     tree
     wl-clipboard # needed for copy/paste in wayland
-    zathura
+#    zathura   see home manager package
   ];
 
 }
