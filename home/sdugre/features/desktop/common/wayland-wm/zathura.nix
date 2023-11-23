@@ -4,6 +4,6 @@
     enable = true;
     extraConfig = ''
       set selection-clipboard clipboard
-    ''
+    '';
   };
 }

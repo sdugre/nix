@@ -37,7 +37,7 @@ in
         bitwarden
         libredirect
         ublock-origin
-#        bypass-paywalls-clean
+        bypass-paywalls-clean
         istilldontcareaboutcookies
       ];
 
