@@ -1,4 +1,0 @@
-
-# Lesson 5.4: RETRIEVING AND MERGING FILES
-
-** To retrieve the contents of a file, type `:r FILENAME`{vim}. **
