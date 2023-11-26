@@ -5,6 +5,8 @@
     inputs.hyprland.homeManagerModules.default
   ];
 
+#  xdg.portal.config.common.default = "*";   
+
   home.packages = with pkgs; [
     inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
