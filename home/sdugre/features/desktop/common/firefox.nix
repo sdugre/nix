@@ -9,7 +9,7 @@ in
     enable = true;
     arkenfox = {
       enable = true;
-      version = "118.0";
+      version = "119.0";
     };
     profiles.default = {
       id = 0;
@@ -29,7 +29,8 @@ in
 	"2000".enable = true; # PLUGINS
 	"2600".enable = true; # MISC
 	"2700".enable = true; # ENHANCED TRACKING PROTECTION
-
+        "2800".enable = true; # SHUTDOWN & SANITIZING
+	"4500".enable = true; # RFP (resist fingerprinting)
       };
 
       isDefault = true;
