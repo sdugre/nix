@@ -7,6 +7,7 @@
     nano
     nmap
     nsxiv    
+    nvd
     python3
     tmux
     thefuck
