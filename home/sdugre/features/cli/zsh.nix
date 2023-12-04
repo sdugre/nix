@@ -17,6 +17,12 @@ in
       fi
     '';
 
+    profileExtra = ''      
+      echo ""
+      /usr/local/bin/figurine -f "3d.flf" $(hostname)
+      echo ""
+    '';
+
     plugins = [
       {
         name = "powerlevel10k";
