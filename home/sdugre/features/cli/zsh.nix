@@ -19,7 +19,7 @@ in
 
     profileExtra = ''      
       echo ""
-      /usr/local/bin/figurine -f "3d.flf" $(hostname)
+      ${pkgs.figurine}/bin/figurine -f "3d.flf" $(hostname)
       echo ""
     '';
 
