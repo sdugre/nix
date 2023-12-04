@@ -3,6 +3,7 @@
 
   environment.systemPackages = with pkgs; [
     autojump
+    figurine
     lm_sensors
     nano
     nmap
