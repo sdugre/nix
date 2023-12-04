@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
   sourceRoot = ".";
 
   installPhase = ''
-    install -m755 -D ${pname}-${version} $out/bin/${pname}
+    install -m755 -D ${pname} $out/bin/${pname}
   '';
 
   meta = with lib; {
