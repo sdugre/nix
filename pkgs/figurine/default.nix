@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/arsham/figurine/releases/download/v${version}/figurine_linux_amd64_v${version}.tar.gz";
-    hash = "";
+    hash = "sha256-5yQw3gyktLRUhJXYA4VvX+wiP0PFmpegv8xxRxDVAyo=";
   };
 
   sourceRoot = ".";
