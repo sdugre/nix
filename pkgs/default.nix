@@ -5,6 +5,7 @@
 
   # Packages with an actual source
   figurine = pkgs.callPackage ./figurine { };
+  tinyMediaManager = pkgs.callPackage ./tinyMediaManager { };
 
   # Personal scripts
   backlight = pkgs.callPackage ./backlight { };
