@@ -1,4 +1,7 @@
-{ stdenv, lib, fetchurl }:
+{ stdenv, lib 
+, fetchurl
+, autoPatchelfHook
+}:
 
 stdenv.mkDerivation rec {
   pname = "tinyMediaManager";
@@ -8,6 +11,10 @@ stdenv.mkDerivation rec {
     url = "https://release.tinymediamanager.org/v4/dist/tmm_${version}_linux-amd64.tar.gz";
     hash = "sha256-1uWm89liPCvpvnBCn/yJL87miLOaKG4T6nc+2f3ApIc=";
   };
+
+  nativeBuildInputs = [
+    autoPatchelfHook
+  ];
 
   sourceRoot = ".";
 
