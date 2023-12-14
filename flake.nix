@@ -69,6 +69,7 @@
 
       wallpapers = import ./home/sdugre/wallpapers;
 
+      # VM
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -80,6 +81,7 @@
         };
       };
 
+      # Primary Laptop
       nixosConfigurations = {
         thinkpad = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -92,11 +94,24 @@
         };
       };
 
+      # Secondary Laptop
       nixosConfigurations = {
         chromebook = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./hosts/chromebook
+            agenix.nixosModules.default
+            nur.nixosModules.nur
+          ];
+        };
+      };  
+
+      # Server
+      nixosConfigurations = {
+        chummie = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/chummie
             agenix.nixosModules.default
             nur.nixosModules.nur
           ];
@@ -124,6 +139,13 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/sdugre/chromebook.nix
+          ];
+        };
+        "sdugre@chummie" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/sdugre/chummie.nix
           ];
         };
       };
