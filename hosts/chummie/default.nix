@@ -47,13 +47,11 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ ];
-    hashedPassword = "$6$uCu95xgOjbsJEWGn$Wyqm4AG0SW9e93MNWcqLXWlsYUZVm7cSKCV8u3brmqbyxcUxmRCKFlS/J1LVxo>
+    hashedPassword = "$6$uCu95xgOjbsJEWGn$Wyqm4AG0SW9e93MNWcqLXWlsYUZVm7cSKCV8u3brmqbyxcUxmRCKFlS/J1LVxohIhuaFGFNSHXhJK2aUR7BZF0";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP08ryfgQQWLbhbNYqwEBTKCBIArQPalcjtRo54mpr/v sdugre@gmail.com>
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP08ryfgQQWLbhbNYqwEBTKCBIArQPalcjtRo54mpr/v sdugre@gmail.com" # thinkpad
     ];
   };
-
-  system.copySystemConfiguration = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11"; # Did you read the comment?
