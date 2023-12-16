@@ -1,4 +1,4 @@
-{ lib, config, pkgs, hostname, stateVer, username, desktop, gpu, inputs, platform, theme, .. }: {
+{ lib, config, pkgs, hostname, stateVer, username, desktop, gpu, inputs, platform, theme, ... }: {
   imports = [
     # Modules
     ./common/global
