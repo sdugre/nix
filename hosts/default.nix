@@ -11,7 +11,7 @@
     ./${hostname}
   ] ++ lib.optional (builtins.isString desktop) ./common/desktops/${desktop};
 
-  networking.hostname = ${hostname};
+  networking.hostname = hostname;
 
   # List default system packages
   environment.systemPackages = with pkgs; [
