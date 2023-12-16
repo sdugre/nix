@@ -11,7 +11,7 @@
     theme      ? "default",
     type       ? "default",
     stateVer   ? "23.11",
-  }: nixpkgs.lib.nixosSystem {
+  }: inputs.nixpkgs.lib.nixosSystem {
     specialArgs = { inherit inputs outputs desktop hostname username gpu platform theme; };
     modules = [
       # 'default', 'small, or 'minimal'
