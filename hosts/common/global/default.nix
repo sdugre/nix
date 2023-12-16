@@ -6,6 +6,7 @@
     ./nix.nix 
     ./tailscale.nix
     ./utils.nix
+    ./openssh.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
 
   nixpkgs = {
