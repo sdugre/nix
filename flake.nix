@@ -43,6 +43,7 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
+      libx = import ./lib { inherit self inputs outputs; };  
     in
     rec {
       # Your custom packages
@@ -108,15 +109,19 @@
 
       # Server
       nixosConfigurations = {
-        chummie = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/chummie
-            agenix.nixosModules.default
-            nur.nixosModules.nur
-          ];
-        };
-      };  
+        chummie    = libx.mkHost { hostname = "chummie"; };
+      };
+
+#      nixosConfigurations = {
+#        chummie = nixpkgs.lib.nixosSystem {
+#          specialArgs = { inherit inputs outputs; };
+#          modules = [
+#            ./hosts/chummie
+#            agenix.nixosModules.default
+#            nur.nixosModules.nur
+#          ];
+#        };
+#      };  
 
       homeConfigurations = {
         "sdugre@nixos" = home-manager.lib.homeManagerConfiguration {
