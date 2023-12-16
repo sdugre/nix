@@ -48,7 +48,7 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
-    hashedPassword = "$6$uCu95xgOjbsJEWGn$Wyqm4AG0SW9e93MNWcqLXWlsYUZVm7cSKCV8u3brmqbyxcUxmRCKFlS/J1LVxohIhuaFGFNSHXhJK2aUR7BZF0";
+    hashedPassword = "$6$VFLMhcigCBrLJ3PF$I7jBNN15btQBG48dd.s987gZKYjkx2Ku796TmMSKV4bhn7p/sEF9F7E0MygJTCpfKuAEfcdxBeJ7ZFz0c/OxG0";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP08ryfgQQWLbhbNYqwEBTKCBIArQPalcjtRo54mpr/v sdugre@gmail.com" # thinkpad
     ];
