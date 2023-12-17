@@ -11,4 +11,8 @@
   ];  
   
   programs.mpv.enable = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0" # for obsidian
+  ];
 }
