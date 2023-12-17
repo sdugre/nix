@@ -1,4 +1,4 @@
-
+  
 { inputs, outputs, lib, config, pkgs, nixos-hardware, ... }: {
   imports = [
     ./hardware-configuration.nix
@@ -6,7 +6,6 @@
     # optional
     ../common/optional/networkDrives.nix
   ];
-
 
   # filesystems
   fileSystems."/".options = [ "compress=zstd" "noatime" ];
@@ -20,8 +19,6 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.networkmanager.enable = true;
 
   # Packages specific to this machine
   environment.systemPackages = ([

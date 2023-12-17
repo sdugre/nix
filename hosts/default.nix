@@ -12,6 +12,7 @@
   ] ++ lib.optional (builtins.isString desktop) ./common/desktops/${desktop};
 
   networking.hostName = hostname;
+  networking.networkmanager.enable = true;
 
   # List default system packages
   environment.systemPackages = with pkgs; [
