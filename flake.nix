@@ -70,18 +70,6 @@
 
       wallpapers = import ./home/sdugre/wallpapers;
 
-      # VM
-      nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/nixos
-            agenix.nixosModules.default
-            nur.nixosModules.nur
-          ];
-        };
-      };
-
       # Primary Laptop
       nixosConfigurations = {
         thinkpad = nixpkgs.lib.nixosSystem {
@@ -107,21 +95,10 @@
         };
       };  
 
-      # Server
       nixosConfigurations = {
-        chummie    = libx.mkHost { hostname = "chummie"; };
+        chummie    = libx.mkHost { hostname = "chummie"; };  # server
+	nixos      = libx.mkHost { hostname = "nixos";, desktop = "gnome"; stateVer = "23.05"; }; # test VM
       };
-
-#      nixosConfigurations = {
-#        chummie = nixpkgs.lib.nixosSystem {
-#          specialArgs = { inherit inputs outputs; };
-#          modules = [
-#            ./hosts/chummie
-#            agenix.nixosModules.default
-#            nur.nixosModules.nur
-#          ];
-#        };
-#      };  
 
       homeConfigurations = {
         "sdugre@nixos" = home-manager.lib.homeManagerConfiguration {
