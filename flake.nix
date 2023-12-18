@@ -43,6 +43,7 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
+      libx = import ./lib { inherit self inputs outputs; };  
     in
     rec {
       # Your custom packages
@@ -69,17 +70,7 @@
 
       wallpapers = import ./home/sdugre/wallpapers;
 
-      nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/nixos
-            agenix.nixosModules.default
-            nur.nixosModules.nur
-          ];
-        };
-      };
-
+      # Primary Laptop
       nixosConfigurations = {
         thinkpad = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -92,6 +83,7 @@
         };
       };
 
+      # Secondary Laptop
       nixosConfigurations = {
         chromebook = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -102,6 +94,11 @@
           ];
         };
       };  
+
+      nixosConfigurations = {
+        chummie    = libx.mkHost { hostname = "chummie"; };  # server
+	nixos      = libx.mkHost { hostname = "nixos"; desktop = "gnome"; stateVer = "23.05"; }; # test VM
+      };
 
       homeConfigurations = {
         "sdugre@nixos" = home-manager.lib.homeManagerConfiguration {
@@ -124,6 +121,13 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/sdugre/chromebook.nix
+          ];
+        };
+        "sdugre@chummie" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/sdugre/chummie.nix
           ];
         };
       };
