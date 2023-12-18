@@ -12,9 +12,17 @@ in
       [[ ! -f ${p10kTheme} ]] || source ${p10kTheme}
     '';
     loginExtra = ''
-      if [ "$(tty)" = "/dev/tty1" ]; then
-        exec Hyprland
-      fi
+    '';
+
+#      if [ "$(tty)" = "/dev/tty1" ]; then
+#        exec Hyprland
+#      fi
+
+
+    profileExtra = ''      
+      echo ""
+      ${pkgs.figurine}/bin/figurine -f "3d.flf" $(hostname)
+      echo ""
     '';
 
     plugins = [

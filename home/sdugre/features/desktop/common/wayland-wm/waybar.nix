@@ -26,9 +26,10 @@ in
           "custom/hostname"
           "network"
           "battery"
-          "tray"
+#         "tray"
           "cpu"
           "memory"
+	  "disk"
           "backlight"
           "pulseaudio"
         ];
@@ -45,7 +46,7 @@ in
 
         backlight = {
            device = "intel_backlight";
-           format = "{percent}% {icon}";
+           format = "{icon}  {percent:3}% ";
            format-icons = ["" ""];
            tooltip = false;
         };
@@ -54,8 +55,8 @@ in
           bat = "BAT0";
           interval = 10;
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-          format = "{icon} {capacity}%";
-          format-charging = "󰂄 {capacity}%";
+          format = "{icon} {capacity:2}% ";
+          format-charging = "󰂄 {capacity:2}% ";
           on-click = "";
         };
 
@@ -68,7 +69,7 @@ in
         };
 
         cpu = {
-          format = "   {usage}%";
+          format = "   {usage:2}% ";
         };
 
         "custom/hostname" = {
@@ -82,10 +83,14 @@ in
           tooltip = false;
         };
 
+        disk = {
+	  format = "   {used} ";
+	};
+
         network = {
           interval = 3;
-          format-wifi = "   {essid}";
-          format-ethernet = "󰈁 Connected";
+          format-wifi = "   {essid} ";
+          format-ethernet = "󰈁 Connected ";
           format-disconnected = "";
           tooltip-format = ''
             {ifname}
@@ -96,12 +101,12 @@ in
         };
 
         memory = {
-          format = "󰍛  {}%";
+          format = "󰍛  {:3}%";
           interval = 5;
         };
 
         pulseaudio = {
-          format = "{icon}  {volume}%";
+          format = "{icon}  {volume:3}%";
           format-muted = "   0%";
           format-icons = {
             headphone = "󰋋";

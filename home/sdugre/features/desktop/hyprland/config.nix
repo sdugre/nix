@@ -1,8 +1,11 @@
 {
   home, 
   wallpaper,
+  pkgs,
+  ...
 }: let   
   inherit (home.sessionVariables) TERMINAL BROWSER;
+  grimblast = "${pkgs.grimblast}/bin/grimblast";
 in ''
   # ASCII Art from https://fsymbols.com/generators/carty/
   monitor=eDP-1,1920x1080,0x0,1
@@ -22,7 +25,7 @@ in ''
 
   decoration {
     active_opacity = 0.94
-    inactive_opacity = 0.84
+    inactive_opacity = 0.75
     fullscreen_opacity = 1.0
     rounding=5
     drop_shadow = true
@@ -72,6 +75,12 @@ in ''
   bindle=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
   bindle=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
   bindl=, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+  # Screenshots
+  bind = , Print , exec, ${grimblast} --notify --freeze copy output
+  bind = SHIFT, Print, exec, ${grimblast} --notify --freeze copy active
+  bind = CONTROL, Print, exec, ${grimblast} --notify --freeze copy screen
+  bind = SUPER, Print, exec, ${grimblast} --notify --freeze copy area
+  bind = ALT, Print, exec, ${grimblast} --notify --freeze copy area
   # Auto Start
   exec-once = mako &
   exec-once = swaybg -i ${wallpaper} --mode fill &
