@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     autojump
     figurine
+    git
     lm_sensors
     nano
     nmap
