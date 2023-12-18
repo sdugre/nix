@@ -1,5 +1,4 @@
 { pkgs, lib, inputs, ... }:
-
 let
   addons = inputs.firefox-addons.packages.${pkgs.system};
 in
@@ -10,7 +9,7 @@ in
     enable = true;
     arkenfox = {
       enable = true;
-      version = "118.0";
+      version = "master";
     };
     profiles.default = {
       id = 0;
@@ -29,6 +28,9 @@ in
 	"1600".enable = true; # REFERERS
 	"2000".enable = true; # PLUGINS
 	"2600".enable = true; # MISC
+	"2700".enable = true; # ENHANCED TRACKING PROTECTION
+        "2800".enable = true; # SHUTDOWN & SANITIZING
+	"4500".enable = true; # RFP (resist fingerprinting)
       };
 
       isDefault = true;

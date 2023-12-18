@@ -9,6 +9,7 @@
     ./gtk.nix
     ./swayidle.nix
     ./swaylock.nix
+    ./zathura.nix
   ];
 
   home.packages = with pkgs; [
@@ -16,6 +17,7 @@
     galculator
     backlight
     rofi-logout
+    test-pkg
   ];
 
   home.sessionVariables = {
