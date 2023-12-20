@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "Sean's nix config";
 
   inputs = {
     # Nixpkgs
@@ -83,21 +83,10 @@
         };
       };
 
-      # Secondary Laptop
       nixosConfigurations = {
-        chromebook = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/chromebook
-            agenix.nixosModules.default
-            nur.nixosModules.nur
-          ];
-        };
-      };  
-
-      nixosConfigurations = {
-        chummie    = libx.mkHost { hostname = "chummie"; };  # server
-	nixos      = libx.mkHost { hostname = "nixos"; desktop = "gnome"; stateVer = "23.05"; }; # test VM
+        chummie    = libx.mkHost { hostname = "chummie";                                           };  # server
+	nixos      = libx.mkHost { hostname = "nixos";      desktop = "gnome"; stateVer = "23.05"; }; # test VM
+        chromebook = libx.mkHost { hostname = "chromebook"; desktop = "gnome"; stateVer = "23.05"; }; # secondary laptop
       };
 
       homeConfigurations = {
