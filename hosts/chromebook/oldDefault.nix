@@ -1,0 +1,61 @@
+
+{ inputs, outputs, lib, config, pkgs, nixos-hardware, ... }: {
+  # You can import other NixOS modules here
+  imports = [
+    ./hardware-configuration.nix
+    ../common/global
+    ../common/users/sdugre
+
+    ../common/optional/networkDrives.nix
+    ../common/optional/gnome.nix
+   
+    ../common/optional/pipewire.nix
+    ../common/optional/laptop.nix
+  ];
+
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  environment.systemPackages = ([
+    inputs.agenix.packages.x86_64-linux.default
+  ]) ++ (with pkgs; [
+    backlight
+ 
+  ]);
+
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "";
+  };
+
+  # udev rule to allow adjusting brightness
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
+  '';
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+  # for a WiFi printer
+  services.avahi.openFirewall = true;
+
+  # TODO: Set your hostname
+  networking.hostName = "chromebook";
+
+  networking.firewall.allowedTCPPorts = [ 3389 ];
+
+  # TODO: This is just an example, be sure to use whatever bootloader you prefer
+#  boot.loader.grub.enable = true;
+#  boot.loader.grub.device = "/dev/sda";
+#  boot.loader.grub.useOSProber = true;
+#  boot.loader.grub.configurationLimit = 10;
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.05";
+
+}
