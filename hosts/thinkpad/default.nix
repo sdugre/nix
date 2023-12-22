@@ -7,9 +7,6 @@
  
     # optional
     ../common/optional/networkDrives.nix
-
-    ../common/optional/hyprland.nix
-   
     ../common/optional/pipewire.nix
     ../common/optional/laptop.nix
     ../common/optional/electronics.nix

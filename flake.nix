@@ -70,19 +70,6 @@
 
       wallpapers = import ./home/sdugre/wallpapers;
 
-      # Primary Laptop
-      nixosConfigurations = {
-        thinkpad = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/thinkpad
-            agenix.nixosModules.default
-            nur.nixosModules.nur
-            nixos-hardware.nixosModules.lenovo-thinkpad-t490
-          ];
-        };
-      };
-
       nixosConfigurations = {
         chummie    = libx.mkHost { hostname = "chummie";                                           }; # server
 	nixos      = libx.mkHost { hostname = "nixos";      desktop = "gnome"; stateVer = "23.05"; }; # test VM
