@@ -12,5 +12,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP08ryfgQQWLbhbNYqwEBTKCBIArQPalcjtRo54mpr/v sdugre@gmail.com" # thinkpad
     ];
   };
+
+  security.pam.services.swaylock = { };
 }
 
