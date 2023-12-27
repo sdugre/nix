@@ -1,10 +1,10 @@
 # logout / suspend / reboot / shutdown script for rofi
 # ${config.programs.swaylock.package}/bin/swaylock -i ${config.wallpaper} --daemonize
-{ pkgs, lib, writeShellApplication, rofi, config, swaylock, ... }: 
+{ pkgs, lib, writeShellApplication, rofi, config, procps, swaylock, ... }: 
 
 (writeShellApplication {
   name = "rofi-logout";
-  runtimeInputs = [ rofi swaylock ];
+  runtimeInputs = [ rofi procps swaylock];
 
   text = /* bash */ ''
     choice=$(printf "Lock\nLogout\nSuspend\nReboot\nShutdown" | rofi -dmenu -i)

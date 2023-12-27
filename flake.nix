@@ -12,7 +12,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Agenix Age-encrypted secrets for NixOS
-    agenix.url = "github:ryantm/agenix";
+#    agenix.url = "github:ryantm/agenix";
 
     # Nix User Repository (NUR)
     nur.url = "github:nix-community/NUR";
