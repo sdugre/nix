@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 let
   p10kTheme = ./p10k.zsh;
+  inherit (lib) mkIf;
+  hyprlandInstalled = inputs.hyprland.config.programs.hyprland.enable;
 in
 {
   programs.zsh = {
@@ -11,12 +13,11 @@ in
     initExtra = ''
       [[ ! -f ${p10kTheme} ]] || source ${p10kTheme}
     '';
-    loginExtra = ''
+    loginExtra = mkIf hyprlandInstalled ''
+      if [ "$(tty)" = "/dev/tty1" ]; then
+        exec Hyprland
+      fi
     '';
-
-#      if [ "$(tty)" = "/dev/tty1" ]; then
-#        exec Hyprland
-#      fi
 
 
     profileExtra = ''      
