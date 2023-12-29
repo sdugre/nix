@@ -1,13 +1,56 @@
-{ inputs, pkgs, config, hmStateVer, username, hostname, desktop, ... }: 
+{ inputs, outputs, lib, pkgs, config, hmStateVer, username, hostname, desktop, ... }: 
+let
+  inherit (inputs.nix-colors) colorSchemes;
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs; }) colorschemeFromPicture nixWallpaperFromScheme;
+in
 {
   imports = [ 
-    ./sdugre/global
+    # modules
+    inputs.nur.hmModules.nur
+    inputs.nix-colors.homeManagerModule
+
+    # global default cli tools
+    ./${username}/common/software/cli
   
-  # machine specific configuration
-  ./${username}/${hostname}.nix 
+    # machine specific configuration
+    ./${username}/${hostname}.nix
+    ]
+    ++ (builtins.attrValues outputs.homeManagerModules)
+    ++ lib.optional (builtins.isString desktop) ./${username}/common/desktops  # default desktop config
+    ;
 
-  ];
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = (_: true);
+    };
+  };
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = hmStateVer;
+  home = {
+    username = username;
+    stateVersion = hmStateVer;
+    homeDirectory = "/home/${username}";
+    sessionPath = [ "/home/${username}/.local/bin" ];
+    sessionVariables = {
+      TERMINAL = "kitty";
+      EDITOR = "nvim";
+      BROWSER = "firefox";   
+    };
+  };
+
+  programs.home-manager.enable = true;
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
+
+  colorscheme = lib.mkDefault colorSchemes.dracula;
 }
