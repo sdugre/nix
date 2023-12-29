@@ -1,9 +1,9 @@
-{ pkgs, desktop, ... }:
+{ pkgs, lib, desktop, ... }:
 {
   imports = [
-    ../software/firefox.nix
-    ../software/zathura.nix
-    ./font.nix
+    ../software/gui/firefox.nix
+    ../software/gui/zathura.nix
+    ../font.nix
   ]
   ++ lib.optional (builtins.isString desktop) ./${desktop} 
   ;
