@@ -2,7 +2,7 @@
   imports = [
     # Modules
     ./common/global
-      
+    ./common/modules/printing.nix      
     # Services
 
     # Software

@@ -100,13 +100,16 @@
             ./home/sdugre/chromebook.nix
           ];
         };
-        "sdugre@chummie" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/sdugre/chummie.nix
-          ];
-        };
+#        "sdugre@chummie" = home-manager.lib.homeManagerConfiguration {
+#          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+#          extraSpecialArgs = { inherit inputs outputs; };
+#          modules = [
+#            ./home/sdugre/chummie.nix
+#          ];
+#        };
+      };
+      homeConfigurations =  {  
+        "sdugre@chummie" = libx.mkHome { hostname = "chummie"; };
       };
     };
 }

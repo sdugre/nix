@@ -1,8 +1,10 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, inputs, desktop, ... }:
 let
   p10kTheme = ./p10k.zsh;
   inherit (lib) mkIf;
-  hyprlandInstalled = inputs.hyprland.config.programs.hyprland.enable;
+#  hyprlandInstalled = config.programs.hyprland.enable == true;
+  hyprlandInstalled = desktop == "hyprland";
+#  hyprlandInstalled = false; # temp turn off until I can figure out how to pass in variables
 in
 {
   programs.zsh = {
@@ -18,7 +20,6 @@ in
         exec Hyprland
       fi
     '';
-
 
     profileExtra = ''      
       echo ""
