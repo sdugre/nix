@@ -2,8 +2,6 @@
 {
   imports = [ 
 
-    ./features/desktop/hyprland
-
     # Optional Packages
     ./features/desktop/common/optional/vscodium.nix
   ];
