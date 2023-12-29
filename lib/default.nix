@@ -18,4 +18,20 @@
       ../hosts/${type}.nix
     ];
   };
+
+  mkHome = {
+    hostname,
+    username   ? "sdugre",
+    desktop    ? null,
+    platform   ? "x86_64-linux",
+    theme      ? "default",
+    type       ? "default",
+    hmStateVer ? "23.11"
+  }: inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = inputs.nixpkgs.legacyPackages.${platform};
+    extraSpecialArgs = { inherit inputs outputs desktop hostname platform username theme hmStateVer; };
+    modules = [
+      ../home/${type}.nix
+    ];
+  };
 }
