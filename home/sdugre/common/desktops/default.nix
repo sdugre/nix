@@ -9,11 +9,13 @@
   ;
 
   home.packages = with pkgs; [
-    obsidian
-    vlc
+    backlight      # personal scrtip for adjusting brightness
+    galculator     # calculator
+    obsidian       # notes
+    vlc            # video player
   ];  
   
-  programs.mpv.enable = true;
+  programs.mpv.enable = true;    # video player
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0" # for obsidian
