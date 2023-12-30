@@ -86,31 +86,17 @@
             nur.nixosModules.nur  
           ];
         };
-#        "sdugre@thinkpad" = home-manager.lib.homeManagerConfiguration {
+#        "sdugre@chromebook" = home-manager.lib.homeManagerConfiguration {
 #          pkgs = nixpkgs.legacyPackages.x86_64-linux;
 #          extraSpecialArgs = { inherit inputs outputs; };
 #          modules = [
-#            ./home/sdugre/thinkpad.nix
+#            ./home/sdugre/chromebook.nix
 #          ];
-#        };
-        "sdugre@chromebook" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/sdugre/chromebook.nix
-          ];
         };
-#        "sdugre@chummie" = home-manager.lib.homeManagerConfiguration {
-#          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-#          extraSpecialArgs = { inherit inputs outputs; };
-#          modules = [
-#            ./home/sdugre/chummie.nix
-#          ];
-#        };
-      };
       homeConfigurations =  {  
-        "sdugre@chummie"  = libx.mkHome { hostname = "chummie"; };
-        "sdugre@thinkpad" = libx.mkHome { hostname = "thinkpad"; desktop = "hyprland"; };
+        "sdugre@chummie"    = libx.mkHome { hostname = "chummie";                                             };
+        "sdugre@chromebook" = libx.mkHome { hostname = "chromebook"; desktop = "gnome"; hmStateVer = "23.05"; };
+        "sdugre@thinkpad"   = libx.mkHome { hostname = "thinkpad";   desktop = "hyprland";                    };
       };
     };
 }

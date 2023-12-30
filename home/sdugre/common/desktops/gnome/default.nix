@@ -1,7 +1,5 @@
 { pkgs, lib, ... }:
 {
-  imports = [ ../common ];
-
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
