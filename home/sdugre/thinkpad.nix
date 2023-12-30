@@ -2,8 +2,8 @@
 {
   imports = [ 
 
-    # Optional Packages
-    ./features/desktop/common/optional/vscodium.nix
+    # Optional machine specific packages
+    ./common/software/gui/vscodium.nix
   ];
 
   wallpaper = "~/Documents/nix-config/home/sdugre/wallpapers/landscape-morning.jpg";
