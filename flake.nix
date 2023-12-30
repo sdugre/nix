@@ -77,25 +77,10 @@
         thinkpad   = libx.mkHost { hostname = "thinkpad";   desktop = "hyprland";                  }; # primary laptop
       };
 
-      homeConfigurations = {
-        "sdugre@nixos" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/sdugre/nixos.nix
-            nur.nixosModules.nur  
-          ];
-        };
-#        "sdugre@chromebook" = home-manager.lib.homeManagerConfiguration {
-#          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-#          extraSpecialArgs = { inherit inputs outputs; };
-#          modules = [
-#            ./home/sdugre/chromebook.nix
-#          ];
-        };
       homeConfigurations =  {  
         "sdugre@chummie"    = libx.mkHome { hostname = "chummie";                                             };
         "sdugre@chromebook" = libx.mkHome { hostname = "chromebook"; desktop = "gnome"; hmStateVer = "23.05"; };
+        "sdugre@nixos"      = libx.mkHome { hostname = "nixos";      desktop = "gnome"; hmStateVer = "23.05"; };
         "sdugre@thinkpad"   = libx.mkHome { hostname = "thinkpad";   desktop = "hyprland";                    };
       };
     };
