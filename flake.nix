@@ -31,6 +31,9 @@
   
     arkenfox.url = "git+https://github.com/dwarfmaster/arkenfox-nixos?ref=main";
     arkenfox.inputs.nixpkgs.follows = "nixpkgs";
+
+#    impermanence.url = "github:nix-community/impermanence";   
+
   };
 
   outputs = { self, nixpkgs, home-manager, agenix, nur, hyprland, nix-colors, nixos-hardware, arkenfox, ... }@inputs:
