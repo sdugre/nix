@@ -1,6 +1,8 @@
-{ lib, config, pkgs, ... }: {
+{ input, lib, config, pkgs, ... }: {
   imports = [
    
+    inputs.hyprland.homeManagerModules.default
+
     # wayland stuff necessary for hyprland
     ../../software/gui/gtk.nix
     ../../software/gui/kitty.nix
@@ -14,7 +16,7 @@
 
   xdg.portal = {
     extraPortals = [ pkgs.inputs.hyprland.xdg-desktop-portal-hyprland ];
-#    configPackages = [ pkgs.inputs.hyprland.hyprland ];
+    configPackages = [ pkgs.inputs.hyprland.hyprland ];
   };
 
   home.packages = with pkgs; [
