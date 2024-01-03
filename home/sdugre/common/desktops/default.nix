@@ -1,4 +1,4 @@
-{ pkgs, lib, desktop, ... }:
+{ inputs, pkgs, lib, desktop, ... }:
 {
   imports = [
     ../software/gui/firefox.nix

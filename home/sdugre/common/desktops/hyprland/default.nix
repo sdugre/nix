@@ -28,6 +28,14 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd = {
+      enable = true;
+      # Same as default, but stop graphical-session too
+      extraCommands = lib.mkBefore [
+        "systemctl --user stop graphical-session.target"
+        "systemctl --user start hyprland-session.target"
+      ];
+    };
     extraConfig = import ./config.nix {
       inherit (config) home wallpaper;
       inherit pkgs;
