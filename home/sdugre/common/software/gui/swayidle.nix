@@ -5,7 +5,6 @@ let
   pgrep = "${pkgs.procps}/bin/pgrep";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   backlight = "${pkgs.backlight}/bin/backlight";
-  notify = "${pkgs.libnotify}/bin/notify-send";
 
   lockTime = 5 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
   dimBeforeTime = 10; # seconds before lockTime to dim screen
@@ -21,13 +20,12 @@ in
       {
         timeout = lockTime - dimBeforeTime;
         command = "${pkgs.test-pkg}/bin/test-pkg"; 
-#        command = "${notify} 'GOING TO SLEEP'";
         resumeCommand = "${pkgs.backlight}/bin/backlight -inc 20";
       }
       # Lock screen
       {
         timeout = lockTime;
-        command = "${swaylock} -i ${config.wallpaper} --daemonize";
+        command = "${swaylock} -i ${config.wallpaper} --daemonize --grace 15";
       }
       # Mute Mic
       {
