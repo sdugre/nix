@@ -4,8 +4,7 @@
   runtimeInputs = [ ];
 
   text = /* bash */ ''
-    ${pkgs.libnotify}/bin/notify-send "USER is $(whoami)"
-    brillo -U 15
+    ${pkgs.libnotify}/bin/notify-send "Locking in 10 seconds..."
   '';
 }) // {
   meta = with lib; {
