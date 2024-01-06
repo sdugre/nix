@@ -13,6 +13,7 @@
     galculator     # calculator
     obsidian       # notes
     vlc            # video player
+    test-pkg
   ];  
   
   programs.mpv.enable = true;    # video player
