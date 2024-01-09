@@ -46,7 +46,7 @@
       pkgsFor = lib.genAttrs systems (system: import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-      });
+
       libx = import ./lib { inherit self inputs outputs; };  
     in
     {
