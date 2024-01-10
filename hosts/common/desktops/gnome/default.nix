@@ -22,6 +22,7 @@
     gnome-connections
     gnome.gnome-tweaks
     gnome.seahorse
+    gnomeExtensions.tiling-assistant
   ];
 
   environment.gnome.excludePackages = (with pkgs; [
