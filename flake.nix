@@ -33,7 +33,7 @@
     arkenfox.url = "git+https://github.com/dwarfmaster/arkenfox-nixos?ref=main";
     arkenfox.inputs.nixpkgs.follows = "nixpkgs";
 
-#    impermanence.url = "github:nix-community/impermanence";   
+    impermanence.url = "github:nix-community/impermanence";   
 
   };
 
