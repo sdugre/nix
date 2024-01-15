@@ -4,7 +4,8 @@
     ./hardware-configuration.nix
 
     # optional
-    ../common/optional/networkDrives.nix
+#    ../common/optional/networkDrives.nix
+    ../common/modules/persistence.nix
   ];
 
   # filesystems

@@ -5,6 +5,7 @@
     ./locale.nix
     ./nix.nix 
     ./tailscale.nix
+    ./systemd-initrd.nix
     ./utils.nix
     ./openssh.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
