@@ -8,7 +8,7 @@
 #    ../common/modules/persistence.nix
   ];
 
-  persistence = {
+  services.persistence = {
     enable = true;
     partition = "nvme0n1p3";
   };
