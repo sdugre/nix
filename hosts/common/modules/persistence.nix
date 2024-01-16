@@ -5,6 +5,7 @@
     inputs.impermanence.nixosModules.impermanence
   ];
 
+  # default.  more in optional modules
   environment.persistence = {
     "/persist" = {
       directories = [

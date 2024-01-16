@@ -5,8 +5,13 @@
 
     # optional
     ../common/optional/networkDrives.nix
-    ../common/modules/persistence.nix
+#    ../common/modules/persistence.nix
   ];
+
+  persistence = {
+    enable = true;
+    partition = "nvme0n1p3";
+  };
 
   # filesystems
   fileSystems."/".options = [ "compress=zstd" "noatime" ];
