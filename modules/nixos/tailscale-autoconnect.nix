@@ -74,7 +74,7 @@ in {
         status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
         # if status is not null, then we are already authenticated
         echo "tailscale status: $status"
-        if [ "$status" != "NeedsLogin" ]; then
+        if [ "$status" = "Running" ]; then
             exit 0
         fi
 
