@@ -1,0 +1,22 @@
+keys:
+  # hosts
+  - &hosts:
+    - &thinkpad age13xhw5pn7s0wd3z2j7dtkm0a837qcv989y85ddmyxdha0pnhw3exs3h867k
+    - &chummie age17quzpf2sen9cjjzyqaczvhqnq7vvc9zuptlvs6azyagcecpgtsds9v9yfv
+
+creation_rules:
+  - path_regex: hosts/thinkpad/secrets.yaml$
+    key_groups:
+    - age:
+      - *thinkpad
+
+  - path_regex: hosts/chummie/secrets.yaml$
+    key_groups:
+    - age:
+      - *chummie
+      - *thinkpad
+  - path_regex: hosts/common/secrets.yaml$
+    key_groups:
+    - age:
+      - *thinkpad
+      - *chummie

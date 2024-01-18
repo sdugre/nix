@@ -11,8 +11,10 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Agenix Age-encrypted secrets for NixOS
-#    agenix.url = "github:ryantm/agenix";
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows ="nixpkgs";
+    };
 
     # Nix User Repository (NUR)
     nur.url = "github:nix-community/NUR";
@@ -37,7 +39,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, nur, hyprland, nix-colors, nixos-hardware, arkenfox, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, hyprland, nix-colors, nixos-hardware, arkenfox, ... }@inputs:
     let
       inherit (self) outputs;
       lib =  nixpkgs.lib // home-manager.lib;
