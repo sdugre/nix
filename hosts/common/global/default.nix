@@ -4,7 +4,7 @@
     ./fonts.nix
     ./locale.nix
     ./nix.nix 
-    ./tailscale.nix
+#    ./tailscale.nix
     ./sops.nix
     ./systemd-initrd.nix
     ./utils.nix
