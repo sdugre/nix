@@ -16,7 +16,7 @@
 
   # List default system packages
   environment.systemPackages = with pkgs; [
-
+    jq
   ];
 
   system.stateVersion = stateVer;
