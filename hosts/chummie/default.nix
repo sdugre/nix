@@ -13,6 +13,17 @@
     partition = "nvme0n1p3";
   };
 
+  services.tailscaleAutoconnect = {
+    enable = true;
+    authkeyFile = config.sops.secrets.tailscale_key.path;
+    loginServer = "https://login.tailscale.com";
+    enableSSH = true;
+  };
+  
+  sops.secrets.tailscale_key = { 
+    sopsFile = ./secrets.yaml; 
+  };
+
   # filesystems
   fileSystems."/".options = [ "compress=zstd" "noatime" ];
   fileSystems."/home".options = [ "compress=zstd" "noatime" ];
