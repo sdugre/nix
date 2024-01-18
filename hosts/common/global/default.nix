@@ -5,6 +5,7 @@
     ./locale.nix
     ./nix.nix 
     ./tailscale.nix
+    ./sops.nix
     ./systemd-initrd.nix
     ./utils.nix
     ./openssh.nix
