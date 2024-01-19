@@ -40,5 +40,6 @@
   # Packages specific to this machine
   environment.systemPackages = ([
   ]) ++ (with pkgs; [
+    lemonade
   ]);
 }
