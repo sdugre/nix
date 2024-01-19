@@ -80,18 +80,16 @@ in {
 
         # otherwise authenticate with tailscale
         # timeout after 10 seconds to avoid hanging the boot process
-        ${coreutils}/bin/timeout 10 ${tailscale}/bin/tailscale up \
-          ${lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"} \
-          --authkey=$(cat "${cfg.authkeyFile}")
-
+#        ${coreutils}/bin/timeout 10 ${tailscale}/bin/tailscale up \
+#          ${lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"} \
+#          --authkey=$(cat "${cfg.authkeyFile}")        
         # we have to proceed in two steps because some options are only available
         # after authentication
         ${coreutils}/bin/timeout 10 ${tailscale}/bin/tailscale up \
-          ${lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"} \
+#          ${lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"} \
           ${lib.optionalString (cfg.advertiseExitNode) "--advertise-exit-node"} \
           ${lib.optionalString (cfg.exitNode != "") "--exit-node=${cfg.exitNode}"} \
-          ${lib.optionalString (cfg.exitNodeAllowLanAccess) "--exit-node-allow-lan-access"} \
-          ${lib.optionalString (cfg.enableSSH) "--ssh"}
+          ${lib.optionalString (cfg.exitNodeAllowLanAccess) "--exit-node-allow-lan-access"} 
       '';
     };
 
@@ -106,6 +104,11 @@ in {
         if cfg.advertiseExitNode
         then "server"
         else "client";
+      authKeyFile = cfg.authkeyFile; 
+      extraUpFlags = mkIf cfg.enableSSH [ 
+        "--ssh" 
+        #lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"
+      ];
     };
  
     environment.persistence = lib.mkIf config.services.persistence.enable {
