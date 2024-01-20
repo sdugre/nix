@@ -3,6 +3,7 @@ keys:
   - &hosts:
     - &thinkpad age13xhw5pn7s0wd3z2j7dtkm0a837qcv989y85ddmyxdha0pnhw3exs3h867k
     - &chummie age17quzpf2sen9cjjzyqaczvhqnq7vvc9zuptlvs6azyagcecpgtsds9v9yfv
+    - &nixos age16mvzwggryj37l3n70xmxlax7qs7vf2w82tzrl2txjx570h8q0yyspexn79
 
 creation_rules:
   - path_regex: hosts/thinkpad/secrets.yaml$
@@ -15,8 +16,14 @@ creation_rules:
     - age:
       - *chummie
 
+  - path_regex: hosts/nixos/secrets.yaml$
+    key_groups:
+    - age:
+      - *nixos
+
   - path_regex: hosts/common/secrets.yaml$
     key_groups:
     - age:
       - *thinkpad
       - *chummie
+      - *nixos

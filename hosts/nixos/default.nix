@@ -9,6 +9,17 @@
     ../common/optional/networkDrives.nix
   ];
 
+  services.tailscaleAutoconnect = {
+    enable = true;
+    authkeyFile = config.sops.secrets.tailscale_key.path;
+    loginServer = "";
+    enableSSH = true;
+  };
+
+  sops.secrets.tailscale_key = { 
+    sopsFile = ./secrets.yaml; 
+  };
+
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
