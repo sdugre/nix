@@ -24,6 +24,21 @@
     sopsFile = ./secrets.yaml; 
   };
 
+  services.miniflux = {
+    enable = true;
+    config = {
+      PORT = "8087";
+    };
+    # Set initial admin user/password
+    adminCredentialsFile = pkgs.writeText "cred" ''
+      ADMIN_USERNAME=miniflux
+      ADMIN_PASSWORD=miniflux
+    '';
+  };
+
+  networking.firewall.allowedTCPPorts = [ 8087 ];
+  networking.firewall.allowedUDPPorts = [ 8087 ];
+
   # filesystems
   fileSystems."/".options = [ "compress=zstd" "noatime" ];
   fileSystems."/home".options = [ "compress=zstd" "noatime" ];
