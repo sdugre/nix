@@ -9,7 +9,7 @@
 
     # services
     ../common/modules/rss.nix
-
+    ../common/modules/acme.nix
   ];
 
   services.persistence = {
