@@ -8,6 +8,7 @@
   security.acme = {
     acceptTerms = true;
     defaults = { 
+      group = "nginx";
       email = "sdugre@gmail.com";
       credentialsFile = config.sops.secrets.cloudfare-creds.path;
       dnsProvider = "cloudflare";

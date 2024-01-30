@@ -10,6 +10,8 @@
     # services
     ../common/modules/rss.nix
     ../common/modules/acme.nix
+    ../common/modules/nginx
+#    ../common/modules/authelia.nix
   ];
 
   services.persistence = {
