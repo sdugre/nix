@@ -32,11 +32,14 @@ in
       "Youtube"
       "DockerHub"
     ];
-    #virtualHost = "${domain}";
+    virtualHost = "rsss-bridge.seandugre.com";
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ "/var/lib/postgresql" ];
+    "/persist".directories = [ 
+      "/var/lib/postgresql" 
+      "/var/lib/rss-bridge"
+    ];
   };
 
 }
