@@ -1,6 +1,9 @@
 { lib, pkgs, config, ... }:{
 
-  imports = [ ./proxy-confs ];
+  imports = [ 
+    ./proxy-confs 
+    ./nginx-extra-options.nix
+  ];
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 

@@ -33,7 +33,7 @@ in
       "Youtube"
       "DockerHub"
     ];
-    virtualHost = "rsss-bridge.seandugre.com";
+    virtualHost = "rss-bridge.seandugre.com";
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {

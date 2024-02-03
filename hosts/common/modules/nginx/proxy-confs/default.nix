@@ -1,7 +1,7 @@
 {
   imports = [
-    ./rsss.seandugre.nix
-    ./rsss-bridge.seandugre.nix
+    ./rss.seandugre.nix
+    ./rss-bridge.seandugre.nix
     ./auth.seandugre.nix
   ];
 }
