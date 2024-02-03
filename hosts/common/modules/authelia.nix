@@ -1,15 +1,50 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, hostname,... }:
 {
-  sops.secrets."authelia" = { 
+  sops.secrets."authelia/jwtSecretFile" = { 
     sopsFile = ../../${hostname}/secrets.yaml; 
+    mode = "0400";
+    owner = "authelia-main";
+    group = "authelia-main";
+    restartUnits = [ "authelia.service" ];
+  };
+
+  sops.secrets."authelia/storageEncryptionKeyFile" = { 
+    sopsFile = ../../${hostname}/secrets.yaml;   
+    mode = "0400";
+    owner = "authelia-main";
+    group = "authelia-main";
+    restartUnits = [ "authelia.service" ];
+  };
+
+  sops.secrets."authelia/sessionSecretFile" = { 
+    sopsFile = ../../${hostname}/secrets.yaml;   
+    mode = "0400";
+    owner = "authelia-main";
+    group = "authelia-main";
+    restartUnits = [ "authelia.service" ];
+  };
+
+  sops.secrets."authelia_login" = { 
+    sopsFile = ../../${hostname}/secrets.yaml;   
+    mode = "0400";
+    owner = "authelia-main";
+    group = "authelia-main";
+    restartUnits = [ "authelia.service" ];
+  };
+
+
+  environment.persistence = lib.mkIf config.services.persistence.enable {
+    "/persist".directories = [ 
+      "/var/lib/authelia-main" 
+    ];
   };
 
   services.authelia.instances.main = {
     enable = true;
     secrets = {
-      jwtSecretFile = config.sops.secrets.authelia.jwtSecretFile.path;
-      storageEncryptionKeyFile = config.sops.secrets.authelia.storageEncryptionKeyFile.path;
-      sessionSecretFile = config.sops.secrets.authelia.sessionSecretFile.path;
+      jwtSecretFile = config.sops.secrets."authelia/jwtSecretFile".path;
+      storageEncryptionKeyFile = config.sops.secrets."authelia/storageEncryptionKeyFile".path;
+      sessionSecretFile = config.sops.secrets."authelia/sessionSecretFile".path;
     };
 
     settings = {
@@ -27,7 +62,25 @@
       };
 
       authentication_backend = {
-        file = { path = "/var/lib/authelia-main/users_database.yml"; };
+        file = { 
+          path = config.sops.secrets."authelia_login".path; 
+          watch = false;
+          search = {
+            email = false;
+            case_insensitive = false;
+          };
+          password = {
+            algorithm = "argon2";
+            argon2 = {
+              variant = "argon2id";
+              iterations = 3;
+              memory = 65536;
+              parallelism = 4;
+              key_length = 32;
+              salt_length = 16;
+            };
+          };
+        };
       };
 
       access_control = {
@@ -77,7 +130,7 @@
   };
 
   services.nginx.virtualHosts."auth.seandugre.com" = {
-    enableACME = true;
+    useACMEHost = "seandugre.com";
     forceSSL = true;
     acmeRoot = null;
 

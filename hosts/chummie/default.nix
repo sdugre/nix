@@ -8,10 +8,11 @@
 #    ../common/modules/persistence.nix
 
     # services
-    ../common/modules/rss.nix
-    ../common/modules/acme.nix
-    ../common/modules/nginx
-#    ../common/modules/authelia.nix
+    ../common/modules/rss.nix       # miniflux & rss-bridge
+    ../common/modules/acme.nix      # certs
+    ../common/modules/nginx         # reverse proxy
+    ../common/modules/authelia.nix  # SSO
+    ../common/modules/ddclient.nix  # DDNS updating
   ];
 
   services.persistence = {

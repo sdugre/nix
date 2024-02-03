@@ -11,6 +11,9 @@
     ./${hostname}
   ] ++ lib.optional (builtins.isString desktop) ./common/desktops/${desktop};
 
+#  sops.secrets.defaultSopsFile = ./${hostname}/secrets.yaml;
+#  sops.secrets.defaultSopsFormat = "yaml";
+
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
 
