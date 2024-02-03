@@ -1,9 +1,13 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, hostname, ... }:
 let 
   port = 8087;
   domain = "rss.seandugre.com";
 in
 {  
+
+  sops.secrets."miniflux-creds" = { 
+    sopsFile = ../../${hostname}/secrets.yaml; 
+  };
 
   services.miniflux = {
     enable = true;
@@ -11,10 +15,7 @@ in
       PORT = toString port;
     };
     # Set initial admin user/password
-    adminCredentialsFile = pkgs.writeText "cred" ''
-      ADMIN_USERNAME=miniflux
-      ADMIN_PASSWORD=miniflux
-    '';
+    adminCredentialsFile = config.sops.secrets."miniflux-creds".path;
   };
 
   networking.firewall.allowedTCPPorts = [ port ];
