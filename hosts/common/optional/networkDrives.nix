@@ -37,5 +37,10 @@
     device = nasIP + ":/volume1/docs";
     fsType = "nfs";
     options = mountOptions;
-  }; 
+  };
+  fileSystems."/mnt/books" = {
+    device = nasIP + ":/volume1/books";
+    fsType = "nfs";
+    options = mountOptions;
+  };  
 }

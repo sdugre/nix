@@ -13,6 +13,7 @@
     ../common/modules/nginx         # reverse proxy
     ../common/modules/authelia.nix  # SSO
     ../common/modules/ddclient.nix  # DDNS updating
+    ../common/modules/plex.nix      # Plex Media Server
   ];
 
   services.persistence = {
