@@ -14,6 +14,7 @@
     ../common/modules/authelia.nix  # SSO
     ../common/modules/ddclient.nix  # DDNS updating
     ../common/modules/plex.nix      # Plex Media Server
+    ../common/modules/frigate.nix   # NVR
   ];
 
   services.persistence = {
