@@ -13,6 +13,7 @@
     ./mqtt.seandugre.nix
     ./nas.seandugre.nix
     ./nvr.seandugre.nix
+    ./nvr2.seandugre.nix
     ./plex.seandugre.nix
     ./pve.seandugre.nix
     ./radarr.seandugre.nix
