@@ -6,10 +6,10 @@
     enable = true;
     hostname = "nvr2.seandugre.com";
     settings = {
-      mqtt = {
-        enabled = false;
-        host = "http://192.168.1.16";
-      };
+#      mqtt = {
+#        enabled = false;
+#        host = "http://192.168.1.16";
+#      };
       cameras = {
         driveway = {
           ffmpeg.inputs = [
@@ -18,7 +18,7 @@
               roles = [ "detect" ];
             }
           ];
-          ffmpeg.input_args = "preset-rtmp-generic";          
+#          ffmpeg.input_args = "preset-rtmp-generic";          
           detect = {
             enabled = false;
           };
