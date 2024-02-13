@@ -16,6 +16,7 @@
     ../common/modules/plex.nix      # Plex Media Server
     ../common/modules/frigate.nix   # NVR
     ../common/modules/paperless.nix # Documents
+    ../common/modules/nextcloud.nix # Cloud
   ];
 
   services.persistence = {
