@@ -14,8 +14,8 @@
     ../common/modules/authelia.nix  # SSO
     ../common/modules/ddclient.nix  # DDNS updating
     ../common/modules/plex.nix      # Plex Media Server
-    ../common/modules/frigate.nix   # NVR
-    ../common/modules/paperless.nix # Documents
+#    ../common/modules/frigate.nix   # NVR
+#    ../common/modules/paperless.nix # Documents
     ../common/modules/nextcloud.nix # Cloud
   ];
 

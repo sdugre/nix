@@ -63,6 +63,16 @@ in
             }}'';
             definedAliases = ["@youtube" "@yt"];
           };
+
+          "Github Nix" = {
+            urls = [{template = "https://github.com/search?q=lang%3Anix+{searchTerms}&type=code";}];
+           # icon = ''${pkgs.fetchurl {
+              #url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
+              #sha256 = "sha256-i7HQ+kOhdDbVndVG9vdMdtxEc13vdSLCLYAxFm24kR0=";
+            #}}'';
+            definedAliases = [ "@ghn"];
+          };
+
 	};
       };
 
