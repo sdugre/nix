@@ -43,6 +43,11 @@ in
       };
     };
 
+    security.sudo.extraConfig = ''
+      # rollback results in sudo lectures after each reboot
+      Defaults lecture = never
+    '';
+
     boot.initrd = {
       enable = true;
       supportedFilesystems = [ "btrfs" ];

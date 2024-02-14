@@ -34,11 +34,13 @@
 #     };
     };
     config = {
-      overwriteProtocol = "https";
-      defaultPhoneRegion = "US";
       dbtype = "pgsql";
       adminuser = "admin";
       adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
+    };
+    settings = {
+      overwriteprotocol = "https";
+      default_phone_region = "US";
     };
     # Suggested by Nextcloud's health check.
     phpOptions."opcache.interned_strings_buffer" = "16";
