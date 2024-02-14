@@ -1,15 +1,12 @@
-{ self, config, lib, pkgs, ... }: {
+{ self, config, lib, pkgs, hostname, ... }: {
 
 
   sops.secrets."nextcloud/admin_password" = {
+    sopsFile = ../../${hostname}/secrets.yaml;   
     owner = "nextcloud";
     group = "nextcloud";
   };
-  sops.secrets."nextcloud/db_password" = {
-    owner = "nextcloud";
-    group = "nextcloud";
-  };
-    # 
+
   services.nextcloud = {
     enable = true;
     hostName = "cloud.seandugre.com";
@@ -42,7 +39,6 @@
       dbtype = "pgsql";
       adminuser = "admin";
       adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
-      dbpassFile = config.sops.secrets."nextcloud/db_password".path;
     };
     # Suggested by Nextcloud's health check.
     phpOptions."opcache.interned_strings_buffer" = "16";
