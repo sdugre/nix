@@ -17,6 +17,7 @@
 #    ../common/modules/frigate.nix   # NVR
 #    ../common/modules/paperless.nix # Documents
     ../common/modules/nextcloud.nix # Cloud
+    ../common/modules/gonic.nix     # Music Server
   ];
 
   services.persistence = {
