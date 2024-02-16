@@ -43,4 +43,9 @@
     fsType = "nfs";
     options = mountOptions;
   };  
+  fileSystems."/mnt/podcasts" = {
+    device = nasIP + ":/volume1/podcasts";
+    fsType = "nfs";
+    options = mountOptions;
+  };  
 }
