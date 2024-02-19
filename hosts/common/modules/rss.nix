@@ -32,6 +32,7 @@ in
       "Wikipedia"
       "Youtube"
       "DockerHub"
+      "GithubSearchBridge"
     ];
     virtualHost = "rss-bridge.seandugre.com";
   };

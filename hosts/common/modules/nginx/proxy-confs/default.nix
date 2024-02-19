@@ -11,6 +11,7 @@
     ./lib.seandugre.nix
     ./lidarr.seandugre.nix
     ./mqtt.seandugre.nix
+    ./music.seandugre.nix
     ./nas.seandugre.nix
     ./nvr.seandugre.nix
     ./nvr2.seandugre.nix

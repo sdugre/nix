@@ -85,15 +85,16 @@
 
       access_control = {
         default_policy = "deny";
+        networks = [
+          {
+            name = "internal";
+            networks = [ "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/18" ];
+          }
+        ];
         rules = [
-          {
-            domain = [ "auth.seandugre.com" ];
-            policy = "bypass";
-          }
-          {
-            domain = [ "*.seandugre.com" ];
-            policy = "one_factor";
-          }
+          { domain = [ "auth.seandugre.com" ]; policy = "bypass"; }
+          { domain = [ "*.seandugre.com" ];    networks = "internal"; policy = "bypass"; }
+          { domain = [ "*.seandugre.com" ];    policy = "one_factor"; }
         ];
       };
 
