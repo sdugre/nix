@@ -31,6 +31,7 @@
   ]) ++ (with pkgs; [
     wireshark
     backlight
+    python311Packages.requests
   ]);
 
   # udev rule to allow adjusting brightness
