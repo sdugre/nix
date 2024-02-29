@@ -6,6 +6,11 @@
       directory = "/mnt/music";
       library = "/home/${username}/.config/beets/library.blb";
       asciify_paths = "yes";
+      clutter = [
+        "Thumbs.DB"
+        ".DS_Store"
+        "@eaDir"
+      ];
       plugins = "
         edit 
         fetchart 
@@ -50,6 +55,10 @@
         user = "admin";
         pass = "admin";
         auth = "pass";
+      };
+
+      embedart = {
+        auto = "no";
       };
     };
   };
