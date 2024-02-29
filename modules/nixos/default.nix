@@ -5,4 +5,5 @@
   # List your module files here
   persistence = import ./persistence.nix;
   tailscale-autoconnect = import ./tailscale-autoconnect.nix;
+#  stirling-pdf = import ./stirling-pdf.nix;
 }
