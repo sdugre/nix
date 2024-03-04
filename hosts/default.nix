@@ -21,7 +21,7 @@
   environment.systemPackages = with pkgs; [
     jq
     lsof
-    lsusb
+    usbutils
   ];
 
   system.stateVersion = stateVer;
