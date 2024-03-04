@@ -21,6 +21,7 @@
         the 
         web 
         subsonicupdate 
+        albumtypes 
       ";
 
       import = {
@@ -48,6 +49,8 @@
       paths = {
         default = "%the{$albumartist}/[$original_year] $album/$track - $title";
         comp = "_Compilations/[$original_year] $album/$track - $albumartist - $title";
+        "albumtype:live" = "%the{$albumartist}/$atypes[$year] $album/$track - $title";
+        "albumtype:ep" = "%the{$albumartist}/[$original_year]$atypes $album/$track - $title";
       };
 
       subsonic = {
@@ -59,6 +62,18 @@
 
       embedart = {
         auto = "no";
+      };
+
+      albumtypes = {
+        types = [
+          {ep = "EP";}
+          {single = "Single";}
+          {soundtrack = "OST";}
+          {live = "Live";}
+          {compilation = "Anthology";}
+        ];
+        ignore_va = "compilation";
+        bracket = "[]";
       };
     };
   };
