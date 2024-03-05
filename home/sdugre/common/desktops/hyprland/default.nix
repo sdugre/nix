@@ -14,6 +14,7 @@
   ];
 
 #  xdg.portal.config.common.default = "*";   
+  services.udiskie.enable = true; # Needed to auto mount USB drives;  See also System default hyprland config.
 
   home.packages = with pkgs; [
     inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
