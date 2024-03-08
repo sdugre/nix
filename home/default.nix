@@ -9,6 +9,8 @@ in
     inputs.nur.hmModules.nur
     inputs.nix-colors.homeManagerModule
 
+    inputs.sops-nix.homeManagerModules.sops
+
     # global default cli tools
     ./${username}/common/software/cli
   
@@ -53,4 +55,6 @@ in
   systemd.user.startServices = "sd-switch";
 
   colorscheme = lib.mkDefault colorSchemes.dracula;
+
+  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt"; 
 }

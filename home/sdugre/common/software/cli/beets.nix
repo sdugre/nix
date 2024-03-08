@@ -1,5 +1,18 @@
-{ pkgs, username, ... }:
+{ pkgs, username, config, ... }:
 {
+  sops.secrets."lastfm_key" = { 
+    sopsFile = ../../../secrets.yaml; 
+  };
+  sops.secrets."plex_token" = { 
+    sopsFile = ../../../secrets.yaml; 
+  };
+  sops.secrets."discogs_token" = { 
+    sopsFile = ../../../secrets.yaml; 
+  };
+  sops.secrets."gonic_password" = { 
+    sopsFile = ../../../secrets.yaml; 
+  };
+
   programs.beets = {
     enable = true;
     settings = {
@@ -33,17 +46,20 @@
       fetchart = {
         auto = "yes";
         sources = "filesystem coverart lastfm itunes amazon wikipedia";
-        lastfm_key = "8bfcb4bcf5e51bcab3ecef70d981b91e";
+        lastfm_key = config.sops.secrets."lastfm_key".path; 
       };
 
       plex = {
         host = "192.168.1.66";
         port = "32400";
-        token = "6zVJ3DgUcv1JBMyTKTKx";
+        token = config.sops.secrets."plex_token".path;
+#        token = "6zVJ3DgUcv1JBMyTKTKx";
+
       };
 
       discogs = {
-        user_token = "IetwGGqEhVSxAkQdkDezNbxcyemntwsvazuTAWlI";
+#        user_token = "IetwGGqEhVSxAkQdkDezNbxcyemntwsvazuTAWlI";
+      user_token = config.sops.secrets."discogs_token".path; 
       }; 
 
       paths = {
@@ -56,7 +72,7 @@
       subsonic = {
         url = "https://music.seandugre.com";
         user = "admin";
-        pass = "admin";
+        pass = config.sops.secrets.gonic_password.path; 
         auth = "pass";
       };
 
