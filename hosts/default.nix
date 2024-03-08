@@ -21,6 +21,7 @@
   environment.systemPackages = with pkgs; [
     jq
     lsof
+    sops
     usbutils
   ];
 

@@ -1,4 +1,7 @@
 keys:
+  # users
+  - &users:
+    - &sdugre_thinkpad age12v00v0egc0zdztxu06su7p8rer2k90k0px8ld74e0s2pc4q7nd8sy0x39t
   # hosts
   - &hosts:
     - &thinkpad age13xhw5pn7s0wd3z2j7dtkm0a837qcv989y85ddmyxdha0pnhw3exs3h867k
@@ -10,6 +13,7 @@ creation_rules:
     key_groups:
     - age:
       - *thinkpad
+      - *sdugre_thinkpad
 
   - path_regex: hosts/chummie/secrets.yaml$
     key_groups:
@@ -27,3 +31,9 @@ creation_rules:
       - *thinkpad
       - *chummie
       - *nixos
+      - *sdugre_thinkpad
+
+  - path_regex: home/sdugre/secrets.yaml$
+    key_groups:
+    - age:
+      - *sdugre_thinkpad
