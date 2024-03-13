@@ -1,8 +1,12 @@
 { config, lib, hostname,... }:{
 
+  # The following needs to be setup manually in the web UI:
+  #   - update admin password
+  #   - last.fm api key.  See here:  https://www.last.fm/api/accounts
+
   networking.firewall.allowedTCPPorts = [ 4747 ];
 
-  # relies on overlay to get v0.16.2
+  # relies on overlay to get v0.16.3
   services.gonic = {
     enable = true;
     settings = {
@@ -23,11 +27,13 @@
   systemd.services.gonic.serviceConfig = lib.mkBefore {
     # See https://github.com/sentriz/gonic/issues/391
     Environment = "XDG_CACHE_HOME=/var/cache/gonic/";
+    # Fixes conflict with ddclient;  also need to manually chmod /persist/var/lib/private to 700 before rebuild-switch for first setup.
+    RuntimeDirectoryMode = 700;
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [ 
-      "/var/lib/gonic" 
+      "/var/lib/private/gonic" 
     ];
   };
 

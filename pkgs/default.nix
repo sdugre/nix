@@ -6,6 +6,7 @@
   # Packages with an actual source
   figurine = pkgs.callPackage ./figurine { };
   tinyMediaManager = pkgs.callPackage ./tinyMediaManager { };
+  pia-wg-config = pkgs.callPackage ./pia-wg-config { };
 
   # Personal scripts
   backlight = pkgs.callPackage ./backlight { };
