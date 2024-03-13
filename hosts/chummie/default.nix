@@ -18,6 +18,7 @@
 #    ../common/modules/paperless.nix # Documents
     ../common/modules/nextcloud.nix # Cloud
     ../common/modules/gonic.nix     # Music Server
+#    ../common/modules/nixarr.nix    # Media aquisition
   ];
 
   services.persistence = {
@@ -53,5 +54,6 @@
   environment.systemPackages = ([
   ]) ++ (with pkgs; [
     lemonade
+    pia-wg-config
   ]);
 }

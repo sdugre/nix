@@ -37,9 +37,11 @@
 
     impermanence.url = "github:nix-community/impermanence";   
 
+    nixarr.url = "github:rasmus-kirk/nixarr";
+
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, hyprland, nix-colors, nixos-hardware, arkenfox, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, hyprland, nix-colors, nixos-hardware, arkenfox, nixarr, ... }@inputs:
     let
       inherit (self) outputs;
       lib =  nixpkgs.lib // home-manager.lib;
