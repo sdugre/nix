@@ -29,9 +29,10 @@
 
   environment.systemPackages = ([
   ]) ++ (with pkgs; [
-    wireshark
-    backlight
-    python311Packages.requests
+    wireshark                  # network monitoring tool
+    backlight                  # personal script for brightness control
+    python311Packages.requests # may be necessary for beets plugin
+    xournal                    # annotate pdfs
   ]);
 
   # udev rule to allow adjusting brightness
