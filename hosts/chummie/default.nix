@@ -19,7 +19,40 @@
     ../common/modules/nextcloud.nix # Cloud
     ../common/modules/gonic.nix     # Music Server
 #    ../common/modules/nixarr.nix    # Media aquisition
+#    ../common/modules/home-assistant-vm.nix
   ];
+
+  # START Home Assistant VM
+  networking.defaultGateway = "192.168.1.1";
+  networking.nameservers = [ "192.168.1.1" "8.8.8.8" ];
+  networking.useDHCP = false;
+  networking.bridges.br0.interfaces = ["eno2"];
+  networking.interfaces.br0 = {
+    useDHCP = false;
+    ipv4.addresses = [{
+      "address" = "192.168.1.200";
+      "prefixLength" = 24;
+    }];
+  };
+
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      # Used for UEFI boot of Home Assistant OS guest image
+      qemu.ovmf.enable = true;
+    };
+  };
+
+  programs.virt-manager.enable = true;
+
+  environment.persistence = lib.mkIf config.services.persistence.enable {
+    "/persist".directories = [ 
+      "/var/lib/libvirt" 
+    ];
+  };
+
+  # END Home Assistand VM
+
 
   services.persistence = {
     enable = true;
