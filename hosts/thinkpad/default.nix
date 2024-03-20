@@ -31,6 +31,7 @@
   ]) ++ (with pkgs; [
     wireshark                  # network monitoring tool
     backlight                  # personal script for brightness control
+    libreoffice-qt             # office suite
     python311Packages.requests # may be necessary for beets plugin
     xournal                    # annotate pdfs
   ]);
