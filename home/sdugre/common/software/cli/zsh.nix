@@ -11,7 +11,7 @@ in
     enable = true;
     dotDir = ".config/zsh";
     history = { }; # all defaults are OK.
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     initExtra = ''
       [[ ! -f ${p10kTheme} ]] || source ${p10kTheme}
     '';
