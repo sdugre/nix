@@ -34,6 +34,7 @@
     libreoffice-qt             # office suite
     python311Packages.requests # may be necessary for beets plugin
     xournal                    # annotate pdfs
+    virt-viewer
   ]);
 
   # udev rule to allow adjusting brightness
