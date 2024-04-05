@@ -93,9 +93,5 @@
   ]) ++ (with pkgs; [
     lemonade
     pia-wg-config
-<<<<<<< HEAD
-    virt-viewer  # for VM's
-=======
->>>>>>> 58ecfd342eaff0b617f89eb1487bed8b5c5fc92a
   ]);
 }
