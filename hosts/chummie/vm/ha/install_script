@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+virt-install \
+    --connect qemu:///system \
+    --name hass \
+    --boot uefi \
+    --import \
+    --disk haos_ova-12.1.qcow2 \
+    --cpu host \
+    --vcpus 2 \
+    --memory 4098 \
+    --network network=bridged-network \
+    --graphics "spice,listen=0.0.0.0" \
+    --os-variant=generic \
+    --noautoconsole

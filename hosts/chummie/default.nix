@@ -51,6 +51,8 @@
     ];
   };
 
+  networking.firewall.allowedTCPPorts = [ 5900 ];
+
   # END Home Assistand VM
 
 
@@ -88,5 +90,6 @@
   ]) ++ (with pkgs; [
     lemonade
     pia-wg-config
+    virt-viewer  # for VM's
   ]);
 }
