@@ -51,8 +51,11 @@
     ];
   };
 
+<<<<<<< HEAD
   networking.firewall.allowedTCPPorts = [ 5900 ];
 
+=======
+>>>>>>> 58ecfd342eaff0b617f89eb1487bed8b5c5fc92a
   # END Home Assistand VM
 
 
