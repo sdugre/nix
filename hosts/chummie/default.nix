@@ -48,6 +48,7 @@
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [ 
       "/var/lib/libvirt" 
+      "/etc/vmimages"
     ];
   };
 
