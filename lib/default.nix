@@ -16,6 +16,7 @@
     modules = [
       # 'default', 'small, or 'minimal'
       ../hosts/${type}.nix
+      inputs.nur.nixosModules.nur
     ];
   };
 

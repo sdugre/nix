@@ -627,7 +627,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nur": "nur",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "tmm-src": "tmm-src"
       }
     },
     "sops-nix": {
@@ -724,6 +725,19 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "tmm-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1712539397,
+        "narHash": "sha256-HnVUW30p6xkaXaS7S3YVYy3JE6V7qqcJZ9FgEVM5IiY=",
+        "type": "tarball",
+        "url": "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.4-linux-amd64.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.4-linux-amd64.tar.xz"
       }
     },
     "treefmt-nix": {

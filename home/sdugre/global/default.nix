@@ -32,6 +32,11 @@ in
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = (_: true);
+#      packageOverrides = pkgs: {
+#        nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive>
+#          inherit pkgs;
+#        };
+#      };
     };
   };
 

@@ -35,6 +35,12 @@
     python311Packages.requests # may be necessary for beets plugin
     xournal                    # annotate pdfs
     virt-viewer
+    config.nur.repos.shados.tmm
+    # tiny media manager
+#    (nur.repos.shados.tmm.overrideAttrs (_old: {
+#      version = "latest";
+#      src = inputs.tmm-src;
+#    }))
   ]);
 
   # udev rule to allow adjusting brightness
