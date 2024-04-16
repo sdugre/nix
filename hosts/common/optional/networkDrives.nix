@@ -5,6 +5,7 @@
       "x-systemd.automount" 
       "noauto"
     ];
+    chummieIP = "100.80.19.29";
   in
 {
   # mount NAS drives via tailscale
@@ -48,4 +49,11 @@
     fsType = "nfs";
     options = mountOptions;
   };  
+
+  fileSystems."/mnt/paperless-import" = {
+    device = chummieIP + ":/svr/nfs/paperless-import";
+    fsType = "nfs";
+    options = mountOptions;
+  }; 
+
 }
