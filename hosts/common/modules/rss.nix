@@ -23,7 +23,7 @@ in
 
   services.rss-bridge = {
     enable = true;
-    whitelist = [ 
+    config.system.enabled_bridges = [
       "Bandcamp"
       "DuckDuckGo"
       "Facebook"
