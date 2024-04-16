@@ -18,6 +18,7 @@ in
       ] ++ ifTheyExist [
         "video"
         "libvirtd" 
+        "paperless"
       ];
     };
   };
