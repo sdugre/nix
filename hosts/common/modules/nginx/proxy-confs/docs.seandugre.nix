@@ -7,7 +7,7 @@
       client_max_body_size 10M;
     '';
     locations."/" = {
-      proxyPass = "http://192.168.1.58:8000";
+      proxyPass = "http://192.168.1.200:6382";
       proxyWebsockets = true;
     };
   };
