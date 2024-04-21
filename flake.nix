@@ -84,10 +84,10 @@
       wallpapers = import ./home/sdugre/wallpapers;
 
       nixosConfigurations = {
-        chummie    = libx.mkHost { hostname = "chummie";                                           }; # server
-        nixos      = libx.mkHost { hostname = "nixos";      desktop = "gnome"; stateVer = "23.05"; }; # test VM
-        chromebook = libx.mkHost { hostname = "chromebook"; desktop = "gnome"; stateVer = "23.05"; }; # secondary laptop
-        thinkpad   = libx.mkHost { hostname = "thinkpad";   desktop = "hyprland";                  }; # primary laptop
+        chummie    = libx.mkHost { hostname = "chummie";                                              }; # server
+        nixos      = libx.mkHost { hostname = "nixos";      desktop = "gnome";    stateVer = "23.05"; }; # test VM
+        chromebook = libx.mkHost { hostname = "chromebook"; desktop = "cinnamon"; stateVer = "23.11"; }; # secondary laptop
+        thinkpad   = libx.mkHost { hostname = "thinkpad";   desktop = "hyprland";                     }; # primary laptop
       };
 
       homeConfigurations =  {  
