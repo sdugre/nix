@@ -24,6 +24,7 @@
       PAPERLESS_URL 			= "https://docs.seandugre.com";
       PAPERLESS_ENABLE_UPDATE_CHECK 	= true;
       PAPERLESS_DATE_ORDER 		= "MDY";
+      PAPERLESS_EMAIL_TASK_CRON = "*/5 * * * *";
     };
   };
 
