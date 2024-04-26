@@ -3,6 +3,7 @@
 
   environment.systemPackages = with pkgs; [
     autojump
+    duf
     figurine
     git
     lm_sensors
