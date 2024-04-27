@@ -11,18 +11,18 @@
 #        host = "http://192.168.1.16";
 #      };
       cameras = {
-        driveway = {
-          ffmpeg.inputs = [
-            {
-              path = "rtmp://192.168.1.42/bcs/channel0_sub.bcs?channel=0&stream=0&user=admin&password=";
-              roles = [ "detect" ];
-            }
-          ];
+#        driveway = {
+#          ffmpeg.inputs = [
+#            {
+#              path = "rtmp://192.168.1.42/bcs/channel0_sub.bcs?channel=0&stream=0&user=admin&password=";
+#              roles = [ "detect" ];
+#            }
+#          ];
 #          ffmpeg.input_args = "preset-rtmp-generic";          
-          detect = {
-            enabled = false;
-          };
-        };
+#          detect = {
+#            enabled = false;
+ #         };
+  #      };
       };
     };
   };

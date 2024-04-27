@@ -14,6 +14,7 @@ in
       "video"
       "libvirtd" 
       "paperless"
+      "frigate"
     ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
