@@ -10,6 +10,18 @@
     ../common/optional/laptop.nix
   ];
 
+  services.tailscaleAutoconnect = {
+    enable = true;
+    authkeyFile = config.sops.secrets.tailscale_key.path;
+    loginServer = "";
+    enableSSH = true;
+  };
+  
+  sops.secrets.tailscale_key = { 
+    sopsFile = ./secrets.yaml; 
+  };
+
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
