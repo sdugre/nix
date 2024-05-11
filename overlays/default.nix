@@ -18,7 +18,8 @@
           owner = "sentriz";
           repo = "gonic";
           rev = "v${version}";
-          sha256 = "sha256-nLONZ0iz27Za09bv8gt0BpBAC4kSn+mh941cRDk1kBU=";
+#          sha256 = "sha256-nLONZ0iz27Za09bv8gt0BpBAC4kSn+mh941cRDk1kBU=";
+          sha256 = "sha256-+8rKODoADU2k1quKvbijjs/6S/hpkegHhG7Si0LSE0k=";  
         };
         vendorHash = "sha256-6JkaiaAgtXYAZqVSRZJFObZvhEsHsbPaO9pwmKqIhYI=";
         doCheck = false;
