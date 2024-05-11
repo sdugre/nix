@@ -7,6 +7,7 @@ keys:
     - &thinkpad age13xhw5pn7s0wd3z2j7dtkm0a837qcv989y85ddmyxdha0pnhw3exs3h867k
     - &chummie age17quzpf2sen9cjjzyqaczvhqnq7vvc9zuptlvs6azyagcecpgtsds9v9yfv
     - &nixos age16mvzwggryj37l3n70xmxlax7qs7vf2w82tzrl2txjx570h8q0yyspexn79
+    - &chromebook age1y5ue0jn8j0aryul67lzkakltn287sgcdl8jjzxg6fmemed8pruhss45ymu
 
 creation_rules:
   - path_regex: hosts/thinkpad/secrets.yaml$
@@ -25,12 +26,18 @@ creation_rules:
     - age:
       - *nixos
 
+  - path_regex: hosts/chromebook/secrets.yaml$
+    key_groups:
+    - age:
+      - *chromebook
+
   - path_regex: hosts/common/secrets.yaml$
     key_groups:
     - age:
       - *thinkpad
       - *chummie
       - *nixos
+      - *chromebook
       - *sdugre_thinkpad
 
   - path_regex: home/sdugre/secrets.yaml$

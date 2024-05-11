@@ -92,7 +92,7 @@
 
       homeConfigurations =  {  
         "sdugre@chummie"    = libx.mkHome { hostname = "chummie";                                             };
-        "sdugre@chromebook" = libx.mkHome { hostname = "chromebook"; desktop = "gnome"; hmStateVer = "23.05"; };
+        "sdugre@chromebook" = libx.mkHome { hostname = "chromebook"; desktop = "cinnamon"; hmStateVer = "23.11"; };
         "sdugre@nixos"      = libx.mkHome { hostname = "nixos";      desktop = "gnome"; hmStateVer = "23.05"; };
         "sdugre@thinkpad"   = libx.mkHome { hostname = "thinkpad";   desktop = "hyprland";                    };
       };
