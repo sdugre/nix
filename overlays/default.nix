@@ -13,7 +13,7 @@
     # });
     gonic = prev.gonic.override {
       buildGoModule = args: prev.buildGoModule (args // rec {
-        version = "0.16.3";
+        version = "0.16.4";
         src = final.fetchFromGitHub {
           owner = "sentriz";
           repo = "gonic";
