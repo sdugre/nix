@@ -21,6 +21,7 @@
 #    ../common/modules/nixarr.nix    # Media aquisition
 #    ../common/modules/home-assistant-vm.nix
     ../common/modules/nfs.nix       # NFS server
+    ../common/modules/podman.nix    # 
   ];
 
   # START Home Assistant VM
@@ -93,5 +94,9 @@
     lemonade
     pia-wg-config
     xclip
+    pciutils
+    inxi
+    smartmontools
+    s-tui
   ]);
 }
