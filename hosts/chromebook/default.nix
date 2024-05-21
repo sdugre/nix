@@ -8,6 +8,7 @@
     # optional
     ../common/optional/networkDrives.nix
     ../common/optional/laptop.nix
+    ../users/elliot
   ];
 
   services.tailscaleAutoconnect = {
