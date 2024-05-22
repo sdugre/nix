@@ -6,7 +6,7 @@
  
   volumes = [
     "/mnt/video/Surveillance:/media/frigate"
-    "/var/lib/frigate:/config/config"
+    "/var/lib/frigate:/config"
     "/etc/localtime:/etc/localtime:ro"
   ];
  
