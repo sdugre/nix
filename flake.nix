@@ -24,7 +24,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/hyprland";
+#    hyprland.url = "github:hyprwm/hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland-contrib.url = "github:hyprwm/contrib";
@@ -41,7 +42,7 @@
 
     # Tiny Media Manager
     tmm-src = {
-      url = "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.4-linux-amd64.tar.xz";
+      url = "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.5-linux-amd64.tar.xz";
       flake = false;
     };
 
