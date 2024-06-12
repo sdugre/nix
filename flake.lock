@@ -71,11 +71,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1717387398,
-        "narHash": "sha256-f1UvCZdDlsmbEb/e9hn9KcxgFKS5Rf9u3IaSCh9zYkU=",
+        "lastModified": 1717646600,
+        "narHash": "sha256-yHNeUEOU8/n+ULrsokW5aCLDWg/mEVbPCOyhTIorZns=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "be0bd738f09e66ae042365fa328efee9160677b5",
+        "rev": "bdbbd8c2cb03b23b586fea14a8a680b218ab363c",
         "type": "gitlab"
       },
       "original": {
@@ -251,11 +251,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1717316182,
-        "narHash": "sha256-Xi0EpZcu39N0eW7apLjFfUOR9y80toyjYizez7J1wMI=",
+        "lastModified": 1717525419,
+        "narHash": "sha256-5z2422pzWnPXHgq2ms8lcCfttM0dz+hg+x1pCcNkAws=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9b53a10f4c91892f5af87cf55d08fba59ca086af",
+        "rev": "a7117efb3725e6197dd95424136f79147aa35e5b",
         "type": "github"
       },
       "original": {
@@ -305,11 +305,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1717447622,
-        "narHash": "sha256-yT+e+NxXDes75AXaoxr41uStjXQgwK1SR5ZQEl27XlU=",
+        "lastModified": 1717698429,
+        "narHash": "sha256-81gZr6hXEySxzdpqltnR4GOBHO+QFRxFHQK3fW3iTTE=",
         "ref": "refs/heads/main",
-        "rev": "d0a224a4915b5a90555818ed3f9e49e1a61b7cdb",
-        "revCount": 4761,
+        "rev": "af5f24929d83cc7a97a77de516bc665e38acfa12",
+        "revCount": 4767,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -476,11 +476,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1717248095,
-        "narHash": "sha256-e8X2eWjAHJQT82AAN+mCI0B68cIDBJpqJ156+VRrFO0=",
+        "lastModified": 1717574423,
+        "narHash": "sha256-cz3P5MZffAHwL2IQaNzsqUBsJS+u0J/AAwArHMAcCa0=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "7b49d3967613d9aacac5b340ef158d493906ba79",
+        "rev": "d6c6cf6f5fead4057d8fb2d5f30aa8ac1727f177",
         "type": "github"
       },
       "original": {
@@ -571,11 +571,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1717196966,
-        "narHash": "sha256-yZKhxVIKd2lsbOqYd5iDoUIwsRZFqE87smE2Vzf6Ck0=",
+        "lastModified": 1717602782,
+        "narHash": "sha256-pL9jeus5QpX5R+9rsp3hhZ+uplVHscNJh8n8VpqscM0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "57610d2f8f0937f39dbd72251e9614b1561942d8",
+        "rev": "e8057b67ebf307f01bdcc8fba94d94f75039d1f6",
         "type": "github"
       },
       "original": {
@@ -587,11 +587,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1717452470,
-        "narHash": "sha256-8sbx/PhdKokC7FzogVk/fDVaKlJp9RNhE53tmSpZJyg=",
+        "lastModified": 1717721451,
+        "narHash": "sha256-dgX7A/c5fbmZCv1i/J+dg2jMeWFmPZebXuaHa3YdwyI=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c4f24fd0d45f73f969e58dfccfea5e5fa068d872",
+        "rev": "2c45b4a221bc1eb5a1bc1cb94875563463baf586",
         "type": "github"
       },
       "original": {
@@ -723,7 +723,7 @@
     "tmm-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1717467837,
+        "lastModified": 1717725539,
         "narHash": "sha256-n779IZldRkcpzTjJblZgdtXKElRH/n2HoE0Qkd3fEqQ=",
         "type": "tarball",
         "url": "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.5-linux-amd64.tar.xz"
