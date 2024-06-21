@@ -1,4 +1,7 @@
-{ config, lib,... }:{
+{ config, lib, hostname, ... }:{
+
+  sops.secrets."PIA" = { 
+    sopsFile = ../../${hostname}/secrets.yaml;  
 
   virtualisation = {
     podman = {
@@ -27,7 +30,8 @@
     script.text = ''
       install -d -m 755 /var/lib/jellyfin -o root -g root
       install -d -m 755 /var/lib/frigate  -o root -g root
-      install -d -m 755 /var/lib/whisparr -o root -g root
+      install -d -m 755 /var/lib/media/whisparr -o root -g root
+      install -d -m 755 /var/lib/media/transmission -o root -g root
     '';
   };
 
@@ -35,7 +39,7 @@
     "/persist".directories = [ 
       "/var/lib/containers"
       "/var/lib/jellyfin"
-      "/var/lib/whisparr"
+      "/var/lib/media"
     ];
   };
 
