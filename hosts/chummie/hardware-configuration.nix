@@ -53,6 +53,11 @@
       fsType = "zfs";
     };
 
+  fileSystems."/mnt/photos" =
+    { device = "tank/photos";
+      fsType = "zfs";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/b2e52443-a32a-46c4-ad5e-2585659cf8ee"; }
     ];

@@ -16,6 +16,7 @@
       containers = {
 #        frigate  = import ./containers/frigate.nix;
         jellyfin = import ./containers/jellyfin.nix;
+        media    = import ./containers/media.nix;
       };
     };
   };
