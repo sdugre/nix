@@ -43,10 +43,13 @@
         gaps_in = 3;
         gaps_out = 5;
         border_size = 2;
-        cursor_inactive_timeout = 4;
         "col.active_border" = "0xff${config.colorscheme.palette.base0C}";
         "col.inactive_border" = "0xff${config.colorscheme.palette.base02}";
       };
+      cursor = {
+        inactive_timeout = 4;
+      };
+
       group = {
         "col.border_active" = "0xff${config.colorscheme.palette.base0B}";
         "col.border_inactive" = "0xff${config.colorscheme.palette.base04}";
