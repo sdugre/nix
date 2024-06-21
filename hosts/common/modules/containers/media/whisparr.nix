@@ -9,7 +9,7 @@
 
   volumes = [
     "/var/lib/whisparr:/config"
-    "/mnt/music:/data/music"
+    "/mnt/downloads:/downloads"
   ];
 
   ports = [

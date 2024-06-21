@@ -16,7 +16,8 @@
       containers = {
 #        frigate  = import ./containers/frigate.nix;
         jellyfin = import ./containers/jellyfin.nix;
-#        media    = import ./containers/media.nix;
+    ### MEDIA POD ###
+        whisparr = import ./containers/media/whisparr.nix;
       };
     };
   };
@@ -25,14 +26,16 @@
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/jellyfin -o root -g root
-      install -d -m 755 /var/lib/frigate -o root -g root
+      install -d -m 755 /var/lib/frigate  -o root -g root
+      install -d -m 755 /var/lib/whisparr -o root -g root
     '';
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [ 
       "/var/lib/containers"
-      "/var/lib/jellyfin" 
+      "/var/lib/jellyfin"
+      "/var/lib/whisparr"
     ];
   };
 
