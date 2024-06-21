@@ -16,7 +16,7 @@
   programs.beets = {
     enable = true;
     settings = {
-      directory = "/mnt/music";
+      directory = "/mnt/media/music";
       library = "/home/${username}/.config/beets/library.blb";
       asciify_paths = "yes";
       clutter = [
@@ -50,7 +50,7 @@
       };
 
       plex = {
-        host = "192.168.1.66";
+        host = "192.168.1.200";
         port = "32400";
         token = config.sops.secrets."plex_token".path;
 #        token = "6zVJ3DgUcv1JBMyTKTKx";
