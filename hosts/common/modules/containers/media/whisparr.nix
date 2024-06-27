@@ -8,8 +8,8 @@
   };
 
   volumes = [
-    "/var/lib/whisparr:/config"
-    "/mnt/downloads:/downloads"
+    "/var/lib/containers/media/whisparr:/config"
+    "/mnt/data:/data"
   ];
 
   ports = [

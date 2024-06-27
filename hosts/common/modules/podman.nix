@@ -1,7 +1,9 @@
-{ config, lib, hostname, ... }:{
 
-  sops.secrets."PIA" = { 
+{ config, pkgs, lib, hostname, ... }:
+{
+  sops.secrets.PIA-env = { 
     sopsFile = ../../${hostname}/secrets.yaml;  
+  }; 
 
   virtualisation = {
     podman = {
@@ -17,10 +19,20 @@
       backend = "podman";
 
       containers = {
-#        frigate  = import ./containers/frigate.nix;
-        jellyfin = import ./containers/jellyfin.nix;
+#        frigate       = import ./containers/frigate.nix;
+        jellyfin      = import ./containers/jellyfin.nix;
     ### MEDIA POD ###
-        whisparr = import ./containers/media/whisparr.nix;
+        transmission  = import ./containers/media/transmission.nix
+          { OPENVPN_CREDS = config.sops.secrets.PIA-env.path; };
+        jackett       = import ./containers/media/jackett.nix;
+        lazylibrarian = import ./containers/media/lazylibrarian.nix;
+        lidarr        = import ./containers/media/lidarr.nix;
+        overseerr     = import ./containers/media/overseerr.nix;
+        radarr        = import ./containers/media/radarr.nix;
+        readarr       = import ./containers/media/readarr.nix;
+        sonarr        = import ./containers/media/sonarr.nix;
+        whisparr      = import ./containers/media/whisparr.nix;
+
       };
     };
   };
@@ -28,20 +40,27 @@
 # Create folders for the containers
   system.activationScripts = {
     script.text = ''
-      install -d -m 755 /var/lib/jellyfin -o root -g root
-      install -d -m 755 /var/lib/frigate  -o root -g root
-      install -d -m 755 /var/lib/media/whisparr -o root -g root
-      install -d -m 755 /var/lib/media/transmission -o root -g root
-    '';
+      install -d -m 755 /var/lib/containers -o root -g root
+      install -d -m 755 /var/lib/containers/jellyfin -o root -g root
+      install -d -m 755 /var/lib/containers/frigate  -o root -g root
+      install -d -m 755 /var/lib/containers/media/transmission -o root -g root
+      install -d -m 755 /var/lib/containers/media/jackett -o root -g root
+      install -d -m 755 /var/lib/containers/media/lazylibrarian -o root -g root
+      install -d -m 755 /var/lib/containers/media/lidarr -o root -g root
+      install -d -m 755 /var/lib/containers/media/overseerr -o root -g root
+      install -d -m 755 /var/lib/containers/media/radarr -o root -g root 
+      install -d -m 755 /var/lib/containers/media/readarr -o root -g root
+      install -d -m 755 /var/lib/containers/media/sonarr -o sdugre -g 1000
+      install -d -m 755 /var/lib/containers/media/whisparr -o root -g root
+   '';
   };
+
+  networking.firewall.allowedTCPPorts = [ 51414 ]; # transmission
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [ 
       "/var/lib/containers"
-      "/var/lib/jellyfin"
-      "/var/lib/media"
     ];
   };
-
 
 }
