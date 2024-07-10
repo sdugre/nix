@@ -8,21 +8,22 @@
 #    ../common/modules/persistence.nix
 
     # services
-    ../common/modules/rss.nix       # miniflux & rss-bridge
     ../common/modules/acme.nix      # certs
-    ../common/modules/nginx         # reverse proxy
     ../common/modules/authelia.nix  # SSO
+#    ../common/modules/calibre.nix   # eBooks
     ../common/modules/ddclient.nix  # DDNS updating
-    ../common/modules/plex.nix      # Plex Media Server
 #    ../common/modules/frigate.nix   # NVR
-    ../common/modules/paperless.nix # Documents
-    ../common/modules/nextcloud.nix # Cloud
     ../common/modules/gonic.nix     # Music Server
-#    ../common/modules/nixarr.nix    # Media aquisition
 #    ../common/modules/home-assistant-vm.nix
-    ../common/modules/nfs.nix       # NFS server
-    ../common/modules/podman.nix    # 
     ../common/modules/mail.nix      # Mail server for notifications
+    ../common/modules/nextcloud.nix # Cloud
+    ../common/modules/nfs.nix       # NFS server
+    ../common/modules/nginx         # reverse proxy
+#    ../common/modules/nixarr.nix    # Media aquisition
+    ../common/modules/paperless.nix # Documents
+    ../common/modules/plex.nix      # Plex Media Server
+    ../common/modules/podman.nix    # Containers
+    ../common/modules/rss.nix       # miniflux & rss-bridge
   ];
 
   # FOR ZFS

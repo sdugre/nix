@@ -7,7 +7,7 @@
   };
 
   volumes = [
-    "/var/lib/jellyfin:/config"
+    "/var/lib/containers/jellyfin:/config"
     "/mnt/video/TV:/data/tvshows"
     "/mnt/video/Movies:/data/movies"
     "/mnt/music:/data/music"

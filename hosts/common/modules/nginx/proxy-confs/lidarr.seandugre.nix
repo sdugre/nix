@@ -6,14 +6,14 @@
     extraConfig = ''
     '';
     locations."/" = {
-      proxyPass = "http://192.168.1.58:8686";
+      proxyPass = "http://192.168.1.200:8687";
       proxyWebsockets = true;
       extraConfig = ''
         resolver 127.0.0.11 valid=30s;
       '';
     };
     locations."~ (/lidarr)?/api" = {
-      proxyPass = "http://192.168.1.58:8686";
+      proxyPass = "http://192.168.1.200:8687";
       extraConfig = ''
         resolver 127.0.0.11 valid=30s;
       '';

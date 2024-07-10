@@ -3,7 +3,7 @@
 
   environment = {
     PUID                 = "1000";
-    PGID                 = "1000";
+    PGID                 = "986";
     UMASK                = "002";
     TZ                   = "America/New_York";
   };

@@ -4,6 +4,9 @@
   sops.secrets.PIA-env = { 
     sopsFile = ../../${hostname}/secrets.yaml;  
   }; 
+  sops.secrets.gluetun-wg-env = { 
+    sopsFile = ../../${hostname}/secrets.yaml;  
+  }; 
 
   virtualisation = {
     podman = {
@@ -20,17 +23,23 @@
 
       containers = {
 #        frigate       = import ./containers/frigate.nix;
+#        calibre       = import ./containers/calibre.nix;
+#        calibre-web   = import ./containers/calibre-web.nix;
         jellyfin      = import ./containers/jellyfin.nix;
     ### MEDIA POD ###
         transmission  = import ./containers/media/transmission.nix
           { OPENVPN_CREDS = config.sops.secrets.PIA-env.path; };
+        gluetun       = import ./containers/media/gluetun.nix
+          { GLUETUN_WG_CREDS = config.sops.secrets.gluetun-wg-env.path; };
         jackett       = import ./containers/media/jackett.nix;
         lazylibrarian = import ./containers/media/lazylibrarian.nix;
         lidarr        = import ./containers/media/lidarr.nix;
         overseerr     = import ./containers/media/overseerr.nix;
         radarr        = import ./containers/media/radarr.nix;
         readarr       = import ./containers/media/readarr.nix;
+        recyclarr     = import ./containers/media/recyclarr.nix;  
         sonarr        = import ./containers/media/sonarr.nix;
+        qbittorrent   = import ./containers/media/qbittorrent.nix;
         whisparr      = import ./containers/media/whisparr.nix;
 
       };
@@ -43,19 +52,23 @@
       install -d -m 755 /var/lib/containers -o root -g root
       install -d -m 755 /var/lib/containers/jellyfin -o root -g root
       install -d -m 755 /var/lib/containers/frigate  -o root -g root
-      install -d -m 755 /var/lib/containers/media/transmission -o root -g root
-      install -d -m 755 /var/lib/containers/media/jackett -o root -g root
-      install -d -m 755 /var/lib/containers/media/lazylibrarian -o root -g root
-      install -d -m 755 /var/lib/containers/media/lidarr -o root -g root
-      install -d -m 755 /var/lib/containers/media/overseerr -o root -g root
-      install -d -m 755 /var/lib/containers/media/radarr -o root -g root 
-      install -d -m 755 /var/lib/containers/media/readarr -o root -g root
-      install -d -m 755 /var/lib/containers/media/sonarr -o sdugre -g 1000
-      install -d -m 755 /var/lib/containers/media/whisparr -o root -g root
+      install -d -m 755 /var/lib/containers/media/transmission -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/jackett -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/gluetun -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/lazylibrarian -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/lidarr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/overseerr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/radarr -o sdugre -g media 
+      install -d -m 755 /var/lib/containers/media/readarr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/recyclarr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/sonarr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/qbittorrent -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/whisparr -o sdugre -g media
    '';
   };
 
   networking.firewall.allowedTCPPorts = [ 51414 ]; # transmission
+  networking.firewall.allowedUDPPorts = [ 49688 ]; # gluetun wireguard
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [ 

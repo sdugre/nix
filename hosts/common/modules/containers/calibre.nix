@@ -1,4 +1,4 @@
-{ image = "ghcr.io/hotio/whisparr";
+{ image = "lscr.io/linuxserver/calibre:latest";
 
   environment = {
     PUID = "1000";
@@ -8,12 +8,13 @@
   };
 
   volumes = [
-    "/var/lib/containers/media/whisparr:/config"
-    "/mnt/data:/data"
+    "/var/lib/containers/calibre:/config"
+    "/mnt/data/media/books:/books"
   ];
 
   ports = [
-    "6969:6969"
+    "8080:8080"
+    "8081:8081"
   ];
 
   autoStart = true;
