@@ -17,6 +17,7 @@
     ./nvr2.seandugre.nix
     ./plex.seandugre.nix
     ./pve.seandugre.nix
+    ./qbit.seandugre.nix
     ./radarr.seandugre.nix
     ./readarr.seandugre.nix
     ./recipe.seandugre.nix

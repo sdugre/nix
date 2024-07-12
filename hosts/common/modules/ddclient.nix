@@ -15,7 +15,7 @@
     passwordFile = config.sops.secrets.cloudflare-api-token.path;
     protocol = "cloudflare";
     ssl = true;
-    use = "web,web=ifconfig.me/ip";
+    usev4 = "webv4,webv4=ifconfig.me/ip";
     verbose = true;
     zone = "seandugre.com";
   };
