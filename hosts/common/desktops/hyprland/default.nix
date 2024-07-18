@@ -8,7 +8,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;	
   };
   environment.systemPackages = with pkgs; [
-    gnome.nautilus
+    nautilus
   ];
 
   services.udisks2.enable = true; # needed for auto mounting USB drives;  See also Home Manager hyprland config.
