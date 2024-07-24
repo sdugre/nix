@@ -42,7 +42,7 @@
 
     # Tiny Media Manager
     tmm-src = {
-      url = "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.7-linux-amd64.tar.xz";
+      url = "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.8-linux-amd64.tar.xz";
       flake = false;
     };
 

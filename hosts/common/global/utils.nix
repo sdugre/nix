@@ -13,7 +13,7 @@
     nvd
     python3
     tmux
-#    thefuck
+    thefuck
     tree
     wl-clipboard # needed for copy/paste in wayland
 #    zathura   see home manager package

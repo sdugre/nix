@@ -17,6 +17,7 @@
     authkeyFile = config.sops.secrets.tailscale_key.path;
     loginServer = "";
     enableSSH = true;
+    exitNode = "100.89.245.83";
   };
   
   sops.secrets.tailscale_key = { 
