@@ -60,5 +60,9 @@
     fsType = "nfs";
     options = mountOptions;
   };
-
+  fileSystems."/mnt/x2" = {
+    device = chummieIP + ":/svr/nfs/x";
+    fsType = "nfs";
+    options = mountOptions;
+  };
 }
