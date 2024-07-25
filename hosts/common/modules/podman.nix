@@ -27,8 +27,8 @@
 #        calibre-web   = import ./containers/calibre-web.nix;
         jellyfin      = import ./containers/jellyfin.nix;
     ### MEDIA POD ###
-        transmission  = import ./containers/media/transmission.nix
-          { OPENVPN_CREDS = config.sops.secrets.PIA-env.path; };
+#        transmission  = import ./containers/media/transmission.nix
+#          { OPENVPN_CREDS = config.sops.secrets.PIA-env.path; };     # removed - using qbittorrent now
         gluetun       = import ./containers/media/gluetun.nix
           { GLUETUN_WG_CREDS = config.sops.secrets.gluetun-wg-env.path; };
         jackett       = import ./containers/media/jackett.nix;

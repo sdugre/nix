@@ -52,8 +52,9 @@
       default_redirection_url = "https://seandugre.com";
 
       server = {
-        host = "127.0.0.1";
-        port = 9091;
+        address = "127.0.0.1:9091";
+#        host = "127.0.0.1";
+#        port = 9091;
       };
 
       log = {
