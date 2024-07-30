@@ -41,14 +41,14 @@
     nixarr.url = "github:rasmus-kirk/nixarr";
 
     # Tiny Media Manager
-    tmm-src = {
-      url = "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.8-linux-amd64.tar.xz";
-      flake = false;
-    };
+#    tmm-src = {
+#      url = "https://release.tinymediamanager.org/v5/dist/tinyMediaManager-5.0.8-linux-amd64.tar.xz";
+#      flake = false;
+#    };
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, hyprland, nix-colors, nixos-hardware, arkenfox, nixarr, tmm-src,... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, hyprland, nix-colors, nixos-hardware, arkenfox, nixarr,... }@inputs:
     let
       inherit (self) outputs;
       lib =  nixpkgs.lib // home-manager.lib;
