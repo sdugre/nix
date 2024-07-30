@@ -84,6 +84,7 @@ in {
           ${lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"} \
           ${lib.optionalString (cfg.advertiseExitNode) "--advertise-exit-node"} \
           ${lib.optionalString (cfg.exitNode != "") "--exit-node=${cfg.exitNode}"} \
+          ${lib.optionalString (cfg.enableSSH) "--ssh"} \
           ${lib.optionalString (cfg.exitNodeAllowLanAccess) "--exit-node-allow-lan-access"} 
       '';
     };

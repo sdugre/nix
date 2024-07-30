@@ -40,6 +40,7 @@ in
         ];
 
         modules-right = [
+          "tray"
           "clock"
           "custom/power"
         ];

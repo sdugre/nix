@@ -83,6 +83,7 @@
       exec-once = [
         "${config.services.mako.package}/bin/makoctl &"
         "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill &"
+        "nm-applet --indicator"
       ];
       
       bind = let

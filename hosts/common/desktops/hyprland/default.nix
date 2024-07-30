@@ -9,6 +9,8 @@
   };
   environment.systemPackages = with pkgs; [
     nautilus
+    networkmanagerapplet
+#    networkmanager_dmenu
   ];
 
   services.udisks2.enable = true; # needed for auto mounting USB drives;  See also Home Manager hyprland config.

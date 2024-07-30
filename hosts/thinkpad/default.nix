@@ -18,6 +18,7 @@
     loginServer = "";
     enableSSH = true;
     exitNode = "100.89.245.83";
+    exitNodeAllowLanAccess = true;
   };
   
   sops.secrets.tailscale_key = { 
