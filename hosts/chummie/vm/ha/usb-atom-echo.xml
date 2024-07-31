@@ -1,0 +1,7 @@
+<!-- usb-atom-echo.xml -->
+<hostdev mode='subsystem' type='usb' managed='yes'>
+  <source>
+    <vendor id='0x0403'/>
+    <product id='0x6001'/>
+  </source>
+</hostdev>
