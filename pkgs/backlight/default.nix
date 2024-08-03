@@ -1,7 +1,7 @@
 # 
-{ lib, writeShellApplication, bc }: (writeShellApplication {
+{ lib, writeShellApplication, bc, coreutils }: (writeShellApplication {
   name = "backlight";
-  runtimeInputs = [ bc ];
+  runtimeInputs = [ bc coreutils ];
 
   text = /* bash */ ''
     MAX=24242
