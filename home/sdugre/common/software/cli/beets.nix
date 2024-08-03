@@ -16,7 +16,7 @@
   programs.beets = {
     enable = true;
     settings = {
-      directory = "/mnt/media/music";
+      directory = "/mnt/data/media/music";
       library = "/home/${username}/.config/beets/library.blb";
       asciify_paths = "yes";
       clutter = [
