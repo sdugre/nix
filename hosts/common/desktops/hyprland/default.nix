@@ -14,4 +14,7 @@
   ];
 
   services.udisks2.enable = true; # needed for auto mounting USB drives;  See also Home Manager hyprland config.
+
+  # Hyprlock should have access to passwords, etc.
+  security.pam.services.hyprlock = {};
 }

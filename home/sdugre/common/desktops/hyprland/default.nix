@@ -7,8 +7,8 @@
     ../../software/gui/kitty.nix
     ../../software/gui/mako.nix
     ../../software/gui/rofi.nix
-    ../../software/gui/swayidle.nix
-    ../../software/gui/swaylock.nix
+    ../../software/gui/hypridle.nix
+    ../../software/gui/hyprlock.nix
     ../../software/gui/waybar.nix
 
   ];
@@ -84,12 +84,10 @@
         "${config.services.mako.package}/bin/makoctl &"
         "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill &"
         "nm-applet --indicator"
+        "${pkgs.hypridle}/bin/hypridle"
       ];
       
       bind = let
-        swaylock = "${config.programs.swaylock.package}/bin/swaylock";
-      #  playerctl = "${config.services.playerctld.package}/bin/playerctl";
-      #  playerctld = "${config.services.playerctld.package}/bin/playerctld";
         makoctl = "${config.services.mako.package}/bin/makoctl";
         rofi = "${config.programs.rofi.package}/bin/rofi";
         rofi-logout = "${pkgs.rofi-logout}/bin/rofi-logout";
@@ -112,7 +110,6 @@
         "SUPER,b,exec,${browser}"
         "SUPER, Space, exec, ${rofi} -modes \"drun,window,run\" -show drun"
         "SUPER, d, exec, nautilus &"
-#        "SUPER, l, exec, /home/sdugre/.nix-profile/bin/rofi-logout"
         "SUPER, l, exec, ${rofi-logout}"
         # Basic Binds
         "SUPER, q, killactive"
@@ -159,10 +156,10 @@
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
       bindl = let
-        swaylock = "${config.programs.swaylock.package}/bin/swaylock";
+        hyprlock = "${config.programs.hyprlock.package}/bin/hyprlock";
       in [ 
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", switch:on:Lid Switch, exec, ${swaylock} -i ${config.wallpaper}"
+        ", switch:on:Lid Switch, exec, pidof hyprlock || ${hyprlock}"
       ];
       monitor = [ "eDP-1,1920x1080,0x0,1" ];
     };
