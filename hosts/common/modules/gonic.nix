@@ -11,9 +11,9 @@
     enable = true;
     settings = {
       listen-addr = "0.0.0.0:4747";
-      music-path = [ "/mnt/music" ];
+      music-path = [ "/mnt/data/media/music" ];
       podcast-path = "/mnt/podcasts";
-      playlists-path = "/mnt/music/_Playlists";
+      playlists-path = "/mnt/data/media/music/_Playlists";
       cache-path = "/var/cache/gonic";
       scan-interval = 720;
       scan-at-start-enabled = false;
