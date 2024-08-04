@@ -1,7 +1,7 @@
-<!-- usb-atom-echo.xml -->
+<!-- usb-sonoff-zigbee.xml -->
 <hostdev mode='subsystem' type='usb' managed='yes'>
   <source>
-    <vendor id='0x0403'/>
-    <product id='0x6001'/>
+    <vendor id='0x10c4'/>
+    <product id='0xea60'/>
   </source>
 </hostdev>
