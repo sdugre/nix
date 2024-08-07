@@ -7,7 +7,8 @@
     ./docs.seandugre.nix
     ./ha.seandugre.nix
     ./jackett.seandugre.nix
-    ./jellyfin.seandugre.nix
+    ./jellyfin.seandugre.nix # on debian
+    ./jfin.seandugre.nix     # on chummie
     ./lib.seandugre.nix
     ./lidarr.seandugre.nix
     ./mqtt.seandugre.nix
