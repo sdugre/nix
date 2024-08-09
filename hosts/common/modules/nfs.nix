@@ -5,7 +5,7 @@
     /svr/nfs                   100.0.0.0/8(insecure,rw,no_subtree_check,crossmnt,fsid=0)
     /svr/nfs/paperless-import  100.0.0.0/8(insecure,rw,no_subtree_check)
     /svr/nfs/media             100.0.0.0/8(insecure,rw,no_subtree_check)
-    /svr/nfs/x                 100.0.0.0/8(insecure,rw,no_subtree_check)
+    /svr/nfs/files             100.0.0.0/8(insecure,rw,no_subtree_check)
   '';
 
   fileSystems."/svr/nfs/paperless-import" = {
@@ -18,8 +18,8 @@
     options = [ "bind" ];
   };
 
-  fileSystems."/svr/nfs/x" = {
-    device = "/mnt/x";
+  fileSystems."/svr/nfs/files" = {
+    device = "/mnt/data/files";
     options = [ "bind" ];
   };
 

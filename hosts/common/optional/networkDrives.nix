@@ -1,11 +1,11 @@
   let 
     nasIP = "100.84.193.57";
+    chummieIP = "100.80.19.29";
     mountOptions = [
       "x-gvfs-show"
       "x-systemd.automount" 
       "noauto"
     ];
-    chummieIP = "100.80.19.29";
   in
 {
   # mount NAS drives via tailscale
@@ -60,4 +60,10 @@
     fsType = "nfs";
     options = mountOptions;
   };
+  fileSystems."/mnt/files" = {
+    device = chummieIP + ":/svr/nfs/files";
+    fsType = "nfs";
+    options = mountOptions;
+  };
 }
+
