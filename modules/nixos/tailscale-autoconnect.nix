@@ -81,6 +81,7 @@ in {
         # otherwise authenticate with tailscale
         # timeout after 10 seconds to avoid hanging the boot process
         ${coreutils}/bin/timeout 10 ${tailscale}/bin/tailscale up \
+          --reset \ 
           ${lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"} \
           ${lib.optionalString (cfg.advertiseExitNode) "--advertise-exit-node"} \
           ${lib.optionalString (cfg.authkeyFile != "") "--auth-key=file:${cfg.authkeyFile}"} \
@@ -101,10 +102,12 @@ in {
         if cfg.advertiseExitNode
         then "server"
         else "client";
-      authKeyFile = cfg.authkeyFile; 
-      extraUpFlags = []
-        ++ (lib.optional (cfg.enableSSH) "--ssh")
-        ++ (lib.optional (cfg.loginServer != "") "--login-server=${cfg.loginServer}");
+#      authKeyFile = cfg.authkeyFile; 
+#      extraUpFlags = [
+#        "--reset"
+#      ]
+#        ++ (lib.optional (cfg.enableSSH) "--ssh")
+#        ++ (lib.optional (cfg.loginServer != "") "--login-server=${cfg.loginServer}");
     };
  
     environment.persistence = lib.mkIf config.services.persistence.enable {
