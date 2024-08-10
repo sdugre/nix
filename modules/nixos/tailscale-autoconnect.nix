@@ -83,6 +83,7 @@ in {
         ${coreutils}/bin/timeout 10 ${tailscale}/bin/tailscale up \
           ${lib.optionalString (cfg.loginServer != "") "--login-server=${cfg.loginServer}"} \
           ${lib.optionalString (cfg.advertiseExitNode) "--advertise-exit-node"} \
+          ${lib.optionalString (cfg.authkeyFile != "") "--auth-key=file:${cfg.authkeyFile}"} \
           ${lib.optionalString (cfg.exitNode != "") "--exit-node=${cfg.exitNode}"} \
           ${lib.optionalString (cfg.enableSSH) "--ssh"} \
           ${lib.optionalString (cfg.exitNodeAllowLanAccess) "--exit-node-allow-lan-access"} 

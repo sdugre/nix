@@ -16,9 +16,9 @@ in
       [[ ! -f ${p10kTheme} ]] || source ${p10kTheme}
     '';
     loginExtra = mkIf hyprlandInstalled ''
-      if [ "$(tty)" = "/dev/tty1" ]; then
-        exec Hyprland
-      fi
+#      if [ "$(tty)" = "/dev/tty1" ]; then
+#        exec Hyprland
+#      fi
     '';
 
     profileExtra = ''      
