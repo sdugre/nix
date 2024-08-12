@@ -1,0 +1,22 @@
+[0;1;32m●[0m podman-tube-archivist-app.service
+     Loaded: loaded (]8;;file://chummie/etc/systemd/system/podman-tube-archivist-app.service/etc/systemd/system/podman-tube-archivist-app.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Mon 2024-08-12 10:44:21 EDT; 30s ago
+ Invocation: f6885b4842b44921bd0f88e817b38699
+    Process: 776069 ExecStartPre=/nix/store/m19x08s9g43q8wwjqn0jlvx5fnr7qajp-pre-start/bin/pre-start (code=exited, status=0/SUCCESS)
+   Main PID: 776145 (conmon)
+         IP: 0B in, 544B out
+         IO: 0B read, 736K written
+      Tasks: 1 (limit: 76939)
+     Memory: 824K (peak: 15.2M)
+        CPU: 196ms
+     CGroup: /system.slice/podman-tube-archivist-app.service
+             └─[0;38;5;245m776145 /nix/store/3azk5pxlxzdmsif5qnr0agy1rgp73qd7-podman-helper-binary-wrapper/bin/conmon --api-version 1 -c a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434 -u a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434 -r /nix/store/3azk5pxlxzdmsif5qnr0agy1rgp73qd7-podman-helper-binary-wrapper/bin/crun -b /var/lib/containers/storage/overlay-containers/a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434/userdata -p /run/containers/storage/overlay-containers/a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434/userdata/pidfile -n tube-archivist-app --exit-dir /run/libpod/exits --persist-dir /run/libpod/persist/a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434 --full-attach -s -l journald --log-level warning --syslog --runtime-arg --log-format=json --runtime-arg --log --runtime-arg=/run/containers/storage/overlay-containers/a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434/userdata/oci-log --conmon-pidfile /run/containers/storage/overlay-containers/a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434/userdata/conmon.pid --exit-command /nix/store/8prdgxn3h5xjz464b317v4qqvrl9bl8a-podman-5.2.0/bin/.podman-wrapped --exit-command-arg --root --exit-command-arg /var/lib/containers/storage --exit-command-arg --runroot --exit-command-arg /run/containers/storage --exit-command-arg --log-level --exit-command-arg warning --exit-command-arg --cgroup-manager --exit-command-arg systemd --exit-command-arg --tmpdir --exit-command-arg /run/libpod --exit-command-arg --network-config-dir --exit-command-arg "" --exit-command-arg --network-backend --exit-command-arg netavark --exit-command-arg --volumepath --exit-command-arg /var/lib/containers/storage/volumes --exit-command-arg --db-backend --exit-command-arg sqlite --exit-command-arg --transient-store=false --exit-command-arg --runtime --exit-command-arg crun --exit-command-arg --storage-driver --exit-command-arg overlay --exit-command-arg --events-backend --exit-command-arg journald --exit-command-arg container --exit-command-arg cleanup --exit-command-arg --rm --exit-command-arg a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434[0m
+
+Aug 12 10:44:21 chummie systemd[1]: Starting podman-tube-archivist-app.service...
+Aug 12 10:44:21 chummie podman[776092]: 2024-08-12 10:44:21.697977401 -0400 EDT m=+0.038156167 container create a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434 (image=docker.io/bbilly1/tubearchivist:latest, name=tube-archivist-app, PODMAN_SYSTEMD_UNIT=podman-tube-archivist-app.service)
+Aug 12 10:44:21 chummie podman[776092]: 2024-08-12 10:44:21.682367218 -0400 EDT m=+0.022545983 image pull 6cc998de69ffa72a6245a38d913e5808d97fa1ae0e9c781c59d78ecf37cec6cb docker.io/bbilly1/tubearchivist
+Aug 12 10:44:21 chummie podman[776092]: 2024-08-12 10:44:21.814099816 -0400 EDT m=+0.154278631 container init a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434 (image=docker.io/bbilly1/tubearchivist:latest, name=tube-archivist-app, PODMAN_SYSTEMD_UNIT=podman-tube-archivist-app.service)
+Aug 12 10:44:21 chummie podman[776092]: 2024-08-12 10:44:21.819498328 -0400 EDT m=+0.159677139 container start a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434 (image=docker.io/bbilly1/tubearchivist:latest, name=tube-archivist-app, PODMAN_SYSTEMD_UNIT=podman-tube-archivist-app.service)
+Aug 12 10:44:21 chummie podman-tube-archivist-app-start[776092]: a1eb45442900561eafe33ee7da630879c315c321d6c188f85ddd3e2c032af434
+Aug 12 10:44:21 chummie systemd[1]: Started podman-tube-archivist-app.service.
+Aug 12 10:44:42 chummie tube-archivist-app[776145]: ... Redis connection failed, retry [0/10]

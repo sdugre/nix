@@ -1,3 +1,4 @@
+{ config, pkgs, lib, hostname, ... }:
 { 
 
   system.activationScripts = {
@@ -25,5 +26,6 @@
         "1902:1900/udp" #optional
       ];
       autoStart = true;
-
+    };
+  };
 }

@@ -1,4 +1,3 @@
-
 { config, pkgs, lib, hostname, ... }:
 {
   sops.secrets.gluetun-wg-env = { 

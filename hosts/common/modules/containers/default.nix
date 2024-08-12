@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-  #  ./frigate.nix;
-  #  ./calibre.nix;
-  #  ./calibre-web.nix;
-    ./jellyfin.nix;
-    ./media.nix;
-    ./tube-archivist.nix;
+  #  ./frigate.nix
+  #  ./calibre.nix
+  #  ./calibre-web.nix
+    ./jellyfin.nix
+    ./media.nix
+    ./tube-archivist.nix
   ];
 
   virtualisation.podman = {
@@ -15,8 +15,9 @@
     dockerSocket.enable = true;
     defaultNetwork.settings.dns_enabled = true;
     autoPrune.enable = true;
-    oci-containers.backend = "podman";
   };
+  virtualisation.oci-containers.backend = "podman";
+
 
 # Create folders for the containers
   system.activationScripts = {
