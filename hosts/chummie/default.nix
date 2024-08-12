@@ -22,7 +22,7 @@
 #    ../common/modules/nixarr.nix    # Media aquisition
     ../common/modules/paperless.nix # Documents
     ../common/modules/plex.nix      # Plex Media Server
-    ../common/modules/podman.nix    # Containers
+    ../common/modules/containers    # Podman Containers
     ../common/modules/rss.nix       # miniflux & rss-bridge
   ];
 
