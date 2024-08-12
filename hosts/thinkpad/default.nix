@@ -38,11 +38,8 @@
     xournal                    # annotate pdfs
     virt-viewer
     config.nur.repos.shados.tmm
-    # tiny media manager
-#    (nur.repos.shados.tmm.overrideAttrs (_old: {
-#      version = "latest";
-#      src = inputs.tmm-src;
-#    }))
+    libimobiledevice           # iphone mount
+    ifuse                      # optional, to mount using 'ifuse'
   ]);
 
   # udev rule to allow adjusting brightness
@@ -51,5 +48,8 @@
   '';
 
   networking.firewall.allowedTCPPorts = [ 3389 ];
+
+  services.usbmuxd.enable = true; # for iphone mount
+
 
 }
