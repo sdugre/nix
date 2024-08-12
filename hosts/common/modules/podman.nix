@@ -1,9 +1,6 @@
 
 { config, pkgs, lib, hostname, ... }:
 {
-  sops.secrets.PIA-env = { 
-    sopsFile = ../../${hostname}/secrets.yaml;  
-  }; 
   sops.secrets.gluetun-wg-env = { 
     sopsFile = ../../${hostname}/secrets.yaml;  
   }; 
@@ -29,19 +26,20 @@
     ### MEDIA POD ###
 #        transmission  = import ./containers/media/transmission.nix
 #          { OPENVPN_CREDS = config.sops.secrets.PIA-env.path; };     # removed - using qbittorrent now
-        gluetun       = import ./containers/media/gluetun.nix
+        gluetun        = import ./containers/media/gluetun.nix
           { GLUETUN_WG_CREDS = config.sops.secrets.gluetun-wg-env.path; };
-        jackett       = import ./containers/media/jackett.nix;
-        lazylibrarian = import ./containers/media/lazylibrarian.nix;
-        lidarr        = import ./containers/media/lidarr.nix;
-        overseerr     = import ./containers/media/overseerr.nix;
-        radarr        = import ./containers/media/radarr.nix;
-        readarr       = import ./containers/media/readarr.nix;
-        recyclarr     = import ./containers/media/recyclarr.nix;  
-        sonarr        = import ./containers/media/sonarr.nix;
-        qbittorrent   = import ./containers/media/qbittorrent.nix;
-        whisparr      = import ./containers/media/whisparr.nix;
-
+        jackett        = import ./containers/media/jackett.nix;
+        lazylibrarian  = import ./containers/media/lazylibrarian.nix;
+        lidarr         = import ./containers/media/lidarr.nix;
+        overseerr      = import ./containers/media/overseerr.nix;
+        radarr         = import ./containers/media/radarr.nix;
+        readarr        = import ./containers/media/readarr.nix;
+        recyclarr      = import ./containers/media/recyclarr.nix;  
+        sonarr         = import ./containers/media/sonarr.nix;
+        tube-archivist = import ./containers/media/tube-archivist
+          { inherit config pkgs hostname; };
+        qbittorrent    = import ./containers/media/qbittorrent.nix;
+        whisparr       = import ./containers/media/whisparr.nix;
       };
     };
   };
@@ -62,6 +60,7 @@
       install -d -m 755 /var/lib/containers/media/readarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/recyclarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/sonarr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/tube-archivist -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/qbittorrent -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/whisparr -o sdugre -g media
    '';
