@@ -35,6 +35,7 @@
         web 
         subsonicupdate 
         albumtypes 
+        permissions
       ";
 
       import = {
@@ -90,6 +91,11 @@
         ];
         ignore_va = "compilation";
         bracket = "[]";
+      };
+
+      permissions = {
+        file = "644";
+        dir = "755";
       };
     };
   };

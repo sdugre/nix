@@ -12,14 +12,12 @@
     ../common/modules/authelia.nix  # SSO
 #    ../common/modules/calibre.nix   # eBooks
     ../common/modules/ddclient.nix  # DDNS updating
-#    ../common/modules/frigate.nix   # NVR
     ../common/modules/gonic.nix     # Music Server
-#    ../common/modules/home-assistant-vm.nix
     ../common/modules/mail.nix      # Mail server for notifications
     ../common/modules/nextcloud.nix # Cloud
     ../common/modules/nfs.nix       # NFS server
     ../common/modules/nginx         # reverse proxy
-#    ../common/modules/nixarr.nix    # Media aquisition
+#    ../common/modules/nixarr.nix    # Media aquisition - use containers instead
     ../common/modules/paperless.nix # Documents
     ../common/modules/plex.nix      # Plex Media Server
     ../common/modules/containers    # Podman Containers

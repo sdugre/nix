@@ -1,12 +1,13 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-  #  ./frigate.nix
-  #  ./calibre.nix
-  #  ./calibre-web.nix
+  #  ./frigate.nix         # can't get to work
+  #  ./calibre.nix         # can't get to work
+  #  ./calibre-web.nix  
     ./jellyfin.nix
-    ./media.nix
-    ./tube-archivist.nix
+    ./media.nix            # arr stack w/ gluetun for vpn
+#    ./tube-archivist.nix  # works, but doesn't auto delete or rename files. Use ytdl-sub instead
+    ./ytdl-sub.nix
   ];
 
   virtualisation.podman = {
