@@ -43,7 +43,7 @@
     };
 
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
 
@@ -111,6 +111,7 @@
         "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill &"
         "nm-applet --indicator"
         "${pkgs.hypridle}/bin/hypridle"
+        "hyprctl setcursor Bibata-Modern-Classic 24"
       ];
       
       bind = let
