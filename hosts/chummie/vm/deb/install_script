@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+virt-install \
+    --connect qemu:///system \
+    --memory memory=16392 \
+    --sysinfo emulate \
+    --vcpus 4 \
+    --cpu host \
+    --clock offset=utc \
+    --boot hd \
+    --network network=bridged-network \
+    --graphics "spice,listen=0.0.0.0" \
+    --noautoconsole \
+    --cdrom /etc/vmimages/debian-12.6.0-amd64-netinst.iso \
+    --name deb \
+    --disk size=30 \
+    --osinfo name=debian12

@@ -24,6 +24,22 @@
     ../common/modules/rss.nix       # miniflux & rss-bridge
   ];
 
+  # FOR QUICKSYNC
+  nixpkgs.config.packageOverrides = pkgs: {
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+  };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      #... # your Open GL, Vulkan and VAAPI drivers
+      intel-media-sdk   # for older GPUs
+      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      libvdpau-va-gl
+    ];
+  };
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+
   # FOR ZFS
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
@@ -77,7 +93,7 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 5900 ];
+  networking.firewall.allowedTCPPorts = [ 5900 5901 1935 ];
 
   # END Home Assistand VM
 
@@ -122,5 +138,6 @@
     smartmontools
     s-tui
     zfs
+    virt-viewer
   ]);
 }

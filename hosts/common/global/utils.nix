@@ -15,6 +15,7 @@
     tmux
     thefuck
     tree
+    libva-utils
     wl-clipboard # needed for copy/paste in wayland
 #    zathura   see home manager package
   ];

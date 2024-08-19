@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+virt-install \
+    --connect qemu:///system \
+    --memory memory=4096 \
+    --sysinfo emulate \
+    --vcpus 1 \
+    --cpu host \
+    --clock offset=utc \
+    --boot hd \
+    --network network=bridged-network \
+    --graphics "spice,listen=0.0.0.0" \
+    --noautoconsole \
+    --cdrom /etc/vmimages/debian-12.6.0-amd64-netinst.iso \
+    --name frigate \
+    --disk path=/var/lib/libvirt/images/frigate.qcow2 \
+    --osinfo name=debian12
