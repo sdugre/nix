@@ -1,6 +1,6 @@
 <!-- usb-coral.xml -->
 <hostdev mode='subsystem' type='usb' managed='yes'>
-  <source>
+  <source startupPolicy='optional'>
     <vendor id='0x1a6e'/>
     <product id='0x089a'/>
   </source>

@@ -1,6 +1,6 @@
 <!-- usb-sonoff-zigbee.xml -->
 <hostdev mode='subsystem' type='usb' managed='yes'>
-  <source>
+  <source startupPolicy='optional'>
     <vendor id='0x10c4'/>
     <product id='0xea60'/>
   </source>

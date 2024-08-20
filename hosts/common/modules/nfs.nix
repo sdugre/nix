@@ -4,7 +4,7 @@
   services.nfs.server.exports = ''
     /svr/nfs                   100.0.0.0/8(insecure,rw,no_subtree_check,crossmnt,fsid=0)
     /svr/nfs/paperless-import  100.0.0.0/8(insecure,rw,no_subtree_check)
-    /svr/nfs/media             100.0.0.0/8(insecure,rw,no_subtree_check)
+    /svr/nfs/media             100.0.0.0/8(insecure,rw,no_subtree_check,all_squash,anonuid=1001,anongid=986)
     /svr/nfs/files             100.0.0.0/8(insecure,rw,no_subtree_check)
   '';
 
