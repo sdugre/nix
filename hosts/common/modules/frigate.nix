@@ -30,7 +30,7 @@
                 path = "rtsp://127.0.0.1:8554/driveway";
                 input_args = "preset-rtsp-restream";
                 roles = [ "record" ];
-              },
+              }
               {
                 path = "rtsp://127.0.0.1:8554/driveway_sub";
                 input_args = "preset-rtsp-restream";
@@ -69,7 +69,7 @@
 
       mqtt.enabled = false;
 
-      version: 0.14
+      version = "0.14";
    
     };
   };

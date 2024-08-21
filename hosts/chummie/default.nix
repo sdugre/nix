@@ -12,6 +12,7 @@
     ../common/modules/authelia.nix  # SSO
 #    ../common/modules/calibre.nix   # eBooks
     ../common/modules/ddclient.nix  # DDNS updating
+#    ../common/modules/frigate.nix   # NVR
     ../common/modules/gonic.nix     # Music Server
     ../common/modules/mail.nix      # Mail server for notifications
     ../common/modules/nextcloud.nix # Cloud
@@ -38,7 +39,7 @@
       libvdpau-va-gl
     ];
   };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+#  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 
   # FOR ZFS
   boot.supportedFilesystems = [ "zfs" ];
