@@ -12,7 +12,7 @@
       proxy_http_version 1.1;
     '';
     locations."/" = {
-      proxyPass = "http://192.168.57:5000";
+      proxyPass = "https://192.168.1.202:8971";
       proxyWebsockets = false;
       extraConfig = ''
 #        resolver 127.0.0.11 valid=30s;

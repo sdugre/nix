@@ -14,6 +14,7 @@
     ../common/modules/ddclient.nix  # DDNS updating
 #    ../common/modules/frigate.nix   # NVR
     ../common/modules/gonic.nix     # Music Server
+    ../common/modules/jellyfin.nix  # Media Server
     ../common/modules/mail.nix      # Mail server for notifications
     ../common/modules/nextcloud.nix # Cloud
     ../common/modules/nfs.nix       # NFS server
@@ -30,6 +31,10 @@
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
 
+  boot.kernelParams = [
+    "i915.enable_guc=2"
+  ];
+
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -37,9 +42,10 @@
       intel-media-sdk   # for older GPUs
       intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       libvdpau-va-gl
+      intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
     ];
   };
-#  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 
   # FOR ZFS
   boot.supportedFilesystems = [ "zfs" ];
@@ -64,7 +70,7 @@
 
 
 
-  # START Home Assistant VM
+  # START VMs
   networking.defaultGateway = "192.168.1.1";
   networking.nameservers = [ "192.168.1.1" "8.8.8.8" ];
   networking.useDHCP = false;
@@ -84,8 +90,17 @@
       qemu.ovmf.enable = true;
     };
   };
-
+  
+  users.extraUsers.sdugre.extraGroups = [ "libvirtd" ];
   programs.virt-manager.enable = true;
+
+  # For Intel GVT-g iGPU passthrough
+  virtualisation.kvmgt.enable = true;
+  virtualisation.kvmgt.vgpus = {
+    "i915-GVTg_V5_4" = {
+      uuid = [ "29eaea12-6732-11ef-ad02-13d33723c500" ];
+    };
+  };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [ 
@@ -94,9 +109,9 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 5900 5901 1935 ];
+  networking.firewall.allowedTCPPorts = [ 5900 5901 5902 1935 ];
 
-  # END Home Assistand VM
+  # END VMs
 
 
   services.persistence = {
@@ -136,6 +151,7 @@
     xclip
     pciutils
     inxi
+    intel-gpu-tools
     smartmontools
     s-tui
     zfs

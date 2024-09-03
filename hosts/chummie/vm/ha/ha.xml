@@ -174,7 +174,7 @@
     </controller>
     <interface type='bridge'>
       <mac address='52:54:00:cb:79:f0'/>
-      <source network='bridged-network' portid='0bf7e048-70bd-4a26-be9f-a337bacbf405' bridge='br0'/>
+      <source bridge='br0'/>
       <target dev='vnet0'/>
       <model type='e1000'/>
       <alias name='net0'/>

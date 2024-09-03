@@ -4,7 +4,7 @@
   #  ./frigate.nix         # can't get to work
   #  ./calibre.nix         # can't get to work
   #  ./calibre-web.nix  
-    ./jellyfin.nix
+  #  ./jellyfin.nix
     ./media.nix            # arr stack w/ gluetun for vpn
 #    ./tube-archivist.nix  # works, but doesn't auto delete or rename files. Use ytdl-sub instead
     ./ytdl-sub.nix
