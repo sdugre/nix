@@ -11,6 +11,7 @@
     ../common/modules/acme.nix      # certs
     ../common/modules/authelia.nix  # SSO
 #    ../common/modules/calibre.nix   # eBooks
+    ../common/modules/containers    # Podman Containers
     ../common/modules/ddclient.nix  # DDNS updating
 #    ../common/modules/frigate.nix   # NVR
     ../common/modules/gonic.nix     # Music Server
@@ -22,8 +23,8 @@
 #    ../common/modules/nixarr.nix    # Media aquisition - use containers instead
     ../common/modules/paperless.nix # Documents
     ../common/modules/plex.nix      # Plex Media Server
-    ../common/modules/containers    # Podman Containers
     ../common/modules/rss.nix       # miniflux & rss-bridge
+#    ../common/modules/wireguard.nix       # vpn
   ];
 
   # FOR QUICKSYNC
