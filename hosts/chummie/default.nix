@@ -16,6 +16,7 @@
 #    ../common/modules/frigate.nix   # NVR
     ../common/modules/gonic.nix     # Music Server
     ../common/modules/jellyfin.nix  # Media Server
+    ../common/modules/immich.nix    # Photo management
     ../common/modules/mail.nix      # Mail server for notifications
     ../common/modules/nextcloud.nix # Cloud
     ../common/modules/nfs.nix       # NFS server
