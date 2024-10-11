@@ -1,4 +1,4 @@
-{ lib, pkgs,...}: 
+{ lib, pkgs,config, ...}: 
 let
   library = "/var/lib/calibre-server";
 in 
@@ -7,16 +7,16 @@ in
     calibre-server = {
       enable = true;
       group = "media";
- #     libraries = [library];
+      libraries = [library];
     };
     calibre-web = {
-      enable = true;
+      enable = false;
       group = "media";
       listen.ip = "0.0.0.0";
       options = {
         enableBookUploading = true;
         enableBookConversion = true;
- #       calibreLibrary = library;
+        calibreLibrary = library;
       };
     };
   };
@@ -25,10 +25,11 @@ in
   systemd.services.calibre-server.serviceConfig.ExecStart = lib.mkForce "${pkgs.calibre}/bin/calibre-server ${library}";
   networking.firewall.allowedTCPPorts = [ 8080 8081 8083 ];
 
-#  environment.persistence = lib.mkIf config.services.persistence.enable {
-#    "/persist".directories = [ 
-#      "/var/lib/paperless" 
-#    ];
-#  };
+  environment.persistence = lib.mkIf config.services.persistence.enable {
+    "/persist".directories = [ 
+      "/var/lib/calibre-server"
+      "/var/lib/calibre-web"
+    ];
+  };
 
 }
