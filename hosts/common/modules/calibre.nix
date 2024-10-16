@@ -1,6 +1,6 @@
 { lib, pkgs,config, ...}: 
 let
-  library = "/var/lib/calibre-server";
+  library = "/var/lib/calibre-lib";
 in 
 {
   services = {
@@ -10,7 +10,7 @@ in
       libraries = [library];
     };
     calibre-web = {
-      enable = false;
+      enable = true;
       group = "media";
       listen.ip = "0.0.0.0";
       options = {
@@ -21,6 +21,12 @@ in
     };
   };
 
+  systemd.services.calibre-lib.serviceConfig = {
+    User = "calibre-server";
+    Group = "media";
+    StateDirectory = "calibre-lib";
+    StateDirectoryMode = "0755";
+  };
 
   systemd.services.calibre-server.serviceConfig.ExecStart = lib.mkForce "${pkgs.calibre}/bin/calibre-server ${library}";
   networking.firewall.allowedTCPPorts = [ 8080 8081 8083 ];
@@ -29,6 +35,7 @@ in
     "/persist".directories = [ 
       "/var/lib/calibre-server"
       "/var/lib/calibre-web"
+      library
     ];
   };
 
