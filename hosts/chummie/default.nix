@@ -10,7 +10,7 @@
     # services
     ../common/modules/acme.nix      # certs
     ../common/modules/authelia.nix  # SSO
-    ../common/modules/calibre.nix   # eBooks
+#    ../common/modules/calibre.nix   # eBooks
     ../common/modules/containers    # Podman Containers
     ../common/modules/ddclient.nix  # DDNS updating
 #    ../common/modules/frigate.nix   # NVR
