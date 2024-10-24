@@ -9,7 +9,7 @@ in
     enable = true;
     arkenfox = {
       enable = true;
-      version = "126.0";
+      version = "128.0";
     };
     profiles.default = {
       id = 0;
