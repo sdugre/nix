@@ -4,7 +4,7 @@
 
     # Optional machine specific packages
     ./common/software/gui/vscodium.nix
-#    ./common/software/gui/calibre.nix
+    ./common/software/gui/calibre.nix
   ];
 
   programs.chromium.enable = true;  # for testing, esphome, etc.
