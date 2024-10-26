@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-  #  ./calibre.nix         # can't get to work
-  #  ./calibre-web.nix  
+    ./calibre.nix         # can't get to work
+  #  ./calibre-web.nix     # use native nix package
     ./chowdown.nix         # recipe wiki
   #  ./frigate.nix         # can't get to work
   #  ./jellyfin.nix
