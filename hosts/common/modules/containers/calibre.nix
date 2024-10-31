@@ -7,6 +7,8 @@
    '';
   };
 
+  networking.firewall.allowedTCPPorts = [ 8180 8181 ];
+
   virtualisation.oci-containers.containers = {
     calibre = { 
 

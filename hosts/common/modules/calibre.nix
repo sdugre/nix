@@ -5,7 +5,7 @@ in
 {
   services = {
     calibre-server = {
-      enable = true;
+      enable = false;  # use content server from calibre podman container instead
       group = "media";
       libraries = [library];
     };
@@ -29,7 +29,7 @@ in
   };
 
   systemd.services.calibre-server.serviceConfig.ExecStart = lib.mkForce "${pkgs.calibre}/bin/calibre-server ${library}";
-  networking.firewall.allowedTCPPorts = [ 8080 8081 8083 ];
+  networking.firewall.allowedTCPPorts = [ 8083 ];
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [ 

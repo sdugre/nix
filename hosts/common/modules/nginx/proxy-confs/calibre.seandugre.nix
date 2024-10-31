@@ -6,7 +6,7 @@
     extraConfig = ''
     '';
     locations."/" = {
-      proxyPass = "http://192.168.1.58:8080";
+      proxyPass = "http://192.168.1.200:8180";
       proxyWebsockets = true;
       extraConfig = ''
         proxy_buffering off;
@@ -17,8 +17,10 @@
       return = "301 $scheme://$host/content-server/";
     };
     locations."^~ /content-server/" = {
-      proxyPass = "http://192.168.1.58:8081";
+      proxyPass = "http://192.168.1.200:8181";
+      proxyWebsockets = true;
       extraConfig = ''
+        proxy_buffering off;
         resolver 127.0.0.11 valid=30s;
       '';
     };
