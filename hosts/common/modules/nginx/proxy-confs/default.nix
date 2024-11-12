@@ -16,6 +16,7 @@
     ./nas.seandugre.nix
     ./nvr.seandugre.nix
     ./nvr2.seandugre.nix
+    ./pdf.seandugre.nix
     ./plex.seandugre.nix
     ./pve.seandugre.nix
     ./qbit.seandugre.nix
