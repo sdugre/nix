@@ -225,7 +225,7 @@
       <source>
         <vendor id='0x10c4'/>
         <product id='0xea60'/>
-        <address bus='1' device='13'/>
+        <address bus='1' device='3'/>
       </source>
       <alias name='hostdev0'/>
       <address type='usb' bus='0' port='2'/>
