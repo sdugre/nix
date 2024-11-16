@@ -74,6 +74,12 @@ in
             definedAliases = [ "@ghn"];
           };
 
+          "Perplexity" = {
+            urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
+            iconUpdateURL = "https://www.perplexity.ai/favicon.ico";
+            updateInterval = 7 * 24 * 60 * 60 * 1000;
+            definedAliases = ["@pp"];
+          };
 	};
       };
 
