@@ -1,4 +1,9 @@
-{ config, lib, pkgs,...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib; let
   cfg = config.services.tailscaleAutoconnect;
 in {
@@ -87,7 +92,7 @@ in {
           ${lib.optionalString (cfg.authkeyFile != "") "--auth-key=file:${cfg.authkeyFile}"} \
           ${lib.optionalString (cfg.exitNode != "") "--exit-node=${cfg.exitNode}"} \
           ${lib.optionalString (cfg.enableSSH) "--ssh"} \
-          ${lib.optionalString (cfg.exitNodeAllowLanAccess) "--exit-node-allow-lan-access"} 
+          ${lib.optionalString (cfg.exitNodeAllowLanAccess) "--exit-node-allow-lan-access"}
       '';
     };
 
@@ -102,16 +107,16 @@ in {
         if cfg.advertiseExitNode
         then "server"
         else "client";
-#      authKeyFile = cfg.authkeyFile; 
-#      extraUpFlags = [
-#        "--reset"
-#      ]
-#        ++ (lib.optional (cfg.enableSSH) "--ssh")
-#        ++ (lib.optional (cfg.loginServer != "") "--login-server=${cfg.loginServer}");
+      #      authKeyFile = cfg.authkeyFile;
+      #      extraUpFlags = [
+      #        "--reset"
+      #      ]
+      #        ++ (lib.optional (cfg.enableSSH) "--ssh")
+      #        ++ (lib.optional (cfg.loginServer != "") "--login-server=${cfg.loginServer}");
     };
- 
+
     environment.persistence = lib.mkIf config.services.persistence.enable {
-      "/persist".directories = [ "/var/lib/tailscale" ];
+      "/persist".directories = ["/var/lib/tailscale"];
     };
   };
 }

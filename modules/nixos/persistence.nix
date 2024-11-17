@@ -1,11 +1,14 @@
 # This file defines the "non-hardware dependent" part of opt-in persistence
 # It imports impermanence and defines the basic persisted dirs.
-{ lib, inputs, config, ... }: 
-
+{
+  lib,
+  inputs,
+  config,
+  ...
+}:
 with lib; let
   cfg = config.services.persistence;
-in
-{
+in {
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
@@ -15,7 +18,7 @@ in
     partition = mkOption {
       type = types.str;
       description = "The name of the partition containing the btrfs subvolumes";
-    }; 
+    };
   };
 
   config = mkIf cfg.enable {
@@ -50,11 +53,11 @@ in
 
     boot.initrd = {
       enable = true;
-      supportedFilesystems = [ "btrfs" ];
+      supportedFilesystems = ["btrfs"];
 
       systemd.services.restore-root = {
         description = "Rollback btrfs rootfs";
-        wantedBy = [ "initrd.target" ];
+        wantedBy = ["initrd.target"];
         requires = [
           "dev-${cfg.partition}.device"
         ];
@@ -63,7 +66,7 @@ in
           # for luks
           #"systemd-cryptsetup@${config.networking.hostName}.service"
         ];
-        before = [ "sysroot.mount" ];
+        before = ["sysroot.mount"];
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
         script = ''

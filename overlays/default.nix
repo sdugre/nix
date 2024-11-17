@@ -1,8 +1,7 @@
 # This file defines overlays
-{ inputs,... }:
-{
+{inputs, ...}: {
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev: import ../pkgs { pkgs = final; };
+  additions = final: _prev: import ../pkgs {pkgs = final;};
 
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
@@ -12,18 +11,20 @@
     # ...
     # });
     gonic = prev.gonic.override {
-      buildGoModule = args: prev.buildGoModule (args // rec {
-        version = "0.16.4";
-        src = final.fetchFromGitHub {
-          owner = "sentriz";
-          repo = "gonic";
-          rev = "v${version}";
-#          sha256 = "sha256-nLONZ0iz27Za09bv8gt0BpBAC4kSn+mh941cRDk1kBU=";
-          sha256 = "sha256-+8rKODoADU2k1quKvbijjs/6S/hpkegHhG7Si0LSE0k=";  
-        };
-        vendorHash = "sha256-6JkaiaAgtXYAZqVSRZJFObZvhEsHsbPaO9pwmKqIhYI=";
-        doCheck = false;
-      });
+      buildGoModule = args:
+        prev.buildGoModule (args
+          // rec {
+            version = "0.16.4";
+            src = final.fetchFromGitHub {
+              owner = "sentriz";
+              repo = "gonic";
+              rev = "v${version}";
+              #          sha256 = "sha256-nLONZ0iz27Za09bv8gt0BpBAC4kSn+mh941cRDk1kBU=";
+              sha256 = "sha256-+8rKODoADU2k1quKvbijjs/6S/hpkegHhG7Si0LSE0k=";
+            };
+            vendorHash = "sha256-6JkaiaAgtXYAZqVSRZJFObZvhEsHsbPaO9pwmKqIhYI=";
+            doCheck = false;
+          });
     };
   };
 
