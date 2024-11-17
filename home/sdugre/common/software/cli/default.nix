@@ -6,6 +6,7 @@
   ];
 
   home.packages = with pkgs; [
+    alejandra
     htop
     wget
     curl
