@@ -1,7 +1,13 @@
-{ lib, inputs, config, pkgs, ... }: {
+{
+  lib,
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.hyprland.homeManagerModules.default
-   
+
     # wayland stuff necessary for hyprland
     ../../software/gui/gtk.nix
     ../../software/gui/kitty.nix
@@ -10,17 +16,16 @@
     ../../software/gui/hypridle.nix
     ../../software/gui/hyprlock.nix
     ../../software/gui/waybar.nix
-
   ];
 
-#  xdg.portal.config.common.default = "*";   
+  #  xdg.portal.config.common.default = "*";
   services.udiskie.enable = true; # Needed to auto mount USB drives;  See also System default hyprland config.
 
   home.packages = with pkgs; [
     inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-    rofi-logout    # personal logout script
-    swaybg         # wallpaper utility
+    rofi-logout # personal logout script
+    swaybg # wallpaper utility
   ];
 
   home.sessionVariables = {
@@ -62,8 +67,8 @@
         "systemctl --user stop graphical-session.target"
         "systemctl --user start hyprland-session.target"
       ];
-    };    
-    
+    };
+
     settings = {
       general = {
         gaps_in = 3;
@@ -86,7 +91,7 @@
       input = {
         kb_layout = "us";
         touchpad.disable_while_typing = false;
-      };    
+      };
       decoration = {
         active_opacity = 0.94;
         inactive_opacity = 0.75;
@@ -115,7 +120,7 @@
         "${pkgs.hypridle}/bin/hypridle"
         "hyprctl setcursor Bibata-Modern-Classic 24"
       ];
-      
+
       bind = let
         makoctl = "${config.services.mako.package}/bin/makoctl";
         rofi = "${config.programs.rofi.package}/bin/rofi";
@@ -170,7 +175,7 @@
         "CONTROL, Print, exec, ${grimblast} --notify --freeze copy screen"
         "SUPER, Print, exec, ${grimblast} --notify --freeze copy area"
         "ALT, Print, exec, ${grimblast} --notify --freeze copy area"
-      ]; 
+      ];
 
       bindm = [
         # Mouse Binds
@@ -178,19 +183,19 @@
         "SUPER, mouse:273, resizewindow"
       ];
 
-        # Volume
-        # Example volume button that allows press and hold, volume limited to 150%
+      # Volume
+      # Example volume button that allows press and hold, volume limited to 150%
       bindle = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
       bindl = let
         hyprlock = "${config.programs.hyprlock.package}/bin/hyprlock";
-      in [ 
+      in [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", switch:on:Lid Switch, exec, pidof hyprlock || ${hyprlock}"
       ];
-      monitor = [ "eDP-1,1920x1080,0x0,1" ];
+      monitor = ["eDP-1,1920x1080,0x0,1"];
     };
   };
 }

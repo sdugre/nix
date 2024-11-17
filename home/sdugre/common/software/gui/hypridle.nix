@@ -1,5 +1,10 @@
-{ pkgs, config, lib, isLaptop, ... }: 
-let
+{
+  pkgs,
+  config,
+  lib,
+  isLaptop,
+  ...
+}: let
   hyprlock = "${config.programs.hyprlock.package}/bin/hyprlock";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   pgrep = "${pkgs.procps}/bin/pgrep";
@@ -8,10 +13,8 @@ let
 
   lockTime = 5 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
   dimBeforeTime = 10; # seconds before lockTime to dim screen
-  suspendAfterTime = 5 * 60; # minutes after lockTime to suspend 
-
-in 
-{
+  suspendAfterTime = 5 * 60; # minutes after lockTime to suspend
+in {
   services.hypridle = {
     enable = true;
     settings = {
@@ -27,7 +30,7 @@ in
         # Dim screen
         {
           timeout = lockTime - dimBeforeTime;
-          on-timeout = "${pkgs.backlight}/bin/backlight -dec 20"; 
+          on-timeout = "${pkgs.backlight}/bin/backlight -dec 20";
           on-resume = "${pkgs.backlight}/bin/backlight -inc 20";
         }
         # Lock screen
@@ -35,20 +38,19 @@ in
           timeout = lockTime;
           on-timeout = "loginctl lock-session";
           on-resume = "startup-reminder";
-
         }
         # Mute Mic
         {
           timeout = lockTime + 10;
           on-timeout = "${pactl} set-source-mute @DEFAULT_SOURCE@ yes";
-          on-resume = "${pactl} set-source-mute @DEFAULT_SOURCE@ no";        
+          on-resume = "${pactl} set-source-mute @DEFAULT_SOURCE@ no";
         }
         # Suspend
         {
           timeout = lockTime + suspendAfterTime;
           on-timeout = "${pkgs.systemd}/bin/systemctl suspend";
         }
-      ]; 
+      ];
     };
   };
 }

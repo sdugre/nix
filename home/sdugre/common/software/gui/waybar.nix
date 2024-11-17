@@ -1,39 +1,37 @@
-{pkgs, config, ... }:
-
-let
+{
+  pkgs,
+  config,
+  ...
+}: let
   # Dependencies
   pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
-
-in
-
-{
+in {
   programs.waybar = {
     enable = true;
     package = pkgs.waybar.overrideAttrs (oa: {
-      mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
+      mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
     });
     systemd.enable = true;
     settings = {
-    
       primary = {
         #mode = "dock";
         layer = "top";
         height = 40;
         margin = "6";
         position = "top";
- 
+
         modules-left = [
           "custom/hostname"
           "network"
           "battery"
-#         "tray"
+          #         "tray"
           "cpu"
           "memory"
-	  "disk"
+          "disk"
           "backlight"
           "pulseaudio"
         ];
- 
+
         modules-center = [
           "hyprland/workspaces"
           "hyprland/submap"
@@ -46,16 +44,16 @@ in
         ];
 
         backlight = {
-           device = "intel_backlight";
-           format = "{icon}  {percent:3}% ";
-           format-icons = ["" ""];
-           tooltip = false;
+          device = "intel_backlight";
+          format = "{icon}  {percent:3}% ";
+          format-icons = ["" ""];
+          tooltip = false;
         };
 
         battery = {
           bat = "BAT0";
           interval = 10;
-          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+          format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           format = "{icon} {capacity:2}% ";
           format-charging = "󰂄 {capacity:2}% ";
           on-click = "";
@@ -64,9 +62,9 @@ in
         clock = {
           format = "{:%H:%M}";
           tooltip-format = "{:%Y-%m-%d %a}";
-           #''
-           # <big>{:%Y %B}</big>
-           # <tt><small>{calendar}</small></tt>'';
+          #''
+          # <big>{:%Y %B}</big>
+          # <tt><small>{calendar}</small></tt>'';
         };
 
         cpu = {
@@ -85,8 +83,8 @@ in
         };
 
         disk = {
-	  format = "   {used} ";
-	};
+          format = "   {used} ";
+        };
 
         network = {
           interval = 3;
@@ -113,7 +111,7 @@ in
             headphone = "󰋋";
             headset = "󰋎";
             portable = "";
-            default = [ "" "" "" ];
+            default = ["" "" ""];
           };
           on-click = pavucontrol;
         };
@@ -125,72 +123,78 @@ in
     # x y -> vertical, horizontal
     # x y z -> top, horizontal, bottom
     # w x y z -> top, right, bottom, left
-    style = let inherit (config.colorscheme) palette; in /* css */ ''
-      * {
-        font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
-        font-size: 14pt;
-        padding: 0 8px;
-      }
-      .modules-right {
-        margin-right: -15px;
-      }
-      .modules-left {
-        margin-left: -15px;
-      }
-      window#waybar.top {
-        opacity: 0.95;
-        padding: 0;
-        background-color: #${palette.base00};
-        border: 2px solid #${palette.base0C};
-        border-radius: 10px;
-      }
-      window#waybar.bottom {
-        opacity: 0.90;
-        background-color: #${palette.base00};
-        border: 2px solid #${palette.base0C};
-        border-radius: 10px;
-      }
-      window#waybar {
-        color: #${palette.base05};
-      }
-      #workspaces button {
-        background-color: #${palette.base02};
-        color: #${palette.base05};
-        margin: 4px;
-      }
-      #workspaces button.hidden {
-        background-color: #${palette.base00};
-        color: #${palette.base04};
-      }
-      #workspaces button.focused,
-      #workspaces button.active {
-        background-color: #${palette.base0B};
-        color: #${palette.base00};
-      }
+    style = let
+      inherit (config.colorscheme) palette;
+    in
+      /*
+      css
+      */
+      ''
+        * {
+          font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
+          font-size: 14pt;
+          padding: 0 8px;
+        }
+        .modules-right {
+          margin-right: -15px;
+        }
+        .modules-left {
+          margin-left: -15px;
+        }
+        window#waybar.top {
+          opacity: 0.95;
+          padding: 0;
+          background-color: #${palette.base00};
+          border: 2px solid #${palette.base0C};
+          border-radius: 10px;
+        }
+        window#waybar.bottom {
+          opacity: 0.90;
+          background-color: #${palette.base00};
+          border: 2px solid #${palette.base0C};
+          border-radius: 10px;
+        }
+        window#waybar {
+          color: #${palette.base05};
+        }
+        #workspaces button {
+          background-color: #${palette.base02};
+          color: #${palette.base05};
+          margin: 4px;
+        }
+        #workspaces button.hidden {
+          background-color: #${palette.base00};
+          color: #${palette.base04};
+        }
+        #workspaces button.focused,
+        #workspaces button.active {
+          background-color: #${palette.base0B};
+          color: #${palette.base00};
+        }
 
-      #clock {
-        background-color: #${palette.base02};
-        color: #${palette.base00};
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 10px;
-      }
+        #clock {
+          background-color: #${palette.base02};
+          color: #${palette.base00};
+          padding-left: 15px;
+          padding-right: 15px;
+          margin-top: 0;
+          margin-bottom: 0;
+          border-radius: 10px;
+        }
 
-      #custom-hostname {
-        background-color: #${palette.base02};
-        color: #${palette.base00};
-        padding-left: 15px;
-        padding-right: 18px;
-        margin-right: 0;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 10px;
-      }
-      #tray {
-        color: #${palette.base05};
-      }
-    '';
-  };	
+        #custom-hostname {
+          background-color: #${palette.base02};
+          color: #${palette.base00};
+          padding-left: 15px;
+          padding-right: 18px;
+          margin-right: 0;
+          margin-top: 0;
+          margin-bottom: 0;
+          border-radius: 10px;
+        }
+        #tray {
+          color: #${palette.base05};
+        }
+      '';
+  };
 }

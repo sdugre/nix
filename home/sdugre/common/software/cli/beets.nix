@@ -1,16 +1,20 @@
-{ pkgs, username, config, ... }:
 {
-  sops.secrets."lastfm_key" = { 
-    sopsFile = ../../../secrets.yaml; 
+  pkgs,
+  username,
+  config,
+  ...
+}: {
+  sops.secrets."lastfm_key" = {
+    sopsFile = ../../../secrets.yaml;
   };
-  sops.secrets."plex_token" = { 
-    sopsFile = ../../../secrets.yaml; 
+  sops.secrets."plex_token" = {
+    sopsFile = ../../../secrets.yaml;
   };
-  sops.secrets."discogs_token" = { 
-    sopsFile = ../../../secrets.yaml; 
+  sops.secrets."discogs_token" = {
+    sopsFile = ../../../secrets.yaml;
   };
-  sops.secrets."gonic_password" = { 
-    sopsFile = ../../../secrets.yaml; 
+  sops.secrets."gonic_password" = {
+    sopsFile = ../../../secrets.yaml;
   };
 
   programs.beets = {
@@ -47,21 +51,20 @@
       fetchart = {
         auto = "yes";
         sources = "filesystem coverart lastfm itunes amazon wikipedia";
-        lastfm_key = config.sops.secrets."lastfm_key".path; 
+        lastfm_key = config.sops.secrets."lastfm_key".path;
       };
 
       plex = {
         host = "192.168.1.200";
         port = "32400";
         token = config.sops.secrets."plex_token".path;
-#        token = "6zVJ3DgUcv1JBMyTKTKx";
-
+        #        token = "6zVJ3DgUcv1JBMyTKTKx";
       };
 
       discogs = {
-#        user_token = "IetwGGqEhVSxAkQdkDezNbxcyemntwsvazuTAWlI";
-      user_token = config.sops.secrets."discogs_token".path; 
-      }; 
+        #        user_token = "IetwGGqEhVSxAkQdkDezNbxcyemntwsvazuTAWlI";
+        user_token = config.sops.secrets."discogs_token".path;
+      };
 
       paths = {
         default = "%the{$albumartist}/[$original_year] $album/$track - $title";
@@ -73,7 +76,7 @@
       subsonic = {
         url = "https://music.seandugre.com";
         user = "admin";
-        pass = config.sops.secrets.gonic_password.path; 
+        pass = config.sops.secrets.gonic_password.path;
         auth = "pass";
       };
 

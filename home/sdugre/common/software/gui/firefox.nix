@@ -1,8 +1,11 @@
-{ pkgs, lib, inputs, ... }:
-let
-  addons = inputs.firefox-addons.packages.${pkgs.system};
-in
 {
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
+  addons = inputs.firefox-addons.packages.${pkgs.system};
+in {
   imports = [inputs.arkenfox.hmModules.arkenfox];
 
   programs.firefox = {
@@ -15,22 +18,22 @@ in
       id = 0;
       arkenfox = {
         enable = true;
-	"0000".enable = true;
-	"0100".enable = true; # Startup
-	"0200".enable = true; # Geolocation
-	"0300".enable = true; # Quieter Fox
-	"0600".enable = true; # Block Implicit Outbound
-	"0700".enable = true; # DNS
-	"0800".enable = true; # Location Bar
-	"0900".enable = true; # Passwords
-	"1000".enable = true; # Disk Avoidance
-	"1200".enable = true; # HTTPS 
-	"1600".enable = true; # REFERERS
-	"2000".enable = true; # PLUGINS
-	"2600".enable = true; # MISC
-	"2700".enable = true; # ENHANCED TRACKING PROTECTION
+        "0000".enable = true;
+        "0100".enable = true; # Startup
+        "0200".enable = true; # Geolocation
+        "0300".enable = true; # Quieter Fox
+        "0600".enable = true; # Block Implicit Outbound
+        "0700".enable = true; # DNS
+        "0800".enable = true; # Location Bar
+        "0900".enable = true; # Passwords
+        "1000".enable = true; # Disk Avoidance
+        "1200".enable = true; # HTTPS
+        "1600".enable = true; # REFERERS
+        "2000".enable = true; # PLUGINS
+        "2600".enable = true; # MISC
+        "2700".enable = true; # ENHANCED TRACKING PROTECTION
         "2800".enable = true; # SHUTDOWN & SANITIZING
-	"4500".enable = true; # RFP (resist fingerprinting)
+        "4500".enable = true; # RFP (resist fingerprinting)
       };
 
       isDefault = true;
@@ -38,40 +41,40 @@ in
         bitwarden
         libredirect
         ublock-origin
-#        bypass-paywalls-clean
+        #        bypass-paywalls-clean
         istilldontcareaboutcookies
       ];
 
       search = {
         default = "DuckDuckGo";
         force = true;
-	engines = {
+        engines = {
           "NixOS Packages" = {
             urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
             icon = ''${pkgs.fetchurl {
-              url = "https://nixos.org/favicon.png";
-              sha256 = "sha256-17/8nOSLmkDyABW9LdHhTqPykqYDtCFuqFeGTT4sqLo=";
-#              sha256 = "sha256-awcsDbbpRcDJnJpRavj/IcKMReEektRcqKbE35IJTKQ=";
-            }}'';
+                url = "https://nixos.org/favicon.png";
+                sha256 = "sha256-17/8nOSLmkDyABW9LdHhTqPykqYDtCFuqFeGTT4sqLo=";
+                #              sha256 = "sha256-awcsDbbpRcDJnJpRavj/IcKMReEektRcqKbE35IJTKQ=";
+              }}'';
             definedAliases = ["@nixpkgs" "@np"];
           };
 
           "YouTube" = {
             urls = [{template = "https://yewtu.be/search?q={searchTerms}";}];
-	    icon = ''${pkgs.fetchurl {
-              url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
-              sha256 = "sha256-i7HQ+kOhdDbVndVG9vdMdtxEc13vdSLCLYAxFm24kR0=";
-            }}'';
+            icon = ''${pkgs.fetchurl {
+                url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
+                sha256 = "sha256-i7HQ+kOhdDbVndVG9vdMdtxEc13vdSLCLYAxFm24kR0=";
+              }}'';
             definedAliases = ["@youtube" "@yt"];
           };
 
           "Github Nix" = {
             urls = [{template = "https://github.com/search?q=lang%3Anix+{searchTerms}&type=code";}];
-           # icon = ''${pkgs.fetchurl {
-              #url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
-              #sha256 = "sha256-i7HQ+kOhdDbVndVG9vdMdtxEc13vdSLCLYAxFm24kR0=";
+            # icon = ''${pkgs.fetchurl {
+            #url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
+            #sha256 = "sha256-i7HQ+kOhdDbVndVG9vdMdtxEc13vdSLCLYAxFm24kR0=";
             #}}'';
-            definedAliases = [ "@ghn"];
+            definedAliases = ["@ghn"];
           };
 
           "Perplexity" = {
@@ -80,9 +83,8 @@ in
             updateInterval = 7 * 24 * 60 * 60 * 1000;
             definedAliases = ["@pp"];
           };
-	};
+        };
       };
-
 
       settings = {
         # enable HTTPS-Only Mode
@@ -124,6 +126,6 @@ in
         "browser.shell.checkDefaultBrowser" = false;
         "browser.shell.defaultBrowserCheckCount" = 1;
       };
-    };  
+    };
   };
 }

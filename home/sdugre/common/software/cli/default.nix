@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./nvim.nix
     ./git.nix
@@ -11,13 +11,12 @@
     wget
     curl
     killall
-  ];  
+  ];
 
-#  home.file = {
-#    nanorc = {
-#      text = "include /run/current-system/sw/share/nano/";
-#      target = ".config/nano/.nanorc";
-#    };
-#  };
-
+  #  home.file = {
+  #    nanorc = {
+  #      text = "include /run/current-system/sw/share/nano/";
+  #      target = ".config/nano/.nanorc";
+  #    };
+  #  };
 }

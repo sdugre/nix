@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
 {
-  programs.zathura= {
+  config,
+  pkgs,
+  ...
+}: {
+  programs.zathura = {
     enable = true;
     extraConfig = ''
       set selection-clipboard clipboard

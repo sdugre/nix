@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -47,11 +50,11 @@
       name = "Launch Terminal";
       command = "kgx";
       binding = "<Super>Return";
-    };   
+    };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       name = "Launch Browser";
       command = "firefox";
       binding = "<Super>b";
-    };   
+    };
   };
 }

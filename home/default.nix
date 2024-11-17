@@ -1,24 +1,35 @@
-{ inputs, outputs, lib, pkgs, config, hmStateVer, username, hostname, desktop, ... }: 
-let
-  inherit (inputs.nix-colors) colorSchemes;
-  inherit (inputs.nix-colors.lib-contrib {inherit pkgs; }) colorschemeFromPicture nixWallpaperFromScheme;
-in
 {
-  imports = [ 
-    # modules
-    inputs.nur.hmModules.nur
-    inputs.nix-colors.homeManagerModule
+  inputs,
+  outputs,
+  lib,
+  pkgs,
+  config,
+  hmStateVer,
+  username,
+  hostname,
+  desktop,
+  ...
+}: let
+  inherit (inputs.nix-colors) colorSchemes;
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) colorschemeFromPicture nixWallpaperFromScheme;
+in {
+  imports =
+    [
+      # modules
+      inputs.nur.hmModules.nur
+      inputs.nix-colors.homeManagerModule
 
-    inputs.sops-nix.homeManagerModules.sops
+      inputs.sops-nix.homeManagerModules.sops
 
-    # global default cli tools
-    ./${username}/common/software/cli
-  
-    # machine specific configuration
-    ./${username}/${hostname}.nix
+      # global default cli tools
+      ./${username}/common/software/cli
+
+      # machine specific configuration
+      ./${username}/${hostname}.nix
     ]
     ++ (builtins.attrValues outputs.homeManagerModules)
-    ++ lib.optional (builtins.isString desktop) ./${username}/common/desktops  # default desktop config
+    ++ lib.optional (builtins.isString desktop) ./${username}/common/desktops
+    # default desktop config
     ;
 
   nixpkgs = {
@@ -33,7 +44,7 @@ in
     config = {
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 
@@ -41,11 +52,11 @@ in
     username = username;
     stateVersion = hmStateVer;
     homeDirectory = "/home/${username}";
-    sessionPath = [ "/home/${username}/.local/bin" ];
+    sessionPath = ["/home/${username}/.local/bin"];
     sessionVariables = {
       TERMINAL = "kitty";
       EDITOR = "nvim";
-      BROWSER = "firefox";   
+      BROWSER = "firefox";
     };
   };
 
@@ -56,5 +67,5 @@ in
 
   colorscheme = lib.mkDefault colorSchemes.dracula;
 
-  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt"; 
+  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
 }

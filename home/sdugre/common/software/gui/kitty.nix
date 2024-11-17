@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  inherit (config.colorscheme) palette;
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  inherit (config.colorscheme) palette;
+in {
   programs.kitty = {
     enable = true;
     font = {
