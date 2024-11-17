@@ -1,5 +1,5 @@
-{ pkgs, ... }:
-{  fonts.packages = with pkgs; [
+{pkgs, ...}: {
+  fonts.packages = with pkgs; [
     meslo-lgs-nf
   ];
 }

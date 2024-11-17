@@ -1,4 +1,5 @@
-{ image = "ghcr.io/hotio/whisparr";
+{
+  image = "ghcr.io/hotio/whisparr";
 
   environment = {
     PUID = "1000";
@@ -17,5 +18,4 @@
   ];
 
   autoStart = true;
-
 }

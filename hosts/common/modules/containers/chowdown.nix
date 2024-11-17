@@ -1,10 +1,14 @@
-{ config, pkgs, lib, hostname, ... }:
-{ 
-
+{
+  config,
+  pkgs,
+  lib,
+  hostname,
+  ...
+}: {
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/containers/chowdown -o root -g root
-   '';
+    '';
   };
 
   virtualisation.oci-containers.containers = {

@@ -1,4 +1,4 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."calibre.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
@@ -24,6 +24,5 @@
         resolver 127.0.0.11 valid=30s;
       '';
     };
-
   };
 }

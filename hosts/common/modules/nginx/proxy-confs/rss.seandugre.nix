@@ -1,4 +1,4 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."rss.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;

@@ -1,10 +1,14 @@
-{ config, pkgs, lib, hostname, ... }:
-{ 
-
+{
+  config,
+  pkgs,
+  lib,
+  hostname,
+  ...
+}: {
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/containers/jellyfin -o root -g root
-   '';
+    '';
   };
 
   virtualisation.oci-containers.containers = {
@@ -21,7 +25,7 @@
       ];
       ports = [
         "8096:8096"
-        "8920:8920"     #optional
+        "8920:8920" #optional
         "7359:7359/udp" #optional
         "1902:1900/udp" #optional
       ];

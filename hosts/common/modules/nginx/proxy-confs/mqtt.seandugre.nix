@@ -1,4 +1,4 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."mqtt.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;

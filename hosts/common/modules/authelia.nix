@@ -1,41 +1,45 @@
-{ lib, pkgs, config, hostname,... }:
 {
-  sops.secrets."authelia/jwtSecretFile" = { 
-    sopsFile = ../../${hostname}/secrets.yaml; 
+  lib,
+  pkgs,
+  config,
+  hostname,
+  ...
+}: {
+  sops.secrets."authelia/jwtSecretFile" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = [ "authelia.service" ];
+    restartUnits = ["authelia.service"];
   };
 
-  sops.secrets."authelia/storageEncryptionKeyFile" = { 
-    sopsFile = ../../${hostname}/secrets.yaml;   
+  sops.secrets."authelia/storageEncryptionKeyFile" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = [ "authelia.service" ];
+    restartUnits = ["authelia.service"];
   };
 
-  sops.secrets."authelia/sessionSecretFile" = { 
-    sopsFile = ../../${hostname}/secrets.yaml;   
+  sops.secrets."authelia/sessionSecretFile" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = [ "authelia.service" ];
+    restartUnits = ["authelia.service"];
   };
 
-  sops.secrets."authelia_login" = { 
-    sopsFile = ../../${hostname}/secrets.yaml;   
+  sops.secrets."authelia_login" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = [ "authelia.service" ];
+    restartUnits = ["authelia.service"];
   };
-
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
-      "/var/lib/authelia-main" 
+    "/persist".directories = [
+      "/var/lib/authelia-main"
     ];
   };
 
@@ -53,8 +57,8 @@
 
       server = {
         address = "127.0.0.1:9091";
-#        host = "127.0.0.1";
-#        port = 9091;
+        #        host = "127.0.0.1";
+        #        port = 9091;
       };
 
       log = {
@@ -63,8 +67,8 @@
       };
 
       authentication_backend = {
-        file = { 
-          path = config.sops.secrets."authelia_login".path; 
+        file = {
+          path = config.sops.secrets."authelia_login".path;
           watch = false;
           search = {
             email = false;
@@ -89,13 +93,23 @@
         networks = [
           {
             name = "internal";
-            networks = [ "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/18" ];
+            networks = ["10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/18"];
           }
         ];
         rules = [
-          { domain = [ "auth.seandugre.com" ]; policy = "bypass"; }
-          { domain = [ "*.seandugre.com" ];    networks = "internal"; policy = "bypass"; }
-          { domain = [ "*.seandugre.com" ];    policy = "one_factor"; }
+          {
+            domain = ["auth.seandugre.com"];
+            policy = "bypass";
+          }
+          {
+            domain = ["*.seandugre.com"];
+            networks = "internal";
+            policy = "bypass";
+          }
+          {
+            domain = ["*.seandugre.com"];
+            policy = "one_factor";
+          }
         ];
       };
 
@@ -114,11 +128,11 @@
         ban_time = "15m";
       };
 
-      storage = { local = { path = "/var/lib/authelia-main/db.sqlite3"; }; };
+      storage = {local = {path = "/var/lib/authelia-main/db.sqlite3";};};
 
       notifier = {
         disable_startup_check = false;
-        filesystem = { filename = "/var/lib/authelia-main/notification.txt"; };
+        filesystem = {filename = "/var/lib/authelia-main/notification.txt";};
       };
     };
   };

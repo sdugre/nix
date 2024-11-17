@@ -1,37 +1,44 @@
-  
-{ inputs, outputs, lib, config, pkgs, nixos-hardware, ... }: {
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  nixos-hardware,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
 
     # optional
     ../common/optional/networkDrives.nix
-#    ../common/modules/persistence.nix
+    #    ../common/modules/persistence.nix
 
     # services
-    ../common/modules/acme.nix          # certs
-    ../common/modules/authelia.nix      # SSO
-    ../common/modules/calibre.nix       # eBooks
-    ../common/modules/containers        # Podman Containers
-    ../common/modules/ddclient.nix      # DDNS updating
-#    ../common/modules/frigate.nix       # NVR
-    ../common/modules/gonic.nix         # Music Server
-    ../common/modules/jellyfin.nix      # Media Server
-    ../common/modules/immich.nix        # Photo management
-    ../common/modules/mail.nix          # Mail server for notifications
-    ../common/modules/nextcloud.nix     # Cloud
-    ../common/modules/nfs.nix           # NFS server
-    ../common/modules/nginx             # reverse proxy
-#    ../common/modules/nixarr.nix        # Media aquisition - use containers instead
-    ../common/modules/paperless.nix     # Documents
-    ../common/modules/plex.nix          # Plex Media Server
-    ../common/modules/rss.nix           # miniflux & rss-bridge
-    ../common/modules/stirling-pdf.nix  # pdf tools
-#    ../common/modules/wireguard.nix     # vpn
+    ../common/modules/acme.nix # certs
+    ../common/modules/authelia.nix # SSO
+    ../common/modules/calibre.nix # eBooks
+    ../common/modules/containers # Podman Containers
+    ../common/modules/ddclient.nix # DDNS updating
+    #    ../common/modules/frigate.nix       # NVR
+    ../common/modules/gonic.nix # Music Server
+    ../common/modules/jellyfin.nix # Media Server
+    ../common/modules/immich.nix # Photo management
+    ../common/modules/mail.nix # Mail server for notifications
+    ../common/modules/nextcloud.nix # Cloud
+    ../common/modules/nfs.nix # NFS server
+    ../common/modules/nginx # reverse proxy
+    #    ../common/modules/nixarr.nix        # Media aquisition - use containers instead
+    ../common/modules/paperless.nix # Documents
+    ../common/modules/plex.nix # Plex Media Server
+    ../common/modules/rss.nix # miniflux & rss-bridge
+    ../common/modules/stirling-pdf.nix # pdf tools
+    #    ../common/modules/wireguard.nix     # vpn
   ];
 
   # FOR QUICKSYNC
   nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override {enableHybridCodec = true;};
   };
 
   boot.kernelParams = [
@@ -42,23 +49,23 @@
     enable = true;
     extraPackages = with pkgs; [
       #... # your Open GL, Vulkan and VAAPI drivers
-      intel-media-sdk   # for older GPUs
+      intel-media-sdk # for older GPUs
       intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       libvdpau-va-gl
       intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
     ];
   };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
 
   # FOR ZFS
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = ["zfs"];
   boot.zfs.forceImportRoot = false;
   networking.hostId = "a610158c";
 
   services.zfs.autoScrub.enable = true;
   services.zfs.zed.settings = {
     ZED_DEBUG_LOG = "/tmp/zed.debug.log";
-    ZED_EMAIL_ADDR = [ "root" ];
+    ZED_EMAIL_ADDR = ["root"];
     ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
     ZED_EMAIL_OPTS = "@ADDRESS@";
 
@@ -71,19 +78,19 @@
   # this option does not work; will return error
   services.zfs.zed.enableMail = false;
 
-
-
   # START VMs
   networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = [ "192.168.1.1" "8.8.8.8" ];
+  networking.nameservers = ["192.168.1.1" "8.8.8.8"];
   networking.useDHCP = false;
   networking.bridges.br0.interfaces = ["eno2"];
   networking.interfaces.br0 = {
     useDHCP = false;
-    ipv4.addresses = [{
-      "address" = "192.168.1.200";
-      "prefixLength" = 24;
-    }];
+    ipv4.addresses = [
+      {
+        "address" = "192.168.1.200";
+        "prefixLength" = 24;
+      }
+    ];
   };
 
   virtualisation = {
@@ -93,29 +100,28 @@
       qemu.ovmf.enable = true;
     };
   };
-  
-  users.extraUsers.sdugre.extraGroups = [ "libvirtd" ];
+
+  users.extraUsers.sdugre.extraGroups = ["libvirtd"];
   programs.virt-manager.enable = true;
 
   # For Intel GVT-g iGPU passthrough
   virtualisation.kvmgt.enable = true;
   virtualisation.kvmgt.vgpus = {
     "i915-GVTg_V5_4" = {
-      uuid = [ "29eaea12-6732-11ef-ad02-13d33723c500" ];
+      uuid = ["29eaea12-6732-11ef-ad02-13d33723c500"];
     };
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
-      "/var/lib/libvirt" 
+    "/persist".directories = [
+      "/var/lib/libvirt"
       "/etc/vmimages"
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 5900 5901 5902 1935 ];
+  networking.firewall.allowedTCPPorts = [5900 5901 5902 1935];
 
   # END VMs
-
 
   services.persistence = {
     enable = true;
@@ -128,18 +134,18 @@
     loginServer = "";
     enableSSH = true;
   };
-  
-  sops.secrets.tailscale_key = { 
-    sopsFile = ./secrets.yaml; 
+
+  sops.secrets.tailscale_key = {
+    sopsFile = ./secrets.yaml;
   };
 
   # filesystems
-  fileSystems."/".options = [ "compress=zstd" "noatime" ];
-  fileSystems."/home".options = [ "compress=zstd" "noatime" ];
-  fileSystems."/nix".options = [ "compress=zstd" "noatime" ];
-  fileSystems."/persist".options = [ "compress=zstd" "noatime" ];
+  fileSystems."/".options = ["compress=zstd" "noatime"];
+  fileSystems."/home".options = ["compress=zstd" "noatime"];
+  fileSystems."/nix".options = ["compress=zstd" "noatime"];
+  fileSystems."/persist".options = ["compress=zstd" "noatime"];
   fileSystems."/persist".neededForBoot = true;
-  fileSystems."/var/log".options = [ "compress=zstd" "noatime" ];
+  fileSystems."/var/log".options = ["compress=zstd" "noatime"];
   fileSystems."/var/log".neededForBoot = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -147,17 +153,19 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Packages specific to this machine
-  environment.systemPackages = ([
-  ]) ++ (with pkgs; [
-    lemonade
-    pia-wg-config
-    xclip
-    pciutils
-    inxi
-    intel-gpu-tools
-    smartmontools
-    s-tui
-    zfs
-    virt-viewer
-  ]);
+  environment.systemPackages =
+    [
+    ]
+    ++ (with pkgs; [
+      lemonade
+      pia-wg-config
+      xclip
+      pciutils
+      inxi
+      intel-gpu-tools
+      smartmontools
+      s-tui
+      zfs
+      virt-viewer
+    ]);
 }

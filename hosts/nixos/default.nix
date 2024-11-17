@@ -1,7 +1,13 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
 
@@ -16,8 +22,8 @@
     enableSSH = true;
   };
 
-  sops.secrets.tailscale_key = { 
-    sopsFile = ./secrets.yaml; 
+  sops.secrets.tailscale_key = {
+    sopsFile = ./secrets.yaml;
   };
 
   boot.loader.grub.enable = true;
@@ -25,11 +31,12 @@
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.configurationLimit = 10;
 
-  environment.systemPackages = ([
-  ]) ++ (with pkgs; [
-    wireshark 
-  ]);
+  environment.systemPackages =
+    [
+    ]
+    ++ (with pkgs; [
+      wireshark
+    ]);
 
-  networking.firewall.allowedTCPPorts = [ 3389 ]; 
-
+  networking.firewall.allowedTCPPorts = [3389];
 }

@@ -1,17 +1,15 @@
-{ 
-
-# Create folders for the containers
+{
+  # Create folders for the containers
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/containers/calibre -o sdugre -g media
-   '';
+    '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 8180 8181 ];
+  networking.firewall.allowedTCPPorts = [8180 8181];
 
   virtualisation.oci-containers.containers = {
-    calibre = { 
-
+    calibre = {
       image = "lscr.io/linuxserver/calibre:latest";
 
       environment = {

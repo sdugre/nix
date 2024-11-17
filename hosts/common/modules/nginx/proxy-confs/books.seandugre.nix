@@ -1,4 +1,4 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."books.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;

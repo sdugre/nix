@@ -1,17 +1,21 @@
-{ config, lib, hostname,... }:{
-
+{
+  config,
+  lib,
+  hostname,
+  ...
+}: {
   # The following needs to be setup manually in the web UI:
   #   - update admin password
   #   - last.fm api key.  See here:  https://www.last.fm/api/accounts
 
-  networking.firewall.allowedTCPPorts = [ 4747 ];
+  networking.firewall.allowedTCPPorts = [4747];
 
   # relies on overlay to get v0.16.3
   services.gonic = {
     enable = true;
     settings = {
       listen-addr = "0.0.0.0:4747";
-      music-path = [ "/mnt/data/media/music" ];
+      music-path = ["/mnt/data/media/music"];
       podcast-path = "/mnt/podcasts";
       playlists-path = "/mnt/data/media/music/_Playlists";
       cache-path = "/var/cache/gonic";
@@ -32,9 +36,8 @@
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
-      "/var/lib/private/gonic" 
+    "/persist".directories = [
+      "/var/lib/private/gonic"
     ];
   };
-
 }

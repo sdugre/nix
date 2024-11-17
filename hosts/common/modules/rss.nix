@@ -1,12 +1,15 @@
-{ lib, pkgs, config, hostname, ... }:
-let 
+{
+  lib,
+  pkgs,
+  config,
+  hostname,
+  ...
+}: let
   port = 8087;
   domain = "rss.seandugre.com";
-in
-{  
-
-  sops.secrets."miniflux-creds" = { 
-    sopsFile = ../../${hostname}/secrets.yaml; 
+in {
+  sops.secrets."miniflux-creds" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
   };
 
   services.miniflux = {
@@ -18,8 +21,8 @@ in
     adminCredentialsFile = config.sops.secrets."miniflux-creds".path;
   };
 
-  networking.firewall.allowedTCPPorts = [ port ];
-  networking.firewall.allowedUDPPorts = [ port ];
+  networking.firewall.allowedTCPPorts = [port];
+  networking.firewall.allowedUDPPorts = [port];
 
   services.rss-bridge = {
     enable = true;
@@ -38,11 +41,9 @@ in
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
-      "/var/lib/postgresql" 
+    "/persist".directories = [
+      "/var/lib/postgresql"
       "/var/lib/rss-bridge"
     ];
   };
-
 }
-

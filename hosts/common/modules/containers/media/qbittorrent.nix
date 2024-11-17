@@ -1,12 +1,12 @@
-{ 
+{
   image = "lscr.io/linuxserver/qbittorrent";
 
   environment = {
-    PUID            = "1000";
-    PGID            = "986";
-    UMASK           = "002";
-    TZ              = "America/New_York";
-    WEBUI_PORT      = "8283";
+    PUID = "1000";
+    PGID = "986";
+    UMASK = "002";
+    TZ = "America/New_York";
+    WEBUI_PORT = "8283";
     TORRENTING_PORT = "6881";
   };
 
@@ -25,5 +25,4 @@
   extraOptions = ["--network=container:gluetun"];
 
   autoStart = true;
-
 }

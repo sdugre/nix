@@ -1,8 +1,8 @@
-{ 
+{
   image = "ghcr.io/recyclarr/recyclarr";
 
   environment = {
-    TZ                      = "America/New_York";
+    TZ = "America/New_York";
     RECYCLARR_CREATE_CONFIG = "true";
   };
 
@@ -18,5 +18,4 @@
   ];
 
   autoStart = true;
-
 }

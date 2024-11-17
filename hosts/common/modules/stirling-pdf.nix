@@ -1,6 +1,10 @@
-{ config, lib, hostname,... }:{
-
-  networking.firewall.allowedTCPPorts = [ 8783 ];
+{
+  config,
+  lib,
+  hostname,
+  ...
+}: {
+  networking.firewall.allowedTCPPorts = [8783];
 
   services = {
     stirling-pdf = {
@@ -14,9 +18,8 @@
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
-      "/var/lib/private/stirling-pdf" 
+    "/persist".directories = [
+      "/var/lib/private/stirling-pdf"
     ];
   };
-
 }

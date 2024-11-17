@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     autojump
     duf
@@ -9,7 +7,7 @@
     lm_sensors
     nano
     nmap
-    nsxiv    
+    nsxiv
     nvd
     python3
     tmux
@@ -17,7 +15,6 @@
     tree
     libva-utils
     wl-clipboard # needed for copy/paste in wayland
-#    zathura   see home manager package
+    #    zathura   see home manager package
   ];
-
 }

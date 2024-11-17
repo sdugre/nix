@@ -1,11 +1,11 @@
-{ 
+{
   image = "lscr.io/linuxserver/overseerr:latest";
 
   environment = {
-    PUID                 = "1000";
-    PGID                 = "986";
-    UMASK                = "002";
-    TZ                   = "America/New_York";
+    PUID = "1000";
+    PGID = "986";
+    UMASK = "002";
+    TZ = "America/New_York";
   };
 
   volumes = [
@@ -17,5 +17,4 @@
   ];
 
   autoStart = true;
-
 }

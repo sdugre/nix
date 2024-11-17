@@ -1,8 +1,13 @@
-{ self, config, lib, pkgs, hostname, ... }: {
-
-
+{
+  self,
+  config,
+  lib,
+  pkgs,
+  hostname,
+  ...
+}: {
   sops.secrets."nextcloud/admin_password" = {
-    sopsFile = ../../${hostname}/secrets.yaml;   
+    sopsFile = ../../${hostname}/secrets.yaml;
     owner = "nextcloud";
     group = "nextcloud";
   };
@@ -24,15 +29,15 @@
     extraApps = with config.services.nextcloud.package.packages.apps; {
       # List of apps we want to install and are already packaged in
       # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-#      inherit calendar contacts notes onlyoffice tasks cookbook qownnotesapi;
+      #      inherit calendar contacts notes onlyoffice tasks cookbook qownnotesapi;
       inherit calendar contacts tasks;
       # Custom app example.
-#      socialsharing_telegram = pkgs.fetchNextcloudApp rec {
-#        url =
-#          "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.0.1/socialsharing_telegram-v3.0.1.tar.gz";
-#        license = "agpl3";
-#        sha256 = "sha256-8XyOslMmzxmX2QsVzYzIJKNw6rVWJ7uDhU1jaKJ0Q8k=";
-#     };
+      #      socialsharing_telegram = pkgs.fetchNextcloudApp rec {
+      #        url =
+      #          "https://github.com/nextcloud-releases/socialsharing/releases/download/v3.0.1/socialsharing_telegram-v3.0.1.tar.gz";
+      #        license = "agpl3";
+      #        sha256 = "sha256-8XyOslMmzxmX2QsVzYzIJKNw6rVWJ7uDhU1jaKJ0Q8k=";
+      #     };
     };
     config = {
       dbtype = "pgsql";
@@ -46,16 +51,15 @@
     # Suggested by Nextcloud's health check.
     phpOptions."opcache.interned_strings_buffer" = "16";
   };
-    # Nightly database backups.
+  # Nightly database backups.
   services.postgresqlBackup = {
     enable = true;
     startAt = "*-*-* 01:15:00";
   };
- 
+
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
-      "/var/lib/nextcloud" 
+    "/persist".directories = [
+      "/var/lib/nextcloud"
     ];
   };
-
 }

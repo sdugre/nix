@@ -1,4 +1,4 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."plex.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
@@ -24,7 +24,7 @@
       proxy_set_header X-Forwarded-Proto $scheme;
       proxy_set_header Host $server_addr;
       proxy_set_header Referer $server_addr;
-      proxy_set_header Origin $server_addr; 
+      proxy_set_header Origin $server_addr;
 
       # Plex has A LOT of javascript, xml and html. This helps a lot, but if it causes playback issues with devices turn it off.
       gzip on;

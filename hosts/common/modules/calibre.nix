@@ -1,11 +1,14 @@
-{ lib, pkgs,config, ...}: 
-let
-  library = "/var/lib/calibre-lib";
-in 
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  library = "/var/lib/calibre-lib";
+in {
   services = {
     calibre-server = {
-      enable = false;  # use content server from calibre podman container instead
+      enable = false; # use content server from calibre podman container instead
       group = "media";
       libraries = [library];
     };
@@ -29,14 +32,13 @@ in
   };
 
   systemd.services.calibre-server.serviceConfig.ExecStart = lib.mkForce "${pkgs.calibre}/bin/calibre-server ${library}";
-  networking.firewall.allowedTCPPorts = [ 8083 ];
+  networking.firewall.allowedTCPPorts = [8083];
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
+    "/persist".directories = [
       "/var/lib/calibre-server"
       "/var/lib/calibre-web"
       library
     ];
   };
-
 }

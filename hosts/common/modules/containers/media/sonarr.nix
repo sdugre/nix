@@ -1,11 +1,11 @@
-{ 
+{
   image = "lscr.io/linuxserver/sonarr";
 
   environment = {
-    PUID                 = "1000";
-    PGID                 = "986";
-    UMASK                = "002";
-    TZ                   = "America/New_York";
+    PUID = "1000";
+    PGID = "986";
+    UMASK = "002";
+    TZ = "America/New_York";
   };
 
   volumes = [
@@ -18,5 +18,4 @@
   ];
 
   autoStart = true;
-
 }

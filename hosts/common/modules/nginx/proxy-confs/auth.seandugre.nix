@@ -1,5 +1,5 @@
-{ config, ... }:{
-    services.nginx.virtualHosts."auth.seandugre.com" = {
+{config, ...}: {
+  services.nginx.virtualHosts."auth.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
     acmeRoot = null;

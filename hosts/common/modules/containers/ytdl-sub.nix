@@ -1,9 +1,14 @@
-{ config, pkgs, lib, hostname, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  hostname,
+  ...
+}: {
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/containers/ytdl-sub -o sdugre -g media
-   '';
+    '';
   };
 
   virtualisation.oci-containers.containers = {

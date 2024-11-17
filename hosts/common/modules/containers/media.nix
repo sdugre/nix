@@ -1,9 +1,14 @@
-{ config, pkgs, lib, hostname, ... }:
 {
-  sops.secrets.gluetun-wg-env = { 
-    sopsFile = ../../../${hostname}/secrets.yaml;  
-  }; 
-# Create folders for the containers
+  config,
+  pkgs,
+  lib,
+  hostname,
+  ...
+}: {
+  sops.secrets.gluetun-wg-env = {
+    sopsFile = ../../../${hostname}/secrets.yaml;
+  };
+  # Create folders for the containers
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/containers/media/jackett -o sdugre -g media
@@ -11,30 +16,30 @@
       install -d -m 755 /var/lib/containers/media/lazylibrarian -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/lidarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/overseerr -o sdugre -g media
-      install -d -m 755 /var/lib/containers/media/radarr -o sdugre -g media 
+      install -d -m 755 /var/lib/containers/media/radarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/readarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/recyclarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/sonarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/tube-archivist -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/qbittorrent -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/whisparr -o sdugre -g media
-   '';
+    '';
   };
 
-  networking.firewall.allowedUDPPorts = [ 49688 ]; # gluetun wireguard
+  networking.firewall.allowedUDPPorts = [49688]; # gluetun wireguard
 
   virtualisation.oci-containers.containers = {
-    gluetun = {  
+    gluetun = {
       image = "qmcgaw/gluetun";
       environment = {
-        PUID                    = "1000";
-        PGID                    = "986";
-        UMASK                   = "002";
-        TZ                      = "America/New_York";
-        VPN_SERVICE_PROVIDER    = "airvpn";
-        VPN_TYPE                = "wireguard"; # see below for wireguard environmental file
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
+        VPN_SERVICE_PROVIDER = "airvpn";
+        VPN_TYPE = "wireguard"; # see below for wireguard environmental file
       };
-      environmentFiles = [ config.sops.secrets.gluetun-wg-env.path ];
+      environmentFiles = [config.sops.secrets.gluetun-wg-env.path];
       extraOptions = [
         "--cap-add=NET_ADMIN"
         "--device=/dev/net/tun:/dev/net/tun:rwm"
@@ -51,10 +56,10 @@
     jackett = {
       image = "lscr.io/linuxserver/jackett";
       environment = {
-        PUID                 = "1000";
-        PGID                 = "986";
-        UMASK                = "002";
-        TZ                   = "America/New_York";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
       };
       volumes = [
         "/var/lib/containers/media/jackett:/config"
@@ -69,10 +74,10 @@
     lazylibrarian = {
       image = "lscr.io/linuxserver/lazylibrarian:latest";
       environment = {
-        PUID                 = "1000";
-        PGID                 = "986";
-        UMASK                = "002";
-        TZ                   = "America/New_York";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
         DOCKER_MODS = "linuxserver/calibre-web:calibre|linuxserver/mods:lazylibrarian-ffmpeg";
       };
       volumes = [
@@ -82,16 +87,16 @@
       ports = [
         "5300:5299"
       ];
-      autoStart = true;    
+      autoStart = true;
     };
 
     lidarr = {
       image = "lscr.io/linuxserver/lidarr";
       environment = {
-        PUID                 = "1000";
-        PGID                 = "986";
-        UMASK                = "002";
-        TZ                   = "America/New_York";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
       };
       volumes = [
         "/var/lib/containers/media/lidarr:/config"
@@ -100,16 +105,16 @@
       ports = [
         "8687:8686"
       ];
-      autoStart = true;      
+      autoStart = true;
     };
 
     overseerr = {
       image = "lscr.io/linuxserver/overseerr:latest";
       environment = {
-        PUID                 = "1000";
-        PGID                 = "986";
-        UMASK                = "002";
-        TZ                   = "America/New_York";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
       };
       volumes = [
         "/var/lib/containers/media/overseerr:/config"
@@ -123,11 +128,11 @@
     qbittorrent = {
       image = "lscr.io/linuxserver/qbittorrent";
       environment = {
-        PUID            = "1000";
-        PGID            = "986";
-        UMASK           = "002";
-        TZ              = "America/New_York";
-        WEBUI_PORT      = "8283";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
+        WEBUI_PORT = "8283";
         TORRENTING_PORT = "6881";
       };
       volumes = [
@@ -147,10 +152,10 @@
     radarr = {
       image = "lscr.io/linuxserver/radarr";
       environment = {
-        PUID                 = "1000";
-        PGID                 = "986";
-        UMASK                = "002";
-        TZ                   = "America/New_York";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
       };
       volumes = [
         "/var/lib/containers/media/radarr:/config"
@@ -165,10 +170,10 @@
     readarr = {
       image = "lscr.io/linuxserver/readarr:develop";
       environment = {
-        PUID                 = "1000";
-        PGID                 = "986";
-        UMASK                = "002";
-        TZ                   = "America/New_York";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
       };
       volumes = [
         "/var/lib/containers/media/readarr:/config"
@@ -183,7 +188,7 @@
     recyclarr = {
       image = "ghcr.io/recyclarr/recyclarr";
       environment = {
-        TZ                      = "America/New_York";
+        TZ = "America/New_York";
         RECYCLARR_CREATE_CONFIG = "true";
       };
       extraOptions = [
@@ -200,10 +205,10 @@
     sonarr = {
       image = "lscr.io/linuxserver/sonarr";
       environment = {
-        PUID                 = "1000";
-        PGID                 = "986";
-        UMASK                = "002";
-        TZ                   = "America/New_York";
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
       };
       volumes = [
         "/var/lib/containers/media/sonarr:/config"

@@ -1,8 +1,14 @@
-{ config, pkgs, hostname, username, environment, programs, ... }:
 {
-
+  config,
+  pkgs,
+  hostname,
+  username,
+  environment,
+  programs,
+  ...
+}: {
   sops.secrets."msmtp/gmail_token" = {
-    sopsFile = ../../${hostname}/secrets.yaml;   
+    sopsFile = ../../${hostname}/secrets.yaml;
     owner = "${username}";
     group = "users";
   };

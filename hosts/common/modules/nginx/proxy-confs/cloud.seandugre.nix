@@ -1,11 +1,11 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."cloud.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
     enableAuthelia = false;
     extraConfig = ''
     '';
-# the rest handled by the module
+    # the rest handled by the module
     # locations."/" = {
     #   proxyPass = "https://192.168.58:4043";
     #   proxyWebsockets = true;

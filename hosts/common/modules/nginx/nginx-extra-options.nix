@@ -1,6 +1,10 @@
-{ lib, pkgs, config, ... }:
-let 
-  vhostOptions = { config, ... }: {
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  vhostOptions = {config, ...}: {
     options = {
       enableAuthelia = lib.mkEnableOption "Enable authelia location";
     };
@@ -72,8 +76,7 @@ let
       };
     };
   };
-in
-{  
+in {
   options.services.nginx.virtualHosts = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule vhostOptions);
   };

@@ -1,22 +1,26 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Enable NAT
   networking.nat = {
     enable = true;
     externalInterface = "eth0";
-    internalInterfaces = [ "wg0" ];
+    internalInterfaces = ["wg0"];
   };
   # Open ports in the firewall
   networking.firewall = {
-    allowedTCPPorts = [ 54 ];
-    allowedUDPPorts = [ 54 51821 ];
+    allowedTCPPorts = [54];
+    allowedUDPPorts = [54 51821];
   };
 
   networking.wg-quick.interfaces = {
     # "wg0" is the network interface name. You can name the interface arbitrarily.
     wg0 = {
       # Determines the IP/IPv6 address and subnet of the client's end of the tunnel interface
-      address = [ "10.10.10.1/24" ];
+      address = ["10.10.10.1/24"];
       # The port that WireGuard listens to - recommended that this be changed from default
       listenPort = 51821;
       # Path to the server's private key
@@ -35,10 +39,11 @@
       '';
 
       peers = [
-        { # phone
+        {
+          # phone
           publicKey = "zG8ScoRB/uSKRGqmX1ivBhy4UF8JyiL/TqMcllVSFgQ=";
-#          presharedKeyFile = "/root/wireguard-keys/preshared_from_peer0_key";
-          allowedIPs = [ "10.10.10.2/32" ];
+          #          presharedKeyFile = "/root/wireguard-keys/preshared_from_peer0_key";
+          allowedIPs = ["10.10.10.2/32"];
         }
       ];
     };
@@ -55,7 +60,7 @@
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = [ 
+    "/persist".directories = [
       "/root/wireguard-keys"
     ];
   };

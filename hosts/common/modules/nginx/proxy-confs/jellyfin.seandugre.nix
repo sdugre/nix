@@ -1,4 +1,4 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."jellyfin.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;

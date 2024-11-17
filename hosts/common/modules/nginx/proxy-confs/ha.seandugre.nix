@@ -1,6 +1,6 @@
-{ config, ... }:{
-# NOTE:  For this to work, had to add 192.168.1.66 to trusted proxies under http in
-#        Home Assistent configuration.yaml config.
+{config, ...}: {
+  # NOTE:  For this to work, had to add 192.168.1.66 to trusted proxies under http in
+  #        Home Assistent configuration.yaml config.
   services.nginx.virtualHosts."ha.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;

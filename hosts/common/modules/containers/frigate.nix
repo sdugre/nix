@@ -1,12 +1,12 @@
-{        
+{
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/containers/frigate  -o root -g root
-   '';
+    '';
   };
 
   virtualisation.oci-containers.containers = {
-    jellyfin = {
+    frigate = {
       image = "ghcr.io/blakeblackshear/frigate:stable";
       autoStart = true;
       volumes = [
@@ -27,5 +27,6 @@
         "--device=/dev/dri/renderD128"
         "--shm-size=64m"
       ];
-    }
+    };
+  };
 }

@@ -1,4 +1,5 @@
-{ image = "lscr.io/linuxserver/calibre-web:latest";
+{
+  image = "lscr.io/linuxserver/calibre-web:latest";
 
   environment = {
     PUID = "1000";
@@ -19,5 +20,4 @@
   ];
 
   autoStart = true;
-
 }

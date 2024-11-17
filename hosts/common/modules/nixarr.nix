@@ -1,11 +1,16 @@
-{ lib, pkgs, config, inputs, ... }:{
-
+{
+  lib,
+  pkgs,
+  config,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.nixarr.nixosModules.default
   ];
 
-  networking.firewall.allowedTCPPorts = [ 9092 ];
-  networking.firewall.allowedUDPPorts = [ 9092 ];
+  networking.firewall.allowedTCPPorts = [9092];
+  networking.firewall.allowedUDPPorts = [9092];
 
   nixarr = {
     enable = true;

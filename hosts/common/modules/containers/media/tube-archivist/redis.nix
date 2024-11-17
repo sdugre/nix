@@ -1,9 +1,9 @@
-{ 
+{
   image = "docker.io/redis/redis-stack-server:latest";
 
   environment = {
-    UMASK                = "002";
-    TZ                   = "America/New_York";
+    UMASK = "002";
+    TZ = "America/New_York";
   };
 
   volumes = [
@@ -23,5 +23,4 @@
   ];
 
   autoStart = true;
-
 }

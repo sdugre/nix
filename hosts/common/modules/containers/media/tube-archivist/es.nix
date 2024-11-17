@@ -1,14 +1,13 @@
-{ TUBEARCHIVIST_ELASTIC_CREDS }:
-{
+{TUBEARCHIVIST_ELASTIC_CREDS}: {
   image = "docker.io/bbilly1/tubearchivist-es";
 
   environment = {
-    UMASK                    = "002";
-    TZ                       = "America/New_York";
-    ES_JAVA_OPTS             = "-Xms1g -Xmx1g";
+    UMASK = "002";
+    TZ = "America/New_York";
+    ES_JAVA_OPTS = "-Xms1g -Xmx1g";
     "xpack.security.enabled" = true;
-    "discovery.type"         = "single-node";
-    "path.repo"              = "/usr/share/elasticsearch/data/snapshot";
+    "discovery.type" = "single-node";
+    "path.repo" = "/usr/share/elasticsearch/data/snapshot";
   };
 
   ulimits = {
@@ -18,7 +17,7 @@
     };
   };
 
-  environmentFiles = [ TUBEARCHIVIST_ELASTIC_CREDS ];
+  environmentFiles = [TUBEARCHIVIST_ELASTIC_CREDS];
 
   volumes = [
     "/var/lib/containers/media/tube-archivist/es:/usr/share/elasticsearch/data"
@@ -33,5 +32,4 @@
   ];
 
   autoStart = true;
-
 }

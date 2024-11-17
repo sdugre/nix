@@ -1,4 +1,4 @@
-{ config, ... }:{
+{config, ...}: {
   services.nginx.virtualHosts."nvr.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
@@ -15,10 +15,10 @@
       proxyPass = "https://192.168.1.202:8971";
       proxyWebsockets = false;
       extraConfig = ''
-#        resolver 127.0.0.11 valid=30s;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $http_connection;
-        proxy_http_version 1.1;
+        #        resolver 127.0.0.11 valid=30s;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection $http_connection;
+                proxy_http_version 1.1;
       '';
     };
   };

@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -14,19 +12,21 @@
     gnome.seahorse
   ];
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-tour
-    gnome-photos
-  ]) ++ (with pkgs.gnome; [
-    cheese
-    geary
-    gnome-calendar
-    gnome-contacts
-    gnome-clocks
-    gnome-maps
-    gnome-music
-    gnome-weather
-    epiphany
-    totem
-  ]);
+  environment.gnome.excludePackages =
+    (with pkgs; [
+      gnome-tour
+      gnome-photos
+    ])
+    ++ (with pkgs.gnome; [
+      cheese
+      geary
+      gnome-calendar
+      gnome-contacts
+      gnome-clocks
+      gnome-maps
+      gnome-music
+      gnome-weather
+      epiphany
+      totem
+    ]);
 }

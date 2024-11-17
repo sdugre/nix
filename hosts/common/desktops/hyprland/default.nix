@@ -1,11 +1,15 @@
-{ inputs, pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.hyprland.nixosModules.default
   ];
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;	
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   environment.systemPackages = with pkgs; [
     nautilus
@@ -26,7 +30,7 @@
             --time \
             --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' \
             --cmd Hyprland
-        '';  
+        '';
         user = "greeter";
       };
     };

@@ -1,11 +1,11 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     # Modules
     ../../optional/pipewire.nix
     ../../modules/printing.nix
   ];
 
- # Configure keymap in X11
+  # Configure keymap in X11
   services.xserver = {
     enable = true;
     layout = "us";
@@ -21,6 +21,6 @@
   environment.systemPackages = with pkgs; [
   ];
 
-  environment.cinnamon.excludePackages = (with pkgs; [
-  ]);
+  environment.cinnamon.excludePackages = with pkgs; [
+  ];
 }
