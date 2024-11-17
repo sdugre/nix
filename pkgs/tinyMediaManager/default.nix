@@ -1,10 +1,10 @@
 # THIS DOESN'T WORK
-
-{ stdenv, lib 
-, fetchurl
-, autoPatchelfHook
+{
+  stdenv,
+  lib,
+  fetchurl,
+  autoPatchelfHook,
 }:
-
 stdenv.mkDerivation rec {
   pname = "tinyMediaManager";
   version = "4.3.14";
@@ -21,8 +21,8 @@ stdenv.mkDerivation rec {
   sourceRoot = ".";
 
   installPhase = ''
-#    install -m755 -D ./${pname}/${pname} $out/bin/${pname}
-    cp -a ./${pname}/${pname} $out/bin/${pname}
+    #    install -m755 -D ./${pname}/${pname} $out/bin/${pname}
+        cp -a ./${pname}/${pname} $out/bin/${pname}
   '';
 
   meta = with lib; {

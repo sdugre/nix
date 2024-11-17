@@ -1,5 +1,8 @@
-{ stdenv, lib, fetchurl }:
-
+{
+  stdenv,
+  lib,
+  fetchurl,
+}:
 stdenv.mkDerivation rec {
   pname = "figurine";
   version = "1.3.0";

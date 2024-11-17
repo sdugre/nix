@@ -1,15 +1,13 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example' or (legacy) 'nix-build -A example'
-
-{ pkgs ? (import ../nixpkgs.nix) { } }: {
-
+{pkgs ? (import ../nixpkgs.nix) {}}: {
   # Packages with an actual source
-  figurine = pkgs.callPackage ./figurine { };
-  tinyMediaManager = pkgs.callPackage ./tinyMediaManager { };
-  pia-wg-config = pkgs.callPackage ./pia-wg-config { };
+  figurine = pkgs.callPackage ./figurine {};
+  tinyMediaManager = pkgs.callPackage ./tinyMediaManager {};
+  pia-wg-config = pkgs.callPackage ./pia-wg-config {};
 
   # Personal scripts
-  backlight = pkgs.callPackage ./backlight { };
-  rofi-logout = pkgs.callPackage ./rofi-logout { };
-  test-pkg = pkgs.callPackage ./test-pkg { };
+  backlight = pkgs.callPackage ./backlight {};
+  rofi-logout = pkgs.callPackage ./rofi-logout {};
+  test-pkg = pkgs.callPackage ./test-pkg {};
 }
