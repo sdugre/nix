@@ -25,6 +25,7 @@
     ./recipe.seandugre.nix
     ./rss.seandugre.nix
     ./rss-bridge.seandugre.nix
+    ./search.seandugre.nix
     ./sonarr.seandugre.nix
     ./transmission.seandugre.nix
     ./tv.seandugre.nix

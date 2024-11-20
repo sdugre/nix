@@ -46,7 +46,7 @@ in {
       ];
 
       search = {
-        default = "DuckDuckGo";
+        default = "SearX";
         force = true;
         engines = {
           "NixOS Packages" = {
@@ -83,6 +83,14 @@ in {
             updateInterval = 7 * 24 * 60 * 60 * 1000;
             definedAliases = ["@pp"];
           };
+
+          "SearX" = {
+            urls = [{ template = "https://search.seandugre.com/?q={searchTerms}"; }];
+            iconUpdateURL = "https://nixos.wiki/favicon.png";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = [ "@sx" ];
+          };
+
         };
       };
 

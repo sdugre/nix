@@ -32,6 +32,7 @@
     ../common/modules/paperless.nix # Documents
     ../common/modules/plex.nix # Plex Media Server
     ../common/modules/rss.nix # miniflux & rss-bridge
+    ../common/modules/searxng.nix # private search engine
     ../common/modules/stirling-pdf.nix # pdf tools
     #    ../common/modules/wireguard.nix     # vpn
   ];
