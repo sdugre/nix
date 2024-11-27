@@ -12,6 +12,7 @@
       */
       ''
         set clipboard=unnamedplus
+	set number relativenumber
       '';
     viAlias = true;
     vimAlias = true;

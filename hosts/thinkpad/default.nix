@@ -13,6 +13,7 @@
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490
 
     # optional
+    ../common/optional/bluetooth.nix
     ../common/optional/networkDrives.nix
     ../common/optional/pipewire.nix
     ../common/optional/laptop.nix

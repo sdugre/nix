@@ -91,6 +91,8 @@
       input = {
         kb_layout = "us";
         touchpad.disable_while_typing = false;
+	repeat_delay = 350;
+	repeat_rate = 50;
       };
       decoration = {
         active_opacity = 0.94;
@@ -119,6 +121,7 @@
         "nm-applet --indicator"
         "${pkgs.hypridle}/bin/hypridle"
         "hyprctl setcursor Bibata-Modern-Classic 24"
+        "blueman-applet"
       ];
 
       bind = let
