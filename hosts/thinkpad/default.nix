@@ -41,15 +41,16 @@
     [
     ]
     ++ (with pkgs; [
-      wireshark # network monitoring tool
       backlight # personal script for brightness control
-      libreoffice-qt # office suite
-      python311Packages.requests # may be necessary for beets plugin
-      xournal # annotate pdfs
-      virt-viewer
       config.nur.repos.shados.tmm
-      libimobiledevice # iphone mount
       ifuse # optional, to mount using 'ifuse'
+      lemonade # copy paste for nvim
+      libreoffice-qt # office suite
+      libimobiledevice # iphone mount
+      python311Packages.requests # may be necessary for beets plugin
+      virt-viewer
+      wireshark # network monitoring tool
+      xournal # annotate pdfs
     ]);
 
   # udev rule to allow adjusting brightness
