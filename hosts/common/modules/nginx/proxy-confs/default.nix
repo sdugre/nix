@@ -11,7 +11,7 @@
     ./jfin.seandugre.nix # on chummie
     ./lib.seandugre.nix
     ./lidarr.seandugre.nix
-    ./linkding.seandugre.nix
+    ./link.seandugre.nix
     ./mqtt.seandugre.nix
     ./music.seandugre.nix
     ./nas.seandugre.nix

@@ -5,6 +5,9 @@
   hostname,
   ...
 }: {
+
+
+
   system.activationScripts = {
     script.text = ''
       install -d -m 755 /var/lib/containers/linkding -o root -g root
@@ -17,9 +20,9 @@
       environment = {
         TZ = "America/New_York";
       };
+#      environmentFiles = [ config.age.secrets.linkding-environment.path ];
       volumes = [
         "/var/lib/containers/linkding:/etc/linkding/data"
-        "/mnt/data/media:/data"
       ];
       ports = [
         "9090:9090"

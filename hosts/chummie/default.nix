@@ -158,15 +158,15 @@
     [
     ]
     ++ (with pkgs; [
-      lemonade
-      pia-wg-config
-      xclip
-      pciutils
       inxi
       intel-gpu-tools
+      lemonade
+      pia-wg-config
+      pciutils
       smartmontools
       s-tui
       zfs
       virt-viewer
+      xclip
     ]);
 }
