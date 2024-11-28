@@ -120,7 +120,7 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [5900 5901 5902 1935];
+  networking.firewall.allowedTCPPorts = [ 5900 5901 5902 1935 2489 ]; #2489 lemonade
 
   # END VMs
 
