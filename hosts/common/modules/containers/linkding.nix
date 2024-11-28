@@ -6,7 +6,9 @@
   ...
 }: {
 
-
+  sops.secrets."linkding-env" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
+  };
 
   system.activationScripts = {
     script.text = ''
@@ -20,7 +22,7 @@
       environment = {
         TZ = "America/New_York";
       };
-#      environmentFiles = [ config.age.secrets.linkding-environment.path ];
+      environmentFiles = [ config.sops.secrets.linkding-env.path ];
       volumes = [
         "/var/lib/containers/linkding:/etc/linkding/data"
       ];
