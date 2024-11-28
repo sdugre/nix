@@ -58,7 +58,7 @@
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
 
-  networking.firewall.allowedTCPPorts = [3389];
+  networking.firewall.allowedTCPPorts = [ 3389 2489 ]; # 2489 lemonade
 
   services.usbmuxd.enable = true; # for iphone mount
 }
