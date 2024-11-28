@@ -7,7 +7,7 @@
 }: {
 
   sops.secrets."linkding-env" = {
-    sopsFile = ../../${hostname}/secrets.yaml;
+    sopsFile = ../../../${hostname}/secrets.yaml;
   };
 
   system.activationScripts = {
@@ -28,8 +28,11 @@
       ];
       ports = [
         "9090:9090"
+#        "5431:5432"
       ];
       autoStart = true;
     };
   };
+  
+#  networking.firewall.allowedTCPPorts = [5431];
 }

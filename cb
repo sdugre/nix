@@ -1,7 +1,1 @@
-  sops.secrets."paperless" = {
-    sopsFile = ../../${hostname}/secrets.yaml;
-    #   mode = "0400";
-    #    owner = "paperless";
-    #   group = "paperless";
-    #    restartUnits = [ "paperless.service" ];
-  };
+  networking.firewall.allowedTCPPorts = [6382];
