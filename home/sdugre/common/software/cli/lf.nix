@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  nix-config-path,
   ...
 }: {
   # for this to work, need to download icons using:
@@ -35,7 +36,7 @@
       "g~" = "cd";
       gh = "cd ~";
       "g/" = "cd /";
-      "gn" = "cd ~/Documents/nix-config";
+      "gn" = "cd ${nix-config-path}";
 
       ee = "editor-open";
       V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';

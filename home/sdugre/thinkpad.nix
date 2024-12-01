@@ -7,9 +7,7 @@
 }: {
   imports = [
     # Optional machine specific packages
-    ./common/software/cli/lf.nix
     ./common/software/gui/vscodium.nix
-    # ./common/software/gui/calibre.nix    # use container on chummie instead
   ];
 
   programs.chromium.enable = true; # for testing, esphome, etc.

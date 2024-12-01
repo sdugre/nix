@@ -3,6 +3,7 @@
     ./nvim.nix
     ./git.nix
     ./zsh.nix
+    ./lf.nix
   ];
 
   home.packages = with pkgs; [

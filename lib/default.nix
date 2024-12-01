@@ -33,10 +33,11 @@
     theme ? "default",
     type ? "default",
     hmStateVer ? "23.11",
+    nix-config-path ? "~/nix-config", # used in lf config, does not actually set the path
   }:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = inputs.nixpkgs.legacyPackages.${platform};
-      extraSpecialArgs = {inherit inputs outputs desktop hostname platform username theme hmStateVer;};
+      extraSpecialArgs = {inherit inputs outputs desktop hostname platform username theme hmStateVer nix-config-path;};
       modules = [
         ../home/${type}.nix
       ];
