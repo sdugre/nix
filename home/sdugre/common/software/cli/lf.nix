@@ -33,8 +33,9 @@
       do = "dragon-out";
 
       "g~" = "cd";
-      gh = "cd";
-      "g/" = "/";
+      gh = "cd ~";
+      "g/" = "cd /";
+      "gn" = "cd ~/Documents/nix-config";
 
       ee = "editor-open";
       V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
