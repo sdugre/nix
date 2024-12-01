@@ -3,6 +3,7 @@
     ./auth.seandugre.nix
     ./books.seandugre.nix
     ./calibre.seandugre.nix
+    ./cars.seandugre.nix
     ./cloud.seandugre.nix
     ./docs.seandugre.nix
     ./ha.seandugre.nix
