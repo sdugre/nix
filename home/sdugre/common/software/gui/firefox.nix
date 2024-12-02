@@ -41,6 +41,7 @@ in {
         bitwarden
         libredirect
 	linkding-extension
+	linkding-injector
         ublock-origin
         #        bypass-paywalls-clean
         istilldontcareaboutcookies
