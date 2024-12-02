@@ -20,6 +20,18 @@
           mkdir $DIR
         }}
       '';
+      delete = ''
+        ''${{
+          clear
+          tput cup $(($(tput lines)/3))
+          tput bold
+          set -f
+          printf "%s\n\t" "$fx"
+          printf "delete?[y/N]"
+          read ans
+          [ $ans = "y" ] && rm -rf -- $fx
+        }}
+      '';    
     };
 
     keybindings = {
@@ -30,7 +42,7 @@
       "`" = "mark-load";
       "\\'" = "mark-load";
       "<enter>" = "open";
-
+      D = "delete";
       do = "dragon-out";
 
       "g~" = "cd";
@@ -75,6 +87,11 @@
     in ''
       set cleaner ${cleaner}/bin/clean.sh
       set previewer ${previewer}/bin/pv.sh
+      set ifs "\n"
+      set scrolloff 10
+      set period 1
+      set hiddenfiles ".*:*.log:*.run.xml"
+      set autoquit true
     '';
   };
 }
