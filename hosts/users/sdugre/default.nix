@@ -22,6 +22,7 @@ in {
         "paperless"
         "frigate"
         "media"
+	"nginx"
       ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
