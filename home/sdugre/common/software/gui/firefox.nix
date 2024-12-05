@@ -45,6 +45,7 @@ in {
         ublock-origin
         #        bypass-paywalls-clean
         istilldontcareaboutcookies
+        vimium-c
       ];
 
       search = {
