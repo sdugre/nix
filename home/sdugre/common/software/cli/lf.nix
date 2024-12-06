@@ -32,6 +32,20 @@
           [ $ans = "y" ] && rm -rf -- $fx
         }}
       '';    
+      fzf_jump = ''
+        ''${{
+          res="$(find . -maxdepth 1 | ${pkgs.fzf}/bin/fzf --reverse --header='Jump to location')"
+          if [ -n "$res" ]; then
+            if [ -d "$res" ]; then
+              cmd="cd"
+            else
+              cmd="select"
+            fi
+            res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+            lf -remote "send $id $cmd \"$res\""
+          fi
+        }}
+      '';
     };
 
     keybindings = {
@@ -52,8 +66,7 @@
 
       ee = "editor-open";
       V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
-
-      # ...
+      "<c-f>" = ":fzf_jump";
     };
 
     settings = {
