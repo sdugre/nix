@@ -46,8 +46,31 @@
           fi
         }}
       '';
+
+      moveto = ''
+        ''${{
+          set -f
+          directories=("$HOME/Documents" "$HOME/Downloads" "$HOME/Pictures" "$HOME/Videos" "Specify directory")
+          dest=$(printf '%s\n' "''${directories[@]}" | ${pkgs.fzf}/bin/fzf --prompt 'Move to where? ')
+          if [ "$dest" = "Specify directory" ]; then
+            dest=$(read -p "Enter custom directory: " && echo "$REPLY" | sed "s|~|$HOME|")
+          fi
+          [ -z "$dest" ] && exit
+          clear; tput cup $(($(tput lines)/3)); tput bold
+          echo "From:"
+          echo "$fx" | sed 's/^/   /'
+          printf "To:\n   %s\n\n\tmove?[y/N]" "$dest"
+          read -r ans
+          [ "$ans" != "y" ] && exit
+          for x in $fx; do
+            mv -iv "$x" "$dest"
+          done &&
+          ${pkgs.libnotify}/bin/notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+        }}
+      '';    
     };
 
+    
     keybindings = {
       "\\\"" = "";
       o = "";
@@ -58,6 +81,7 @@
       "<enter>" = "open";
       D = "delete";
       do = "dragon-out";
+      M = ":moveto";
 
       "g~" = "cd";
       gh = "cd ~";
