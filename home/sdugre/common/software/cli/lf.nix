@@ -34,7 +34,7 @@
       '';    
       fzf_jump = ''
         ''${{
-          res="$(find . -maxdepth 1 | ${pkgs.fzf}/bin/fzf --reverse --header='Jump to location')"
+          res="$(find . | ${pkgs.fzf}/bin/fzf --reverse --header='Jump to location')"
           if [ -n "$res" ]; then
             if [ -d "$res" ]; then
               cmd="cd"
@@ -87,6 +87,8 @@
       gh = "cd ~";
       "g/" = "cd /";
       "gn" = "cd ${nix-config-path}";
+      gd = "cd ~/Documents";
+      gD = "cd ~/Downloads";
 
       ee = "editor-open";
       V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
