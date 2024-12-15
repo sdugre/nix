@@ -5,15 +5,16 @@
   ...
 }: {
   imports = [
-    ./calibre.nix # can't get to work
+    ./actual-budget.nix # personal finance
+    ./calibre.nix       # can't get to work
     #  ./calibre-web.nix     # use native nix package
     ./chowdown.nix # recipe wiki
     #  ./frigate.nix         # can't get to work
     #  ./jellyfin.nix
-    ./linkding.nix  # bookmark manager
-    ./lubelogger.nix # automobile maintenance logging
-    ./media.nix # arr stack w/ gluetun for vpn
-    #    ./tube-archivist.nix  # works, but doesn't auto delete or rename files. Use ytdl-sub instead
+    ./linkding.nix      # bookmark manager
+    ./lubelogger.nix    # automobile maintenance logging
+    ./media.nix         # arr stack w/ gluetun for vpn
+    # ./tube-archivist.nix  # works, but doesn't auto delete or rename files. Use ytdl-sub instead
     ./ytdl-sub.nix
   ];
 
