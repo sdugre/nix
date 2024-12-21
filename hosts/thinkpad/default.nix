@@ -42,7 +42,7 @@
     ]
     ++ (with pkgs; [
       backlight # personal script for brightness control
-      config.nur.repos.shados.tmm
+#      config.nur.repos.shados.tmm
       ifuse # optional, to mount using 'ifuse'
       lemonade # copy paste for nvim
       libreoffice-qt # office suite
@@ -50,7 +50,7 @@
       python311Packages.requests # may be necessary for beets plugin
       virt-viewer
       wireshark # network monitoring tool
-      xournal # annotate pdfs
+      xournalpp # annotate pdfs
     ]);
 
   # udev rule to allow adjusting brightness
