@@ -1,18 +1,24 @@
 {
   config,
   lib,
+  hostname,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [5000 8554 8555 8971 1935];
+  networking.firewall.allowedTCPPorts = [5000 5001 8554 8555 8971 1935 1984];
   networking.firewall.allowedUDPPorts = [8555];
+
+  services.go2rtc.enable = true;
+  services.go2rtc.settings.streams = { 
+    driveway = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="]; 
+    driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
+  };
 
   services.frigate = {
     enable = true;
-    hostname = "nvr2.seandugre.com";
+    hostname = "nvr.seandugre.com";
     settings = {
-      auth = {
-        enabled = false;
-      };
+      auth.enabled = false;
+      tls.enabled = false;
 
       detectors.coral = {
         type = "edgetpu";
@@ -20,8 +26,11 @@
       };
 
       go2rtc.streams = {
-        driveway = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=";
-        driveway_sub = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=";
+        rtsp = {
+          listen = ":8554";
+        };
+        driveway = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
+        driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
       };
 
       cameras = {
@@ -29,14 +38,12 @@
           ffmpeg = {
             inputs = [
               {
-                # path = "rtsp://127.0.0.1:8554/driveway";
-                path = "rtsp://192.168.1.200:8554/driveway";
+                path = "rtsp://127.0.0.1:8554/driveway";
                 input_args = "preset-rtsp-restream";
                 roles = ["record"];
               }
               {
-                # path = "rtsp://127.0.0.1:8554/driveway_sub";
-                path = "rtsp://192.168.1.200:8554/driveway_sub";
+                path = "rtsp://127.0.0.1:8554/driveway_sub";
                 input_args = "preset-rtsp-restream";
                 roles = ["detect"];
               }
@@ -71,11 +78,28 @@
         };
       };
 
-      mqtt.enabled = false;
-
+      mqtt = {
+        enabled = true;
+        host = "192.168.1.201";
+        user = "{FRIGATE_MQTT_USER}";
+        password = "{FRIGATE_MQTT_PASSWORD}";
+      };
       version = "0.14";
     };
   };
+
+  services.nginx.virtualHosts.${config.services.frigate.hostname}.listen = {
+    addr = "0.0.0.0";
+    port = 5000;
+  };
+
+  sops.secrets.frigate = {
+    sopsFile = ../../${hostname}/secrets.yaml;
+  #  format = "binary";
+  #  owner = config.systemd.services.frigate.serviceConfig.User;
+  };
+
+  systemd.services.frigate.serviceConfig.EnvironmentFile = config.sops.secrets.frigate.path;
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [

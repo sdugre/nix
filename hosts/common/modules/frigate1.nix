@@ -19,10 +19,10 @@
         device = "usb";
       };
 
-      go2rtc.streams = {
-        driveway = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=";
-        driveway_sub = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=";
-      };
+#      go2rtc.streams = {
+#        driveway = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=";
+#        driveway_sub = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=";
+#      };
 
       cameras = {
         driveway = {
@@ -30,13 +30,15 @@
             inputs = [
               {
                 # path = "rtsp://127.0.0.1:8554/driveway";
-                path = "rtsp://192.168.1.200:8554/driveway";
+                # path = "rtsp://192.168.1.200:8554/driveway";
+                path = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password=";
                 input_args = "preset-rtsp-restream";
                 roles = ["record"];
               }
               {
                 # path = "rtsp://127.0.0.1:8554/driveway_sub";
-                path = "rtsp://192.168.1.200:8554/driveway_sub";
+                # path = "rtsp://192.168.1.200:8554/driveway_sub";
+                path = "ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password=";
                 input_args = "preset-rtsp-restream";
                 roles = ["detect"];
               }
