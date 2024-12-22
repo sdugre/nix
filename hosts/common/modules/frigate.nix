@@ -95,8 +95,6 @@
 
   sops.secrets.frigate = {
     sopsFile = ../../${hostname}/secrets.yaml;
-  #  format = "binary";
-  #  owner = config.systemd.services.frigate.serviceConfig.User;
   };
 
   systemd.services.frigate.serviceConfig.EnvironmentFile = config.sops.secrets.frigate.path;
