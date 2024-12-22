@@ -88,11 +88,6 @@
     };
   };
 
-  services.nginx.virtualHosts.${config.services.frigate.hostname}.listen = {
-    addr = "0.0.0.0";
-    port = 5000;
-  };
-
   sops.secrets.frigate = {
     sopsFile = ../../${hostname}/secrets.yaml;
   };
