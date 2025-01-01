@@ -2,6 +2,7 @@
   config,
   lib,
   hostname,
+  pkgs,
   ...
 }: {
   networking.firewall.allowedTCPPorts = [5000 5001 5002 8082 8554 8555 8971 1935 1984];
@@ -11,7 +12,7 @@
   services.go2rtc.settings.streams = {
     driveway = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
     driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
-    porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd=${config.sops.secrets."porch_camera_password".path}#video=h264#hardware"];
+    porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd=\${FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
   };
 
   # hardware encode/decode with amdgpu vaapi
@@ -44,7 +45,7 @@
         };
         driveway = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
         driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
-        porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd=${config.sops.secrets."porch_camera_password".path}#video=h264#hardware"];
+        porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd={FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
       };
 
       go2rtc.webrtc = {
@@ -151,11 +152,8 @@
     sopsFile = ../../${hostname}/secrets.yaml;
   };
 
-  sops.secrets."porch_camera_password" = {
-    sopsFile = ../../${hostname}/secrets.yaml;
-  };
-
   systemd.services.frigate.serviceConfig.EnvironmentFile = config.sops.secrets.frigate.path;
+  systemd.services.go2rtc.serviceConfig.EnvironmentFile = config.sops.secrets.frigate.path;
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [
