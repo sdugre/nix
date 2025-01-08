@@ -12,6 +12,8 @@
   services.go2rtc.settings.streams = {
     driveway = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
     driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
+    back = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
+    back_sub = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
     porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd=\${FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
   };
 
@@ -45,6 +47,8 @@
         };
         driveway = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
         driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
+        back = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
+        back_sub = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
         porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd={FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
       };
 
@@ -91,6 +95,34 @@
             filters.person.min_area = 2000;
           };
         };
+        
+        back = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/back";
+                input_args = "preset-rtsp-restream";
+                roles = ["record"];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/back_sub";
+                input_args = "preset-rtsp-restream";
+                roles = ["detect"];
+              }
+            ];
+          };
+
+          detect = {
+            height = 480;
+            width = 640;
+            fps = 5;
+          };
+          
+          objects = {
+            track = ["person" "dog"];
+            filters.person.min_area = 2000;
+          };
+        };
 
         driveway = {
           ffmpeg = {
@@ -111,7 +143,7 @@
           detect = {
             height = 480;
             width = 640;
-            fps = 7;
+            fps = 5;
           };
 
           motion.mask = [

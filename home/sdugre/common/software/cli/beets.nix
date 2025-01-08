@@ -58,11 +58,9 @@
         host = "192.168.1.200";
         port = "32400";
         token = config.sops.secrets."plex_token".path;
-        #        token = "6zVJ3DgUcv1JBMyTKTKx";
       };
 
       discogs = {
-        #        user_token = "IetwGGqEhVSxAkQdkDezNbxcyemntwsvazuTAWlI";
         user_token = config.sops.secrets."discogs_token".path;
       };
 
@@ -100,6 +98,13 @@
         file = "644";
         dir = "755";
       };
+      
+      hook.hooks = [
+        {
+          event = "album_imported";
+          command = "ssh -i /home/sdugre/.ssh/id_ed25519 volumio@192.168.1.32 /usr/bin/mpc update";
+        }
+      ];
     };
   };
 }
