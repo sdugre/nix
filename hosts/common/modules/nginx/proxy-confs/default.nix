@@ -6,6 +6,7 @@
     ./cars.seandugre.nix
     ./cloud.seandugre.nix
     ./docs.seandugre.nix
+    ./food.seandugre.nix
     ./ha.seandugre.nix
     ./jackett.seandugre.nix
     ./jellyfin.seandugre.nix # on debian

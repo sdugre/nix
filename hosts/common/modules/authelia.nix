@@ -10,7 +10,7 @@
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = ["authelia.service"];
+    restartUnits = ["authelia-main.service"];
   };
 
   sops.secrets."authelia/storageEncryptionKeyFile" = {
@@ -18,7 +18,7 @@
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = ["authelia.service"];
+    restartUnits = ["authelia-main.service"];
   };
 
   sops.secrets."authelia/sessionSecretFile" = {
@@ -26,7 +26,7 @@
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = ["authelia.service"];
+    restartUnits = ["authelia-main.service"];
   };
 
   sops.secrets."authelia_login" = {
@@ -34,7 +34,23 @@
     mode = "0400";
     owner = "authelia-main";
     group = "authelia-main";
-    restartUnits = ["authelia.service"];
+    restartUnits = ["authelia-main.service"];
+  };
+
+  sops.secrets."authelia/oidcHmacSecretFile" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
+    mode = "0400";
+    owner = "authelia-main";
+    group = "authelia-main";
+    restartUnits = ["authelia-main.service"];
+  };
+
+  sops.secrets."authelia/oidcIssuerPrivateKeyFile" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
+    mode = "0400";
+    owner = "authelia-main";
+    group = "authelia-main";
+    restartUnits = ["authelia-main.service"];
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
@@ -49,6 +65,8 @@
       jwtSecretFile = config.sops.secrets."authelia/jwtSecretFile".path;
       storageEncryptionKeyFile = config.sops.secrets."authelia/storageEncryptionKeyFile".path;
       sessionSecretFile = config.sops.secrets."authelia/sessionSecretFile".path;
+      oidcIssuerPrivateKeyFile = config.sops.secrets."authelia/oidcIssuerPrivateKeyFile".path;
+      oidcHmacSecretFile = config.sops.secrets."authelia/oidcHmacSecretFile".path;
     };
 
     settings = {
@@ -85,6 +103,18 @@
               salt_length = 16;
             };
           };
+        };
+      };
+
+      identity_providers.oidc = {
+        cors = {
+          endpoints = [
+            "authorization"
+            "token"
+            "revocation"
+            "introspection"
+            "userinfo"
+          ];
         };
       };
 
