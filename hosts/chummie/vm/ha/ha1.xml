@@ -1,4 +1,4 @@
-<domain type='kvm' id='5'>
+<domain type='kvm' id='1'>
   <name>hass</name>
   <uuid>1c5ba04a-e534-4dcc-b74b-b77ce7cb4a4c</uuid>
   <memory unit='KiB'>4196352</memory>
@@ -9,8 +9,8 @@
   </resource>
   <os>
     <type arch='x86_64' machine='pc-i440fx-8.2'>hvm</type>
-    <loader readonly='yes' type='pflash' format='raw'>/run/libvirt/nix-ovmf/OVMF_CODE.fd</loader>
-    <nvram template='/run/libvirt/nix-ovmf/OVMF_VARS.fd' templateFormat='raw' format='raw'>/var/lib/libvirt/qemu/nvram/hass_VARS.fd</nvram>
+    <loader readonly='yes' type='pflash'>/run/libvirt/nix-ovmf/OVMF_CODE.fd</loader>
+    <nvram template='/run/libvirt/nix-ovmf/OVMF_VARS.fd'>/var/lib/libvirt/qemu/nvram/hass_VARS.fd</nvram>
     <boot dev='hd'/>
   </os>
   <features>
@@ -119,7 +119,6 @@
     <feature policy='require' name='vmx-eptp-switching'/>
     <feature policy='disable' name='hle'/>
     <feature policy='disable' name='rtm'/>
-    <feature policy='require' name='vmx-invvpid-single-context-noglobals'/>
   </cpu>
   <clock offset='utc'>
     <timer name='rtc' tickpolicy='catchup'/>
@@ -176,7 +175,7 @@
     <interface type='bridge'>
       <mac address='52:54:00:cb:79:f0'/>
       <source bridge='br0'/>
-      <target dev='vnet2'/>
+      <target dev='vnet0'/>
       <model type='e1000'/>
       <alias name='net0'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
@@ -223,7 +222,7 @@
       <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
     </video>
     <hostdev mode='subsystem' type='usb' managed='yes'>
-      <source startupPolicy='optional'>
+      <source>
         <vendor id='0x10c4'/>
         <product id='0xea60'/>
         <address bus='1' device='7'/>

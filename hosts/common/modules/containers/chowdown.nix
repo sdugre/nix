@@ -23,7 +23,7 @@
         "/var/lib/containers/chowdown:/config"
       ];
       ports = [
-        "4000:4000"
+        "5700:4000"
       ];
       autoStart = true;
     };

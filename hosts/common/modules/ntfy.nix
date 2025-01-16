@@ -8,8 +8,7 @@
   domain = "seandugre.com";
   port = 5600;
   dataDir = "/var/lib/ntfy";
-in
-{
+in {
   services.ntfy-sh = {
     enable = true;
     settings = {
@@ -43,8 +42,14 @@ in
     };
   };
 
-  # Create necessary folders 
+  # Create necessary folders
   systemd.tmpfiles.rules = [
     "d ${dataDir}/ 0755 ntfy-sh ntfy-sh -"
   ];
+
+  environment.persistence = lib.mkIf config.services.persistence.enable {
+    "/persist".directories = [
+      "${dataDir}"
+    ];
+  };
 }
