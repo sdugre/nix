@@ -120,7 +120,7 @@
       "sdugre@thinkpad" = libx.mkHome {
         hostname = "thinkpad";
         desktop = "hyprland";
-	nix-config-path = "~/Documents/nix-config";
+        nix-config-path = "~/Documents/nix-config";
       };
     };
   };
