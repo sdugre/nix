@@ -40,8 +40,8 @@ in {
       extensions = with addons; [
         bitwarden
         libredirect
-	linkding-extension
-	linkding-injector
+	      linkding-extension
+	      linkding-injector
         ublock-origin
         #        bypass-paywalls-clean
         istilldontcareaboutcookies
