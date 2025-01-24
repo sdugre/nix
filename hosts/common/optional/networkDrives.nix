@@ -1,5 +1,5 @@
 let
-  nasIP = "100.84.193.57";
+#  nasIP = "100.84.193.57";
   chummieIP = "100.80.19.29";
   mountOptions = [
     "x-gvfs-show"
@@ -28,11 +28,11 @@ in {
   #    fsType = "nfs";
   #    options = mountOptions;
   #  };
-  fileSystems."/mnt/homes" = {
-    device = nasIP + ":/volume1/homes";
-    fsType = "nfs";
-    options = mountOptions;
-  };
+  #  fileSystems."/mnt/homes" = {
+  #    device = nasIP + ":/volume1/homes";
+  #    fsType = "nfs";
+  #    options = mountOptions;
+  #  };
   #  fileSystems."/mnt/docs" = {
   #    device = nasIP + ":/volume1/docs";
   #    fsType = "nfs";
@@ -43,11 +43,11 @@ in {
   #    fsType = "nfs";
   #    options = mountOptions;
   #  };
-  fileSystems."/mnt/podcasts" = {
-    device = nasIP + ":/volume1/podcasts";
-    fsType = "nfs";
-    options = mountOptions;
-  };
+  #  fileSystems."/mnt/podcasts" = {
+  #    device = nasIP + ":/volume1/podcasts";
+  #    fsType = "nfs";
+  #    options = mountOptions;
+  #  };
 
   fileSystems."/mnt/paperless-import" = {
     device = chummieIP + ":/svr/nfs/paperless-import";

@@ -33,6 +33,7 @@
     ../common/modules/ntfy.nix # Notification service
     ../common/modules/paperless.nix # Documents
     ../common/modules/plex.nix # Plex Media Server
+    ../common/modules/restic.nix # Backups
     ../common/modules/rss.nix # miniflux & rss-bridge
     ../common/modules/searxng.nix # private search engine
     ../common/modules/stirling-pdf.nix # pdf tools
