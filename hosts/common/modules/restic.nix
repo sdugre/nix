@@ -26,6 +26,7 @@ in {
     paths = [ 
       "/home/sdugre"
       "/mnt/photos"
+      "/mnt/data/media"
     ];
     exclude = [
     ];
