@@ -14,7 +14,7 @@
     ./lib.seandugre.nix
     ./lidarr.seandugre.nix
     ./link.seandugre.nix
-    ./money.seandugre.nix
+#    ./money.seandugre.nix  # see actual-budget container config
     ./mqtt.seandugre.nix
     ./music.seandugre.nix
     ./nas.seandugre.nix
