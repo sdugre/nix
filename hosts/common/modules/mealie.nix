@@ -52,7 +52,8 @@
           authorization_policy = "one_factor";
           redirect_uris = [
             "https://food.seandugre.com/login"
-            "http://localhost:9000/login"
+            "http://food.seandugre.com/login"
+            "http://192.168.1.200:9000/login"
           ];
           scopes = ["openid" "profile" "email" "groups"];
           userinfo_signed_response_alg = "none";
@@ -77,5 +78,17 @@
     "/persist".directories = [
       "/var/lib/mealie"
     ];
+  };
+
+  services.nginx.virtualHosts."food.seandugre.com" = {
+    useACMEHost = "seandugre.com";
+    forceSSL = true;
+    enableAuthelia = false; # handled by OIDC in app
+    extraConfig = ''
+    '';
+    locations."/" = {
+      proxyPass = "http://192.168.1.200:9000";
+      proxyWebsockets = true;
+    };
   };
 }
