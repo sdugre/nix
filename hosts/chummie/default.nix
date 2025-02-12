@@ -16,6 +16,7 @@
 
     # services
     ../common/modules/acme.nix # certs
+    ../common/modules/actual-budget.nix # Personal finance
     ../common/modules/authelia.nix # SSO
     ../common/modules/calibre.nix # eBooks
     ../common/modules/containers # Podman Containers
