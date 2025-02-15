@@ -15,30 +15,32 @@
     #    ../common/modules/persistence.nix
 
     # services
-    ../common/modules/acme.nix # certs
+    ../common/modules/acme.nix          # certs
     ../common/modules/actual-budget.nix # Personal finance
-    ../common/modules/authelia.nix # SSO
-    ../common/modules/calibre.nix # eBooks
-    ../common/modules/containers # Podman Containers
-    ../common/modules/ddclient.nix # DDNS updating
+    ../common/modules/authelia.nix      # SSO
+    ../common/modules/calibre.nix       # eBooks
+    ../common/modules/containers        # Podman Containers
+    #../common/modules/dokuwiki.nix     # Personal Wiki - works. don't like it.
+    ../common/modules/ddclient.nix      # DDNS updating
     ../common/modules/frigate.nix       # NVR
-    ../common/modules/gonic.nix # Music Server
-    ../common/modules/jellyfin.nix # Media Server
-    ../common/modules/immich.nix # Photo management
-    ../common/modules/mail.nix # Mail server for notifications
-    ../common/modules/mealie.nix # Meal planning and recipies
-    ../common/modules/nextcloud.nix # Cloud
-    ../common/modules/nfs.nix # NFS server
-    ../common/modules/nginx # reverse proxy
-    #    ../common/modules/nixarr.nix        # Media aquisition - use containers instead
-    ../common/modules/ntfy.nix # Notification service
-    ../common/modules/paperless.nix # Documents
-    ../common/modules/plex.nix # Plex Media Server
-    ../common/modules/restic.nix # Backups
-    ../common/modules/rss.nix # miniflux & rss-bridge
-    ../common/modules/searxng.nix # private search engine
-    ../common/modules/stirling-pdf.nix # pdf tools
-    #    ../common/modules/wireguard.nix     # vpn
+    ../common/modules/gonic.nix         # Music Server
+    ../common/modules/jellyfin.nix      # Media Server
+    ../common/modules/immich.nix        # Photo management
+    ../common/modules/mail.nix          # Mail server for notifications
+    ../common/modules/mealie.nix        # Meal planning and recipies
+    ../common/modules/nextcloud.nix     # Cloud
+    ../common/modules/nfs.nix           # NFS server
+    ../common/modules/nginx             # reverse proxy
+    #../common/modules/nixarr.nix       # Media aquisition - use containers instead
+    ../common/modules/ntfy.nix          # Notification service
+    ../common/modules/paperless.nix     # Documents
+    ../common/modules/plex.nix          # Plex Media Server
+    ../common/modules/restic.nix        # Backups
+    ../common/modules/rss.nix           # miniflux & rss-bridge
+    ../common/modules/searxng.nix       # private search engine
+    ../common/modules/stirling-pdf.nix  # pdf tools
+    ../common/modules/wiki-js.nix       # Personal Wiki
+    #../common/modules/wireguard.nix    # vpn
   ];
 
   # FOR QUICKSYNC
