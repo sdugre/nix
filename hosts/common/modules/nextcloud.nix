@@ -6,6 +6,9 @@
   hostname,
   ...
 }: {
+  # enable writing to external storage
+  users.users.nextcloud.extraGroups = [ "users" ];
+
   sops.secrets."nextcloud/admin_password" = {
     sopsFile = ../../${hostname}/secrets.yaml;
     owner = "nextcloud";

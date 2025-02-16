@@ -38,7 +38,7 @@
   };
 
   fileSystems."/svr/nfs/photos" = {
-    device = "/mnt/data/photos";
+    device = "/mnt/photos";
     options = ["bind"];
   };
 
