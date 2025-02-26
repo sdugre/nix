@@ -10,6 +10,7 @@ in
   services.immich = {
     enable = true;
     host = "0.0.0.0";
+    group = "users";
     environment.IMMICH_MACHINE_LEARNING_URL = "http://localhost:3003";
   };
 

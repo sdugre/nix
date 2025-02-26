@@ -8,18 +8,20 @@
   LUBELOGGER-DB_CREDS = config.sops.secrets.lubelogger-db-env.path;
   basePath = "/var/lib/containers/lubelogger";
   port = 8999;
-  initSql = pkgs.fetchFromGitHub {
-    owner = "hargata";
-    repo = "lubelog";
-    rev = "main";  # or specific commit hash
-    sha256 = "sha256-Ee9jwbZNc5M9edGkPvbO7xaraYXVMbVazVOU6DV6nFc=";  # replace with actual hash
-  } + "/init.sql";
+  initSql =
+    pkgs.fetchFromGitHub {
+      owner = "hargata";
+      repo = "lubelog";
+      rev = "main"; # or specific commit hash
+      sha256 = "sha256-Ee9jwbZNc5M9edGkPvbO7xaraYXVMbVazVOU6DV6nFc="; # replace with actual hash
+    }
+    + "/init.sql";
 in {
   sops.secrets."lubelogger-db-env" = {
     sopsFile = ../../../${hostname}/secrets.yaml;
   };
 
-  networking.firewall.allowedTCPPorts = [ (lib.toInt (toString port)) ];
+  networking.firewall.allowedTCPPorts = [(lib.toInt (toString port))];
 
   # we create a systemd service so that we can create a single "pod"
   # for our containers to live inside of. This will mimic how docker compose
@@ -27,8 +29,8 @@ in {
   systemd.services.create-lubelogger-pod = with config.virtualisation.oci-containers; {
     serviceConfig.Type = "oneshot";
     description = "Create Lubelogger Podman pod";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
     # wantedBy = [
     #  "${backend}-lubelogger.service"
     #  "${backend}-lubelogger-db.service"
@@ -57,7 +59,7 @@ in {
     lubelogger-app = {
       image = "ghcr.io/hargata/lubelogger:latest";
       environment = {
-	LC_ALL = "en_US.UTF-8";
+        LC_ALL = "en_US.UTF-8";
         LANG = "en_US.UTF-8";
         LOGGING__LOGLEVEL__DEFAULT = "Error";
       };
@@ -86,10 +88,10 @@ in {
       image = "postgres:14";
       environment = {
       };
-      environmentFiles = [ LUBELOGGER-DB_CREDS ];
+      environmentFiles = [LUBELOGGER-DB_CREDS];
       volumes = [
         "/var/lib/containers/lubelogger/postgres:/var/lib/postgresql/data"
-	"/etc/localtime:/etc/localtime:ro"
+        "/etc/localtime:/etc/localtime:ro"
         "${initSql}:/docker-entrypoint-initdb.d/init.sql"
       ];
       extraOptions = [
