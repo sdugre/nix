@@ -125,7 +125,13 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 5900 5901 5902 1935 2489 5000 ]; #2489 lemonade
+  networking.firewall.allowedTCPPorts = [ 
+    5900 
+    5901 
+    5902 
+    1935 
+    2489    # lemonade
+    5000 ]; 
 
   # 5000 frigate (test)
   # END VMs
