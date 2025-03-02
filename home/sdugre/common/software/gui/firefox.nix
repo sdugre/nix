@@ -37,7 +37,7 @@ in {
       };
 
       isDefault = true;
-      extensions = with addons; [
+      extensions.packages = with addons; [
         bitwarden
         libredirect
 	      linkding-extension
