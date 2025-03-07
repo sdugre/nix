@@ -9,5 +9,6 @@
   # Personal scripts
   backlight = pkgs.callPackage ./backlight {};
   rofi-logout = pkgs.callPackage ./rofi-logout {};
+  rotate-video = pkgs.callPackage ./rotate-video {};
   test-pkg = pkgs.callPackage ./test-pkg {};
 }

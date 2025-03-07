@@ -36,6 +36,7 @@
   environment.systemPackages = with pkgs; [
     jq
     lsof
+    rotate-video # personal script
     sops
     usbutils
   ];
