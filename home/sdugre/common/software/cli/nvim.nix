@@ -1,8 +1,13 @@
 {
   config,
   pkgs,
+  inputs,
   ...
-}: {
+}: 
+
+# Required to use vimThemeFromScheme to set colorscheme.
+# with inputs.nix-colors.lib-contrib { inherit pkgs; };
+{
   programs.neovim = {
     enable = true;
 
@@ -12,7 +17,7 @@
       */
       ''
         set clipboard=unnamedplus
-	set number relativenumber
+	      set number relativenumber
         set scrolloff=10
         set expandtab
         set tabstop=2
@@ -22,5 +27,14 @@
       '';
     viAlias = true;
     vimAlias = true;
+#    plugins = with pkgs.vimPlugins; [
+#      # Set theme to nix-colors'.
+#      {
+#        plugin = vimThemeFromScheme { scheme = colorscheme; };
+#        config = ''
+#          colorscheme nix-${colorscheme.slug}
+#        '';
+#      }
+#    ];
   };
 }

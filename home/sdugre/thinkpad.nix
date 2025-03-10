@@ -4,12 +4,15 @@
   config,
   nix-colors,
   ...
-}: {
+}: 
+  let 
+    wallpaperPath = "~/Documents/nix-config/home/sdugre/wallpapers/landscape-morning.jpg";
+  in {
   imports = [
     # Optional machine specific packages
     ./common/software/gui/vscodium.nix
   ];
 
-  wallpaper = "~/Documents/nix-config/home/sdugre/wallpapers/landscape-morning.jpg";
+  wallpaper = wallpaperPath;
   colorscheme = inputs.nix-colors.colorSchemes.atlas;
 }
