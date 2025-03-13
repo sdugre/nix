@@ -24,12 +24,14 @@
         set shiftwidth=2
         set softtabstop=2
         set autoindent
+
+        vmap <C-c> y:OSCYankVisual<cr>
       '';
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
-      # Set theme to nix-colors'.
-      {
+      vim-oscyank # allows copy to local clipboard from remote nvim session
+      { # Set theme to nix-colors'.
         plugin = vimThemeFromScheme { scheme = config.colorscheme; };
         config = ''
           colorscheme nix-${config.colorscheme.slug}
