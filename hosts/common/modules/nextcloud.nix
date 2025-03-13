@@ -105,7 +105,7 @@
     #   '';
     # };
   };
-#    
+    
 #  services.nginx.virtualHosts."office.seandugre.com" =  {
 #    enableACME = true;
 #    forceSSL = true;
