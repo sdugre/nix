@@ -6,7 +6,7 @@
 }: 
 
 # Required to use vimThemeFromScheme to set colorscheme.
-# with inputs.nix-colors.lib-contrib { inherit pkgs; };
+ with inputs.nix-colors.lib-contrib { inherit pkgs; };
 {
   programs.neovim = {
     enable = true;
@@ -27,14 +27,14 @@
       '';
     viAlias = true;
     vimAlias = true;
-#    plugins = with pkgs.vimPlugins; [
-#      # Set theme to nix-colors'.
-#      {
-#        plugin = vimThemeFromScheme { scheme = colorscheme; };
-#        config = ''
-#          colorscheme nix-${colorscheme.slug}
-#        '';
-#      }
-#    ];
+    plugins = with pkgs.vimPlugins; [
+      # Set theme to nix-colors'.
+      {
+        plugin = vimThemeFromScheme { scheme = config.colorscheme; };
+        config = ''
+          colorscheme nix-${config.colorscheme.slug}
+        '';
+      }
+    ];
   };
 }
