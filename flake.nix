@@ -35,7 +35,7 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nixarr.url = "github:rasmus-kirk/nixarr";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = {

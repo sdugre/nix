@@ -33,29 +33,29 @@
   };
 
   home.pointerCursor = {
-    gtk.enable = true;
-    # x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 16;
+#    gtk.enable = true;
+#    # x11.enable = true;
+#    package = pkgs.bibata-cursors;
+#    name = "Bibata-Modern-Classic";
+#    size = 16;
   };
 
   gtk = {
     enable = true;
-    theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Grey-Darkest";
-    };
+#    theme = {
+#      package = pkgs.flat-remix-gtk;
+#      name = "Flat-Remix-GTK-Grey-Darkest";
+#    };
 
     iconTheme = {
       package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
 
-    font = {
-      name = "Sans";
-      size = 11;
-    };
+#    font = {
+#      name = "Sans";
+#      size = 11;
+#    };
   };
 
   wayland.windowManager.hyprland = {
@@ -76,16 +76,16 @@
         gaps_in = 3;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "0xff${config.colorscheme.palette.base0C}";
-        "col.inactive_border" = "0xff${config.colorscheme.palette.base02}";
+#       "col.active_border" = "0xff${config.colorscheme.palette.base0C}";
+#       "col.inactive_border" = "0xff${config.colorscheme.palette.base02}";
       };
       cursor = {
         inactive_timeout = 4;
       };
 
       group = {
-        "col.border_active" = "0xff${config.colorscheme.palette.base0B}";
-        "col.border_inactive" = "0xff${config.colorscheme.palette.base04}";
+#       "col.border_active" = "0xff${config.colorscheme.palette.base0B}";
+#        "col.border_inactive" = "0xff${config.colorscheme.palette.base04}";
         groupbar = {
           font_size = 11;
         };
@@ -112,8 +112,8 @@
           enabled = true;
           range = 12;
           offset = "3 3";
-          color = "0x44000000";
-          color_inactive = "0x66000000";
+#          color = "0x44000000";
+#          color_inactive = "0x66000000";
         };
       };
 

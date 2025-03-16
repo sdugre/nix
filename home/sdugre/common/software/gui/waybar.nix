@@ -124,7 +124,8 @@ in {
     # x y z -> top, horizontal, bottom
     # w x y z -> top, right, bottom, left
     style = let
-      inherit (config.colorscheme) palette;
+#      inherit (config.colorscheme) palette;
+      colors = config.lib.stylix.colors;
     in
       /*
       css
@@ -144,37 +145,37 @@ in {
         window#waybar.top {
           opacity: 0.95;
           padding: 0;
-          background-color: #${palette.base00};
-          border: 2px solid #${palette.base0C};
+          background-color: #${colors.base00};
+          border: 2px solid #${colors.base0C};
           border-radius: 10px;
         }
         window#waybar.bottom {
           opacity: 0.90;
-          background-color: #${palette.base00};
-          border: 2px solid #${palette.base0C};
+          background-color: #${colors.base00};
+          border: 2px solid #${colors.base0C};
           border-radius: 10px;
         }
         window#waybar {
-          color: #${palette.base05};
+          color: #${colors.base05};
         }
         #workspaces button {
-          background-color: #${palette.base02};
-          color: #${palette.base05};
+          background-color: #${colors.base0A};
+          color: #${colors.base04};
           margin: 4px;
         }
         #workspaces button.hidden {
-          background-color: #${palette.base00};
-          color: #${palette.base04};
+          background-color: #${colors.base00};
+          color: #${colors.base03};
         }
         #workspaces button.focused,
         #workspaces button.active {
-          background-color: #${palette.base0B};
-          color: #${palette.base00};
+          background-color: #${colors.base0F};
+         color: #${colors.base00};
         }
 
         #clock {
-          background-color: #${palette.base02};
-          color: #${palette.base00};
+          background-color: #${colors.base0A};
+          color: #${colors.base00};
           padding-left: 15px;
           padding-right: 15px;
           margin-top: 0;
@@ -183,8 +184,8 @@ in {
         }
 
         #custom-hostname {
-          background-color: #${palette.base02};
-          color: #${palette.base00};
+          background-color: #${colors.base0A};
+          color: #${colors.base00};
           padding-left: 15px;
           padding-right: 18px;
           margin-right: 0;
@@ -193,7 +194,7 @@ in {
           border-radius: 10px;
         }
         #tray {
-          color: #${palette.base05};
+          color: #${colors.base05};
         }
       '';
   };
