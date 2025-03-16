@@ -103,6 +103,11 @@
         hostname = "thinkpad";
         desktop = "hyprland";
       }; # primary laptop
+      optiplex = libx.mkHost {
+        hostname = "optiplex";
+        desktop = "hyprland";
+        stateVer = "24.11";
+      };
     };
 
     homeConfigurations = {
@@ -119,6 +124,11 @@
       };
       "sdugre@thinkpad" = libx.mkHome {
         hostname = "thinkpad";
+        desktop = "hyprland";
+        nix-config-path = "~/Documents/nix-config";
+      };
+      "sdugre@optiplex" = libx.mkHome {
+        hostname = "optiplex";
         desktop = "hyprland";
         nix-config-path = "~/Documents/nix-config";
       };
