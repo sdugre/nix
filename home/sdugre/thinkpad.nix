@@ -23,8 +23,7 @@
   stylix.image = ./landscape-morning.jpg;
   stylix.targets.hyprlock.enable = false;
   stylix.targets.mako.enable = false;
-#  stylix.targets.waybar.enableLeftBackColors = true;
-#  stylix.targets.waybar.enableCenterBackColors = true;
-#  stylix.targets.waybar.enableRightBackColors = true;
   stylix.polarity = "dark";
+  stylix.targets.vscode.profileNames = [ "Default" ];
+  stylix.targets.firefox.profileNames = [ "default" ];
 }
