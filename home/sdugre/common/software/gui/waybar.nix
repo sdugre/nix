@@ -160,16 +160,16 @@ in {
         }
         #workspaces button {
           background-color: #${colors.base0A};
-          color: #${colors.base00};
+          color: #${colors.base04};
           margin: 4px;
         }
         #workspaces button.hidden {
           background-color: #${colors.base00};
-          color: #${colors.base04};
+          color: #${colors.base03};
         }
         #workspaces button.focused,
         #workspaces button.active {
-          background-color: #${colors.base0B};
+          background-color: #${colors.base0F};
          color: #${colors.base00};
         }
 
