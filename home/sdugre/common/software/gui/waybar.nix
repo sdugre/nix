@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: let
   # Dependencies
@@ -19,6 +20,7 @@ in {
         height = 40;
         margin = "6";
         position = "top";
+        output = (lib.head (lib.filter (m: m.primary) config.monitors)).name; # show bar only on primary monitor
 
         modules-left = [
           "custom/hostname"

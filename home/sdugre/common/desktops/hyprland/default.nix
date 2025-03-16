@@ -200,7 +200,18 @@
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", switch:on:Lid Switch, exec, pidof hyprlock || ${hyprlock}"
       ];
-      monitor = ["eDP-1,1920x1080,0x0,1"];
+#      monitor = ["eDP-1,1920x1080,0x0,1"];
+      monitor = map (
+        m: "${m.name},${
+          if m.enabled
+          then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
+          else "disable"
+        }"
+      ) config.monitors;
+
+      workspace = map (m: "name:${m.workspace},monitor:${m.name}") (
+        lib.filter (m: m.enabled && m.workspace != null) config.monitors
+      );
     };
   };
 }

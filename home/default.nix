@@ -16,7 +16,6 @@ in {
   imports =
     [
       # modules
-      # inputs.nur.hmModules.nur
       inputs.nur.modules.homeManager.default
       inputs.nix-colors.homeManagerModule
 
