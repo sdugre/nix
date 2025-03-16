@@ -15,6 +15,7 @@
     ../common/optional/networkDrives.nix
     ../common/optional/pipewire.nix
     ../common/optional/electronics.nix
+    ../common/modules/colors.nix
   ];
 
 #  services.tailscaleAutoconnect = {
