@@ -6,7 +6,7 @@
   ...
 }: 
   let 
-    wallpaperPath = "~/Documents/nix-config/home/sdugre/wallpapers/landscape-morning.jpg";
+    wallpaperPath = "~/Documents/nix-config/home/sdugre/wallpapers/forest.jpg";
   in {
   imports = [
     # Optional machine specific packages
