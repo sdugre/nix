@@ -16,6 +16,7 @@
     ../../software/gui/hypridle.nix
     ../../software/gui/hyprlock.nix
     ../../software/gui/waybar.nix
+    ../../software/gui/hyprpaper.nix
   ];
 
   #  xdg.portal.config.common.default = "*";
@@ -119,7 +120,8 @@
 
       exec-once = [
         "${config.services.mako.package}/bin/makoctl &"
-        "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill &"
+#        "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill &"
+        "${pkgs.hyprpaper}/bin/hyprpaper"
         "nm-applet --indicator"
         "${pkgs.hypridle}/bin/hypridle"
         "hyprctl setcursor Bibata-Modern-Classic 24"
@@ -207,10 +209,10 @@
           then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
           else "disable"
         }"
-      ) config.monitors;
+      ) (config.monitors);
 
       workspace = map (m: "name:${m.workspace},monitor:${m.name}") (
-        lib.filter (m: m.enabled && m.workspace != null) config.monitors
+        lib.filter (m: m.enabled && m.workspace != null) (config.monitors)
       );
     };
   };

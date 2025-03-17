@@ -6,8 +6,8 @@
   ...
 }: 
   let 
-    wallpaperPath = "./wallpapers/landscape-morning.jpg";
-#    wallpaperPath = "~/Documents/nix-config/home/sdugre/wallpapers/landscape-morning.jpg";
+#    wallpaperPath = "./wallpapers/landscape-morning.jpg";
+    wallpaperPath = "~/Documents/nix-conf/home/sdugre/wallpapers/mountain.jpeg";
 
   in {
   imports = [
