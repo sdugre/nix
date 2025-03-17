@@ -3,12 +3,14 @@ keys:
   - &users:
     - &sdugre_thinkpad age12v00v0egc0zdztxu06su7p8rer2k90k0px8ld74e0s2pc4q7nd8sy0x39t
     - &sdugre_chummie age1vulqhl4axmf07h0hczw68s3yegz9kv3daunsw34tqnnw8eyuyfns3ajqxp
+    - &sdugre_optiplex age1xh95w5mu5p8xm3xeyc0nwcgw8eg2fe2wlzall3qngwchwh2eue3sx2yw28
   # hosts
   - &hosts:
     - &thinkpad age13xhw5pn7s0wd3z2j7dtkm0a837qcv989y85ddmyxdha0pnhw3exs3h867k
     - &chummie age17quzpf2sen9cjjzyqaczvhqnq7vvc9zuptlvs6azyagcecpgtsds9v9yfv
     - &nixos age16mvzwggryj37l3n70xmxlax7qs7vf2w82tzrl2txjx570h8q0yyspexn79
     - &chromebook age1y5ue0jn8j0aryul67lzkakltn287sgcdl8jjzxg6fmemed8pruhss45ymu
+    - &optiplex age1x8h0f4km2fuunmzmr0gfl4843lc4d23tc34qjt9nxqmtspcsrulque3ymg
 
 creation_rules:
   - path_regex: hosts/thinkpad/secrets.yaml$
@@ -32,18 +34,27 @@ creation_rules:
     - age:
       - *chromebook
 
+  - path_regex: hosts/optiplex/secrets.yaml$
+    key_groups:
+    - age:
+      - *optiplex
+      - *sdugre_optiplex
+
   - path_regex: hosts/common/secrets.yaml$
     key_groups:
     - age:
       - *thinkpad
       - *chummie
       - *nixos
+      - *optiplex
       - *chromebook
       - *sdugre_thinkpad
       - *sdugre_chummie
+      - *sdugre_optiplex
 
   - path_regex: home/sdugre/secrets.yaml$
     key_groups:
     - age:
       - *sdugre_thinkpad
       - *sdugre_chummie
+      - *sdugre_optiplex

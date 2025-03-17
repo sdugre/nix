@@ -18,18 +18,18 @@
     ../common/modules/colors.nix
   ];
 
-#  services.tailscaleAutoconnect = {
-#    enable = true;
-#    authkeyFile = config.sops.secrets.tailscale_key.path;
-#    loginServer = "";
-#    enableSSH = true;
-#    exitNode = "100.89.245.83";
-#    exitNodeAllowLanAccess = true;
-#  };
+  services.tailscaleAutoconnect = {
+    enable = true;
+    authkeyFile = config.sops.secrets.tailscale_key.path;
+    loginServer = "";
+    enableSSH = true;
+    exitNode = "100.89.245.83";
+    exitNodeAllowLanAccess = true;
+  };
 
- # sops.secrets.tailscale_key = {
- #   sopsFile = ./secrets.yaml;
- # };
+  sops.secrets.tailscale_key = {
+    sopsFile = ./secrets.yaml;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
