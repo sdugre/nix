@@ -29,6 +29,9 @@
   stylix.polarity = "dark";
   stylix.targets.vscode.profileNames = [ "Default" ];
   stylix.targets.firefox.profileNames = [ "default" ];
+  stylix.cursor.package = pkgs.bibata-cursors;
+  stylix.cursor.name = "Bibata-Modern-Classic";
+  stylix.cursor.size = 20;
 
   #  ------   -----   ------
   # | DP-3 | | DP-1| | DP-2 |
