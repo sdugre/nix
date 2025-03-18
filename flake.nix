@@ -130,7 +130,7 @@
       "sdugre@optiplex" = libx.mkHome {
         hostname = "optiplex";
         desktop = "hyprland";
-        nix-config-path = "~/Documents/nix-config";
+        nix-config-path = "~/Documents/nix-conf";
       };
     };
   };
