@@ -16,6 +16,7 @@
     ../common/optional/pipewire.nix
     ../common/optional/electronics.nix
     ../common/modules/colors.nix
+    ../common/modules/distributed-builds.nix
   ];
 
   services.tailscaleAutoconnect = {

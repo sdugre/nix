@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (config.colorscheme) palette;
+#  inherit (config.colorscheme) palette;
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   font-family = "${config.fontProfiles.regular.family}";
   wallpaper = "${config.wallpaper}";
@@ -42,9 +42,9 @@ in {
         dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
         dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
         dots_center = true;
-        outer_color = "rgba(0, 0, 0, 0)";
-        inner_color = "rgba(0, 0, 0, 0.5)";
-        font_color = "rgb(200, 200, 200)";
+#        outer_color = "rgba(0, 0, 0, 0)";
+#        inner_color = "rgba(0, 0, 0, 0.5)";
+#        font_color = "rgb(200, 200, 200)";
         fade_on_empty = false;
         placeholder_text = "Enter password to unlock";
         hide_input = false;
@@ -57,7 +57,7 @@ in {
         # TIME
         {
           text = "cmd[update:1000] date +\"%H:%M\"";
-          color = "rgba(255, 255, 255, 0.9)";
+#          color = "rgba(255, 255, 255, 0.9)";
           font_size = 100;
           font_family = "${font-family}";
           position = "0, -300";
@@ -68,7 +68,7 @@ in {
         # USER
         {
           text = "$USER";
-          color = "rgba(255, 255, 255, 0.6)";
+#          color = "rgba(255, 255, 255, 0.6)";
           font_size = 20;
           font_family = "${font-family}";
           position = "0, -40";
@@ -79,7 +79,7 @@ in {
         # CURRENT SONG
         {
           text = "cmd[update:1000] ${playerctl} metadata --format '{{title}}   {{artist}}'";
-          color = "rgba(255, 255, 255, 0.6)";
+#          color = "rgba(255, 255, 255, 0.6)";
           font_size = 18;
           font_family = "${font-family}";
           position = "0, 0";

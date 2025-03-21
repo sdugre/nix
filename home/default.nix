@@ -65,7 +65,7 @@ in {
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  colorscheme = lib.mkDefault colorSchemes.dracula;
+#  colorscheme = lib.mkDefault colorSchemes.dracula;
 
   sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
 }

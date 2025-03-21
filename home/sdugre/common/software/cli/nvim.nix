@@ -6,7 +6,7 @@
 }: 
 
 # Required to use vimThemeFromScheme to set colorscheme.
- with inputs.nix-colors.lib-contrib { inherit pkgs; };
+ # with inputs.nix-colors.lib-contrib { inherit pkgs; };
 {
   programs.neovim = {
     enable = true;
@@ -31,12 +31,12 @@
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
       vim-oscyank # allows copy to local clipboard from remote nvim session
-      { # Set theme to nix-colors'.
-        plugin = vimThemeFromScheme { scheme = config.colorscheme; };
-        config = ''
-          colorscheme nix-${config.colorscheme.slug}
-        '';
-      }
+ #     { # Set theme to nix-colors'.
+ #       plugin = vimThemeFromScheme { scheme = config.colorscheme; };
+ #       config = ''
+ #         colorscheme nix-${config.colorscheme.slug}
+ #       '';
+ #     }
     ];
   };
 }

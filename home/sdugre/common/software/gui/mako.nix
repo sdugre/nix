@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (config.colorscheme) palette kind;
+#  inherit (config.colorscheme) palette kind;
 in {
   services.mako = {
     enable = true;
@@ -19,9 +19,9 @@ in {
     width = 400;
     height = 150;
     borderSize = 2;
-    backgroundColor = "#${palette.base00}dd";
-    borderColor = "#${palette.base03}dd";
-    textColor = "#${palette.base05}dd";
+#    backgroundColor = "#${palette.base00}dd";
+#    borderColor = "#${palette.base03}dd";
+#    textColor = "#${palette.base05}dd";
     layer = "overlay";
   };
 

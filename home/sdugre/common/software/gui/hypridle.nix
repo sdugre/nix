@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  isLaptop,
   ...
 }: let
   hyprlock = "${config.programs.hyprlock.package}/bin/hyprlock";
@@ -11,7 +10,7 @@
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   backlight = "${pkgs.backlight}/bin/backlight";
 
-  lockTime = 5 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
+  lockTime = if config.device.isLaptop then 5 * 60 else 15 * 60;
   dimBeforeTime = 10; # seconds before lockTime to dim screen
   suspendAfterTime = 5 * 60; # minutes after lockTime to suspend
 in {
