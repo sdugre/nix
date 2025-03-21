@@ -4,7 +4,10 @@
     createHome = false;
     group = "remotebuild";
 
-    openssh.authorizedKeys.keyFiles = [ ./remotebuild.pub ];
+    openssh.authorizedKeys.keyFiles = [ 
+      ./remotebuild.pub 
+      ./remotebuild-thinkpad.pub
+    ];
   };
 
   users.groups.remotebuild = {};
