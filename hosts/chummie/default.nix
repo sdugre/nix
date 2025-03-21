@@ -34,6 +34,7 @@
     ../common/modules/ntfy.nix          # Notification service
     ../common/modules/paperless.nix     # Documents
     ../common/modules/plex.nix          # Plex Media Server
+    ../common/modules/remote-builder.nix # Distributed Nix Builds
     ../common/modules/restic.nix        # Backups
     ../common/modules/rss.nix           # miniflux & rss-bridge
     ../common/modules/searxng.nix       # private search engine
