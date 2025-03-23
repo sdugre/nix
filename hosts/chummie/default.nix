@@ -17,6 +17,7 @@
     ../common/modules/acme.nix          # certs
     ../common/modules/actual-budget.nix # Personal finance
     ../common/modules/authelia.nix      # SSO
+    ../common/modules/binary-cache.nix  # Binary Cache for nix builds
     ../common/modules/calibre.nix       # eBooks
     ../common/modules/containers        # Podman Containers
     #../common/modules/dokuwiki.nix     # Personal Wiki - works. don't like it.
