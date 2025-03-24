@@ -70,6 +70,6 @@
 
   nix.settings = {
     extra-substituters = [ "http://bin-cache" ];
-    extra-trusted-public-keys = [ "bin-cache:9K9KsjABYjB7rh7xfL6UyDvw5E5wp3lxiUSuSYw0cAM=%" ];
+    extra-trusted-public-keys = [ "bin-cache:O7CCOIP4nu44qHdDzUuf1cEDSiCe0ArU8EM3QDJSLPY=" ];
   };
 }
