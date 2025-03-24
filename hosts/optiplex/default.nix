@@ -54,4 +54,10 @@
   ]; 
 
   services.usbmuxd.enable = true; # for iphone mount
+  
+  nix.settings = {
+    extra-substituters = [ "http://bin-cache" ];
+    extra-trusted-public-keys = [ "bin-cache:9K9KsjABYjB7rh7xfL6UyDvw5E5wp3lxiUSuSYw0cAM=%" ];
+  };
 }
+
