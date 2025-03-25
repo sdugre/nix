@@ -62,7 +62,7 @@ in {
             definedAliases = ["@nixpkgs" "@np"];
           };
 
-          "YouTube" = {
+          "youtube" = {
             urls = [{template = "https://yewtu.be/search?q={searchTerms}";}];
             icon = ''${pkgs.fetchurl {
                 url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
@@ -82,14 +82,14 @@ in {
 
           "Perplexity" = {
             urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
-            iconUpdateURL = "https://www.perplexity.ai/favicon.ico";
+            icon = "https://www.perplexity.ai/favicon.ico";
             updateInterval = 7 * 24 * 60 * 60 * 1000;
             definedAliases = ["@pp"];
           };
 
           "SearX" = {
             urls = [{ template = "https://search.seandugre.com/?q={searchTerms}"; }];
-            iconUpdateURL = "https://nixos.wiki/favicon.png";
+            icon = "https://nixos.wiki/favicon.png";
             updateInterval = 24 * 60 * 60 * 1000; # every day
             definedAliases = [ "@sx" ];
           };
