@@ -30,8 +30,13 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
-    arkenfox.url = "git+https://github.com/dwarfmaster/arkenfox-nixos?ref=main";
-    arkenfox.inputs.nixpkgs.follows = "nixpkgs";
+ #   arkenfox.url = "git+https://github.com/dwarfmaster/arkenfox-nixos?ref=main";
+#    arkenfox.inputs.nixpkgs.follows = "nixpkgs";
+
+    betterfox = {
+      url = "github:HeitorAugustoLN/betterfox-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     impermanence.url = "github:nix-community/impermanence";
 
@@ -46,7 +51,7 @@
     hyprland,
     nix-colors,
     nixos-hardware,
-    arkenfox,
+    betterfox,
     nixarr,
     ...
   } @ inputs: let

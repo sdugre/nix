@@ -6,42 +6,48 @@
 }: let
   addons = inputs.firefox-addons.packages.${pkgs.system};
 in {
-  imports = [inputs.arkenfox.hmModules.arkenfox];
+  imports = [inputs.betterfox.homeManagerModules.betterfox];
 
   programs.firefox = {
     enable = true;
-    arkenfox = {
-      enable = true;
-      version = "128.0";
+    policies = {
+      DisableTelemetry = true;
+      DisablePocket = true;
+      DisableFirefoxStudies = true;
+      EnableTrackingProtection = {
+        Value = true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+      };
+      OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
+      Preferences = {
+        # use bitwarden for this
+        "signon.rememberSignons" = false;
+      };
+      ExtensionSettings = {
+        # Disable built-in search engines
+        "amazondotcom@search.mozilla.org".installation_mode = "blocked";
+        "bing@search.mozilla.org".installation_mode = "blocked";
+        "ebay@search.mozilla.org".installation_mode = "blocked";
+        "google@search.mozilla.org".installation_mode = "blocked";
+      };
     };
+    betterfox.enable = true;
     profiles.default = {
       id = 0;
-      arkenfox = {
+      betterfox = {
         enable = true;
-        "0000".enable = true;
-        "0100".enable = true; # Startup
-        "0200".enable = true; # Geolocation
-        "0300".enable = true; # Quieter Fox
-        "0600".enable = true; # Block Implicit Outbound
-        "0700".enable = true; # DNS
-        "0800".enable = true; # Location Bar
-        "0900".enable = true; # Passwords
-        "1000".enable = true; # Disk Avoidance
-        "1200".enable = true; # HTTPS
-        "1600".enable = true; # REFERERS
-        "2000".enable = true; # PLUGINS
-        "2600".enable = true; # MISC
-        "2700".enable = true; # ENHANCED TRACKING PROTECTION
-        "2800".enable = true; # SHUTDOWN & SANITIZING
-        "4500".enable = true; # RFP (resist fingerprinting)
+        enableAllSections = true;
       };
 
       isDefault = true;
       extensions.packages = with addons; [
         bitwarden
         libredirect
-	      linkding-extension
-	      linkding-injector
+        linkding-extension
+        linkding-injector
         ublock-origin
         #        bypass-paywalls-clean
         istilldontcareaboutcookies
@@ -88,12 +94,17 @@ in {
           };
 
           "SearX" = {
-            urls = [{ template = "https://search.seandugre.com/?q={searchTerms}"; }];
+            urls = [{template = "https://search.seandugre.com/?q={searchTerms}";}];
             icon = "https://nixos.wiki/favicon.png";
             updateInterval = 24 * 60 * 60 * 1000; # every day
-            definedAliases = [ "@sx" ];
+            definedAliases = ["@sx"];
           };
-
+          # Hide all other search engines
+          amazondotcom-us.metaData.hidden = true;
+          google.metaData.hidden = true;
+          bing.metaData.hidden = true;
+          ebay.metaData.hidden = true;
+          wikipedia.metaData.hidden = true;
         };
       };
 
