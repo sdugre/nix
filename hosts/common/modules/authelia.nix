@@ -106,6 +106,31 @@
         };
       };
 
+# DRAFT #
+#      authentication_backend = {
+#        password_reset.disable = false;
+#        refresh_interval = "1m";
+#        ldap = {
+#          implementation = "custom";
+#          address = "ldap://127.0.0.1:${toString config.services.lldap.settings.ldap_port}";
+#          timeout = "5m";
+#          start_tls = false;
+#          base_dn = "dc=seandugre,dc=com";
+#          additional_users_dn = "ou=people";
+#          users_filter = "(&({username_attribute}={input})(objectClass=person))";
+#          additional_groups_dn = "ou=groups";
+#          groups_filter = "(member={dn})";
+#          attributes = {
+#            user_name = "uid";
+#            member_of = "memberOf";
+#            group_name = "cn";
+#            mail = "mail";
+#            display_name_attribute = "displayName";
+#          };
+#          user = "uid=admin,ou=people,dc=seandugre,dc=com";
+#        };
+#      };
+
       identity_providers.oidc = {
         cors = {
           endpoints = [

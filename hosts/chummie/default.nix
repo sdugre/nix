@@ -26,6 +26,7 @@
     ../common/modules/gonic.nix         # Music Server
     ../common/modules/jellyfin.nix      # Media Server
     ../common/modules/immich.nix        # Photo management
+    ../common/modules/lldap.nix         # LDAP Server for Authelia
     ../common/modules/mail.nix          # Mail server for notifications
     ../common/modules/mealie.nix        # Meal planning and recipies
     ../common/modules/nextcloud.nix     # Cloud
