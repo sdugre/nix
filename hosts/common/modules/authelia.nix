@@ -23,6 +23,7 @@
       "authelia/oidcHmacSecretFile" = cfg;
       "authelia/oidcIssuerPrivateKeyFile" = cfg;
       "authelia/lldap" = cfg;
+      "authelia/gmail_token" = cfg;
     };
   };
 
@@ -43,6 +44,7 @@
     };
     environmentVariables = {
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = config.sops.secrets."authelia/lldap".path;
+      AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = config.sops.secrets."authelia/gmail_token".path;
     };
     settings = {
       theme = "dark";
@@ -50,8 +52,6 @@
 
       server = {
         address = "127.0.0.1:9091";
-        #        host = "127.0.0.1";
-        #        port = 9091;
       };
 
       log = {
@@ -59,29 +59,6 @@
         format = "text";
       };
 
-#      authentication_backend = {
-#        file = {
-#          path = config.sops.secrets."authelia_login".path;
-#          watch = false;
-#          search = {
-#            email = false;
-#            case_insensitive = false;
-#          };
-#          password = {
-#            algorithm = "argon2";
-#            argon2 = {
-#              variant = "argon2id";
-#              iterations = 3;
-#              memory = 65536;
-#              parallelism = 4;
-#              key_length = 32;
-#              salt_length = 16;
-#            };
-#          };
-#        };
-#      };
-
-# DRAFT #
       authentication_backend = {
         password_reset.disable = false;
         refresh_interval = "1m";
@@ -118,6 +95,11 @@
         };
       };
 
+      totp = {
+        disable = false;
+        issuer = "seandugre.com";
+      };
+
       access_control = {
         default_policy = "deny";
         networks = [
@@ -130,6 +112,10 @@
           {
             domain = ["auth.seandugre.com"];
             policy = "bypass";
+          }
+          {
+            domain = ["money.seandugre.com"];
+            policy = "two_factor";
           }
           {
             domain = ["ldap.seandugre.com"];
@@ -172,7 +158,11 @@
 
       notifier = {
         disable_startup_check = false;
-        filesystem = {filename = "/var/lib/authelia-main/notification.txt";};
+        smtp = {
+          address = "submission://smtp.gmail.com:587";
+          username = "sdugre@gmail.com";
+          sender = "admin@seandugre.com";
+        };
       };
     };
   };
