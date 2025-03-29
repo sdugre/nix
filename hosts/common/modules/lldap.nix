@@ -48,7 +48,7 @@ in {
   services.nginx.virtualHosts."${app}.${domain}" = {
     useACMEHost = "${domain}";
     forceSSL = true;
-    enableAuthelia = false;
+    enableAuthelia = true;
     extraConfig = ''
     '';
     locations."/" = {

@@ -132,6 +132,16 @@
             policy = "bypass";
           }
           {
+            domain = ["ldap.seandugre.com"];
+            networks = "internal";
+            subject = ["user:sdugre"];
+            policy = "one_factor";
+          }
+          {
+            domain = ["ldap.seandugre.com"];
+            policy = "deny";
+          }
+          {
             domain = ["*.seandugre.com"];
             networks = "internal";
             policy = "bypass";
