@@ -52,6 +52,7 @@
       python311Packages.requests # may be necessary for beets plugin
       remmina   # RDP
       virt-viewer
+      wake      # personal wake on lan script
       wireshark # network monitoring tool
       xournalpp # annotate pdfs
     ]);
