@@ -15,7 +15,7 @@
     ../../software/gui/rofi.nix
     ../../software/gui/hypridle.nix
     ../../software/gui/hyprlock.nix
-    ../../software/gui/waybar.nix
+    ../../software/gui/waybar2.nix
     ../../software/gui/hyprpaper.nix
   ];
 
