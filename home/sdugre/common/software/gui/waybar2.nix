@@ -17,7 +17,7 @@ in {
       primary = {
         #mode = "dock";
         layer = "top";
-        height = 40;
+        height = 32;
         margin = "6";
         position = "top";
         output = (lib.head (lib.filter (m: m.primary) config.monitors)).name; # show bar only on primary monitor
@@ -157,6 +157,7 @@ in {
 
         temperature = {
           critical-threshold = 90;
+          hwmon-path = "/sys/class/thermal/thermal_zone7/temp";
           interval = 5;
           format = "{icon} {temperatureC}°";
           format-icons = [
@@ -356,8 +357,8 @@ in {
         /* Workspaces stuff */
         #workspaces button {
         	/*font-weight: bold;*/
-        	padding-left: 2pt;
-        	padding-right: 2pt;
+        	padding-left: 4pt;
+        	padding-right: 4pt;
         	color: @white;
         	background: @unfocused;
         }
@@ -441,61 +442,61 @@ in {
         }
         
         #custom-arrow1 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @time;
         	background: @date;
         }
         
         #custom-arrow2 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @date;
         	background: @layout;
         }
         
         #custom-arrow3 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @layout;
         	background: @battery;
         }
         
         #custom-arrow4 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @battery;
         	background: @temp;
         }
         
         #custom-arrow5 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @temp;
         	background: @cpu;
         }
         
         #custom-arrow6 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @cpu;
         	background: @memory;
         }
         
         #custom-arrow7 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @memory;
         	background: @network;
         }
         
         #custom-arrow8 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @network;
         	background: @sound;
         }
         
         #custom-arrow9 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @sound;
         	background: transparent;
         }
         
         #custom-arrow10 {
-        	font-size: 11pt;
+        	font-size: 18pt;
         	color: @unfocused;
         	background: transparent;
         }
