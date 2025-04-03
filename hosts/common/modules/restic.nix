@@ -24,11 +24,15 @@ in {
     repository = "sftp:sdugre@${nasIP}:${backupDir}";
     initialize = true;
     paths = [ 
+      "/var/lib"
       "/home/sdugre"
       "/mnt/photos"
       "/mnt/data/media"
     ];
     exclude = [
+      "/mnt/data/media/movies"
+      "/mnt/data/media/videos*"
+      "/mnt/data/media/tv*"
     ];
     timerConfig = {
       OnCalendar = "03:05";
