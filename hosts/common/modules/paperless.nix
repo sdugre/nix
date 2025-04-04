@@ -30,6 +30,15 @@
       PAPERLESS_DATE_ORDER = "MDY";
       PAPERLESS_EMAIL_TASK_CRON = "*/5 * * * *";
     };
+    exporter = {
+      enable = true;
+      directory = "/mnt/docs";
+      settings = {
+        no-archive = true;
+        no-thumbnail = true;
+        no-progress-bar = true;
+      };
+    };
   };
 
   networking.firewall.allowedTCPPorts = [6382];
