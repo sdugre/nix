@@ -10,6 +10,7 @@
     /svr/nfs/media             100.0.0.0/8(insecure,rw,no_subtree_check,all_squash,anonuid=1001,anongid=986)
     /svr/nfs/files             100.0.0.0/8(insecure,rw,no_subtree_check)
     /svr/nfs/photos            100.0.0.0/8(insecure,rw,no_subtree_check)
+    /svr/nfs/docs              100.0.0.0/8(insecure,rw,no_subtree_check)
     /svr/nfs/music             192.168.1.32(insecure,no_subtree_check) # volumio
   '';
     # fixed rpc.statd port; for firewall
@@ -42,6 +43,10 @@
     options = ["bind"];
   };
 
+  fileSystems."/svr/nfs/docs" = {
+    device = "/mnt/docs";
+    options = ["bind"];
+  };
   networking.firewall.allowedTCPPorts = [ 111 2049 4000 4001 4002 20048 ];
   networking.firewall.allowedUDPPorts = [ 111 2049 4000 4001 4002 20048 ];
 }
