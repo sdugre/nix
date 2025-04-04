@@ -26,4 +26,9 @@ in {
     fsType = "nfs";
     options = mountOptions;
   };
+  fileSystems."/mnt/docs" = {
+    device = chummieIP + ":/svr/nfs/docs";
+    fsType = "nfs";
+    options = mountOptions;
+  };
 }
