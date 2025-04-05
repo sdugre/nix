@@ -27,7 +27,9 @@
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     rofi-logout # personal logout script
     swaybg # wallpaper utility
-  ];
+  ] ++ (if !config.device.isLaptop then [
+    wayvnc # RDP
+  ] else []);
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
@@ -126,6 +128,7 @@
         "${pkgs.hypridle}/bin/hypridle"
         "hyprctl setcursor Bibata-Modern-Classic 24"
         "blueman-applet"
+        (if !config.device.isLaptop then "wayvnc -o DP-1 0.0.0.0" else "")
       ];
 
       bind = let

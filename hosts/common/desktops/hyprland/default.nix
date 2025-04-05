@@ -47,4 +47,7 @@
     TTYVHangup = true;
     TTYVTDisallocate = true;
   };
+
+  networking.firewall.allowedTCPPorts = [ 5900 ]; # for wayvnc
+
 }
