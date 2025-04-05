@@ -47,6 +47,7 @@ in {
           "clock#date"
           "custom/arrow1"
           "clock#time"
+          "custom/power"
         ];
 
         battery = {
@@ -92,6 +93,12 @@ in {
             warning = 70;
             critical = 90;
           };
+        };
+
+        "custom/power" = {
+          format = " ";
+          on-click = "/home/sdugre/.nix-profile/bin/rofi-logout";
+          tooltip = false;
         };
 
         "hyprland/language" = {
@@ -298,7 +305,7 @@ in {
         	padding: 0;
         	box-shadow: none;
         	text-shadow: none;
-        	icon-shadow: none;
+        	-gtk-icon-shadow: none;
           font-size: 14pt;
         }
         
@@ -326,6 +333,7 @@ in {
         #idle_inhibitor,
         #disk,
         #user,
+        #custom-power,
         #mpris {
         	padding-left: 8pt;
         	padding-right: 8pt;
@@ -447,7 +455,7 @@ in {
         	background: @time;
         	color: @black;
         }
-        
+
         #custom-arrow1 {
         	font-size: 18pt;
         	color: @time;
@@ -506,6 +514,11 @@ in {
         	font-size: 18pt;
         	color: @unfocused;
         	background: transparent;
+        }
+
+        #custom-power {
+          color: @black;
+          background: @time;
         }
       '';
   };
