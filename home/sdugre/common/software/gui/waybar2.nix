@@ -157,7 +157,7 @@ in {
 
         temperature = {
           critical-threshold = 90;
-          hwmon-path = "/sys/class/thermal/thermal_zone7/temp";
+          hwmon-path = "/sys/class/thermal/thermal_zone${config.device.cpuThermalZone}/temp";
           interval = 5;
           format = "{icon} {temperatureC}°";
           format-icons = [
