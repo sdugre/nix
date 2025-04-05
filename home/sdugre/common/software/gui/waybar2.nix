@@ -118,10 +118,14 @@ in {
         network = {
           interval = 5;
           format-wifi = " {essid} ({signalStrength}%)";
-          format-ethernet = " {ifname}";
+          format-ethernet = "  {ifname}";
           format-disconnected = "No connection";
           format-alt = " {ipaddr}/{cidr}";
-          tooltip = false;
+          tooltip-format = ''
+            {ifname}
+            {ipaddr}/{cidr}
+            Up: {bandwidthUpBits}
+            Down: {bandwidthDownBits}'';
         };
 
         "hyprland/window" = {
@@ -140,7 +144,8 @@ in {
         pulseaudio = {
           format = "{icon} {volume}%";
           format-bluetooth = "{icon} {volume}%";
-          format-muted = "";
+          #format-muted = "";
+          format-muted = "   0%";
           format-icons = {
             headphone = "";
             hands-free = "";
@@ -151,7 +156,8 @@ in {
             default = ["" ""];
           };
           scroll-step = 1;
-          on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          #on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          on-click = pavucontrol;
           tooltip = false;
         };
 
