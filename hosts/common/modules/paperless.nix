@@ -34,6 +34,8 @@
       enable = true;
       directory = "/mnt/docs";
       settings = {
+        delete = true;
+        use-filename-format = true;
         no-archive = true;
         no-thumbnail = true;
         no-progress-bar = true;
