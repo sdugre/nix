@@ -38,8 +38,8 @@ in {
           "cpu"
           "custom/arrow5"
           "temperature"
-          "custom/arrow4"
-          "battery"
+          (if config.device.isLaptop then "custom/arrow4" else "")
+          (if config.device.isLaptop then "battery" else "")
           "custom/arrow3"
           "disk"
           "custom/arrow2"
@@ -229,6 +229,7 @@ in {
     style = let
 #      inherit (config.colorscheme) palette;
       colors = config.lib.stylix.colors;
+      arrow3BG = if config.device.isLaptop then "@battery" else "@temp";
     in
       /*
       css
@@ -456,7 +457,7 @@ in {
         #custom-arrow3 {
         	font-size: 18pt;
         	color: @layout;
-        	background: @battery;
+        	background: ${arrow3BG};
         }
         
         #custom-arrow4 {
