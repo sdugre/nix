@@ -5,7 +5,7 @@
     ./calibre.seandugre.nix
     ./cars.seandugre.nix
 #    ./cloud.seandugre.nix
-    ./docs.seandugre.nix
+#    ./docs.seandugre.nix
 #    ./food.seandugre.nix  # see mealie config
     ./ha.seandugre.nix
     ./jackett.seandugre.nix

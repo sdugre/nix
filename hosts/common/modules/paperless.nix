@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   hostname,
@@ -6,18 +7,12 @@
 }: {
   sops.secrets."paperless" = {
     sopsFile = ../../${hostname}/secrets.yaml;
-    #   mode = "0400";
-    #    owner = "paperless";
-    #   group = "paperless";
-    #    restartUnits = [ "paperless.service" ];
   };
 
   services.paperless = {
     enable = true;
     address = "0.0.0.0";
     port = 6382;
-    #    mediaDir = "/mnt/docs";
-    #    consumptionDir = "/mnt/docs/paperless-inbox";
     consumptionDirIsPublic = true;
     passwordFile = config.sops.secrets.paperless.path;
     settings = {
@@ -43,7 +38,30 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [6382];
+  # set permissions so users can browse exported files
+  systemd.services.paperless-exporter = {
+    serviceConfig = {
+      ExecStartPost = ''
+        ${pkgs.coreutils}/bin/chmod -R g+r /mnt/docs
+        ${pkgs.coreutils}/bin/chgrp -R ${config.services.paperless.user} /mnt/docs
+      '';
+    };
+  };
+
+#  networking.firewall.allowedTCPPorts = [6382];
+
+  services.nginx.virtualHosts."docs.seandugre.com" = {
+    useACMEHost = "seandugre.com";
+    forceSSL = true;
+    enableAuthelia = true;
+    extraConfig = ''
+      client_max_body_size 10M;
+    '';
+    locations."/" = {
+      proxyPass = "http://192.168.1.200:${toString config.services.paperless.port}";
+      proxyWebsockets = true;
+    };
+  };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [
