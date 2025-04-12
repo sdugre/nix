@@ -178,6 +178,7 @@
       lemonade
       pia-wg-config
       pciutils
+      nextcloud-backup-helper
       smartmontools
       s-tui
       zfs

@@ -7,10 +7,12 @@
   domain = "seandugre.com";
 in 
 {
+  users.groups.photos = {};
+
   services.immich = {
     enable = true;
     host = "0.0.0.0";
-    group = "users";
+    group = "photos";
     environment.IMMICH_MACHINE_LEARNING_URL = "http://localhost:3003";
   };
 

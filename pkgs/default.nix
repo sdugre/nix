@@ -8,6 +8,7 @@
 
   # Personal scripts
   backlight = pkgs.callPackage ./backlight {};
+  nextcloud-backup-helper = pkgs.callPackage ./nextcloud-backup-helper {};
   rofi-logout = pkgs.callPackage ./rofi-logout {};
   rotate-video = pkgs.callPackage ./rotate-video {};
   test-pkg = pkgs.callPackage ./test-pkg {};
