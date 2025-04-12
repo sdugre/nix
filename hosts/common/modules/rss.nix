@@ -58,6 +58,7 @@ in {
       "Youtube"
       "DockerHub"
       "GithubSearchBridge"
+      "WordPressBridge"
     ];
     virtualHost = "rss-bridge.seandugre.com";
   };
