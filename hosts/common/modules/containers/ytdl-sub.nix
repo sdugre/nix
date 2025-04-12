@@ -27,6 +27,8 @@
         PGID = "1000";
         TZ = "America/New_York";
         DOCKER_MODS = "linuxserver/mods:universal-cron";
+        CRON_SCHEDULE = "0 */6 * * *";
+        CRON_RUN_ON_START = "true";        
       };
       autoStart = true;
     };
