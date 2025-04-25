@@ -17,7 +17,7 @@ in {
     dotDir = ".config/zsh";
     history = {}; # all defaults are OK.
     autosuggestion.enable = true;
-    initExtra = ''
+    initContent = ''
       [[ ! -f ${p10kTheme} ]] || source ${p10kTheme}
     '';
     loginExtra = mkIf hyprlandInstalled ''
