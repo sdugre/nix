@@ -52,7 +52,6 @@
     nix-colors,
     nixos-hardware,
     betterfox,
-    nixarr,
     ...
   } @ inputs: let
     inherit (self) outputs;
