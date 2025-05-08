@@ -11,6 +11,7 @@
 
   services.paperless = {
     enable = true;
+#    package = pkgs.stable.paperless-ngx;
     address = "0.0.0.0";
     port = 6382;
     consumptionDirIsPublic = true;

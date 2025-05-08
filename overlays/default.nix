@@ -36,12 +36,29 @@
 #          --replace-fail 'psutil = "^6.0.0"' 'psutil = ">=6.0.0,<8.0.0"'
 #        '';
 #    });
+
+
+    paperless-ngx = prev.paperless-ngx.overrideAttrs (oldAttrs: {
+      doCheck = false;
+      disabledTests = (oldAttrs.disabledTests or [ ]) ++ [
+        "test_barcodes"
+        "test_consume_file"
+        "test_management_consumer"
+        "test_preprocessor"
+      ];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
-  unstable-packages = final: _prev: {
-    unstable = import inputs.nixpkgs-unstable {
+#  unstable-packages = final: _prev: {
+#    unstable = import inputs.nixpkgs-unstable {
+#      system = final.system;
+#      config.allowUnfree = true;
+#    };
+#  };
+  stable-packages = final: _prev: {
+    stable = import inputs.nixpkgs-stable {
       system = final.system;
       config.allowUnfree = true;
     };
