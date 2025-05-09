@@ -8,7 +8,7 @@
 
   services.mealie = {
     enable = true;
-    package = pkgs.stable.mealie;
+    package = pkgs.stablePkgs.mealie; # unstable marked as broken
     settings = {
       BASE_URL = "https://food.seandugre.com";
       OIDC_AUTH_ENABLED = "true";
