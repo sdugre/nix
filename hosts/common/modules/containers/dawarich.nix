@@ -11,7 +11,7 @@ in {
     sopsFile = ../../../${hostname}/secrets.yaml;
   };
 
-  networking.firewall.allowedTCPPorts = [ 3060 ];
+  networking.firewall.allowedTCPPorts = [ 3070 ];
 
   # we create a systemd service so that we can create a single "pod"
   # for our containers to live inside of. This will mimic how docker compose
@@ -22,12 +22,12 @@ in {
     wantedBy = [
       "${backend}-dawarich.service"
       "${backend}-dawarich-db.service"
-      "${backend}-dararich-redis.service"
-      "${backend}-dararich-sidekiq.service"
+      "${backend}-dawarich-redis.service"
+      "${backend}-dawarich-sidekiq.service"
     ];
     script = ''
             ${pkgs.podman}/bin/podman pod exists dawarich || \
-            ${pkgs.podman}/bin/podman pod create -n dawarich -p '0.0.0.0:3060:3000'
+            ${pkgs.podman}/bin/podman pod create -n dawarich -p '0.0.0.0:3070:3000'
     '';
   };
 
@@ -61,7 +61,7 @@ in {
     };
 
     dawarich_db = {
-      image = "postgis/postgis:14-3.5-alpine";
+      image = "postgis/postgis:17-3.5-alpine";
       volumes = [
         "${basePath}/db_data:/var/lib/postgresql/data"
         "${basePath}/shared:/var/shared"
@@ -116,6 +116,7 @@ in {
         "TIME_ZONE" = "America/Toronto";
         "PHOTON_API_HOST" = "192.168.1.200:2322";
         "PHOTON_API_USE_HTTPS" = "false";
+        "SELF_HOSTED" = "true";
       };
       extraOptions = [
         "--pod=dawarich"
@@ -178,5 +179,7 @@ in {
         "dawarich_redis"
       ];
     };
+
+
   };
 }
