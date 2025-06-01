@@ -7,7 +7,7 @@
 }: {
 
   services.mealie = {
-    enable = false;
+    enable = true;
     settings = {
       BASE_URL = "https://food.seandugre.com";
       OIDC_AUTH_ENABLED = "true";
