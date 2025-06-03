@@ -22,8 +22,6 @@ in {
     wantedBy = [
       "${backend}-dawarich.service"
       "${backend}-dawarich-db.service"
-      "${backend}-dawarich-redis.service"
-      "${backend}-dawarich-sidekiq.service"
     ];
     script = ''
             ${pkgs.podman}/bin/podman pod exists dawarich || \
@@ -42,30 +40,11 @@ in {
   ];
 
   virtualisation.oci-containers.containers = {
-    dawarich_redis = {
-      image = "redis:7.0-alpine";
-      cmd = [ "redis-server" ];
-      volumes = [
-        "${basePath}/shared:/data"
-      ];
-      autoStart = true;
-      log-driver = "journald";
-      extraOptions = [
-        "--pod=dawarich"
-        "--health-cmd=[\"redis-cli\", \"--raw\", \"incr\", \"ping\"]"
-        "--health-interval=10s"
-        "--health-retries=5"
-        "--health-start-period=30s"
-        "--health-timeout=10s"
-      ];
-    };
-
     dawarich_db = {
       image = "postgis/postgis:17-3.5-alpine";
       volumes = [
         "${basePath}/db_data:/var/lib/postgresql/data"
         "${basePath}/shared:/var/shared"
-        # - ./postgresql.conf:/etc/postgresql/postgresql.conf # Optional, uncomment if you want to use a custom config
       ];
       environmentFiles = [
         config.sops.secrets."dawarich.env".path
@@ -89,13 +68,10 @@ in {
         "${basePath}/public:/var/app/public"
         "${basePath}/watched:/var/app/tmp/imports/watched"
         "${basePath}/storage:/var/app/storage"
+        "${basePath}/db_data:/dawarich_db_data"
       ];
       environmentFiles = [
         config.sops.secrets."dawarich.env".path
-      ];
-      ports = [
-#        "3050:3000"
-        # "9394:9394" # Prometheus exporter, uncomment if needed
       ];
       cmd = [ "bin/rails" "server" "-p" "3000" "-b" "0.0.0.0" ];
       autoStart = true; 
@@ -112,11 +88,13 @@ in {
         "PROMETHEUS_EXPORTER_HOST" = "0.0.0.0";
         "PROMETHEUS_EXPORTER_PORT" = "9394";
         "RAILS_ENV" = "development";
-        "REDIS_URL" = "redis://dawarich_redis:6379/0";
         "TIME_ZONE" = "America/Toronto";
         "PHOTON_API_HOST" = "192.168.1.200:2322";
         "PHOTON_API_USE_HTTPS" = "false";
         "SELF_HOSTED" = "true";
+        "QUEUE_DATABASE_PATH" = "/dawarich_db_data/dawarich_development_queue.sqlite3";
+        "CACHE_DATABASE_PATH" = "/dawarich_db_data/dawarich_development_cache.sqlite3";
+        "CABLE_DATABASE_PATH" = "/dawarich_db_data/dawarich_development_cable.sqlite3";
       };
       extraOptions = [
         "--pod=dawarich"
@@ -130,56 +108,7 @@ in {
       log-driver = "journald";
       dependsOn = [
         "dawarich_db"
-        "dawarich_redis"
       ];
     };
-
-    dawarich_sidekiq = {
-      image = "freikin/dawarich:latest";
-      volumes = [
-        "${basePath}/public:/var/app/public"
-        "${basePath}/watched:/var/app/tmp/imports/watched"
-        "${basePath}/storage:/var/app/storage"
-      ];
-      cmd = [ "sidekiq" ];
-      autoStart = true;
-      environment = {
-        "APPLICATION_HOSTS" = "localhost";
-        "APPLICATION_PROTOCOL" = "http";
-        "BACKGROUND_PROCESSING_CONCURRENCY" = "10";
-        "DATABASE_HOST" = "dawarich_db";
-        "DATABASE_NAME" = "dawarich_development";
-        "DISTANCE_UNIT" = "mi";
-        "ENABLE_TELEMETRY" = "false";
-        "PROMETHEUS_EXPORTER_ENABLED" = "false";
-        "PROMETHEUS_EXPORTER_HOST" = "dawarich";
-        "PROMETHEUS_EXPORTER_PORT" = "9394";
-        "RAILS_ENV" = "development";
-        "REDIS_URL" = "redis://dawarich_redis:6379/0";
-        "PHOTON_API_HOST" = "192.168.1.200:2322";
-        "PHOTON_API_USE_HTTPS" = "false";
-
-      };
-      environmentFiles = [
-        config.sops.secrets."dawarich.env".path
-      ];
-      extraOptions = [
-        "--pod=dawarich"
-        "--entrypoint=sidekiq-entrypoint.sh"
-        "--health-cmd=bundle exec sidekiqmon processes | grep \${HOSTNAME}"
-        "--health-interval=10s"
-        "--health-retries=30"
-        "--health-start-period=30s"
-        "--health-timeout=10s"
-      ];
-      log-driver = "journald";
-      dependsOn = [
-        "dawarich"
-        "dawarich_db"
-        "dawarich_redis"
-      ];
-    };
-
-
   };
 }
