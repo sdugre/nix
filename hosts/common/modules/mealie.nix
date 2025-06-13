@@ -15,8 +15,8 @@
       OIDC_CONFIGURATION_URL = "https://auth.seandugre.com/.well-known/openid-configuration";
       OIDC_CLIENT_ID = "mealie";
       OIDC_AUTO_REDIRECT = "true";
-      OIDC_ADMIN_GROUP = "admin"; 
-      OIDC_USER_GROUP = "user";
+      OIDC_ADMIN_GROUP = "mealie-admin"; 
+      OIDC_USER_GROUP = "mealie";
       OIDC_PROVIDER_NAME = "Authelia";
     };
     credentialsFile = config.sops.secrets.mealie-secrets.path;
