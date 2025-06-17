@@ -113,10 +113,10 @@
             domain = ["auth.seandugre.com"];
             policy = "bypass";
           }
-          {
-            domain = ["money.seandugre.com"];
-            policy = "two_factor";
-          }
+#          {
+#            domain = ["money.seandugre.com"];
+#            policy = "two_factor";
+#          }
           {
             domain = ["ldap.seandugre.com"];
             networks = "internal";
