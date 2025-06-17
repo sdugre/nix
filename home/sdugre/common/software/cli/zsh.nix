@@ -46,7 +46,6 @@ in {
     plugins = [
       "git"
       "sudo"
-      "thefuck"
       "autojump"
     ];
     theme = "agnoster";
