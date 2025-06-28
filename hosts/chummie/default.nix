@@ -176,7 +176,7 @@
       inxi
       intel-gpu-tools
       lemonade
-      pia-wg-config
+#      pia-wg-config
       pciutils
       nextcloud-backup-helper
       smartmontools

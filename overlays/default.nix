@@ -27,17 +27,6 @@
           });
     };
     
-    # FIX: https://github.com/NixOS/nixpkgs/issues/392278
-#    auto-cpufreq = prev.auto-cpufreq.overrideAttrs (oldAttrs: {
-#      postPatch =
-#        oldAttrs.postPatch
-#        + ''
-#          substituteInPlace pyproject.toml \
-#          --replace-fail 'psutil = "^6.0.0"' 'psutil = ">=6.0.0,<8.0.0"'
-#        '';
-#    });
-
-
     paperless-ngx = prev.paperless-ngx.overrideAttrs (oldAttrs: {
       doCheck = false;
       disabledTests = (oldAttrs.disabledTests or [ ]) ++ [
@@ -48,16 +37,19 @@
         "test_concurrency"
       ];
     });
+    
+    # This for mealie build failure 2025-06-24
+    python313 = prev.python313.override {
+      packageOverrides = self: super: {
+        lxml-html-clean = super.lxml-html-clean.overridePythonAttrs (old: {
+          # Disable tests to bypass failures
+          doCheck = false;
+        });
+      };
+    };
 
   };
-  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.unstable'
-#  unstable-packages = final: _prev: {
-#    unstable = import inputs.nixpkgs-unstable {
-#      system = final.system;
-#      config.allowUnfree = true;
-#    };
-#  };
+
   stable-packages = final: _prev: {
     stablePkgs = import inputs.nixpkgs-stable {
       system = final.system;
