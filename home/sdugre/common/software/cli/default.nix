@@ -1,10 +1,16 @@
-{pkgs, ...}: {
-  imports = [
-    ./nvim.nix
-    ./git.nix
-    ./zsh.nix
-    ./lf.nix
-  ];
+{
+  pkgs,
+  config,
+  ...
+}: {
+  imports =
+    [
+      ./nvim.nix
+      ./git.nix
+      ./zsh.nix
+      ./lf.nix
+      ./zellij.nix
+    ];
 
   home.packages = with pkgs; [
     alejandra
@@ -13,11 +19,4 @@
     curl
     killall
   ];
-
-  #  home.file = {
-  #    nanorc = {
-  #      text = "include /run/current-system/sw/share/nano/";
-  #      target = ".config/nano/.nanorc";
-  #    };
-  #  };
 }
