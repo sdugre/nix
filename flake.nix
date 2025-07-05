@@ -78,8 +78,12 @@
     devShells = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
+        shells = import ./shell.nix { inherit pkgs; };
       in
-        import ./shell.nix {inherit pkgs;}
+        {
+          default = shells.default;
+          mkdocs = shells.mkdocs;
+        }
     );
 
     # Your custom packages and modifications, exported as overlays
