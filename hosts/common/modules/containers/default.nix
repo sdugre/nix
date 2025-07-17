@@ -12,6 +12,7 @@
     ./dawarich.nix            # location tracking
     #  ./frigate.nix          # can't get to work
     #  ./jellyfin.nix         # use native nix package
+    ./jelu.nix                # goodreads alternative
     ./linkding.nix            # bookmark manager
     ./lubelogger.nix          # automobile maintenance logging
     ./media.nix               # arr stack w/ gluetun for vpn

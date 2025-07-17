@@ -1,8 +1,9 @@
 {
   imports = [
     ./auth.seandugre.nix
-    ./books.seandugre.nix
+#    ./books.seandugre.nix
     ./calibre.seandugre.nix
+    ./calibre-web.seandugre.nix
     ./cars.seandugre.nix
 #    ./cloud.seandugre.nix
 #    ./docs.seandugre.nix
