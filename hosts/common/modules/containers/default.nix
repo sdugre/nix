@@ -6,11 +6,11 @@
 }: {
   imports = [
     ./bibliotheca.nix         # goodreads alternative
-    ./calibre.nix             # can't get to work
+    ./calibre.nix             # can't get to native nix package to work
     #  ./calibre-web.nix      # use native nix package
     ./chowdown.nix            # recipe wiki
     ./dawarich.nix            # location tracking
-    #  ./frigate.nix          # can't get to work
+    #  ./frigate.nix          # use native nix package
     #  ./jellyfin.nix         # use native nix package
     ./jelu.nix                # goodreads alternative
     ./linkding.nix            # bookmark manager
