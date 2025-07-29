@@ -13,7 +13,7 @@ in {
       libraries = [library];
     };
     calibre-web = {
-      enable = true;
+      enable = false; # temp disable due to build failure 7-26-2025 (dependency)
       group = "media";
       listen.ip = "0.0.0.0";
       options = {

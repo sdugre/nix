@@ -59,7 +59,7 @@
     enable = true;
     extraPackages = with pkgs; [
       #... # your Open GL, Vulkan and VAAPI drivers
-      intel-media-sdk # for older GPUs
+#      intel-media-sdk # for older GPUs
       intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       libvdpau-va-gl
       intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
