@@ -17,9 +17,15 @@ in {
     owner = "sdugre";
     group = "users";
   };
+
+  sops.secrets."ntfy/token" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
+    owner = "sdugre";
+    group = "users";
+  };
   
+  # note: this runs as root.  Need to make ssh key and copy to nas
   services.restic.backups.daily = {
-    user = "sdugre";
     passwordFile = config.sops.secrets.restic.path;
     repository = "sftp:sdugre@${nasIP}:${backupDir}";
     initialize = true;
@@ -44,5 +50,21 @@ in {
       "--keep-weekly 3"
       "--keep-monthly 3"
     ];
+
+    backupCleanupCommand = ''
+      if [ $EXIT_STATUS -ne 0 ]; then
+        ${pkgs.curl}/bin/curl \
+        -u ":$(cat /run/secrets/ntfy/token)" \
+        -H 'Title: Backup failed' \
+        -H 'Tags: warning,backup,restic' \
+        -d "Restic backup error on ${hostname}!" https://ntfy.seandugre.com/backups
+      else
+        ${pkgs.curl}/bin/curl \
+        -u ":$(cat /run/secrets/ntfy/token)" \
+        -H 'Title: Backup successful' \
+        -H 'Tags: heavy_check_mark,backup,restic' \
+        -d "Restic backup success on ${hostname}" https://ntfy.seandugre.com/backups
+      fi
+    '';
   };
 }
