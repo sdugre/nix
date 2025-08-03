@@ -163,7 +163,7 @@ in {
       extraOptions = [
         "--pod=dawarich"
         "--entrypoint=sidekiq-entrypoint.sh"
-        "--health-cmd=bundle exec sidekiqmon processes | grep \${HOSTNAME}"
+        "--health-cmd=pgrep -f sidekiq"
         "--health-interval=10s"
         "--health-retries=30"
         "--health-start-period=30s"
