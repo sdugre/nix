@@ -47,6 +47,7 @@ in {
       "git"
       "sudo"
       "autojump"
+      "systemd"
     ];
     theme = "agnoster";
   };
