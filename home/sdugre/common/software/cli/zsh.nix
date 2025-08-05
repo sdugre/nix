@@ -14,7 +14,7 @@
 in {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = config.home.homeDirectory + "/.config/zsh";
     history = {}; # all defaults are OK.
     autosuggestion.enable = true;
     initContent = ''
