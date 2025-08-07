@@ -185,5 +185,6 @@
       zfs
       virt-viewer
       xclip
+      wake # personal wol script
     ]);
 }
