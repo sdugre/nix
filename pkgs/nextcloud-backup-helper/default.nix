@@ -37,7 +37,8 @@
       find "$SRC" -mindepth 1 -type d -empty -delete
 
       chmod -R a=,a+rX,u+w,g+w "$TARGET" "$TARGET_VID" 
-      chown -R sdugre:photos "$TARGET" "$TARGET_VID"
+      chown -R sdugre:photos "$TARGET" 
+      chown -R sdugre:media "$TARGET_VID"
     '';
 })
 // {
