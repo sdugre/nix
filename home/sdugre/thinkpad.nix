@@ -9,6 +9,7 @@ in {
   imports = [
     # Optional machine specific packages
     ./common/software/gui/vscodium.nix
+    ./common/software/cli/feh.nix
     inputs.stylix.homeModules.stylix
   ];
   device.isLaptop = true;
