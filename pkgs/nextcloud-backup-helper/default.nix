@@ -33,8 +33,26 @@
         --exclude='*.mpeg' --exclude='*.mpg' \
         "$SRC"/ "$TARGET"/
 
-      # Delete empty directories from SRC
-      find "$SRC" -mindepth 1 -type d -empty -delete
+      # Delete empty month and year directories only if not current
+      now_year=$(date +%Y)
+      now_month=$(date +%m)
+  
+      # Delete empty month directories of previous months/years
+      find "$SRC" -mindepth 2 -maxdepth 2 -type d -empty | while read -r monthdir; do
+        year=$(basename "$(dirname "$monthdir")")
+        month=$(basename "$monthdir")
+        if (( 10#$year < 10#$now_year || (10#$year == 10#$now_year && 10#$month < 10#$now_month) )); then
+          rmdir "$monthdir"
+        fi
+      done
+  
+      # Delete empty year directories from previous years
+      find "$SRC" -mindepth 1 -maxdepth 1 -type d -empty | while read -r yeardir; do
+        year=$(basename "$yeardir")
+        if [[ "$year" -lt "$now_year" ]]; then
+          rmdir "$yeardir"
+        fi
+      done
 
       chmod -R a=,a+rX,u+w,g+w "$TARGET" "$TARGET_VID" 
       chown -R sdugre:photos "$TARGET" 

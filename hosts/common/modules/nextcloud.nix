@@ -145,6 +145,26 @@
     };
   };
 
+  # Prepare phone photos backed up by nextcloud iOS app
+  systemd.services.nextcloud-backup-helper = {
+    script = '' 
+      ${pkgs.nextcloud-backup-helper}/bin/nextcloud-backup-helper
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
+  
+  systemd.timers.nextcloud-backup-helper = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 05:00:00"; # daily at 5am
+      Persistent = true; # run at next boot if machine off
+      Unit = "nextcloud-backup-helper.service";
+    };
+  };
+
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [
       "/var/lib/nextcloud"
