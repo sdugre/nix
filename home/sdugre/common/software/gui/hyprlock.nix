@@ -12,7 +12,6 @@ in {
     enable = true;
     settings = {
       general = {
-        grace = 10;
       };
 
       background = {
