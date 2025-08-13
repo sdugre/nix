@@ -3,10 +3,12 @@
   pkgs,
   ...
 }: let
-#  inherit (config.colorscheme) palette;
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   font-family = "${config.fontProfiles.regular.family}";
   wallpaper = "${config.wallpaper}";
+  nowPlayingScript = pkgs.writeShellScript "hypr-nowplaying" ''
+    exec ${playerctl} metadata --format "{{title}}   {{artist}}" 2>/dev/null || echo ""
+  '';
 in {
   programs.hyprlock = {
     enable = true;
@@ -60,7 +62,7 @@ in {
 
         # CURRENT SONG
         {
-          text = "cmd[update:1000] ${playerctl} metadata --format '{{title}}   {{artist}}'";
+          text = "cmd[update:1000] ${nowPlayingScript}";
           font_size = 18;
           font_family = "${font-family}";
           position = "0, 0";
