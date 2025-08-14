@@ -37,10 +37,30 @@ in {
     "d ${basePath}/public 0755 root root -"
     "d ${basePath}/watched 0755 root root -"
     "d ${basePath}/storage 0755 root root -"
+    "d ${basePath}/ts 0755 root root -"
   ];
 
   virtualisation.oci-containers.containers = {
 
+#    tailscale = {
+#      image = "tailscale/tailscale:latest";
+#      hostname = "loc";
+#      extraOptions = [
+#        "--pod=dawarich"
+#        "--env=TS_STATE_DIR=/var/lib/containers/dawarich/ts"
+#        "--system_caps=true" 
+#        "--cap_net_admin=true" 
+#        "--cap_net_raw=true"
+#      #  "--env=TS_AUTHKEY=${builtins.readFile /etc/nixos/secrets/ts.key}"
+#      ];
+#      volumes = [ 
+#        "/dev/net/tun:/dev/net/tun" 
+#        "/var/lib/containers/dawarich/ts:/var/lib/tailscale" 
+#      ];
+#      environmentFiles = [
+#        config.sops.secrets."dawarich.env".path
+#      ];
+#    };
 
     dawarich_redis = {
       image = "redis:7.4-alpine";
