@@ -44,6 +44,15 @@ in {
     };
   };
 
+# The below config causes machine to not boot....
+#  services.meshSidecar = {
+#    services = {
+#      wiki-js = {
+#        meshName = "wiki";
+#      };
+#    };
+#  };
+
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [
       "/var/lib/private/wiki-js"

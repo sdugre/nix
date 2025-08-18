@@ -30,6 +30,7 @@
     ../common/modules/lldap.nix         # LDAP Server for Authelia
     ../common/modules/mail.nix          # Mail server for notifications
     ../common/modules/mealie.nix        # Meal planning and recipies
+    ../common/modules/meshSidecar.nix   # Tailscale sidecar for containers
     ../common/modules/nextcloud.nix     # Cloud
     ../common/modules/nfs.nix           # NFS server
     ../common/modules/nginx             # reverse proxy
@@ -156,6 +157,17 @@
     sopsFile = ./secrets.yaml;
   };
 
+  services.meshSidecar = {
+    enable = true;
+    provider = "tailscale";
+    authKeyFile = config.sops.secrets.meshSidecar_key.path;
+    outboundInterface = "br0";
+  };
+
+  sops.secrets.meshSidecar_key = {
+    sopsFile = ./secrets.yaml;
+  };
+  
   # filesystems
   fileSystems."/".options = ["compress=zstd" "noatime"];
   fileSystems."/home".options = ["compress=zstd" "noatime"];

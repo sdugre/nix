@@ -71,6 +71,15 @@ in {
     };
   };
 
+#  services.meshSidecar = {
+#    services = {
+#    #  grafana = {
+#    #    meshName = "monitoring-grafana";  # Custom hostname on mesh
+#    #  };
+#      actual = {};
+#    };
+#  };
+
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [
       "/var/lib/private/actual"
