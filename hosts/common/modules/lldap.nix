@@ -37,10 +37,11 @@ in {
     settings = {
       ldap_base_dn = "dc=seandugre,dc=com";
       ldap_user_email = "sdugre@gmail.com";
+      ldap_user_pass_file = config.sops.secrets."lldap/user_password".path;
+      force_ldap_user_pass_reset = "always";
     };
     environment = {
       LLDAP_JWT_SECRET_FILE = config.sops.secrets."lldap/jwt_secret".path;
-      LLDAP_LDAP_USER_PASS_FILE = config.sops.secrets."lldap/user_password".path;
       LLDAP_KEY_SEED_FILE = config.sops.secrets."lldap/key_seed".path;
     };
   };

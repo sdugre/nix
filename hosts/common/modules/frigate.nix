@@ -30,6 +30,7 @@
     enable = true;
     hostname = "nvr.seandugre.com";
     vaapiDriver = "i965";
+    checkConfig = false; # temp disable due to key error with FRIGATE_MQTT_USER
     settings = {
       auth.enabled = false;
       tls.enabled = false;
