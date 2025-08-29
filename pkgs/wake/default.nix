@@ -2,11 +2,12 @@
   lib,
   stdenv,
   wol,
+  net-tools,
   writeShellApplication,
 }:
 (writeShellApplication {
   name = "wake";
-  runtimeInputs = [wol];
+  runtimeInputs = [wol net-tools];
   text =
     /*
     bash
@@ -32,10 +33,15 @@
           
           echo "Waiting for $hostname to wake up..."
           for _ in {1..30}; do
-              ip_address=$(arp -n | grep -i "$mac_address" | awk '{print $1}')
-              if [ -n "$ip_address" ]; then
-                  echo "$hostname is now online at $ip_address"
-                  exit 0
+              if ping -c 1 "$hostname" >/dev/null 2>&1; then
+                  ip_address=$(arp -n | grep -i "$mac_address" | awk '{print $1}')
+                  if [ -n "$ip_address" ]; then
+                      echo "$hostname is now online at $ip_address"
+                      exit 0
+                  else
+                      echo "$hostname responded to ping but IP could not be found in ARP table"
+                      exit 1             
+                  fi
               fi
               sleep 2
           done
