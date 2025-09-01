@@ -13,7 +13,7 @@
   imports = [
     # Optional machine specific packages
     ./common/software/gui/vscodium.nix
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
 
   ];
 

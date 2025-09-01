@@ -6,7 +6,7 @@
 }: let
   addons = inputs.firefox-addons.packages.${pkgs.system};
 in {
-  imports = [inputs.betterfox.homeManagerModules.betterfox];
+  imports = [inputs.betterfox.homeModules.betterfox];
 
   programs.firefox = {
     enable = true;
@@ -35,13 +35,10 @@ in {
       };
     };
     betterfox.enable = true;
+    betterfox.profiles.default.enableAllSections = true;
+
     profiles.default = {
       id = 0;
-      betterfox = {
-        enable = true;
-        enableAllSections = true;
-      };
-
       isDefault = true;
       extensions.packages = with addons; [
         bitwarden
