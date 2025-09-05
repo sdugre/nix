@@ -30,7 +30,7 @@
     ../common/modules/immich.nix        # Photo management
     ../common/modules/lldap.nix         # LDAP Server for Authelia
     ../common/modules/mail.nix          # Mail server for notifications
-#    ../common/modules/mealie.nix        # Meal planning and recipies              # TEMP DISABLE DUE TO BUILD FAILURES 8-27-2025
+    ../common/modules/mealie.nix        # Meal planning and recipies
     ../common/modules/meshSidecar.nix   # Tailscale sidecar for containers
     ../common/modules/nextcloud.nix     # Cloud
     ../common/modules/nfs.nix           # NFS server
