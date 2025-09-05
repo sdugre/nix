@@ -22,6 +22,7 @@
     ../common/modules/containers        # Podman Containers
     #../common/modules/dokuwiki.nix     # Personal Wiki - works. don't like it.
     ../common/modules/ddclient.nix      # DDNS updating
+    ../common/modules/forgejo.nix       # Git repository
     ../common/modules/frigate.nix       # NVR
     ../common/modules/gonic.nix         # Music Server
     ../common/modules/homebox.nix       # Inventory Management
