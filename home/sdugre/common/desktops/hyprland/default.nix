@@ -122,8 +122,6 @@
 
       exec-once = [
         "${config.services.mako.package}/bin/makoctl &"
-#        "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill &"
-        "${pkgs.hyprpaper}/bin/hyprpaper"
         "nm-applet --indicator"
         "${pkgs.hypridle}/bin/hypridle"
         "hyprctl setcursor Bibata-Modern-Classic 24"
