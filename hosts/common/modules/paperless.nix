@@ -16,6 +16,7 @@
     port = 6382;
     consumptionDirIsPublic = true;
     passwordFile = config.sops.secrets.paperless.path;
+    domain = "docs.seandugre.com";
     settings = {
       PAPERLESS_ADMIN_USER = "sdugre";
       PAPERLESS_TIME_ZONE = "America/New_York";
