@@ -21,7 +21,10 @@ in
         HTTP_PORT = 3333;  # default 3000 is in use;
         LANDING_PAGE = "explore";
       };
-      service.DISABLE_REGISTRATION = true; 
+      service = {
+        DISABLE_REGISTRATION = true; 
+        ENABLE_INTERNAL_SIGNIN = false; 
+      };
       overall.APP_NAME = "";
     };
   };
@@ -38,15 +41,41 @@ in
     pwd = config.sops.secrets.forgejo-admin-password;
     user = "sdugre"; # Note, Forgejo doesn't allow creation of an account named "admin"
   in ''
-    ${adminCmd} create --admin --email "root@localhost" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
+    ${adminCmd} create --admin --email "sdugre@gmail.com" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
     ## uncomment this line to change an admin user which was already created
     # ${adminCmd} change-password --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
   '';
 
+  services.authelia.instances.main.settings.identity_providers.oidc.clients = [
+    {
+      client_id = "forgejo";
+      client_name = "Forgejo";
+      client_secret = "$pbkdf2-sha512$310000$1.Yw8tYNkru2hyEL29g6GA$YX8dlPR71A27qj6ph91q2Oaj83HAxujI3YvOEPgIxbii6ooFV4GbMCukrJSta4gslmrXIuCwTFa2Me9JvL5uPQ";
+      public = false;
+      authorization_policy = "one_factor";
+      require_pkce = true;
+      pkce_challenge_method = "S256";
+      redirect_uris = [
+        "https://${domain}/user/oauth2/authelia/callback"
+      ];
+      scopes = [
+        "openid"
+        "profile"
+        "groups"
+        "email"
+      ];
+      response_types = [ "code" ];
+      grant_types = [ "authorization_code"];
+      access_token_signed_response_alg = "none";
+      userinfo_signed_response_alg = "none";
+      token_endpoint_auth_method = "client_secret_basic";
+    }
+  ];
+
   services.nginx.virtualHosts.${svr.DOMAIN} = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
-    enableAuthelia = true;
+    enableAuthelia = false; # handled by OAUTH
     extraConfig = ''
       client_max_body_size 512M;
     '';
