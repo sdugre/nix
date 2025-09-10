@@ -128,6 +128,15 @@
             policy = "deny";
           }
           {
+            domain = ["photos.seandugre.com"];
+            subject = ["group:immich-admins" "group:immich-users"];
+            policy = "one_factor";
+          }
+          {
+            domain = [ "photos.seandugre.com" ];
+            policy = "deny";
+          }
+          {
             domain = ["*.seandugre.com"];
             networks = "internal";
             policy = "bypass";
