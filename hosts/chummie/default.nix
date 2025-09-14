@@ -159,10 +159,12 @@
   };
 
   services.meshSidecar = {
-    enable = true;
+    enable = false;
     provider = "tailscale";
     authKeyFile = config.sops.secrets.meshSidecar_key.path;
-    outboundInterface = "br0";
+    outboundInterface = "eno2";
+
+#    services.wiki-js = { };
   };
 
   sops.secrets.meshSidecar_key = {
