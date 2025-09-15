@@ -52,6 +52,27 @@
 
 #  networking.firewall.allowedTCPPorts = [6382];
 
+#  services.authelia.instances.main.settings.identity_providers.oidc = {
+#    {
+#      client_id = "paperless";
+#      client_name = "Paperless";
+#      client_secret = "$pbkdf2-...REPLACE";
+#      public = false;
+#      authorization_policy = "one_factor";
+#      redirect_uris = [
+#        "https://${config.services.paperless.domain}/accounts/oidc/authelia/login/callback/"
+#      ];
+#      scopes = [
+#        "openid"
+#        "profile"
+#        "email"
+#        "groups"
+#      ];
+#      userinfo_signed_response_alg = "none";
+#      token_endpoint_auth_method = "client_secret_basic";
+#    }
+#  };
+
   services.nginx.virtualHosts."docs.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
