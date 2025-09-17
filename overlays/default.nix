@@ -1,5 +1,6 @@
 # This file defines overlays
 {inputs, ...}: {
+
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs {pkgs = final;};
 
@@ -52,6 +53,13 @@
 
   stable-packages = final: _prev: {
     stablePkgs = import inputs.nixpkgs-stable {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
+
+  pinned-packages = final: _prev: {
+    pinned = import inputs.nixpkgs-pinned {
       system = final.system;
       config.allowUnfree = true;
     };

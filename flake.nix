@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-pinned.url = "github:NixOS/nixpkgs/fd58998f87e25b8db4eca4aa1f5a95943885d850";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -48,6 +49,7 @@
     self,
     nixpkgs,
     nixpkgs-stable,
+    nixpkgs-pinned,
     home-manager,
     nur,
     hyprland,
