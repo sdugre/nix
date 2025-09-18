@@ -6,7 +6,7 @@
 }: {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+#    package = pkgs.rofi-wayland;
     font = lib.mkForce "${config.fontProfiles.monospace.family} 16";
     extraConfig = {
       modi = "run,drun,window";
