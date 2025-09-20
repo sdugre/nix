@@ -18,6 +18,7 @@
       install -d -m 755 /var/lib/containers/media/overseerr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/radarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/readarr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/bookshelf -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/recyclarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/sonarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/tube-archivist -o sdugre -g media
@@ -168,7 +169,8 @@
     };
 
     readarr = {
-      image = "lscr.io/linuxserver/readarr:develop";
+#      image = "lscr.io/linuxserver/readarr:develop";
+      image = "ghcr.io/pennydreadful/bookshelf:softcover";
       environment = {
         PUID = "1000";
         PGID = "986";

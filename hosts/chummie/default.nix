@@ -25,6 +25,7 @@
     ../common/modules/forgejo.nix       # Git repository
     ../common/modules/frigate.nix       # NVR
     ../common/modules/gonic.nix         # Music Server
+    ../common/modules/headphones.nix    # Music Downloader
     ../common/modules/homebox.nix       # Inventory Management
     ../common/modules/jellyfin.nix      # Media Server
     ../common/modules/immich.nix        # Photo management
