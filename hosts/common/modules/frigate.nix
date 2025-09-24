@@ -28,6 +28,7 @@
 
   services.frigate = {
     enable = true;
+    package = pkgs.pinned.frigate; # temp pin to older version due to seg fault on 2025-09-23
     hostname = "nvr.seandugre.com";
     vaapiDriver = "i965";
     checkConfig = false; # temp disable due to key error with FRIGATE_MQTT_USER
