@@ -43,6 +43,7 @@
       ifuse # optional, to mount using 'ifuse'
       libreoffice-qt # office suite
       libimobiledevice # iphone mount
+      librecad  # 2D autoCad replacement
       handbrake # video transcoder
       remmina   # RDP
       wireshark # network monitoring tool
