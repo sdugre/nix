@@ -44,6 +44,7 @@ in {
           "disk"
           "custom/arrow2"
           "tray"
+          "idle_inhibitor"
           "clock#date"
           "custom/arrow1"
           "clock#time"
@@ -110,6 +111,14 @@ in {
 
         disk = {
           format = "   {used} ";
+        };
+
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
         };
 
         memory = {

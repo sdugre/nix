@@ -41,6 +41,7 @@ in {
 
         modules-right = [
           "tray"
+          "idle_inhibitor"
           "clock"
           "custom/power"
         ];
@@ -86,6 +87,14 @@ in {
 
         disk = {
           format = "   {used} ";
+        };
+
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
         };
 
         network = {
