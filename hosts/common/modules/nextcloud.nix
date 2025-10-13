@@ -19,7 +19,7 @@
     enable = true;
     hostName = "cloud.seandugre.com";
     # Need to manually increment with every major upgrade.
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
     # Let NixOS install and configure the database automatically.
     database.createLocally = true;
     # Let NixOS install and configure Redis caching automatically.
@@ -33,7 +33,7 @@
       # List of apps we want to install and are already packaged in
       # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
       #      inherit calendar contacts notes onlyoffice tasks cookbook qownnotesapi;
-      inherit calendar contacts tasks richdocuments;
+      inherit calendar contacts richdocuments;
       # Custom app example.
       #      socialsharing_telegram = pkgs.fetchNextcloudApp rec {
       #        url =
