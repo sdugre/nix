@@ -32,9 +32,6 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
- #   arkenfox.url = "git+https://github.com/dwarfmaster/arkenfox-nixos?ref=main";
-#    arkenfox.inputs.nixpkgs.follows = "nixpkgs";
-
     betterfox = {
       url = "github:HeitorAugustoLN/betterfox-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -120,6 +117,20 @@
         desktop = "hyprland";
         stateVer = "24.11";
       };
+      macbookPro = libx.mkHost {
+        hostname = "macbookPro";
+        desktop = "gnome";
+        stateVer = "25.05";
+      }; #2010 macbook
+
+      iso = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+          ./hosts/iso
+        ];
+      };
     };
 
     homeConfigurations = {
@@ -143,6 +154,12 @@
         hostname = "optiplex";
         desktop = "hyprland";
         nix-config-path = "~/Documents/nix-conf";
+      };
+      "sdugre@macbookPro" = libx.mkHome {
+        hostname = "macbookPro";
+        desktop = "gnome";
+        hmStateVer = "25.05";
+        nix-config-path = "~/Documents/nix-config";
       };
     };
   };
