@@ -20,26 +20,26 @@
 
   environment.systemPackages = with pkgs; [
     gnome-connections
-    gnome.gnome-tweaks
-    gnome.seahorse
+    gnome-tweaks
+    seahorse
     gnomeExtensions.tiling-assistant
+    cheese
+    geary
   ];
 
   environment.gnome.excludePackages =
     (with pkgs; [
-      gnome-tour
-      gnome-photos
-    ])
-    ++ (with pkgs.gnome; [
-      cheese
-      geary
-      gnome-calendar
-      gnome-contacts
       gnome-clocks
-      gnome-maps
       gnome-music
       gnome-weather
+      gnome-maps
+      gnome-contacts
+      gnome-tour
+      gnome-photos
+      gnome-calendar
       epiphany
       totem
+    ])
+    ++ (with pkgs.gnome; [
     ]);
 }

@@ -57,11 +57,11 @@ in {
         engines = {
           "NixOS Packages" = {
             urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
-            icon = ''${pkgs.fetchurl {
-                url = "https://nixos.org/favicon.png";
-                sha256 = "sha256-17/8nOSLmkDyABW9LdHhTqPykqYDtCFuqFeGTT4sqLo=";
+#            icon = ''${pkgs.fetchurl {
+              #  url = "https://nixos.org/favicon.png";
+#                sha256 = "sha256-17/8nOSLmkDyABW9LdHhTqPykqYDtCFuqFeGTT4sqLo=";
                 #              sha256 = "sha256-awcsDbbpRcDJnJpRavj/IcKMReEektRcqKbE35IJTKQ=";
-              }}'';
+#              }}'';
             definedAliases = ["@nixpkgs" "@np"];
           };
 

@@ -9,7 +9,7 @@
 }: {
   # You can import other NixOS modules here
   imports = [
-#    ./hardware-configuration.nix
+    ./hardware-configuration.nix
 #    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490
 
     # optional
