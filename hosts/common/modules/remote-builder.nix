@@ -7,6 +7,7 @@
     openssh.authorizedKeys.keys = [ 
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID6AXd0wc3K1UWj4AmZ+Qo6c4F/uaszWylnydGtclTss root@optiplex"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMIo7vG9UOsUWyk/sT+0CEOhKhHx/nlgHKvJQ6Wekzso root@thinkpad"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBQGBkq9b1QhFQ0p5gAFhfT/uikpV/lm48/8ZcXFvgvZ root@macbookPro"
     ];
   };
 
