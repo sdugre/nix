@@ -4,6 +4,8 @@ keys:
     - &sdugre_thinkpad age12v00v0egc0zdztxu06su7p8rer2k90k0px8ld74e0s2pc4q7nd8sy0x39t
     - &sdugre_chummie age1vulqhl4axmf07h0hczw68s3yegz9kv3daunsw34tqnnw8eyuyfns3ajqxp
     - &sdugre_optiplex age1xh95w5mu5p8xm3xeyc0nwcgw8eg2fe2wlzall3qngwchwh2eue3sx2yw28
+    - &sdugre_macbookPro age1jcyj9vtydj7uejzxda7rq5gyd456jeru8f87lvamnu9flulukypq0xuj82
+
   # hosts
   - &hosts:
     - &thinkpad age13xhw5pn7s0wd3z2j7dtkm0a837qcv989y85ddmyxdha0pnhw3exs3h867k
@@ -11,6 +13,7 @@ keys:
     - &nixos age16mvzwggryj37l3n70xmxlax7qs7vf2w82tzrl2txjx570h8q0yyspexn79
     - &chromebook age1y5ue0jn8j0aryul67lzkakltn287sgcdl8jjzxg6fmemed8pruhss45ymu
     - &optiplex age1x8h0f4km2fuunmzmr0gfl4843lc4d23tc34qjt9nxqmtspcsrulque3ymg
+    - &macbookPro age1jqc7ptr68gzfatv6thkcnleqnj6tsmxc2e6hagcyaxtngnlheujqkwxp6s
 
 creation_rules:
   - path_regex: hosts/thinkpad/secrets.yaml$
@@ -40,6 +43,12 @@ creation_rules:
       - *optiplex
       - *sdugre_optiplex
 
+  - path_regex: hosts/macbookPro/secrets.yaml$
+    key_groups:
+    - age:
+      - *macbookPro
+      - *sdugre_macbookPro
+
   - path_regex: hosts/common/secrets.yaml$
     key_groups:
     - age:
@@ -48,9 +57,11 @@ creation_rules:
       - *nixos
       - *optiplex
       - *chromebook
+      - *macbookPro
       - *sdugre_thinkpad
       - *sdugre_chummie
       - *sdugre_optiplex
+      - *sdugre_macbookPro
 
   - path_regex: home/sdugre/secrets.yaml$
     key_groups:
@@ -58,3 +69,4 @@ creation_rules:
       - *sdugre_thinkpad
       - *sdugre_chummie
       - *sdugre_optiplex
+      - *sdugre_macbookPro
