@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   programs.git = {
     enable = true;
-    userName = "sdugre";
-    userEmail = "sdugre@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "sdugre";
+      user.email = "sdugre@gmail.com";
       credential.helper = "${
         pkgs.git.override {withLibsecret = true;}
       }/bin/git-credential-libsecret";
