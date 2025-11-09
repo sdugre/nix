@@ -40,7 +40,8 @@
         subsonicupdate 
         albumtypes 
         permissions
-      ";
+        musicbrainz
+      "; # discogs removed...
 
       import = {
         move = true;
@@ -60,9 +61,11 @@
         token = config.sops.secrets."plex_token".path;
       };
 
-      discogs = {
-        user_token = config.sops.secrets."discogs_token".path;
-      };
+#      discogs = {
+#        user_token = config.sops.secrets."discogs_token".path;
+#      };
+
+      musicbrainz = { };
 
       paths = {
         default = "%the{$albumartist}/[$original_year] $album/$track - $title";
