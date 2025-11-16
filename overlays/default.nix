@@ -11,23 +11,7 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    gonic = prev.gonic.override {
-      buildGoModule = args:
-        prev.buildGoModule (args
-          // rec {
-            version = "0.16.4";
-            src = final.fetchFromGitHub {
-              owner = "sentriz";
-              repo = "gonic";
-              rev = "v${version}";
-              #          sha256 = "sha256-nLONZ0iz27Za09bv8gt0BpBAC4kSn+mh941cRDk1kBU=";
-              sha256 = "sha256-+8rKODoADU2k1quKvbijjs/6S/hpkegHhG7Si0LSE0k=";
-            };
-            vendorHash = "sha256-6JkaiaAgtXYAZqVSRZJFObZvhEsHsbPaO9pwmKqIhYI=";
-            doCheck = false;
-          });
-    };
-    
+
     paperless-ngx = prev.paperless-ngx.overrideAttrs (oldAttrs: {
       doCheck = false;
       disabledTests = (oldAttrs.disabledTests or [ ]) ++ [
@@ -38,16 +22,18 @@
         "test_concurrency"
       ];
     });
-    
-    # This for mealie build failure 2025-06-24
-    python313 = prev.python313.override {
-      packageOverrides = self: super: {
-        lxml-html-clean = super.lxml-html-clean.overridePythonAttrs (old: {
-          # Disable tests to bypass failures
-          doCheck = false;
-        });
-      };
-    };
+
+    # This is for mealie build failure 2025-11-15
+    python3Packages = prev.python3Packages.overrideScope (self: super: {
+      pint = super.pint.overridePythonAttrs (old: rec {
+        version = "0.24.4";
+        src = super.fetchPypi {
+          pname = "pint";
+          version = "0.24.4";
+          sha256 = "NSdUObV0g3ps0wIKWkpzZF6xJc5BUqc6LxJr8WS5G4A=";
+        };
+      });
+    });
 
   };
 

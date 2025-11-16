@@ -10,7 +10,6 @@
 
   networking.firewall.allowedTCPPorts = [4747];
 
-  # relies on overlay to get v0.16.3
   services.gonic = {
     enable = true;
     settings = {
@@ -31,13 +30,13 @@
   systemd.services.gonic.serviceConfig = lib.mkBefore {
     # See https://github.com/sentriz/gonic/issues/391
     Environment = "XDG_CACHE_HOME=/var/cache/gonic/";
-    # Fixes conflict with ddclient;  also need to manually chmod /persist/var/lib/private to 700 before rebuild-switch for first setup.
     RuntimeDirectoryMode = 700;
+    DynamicUser = lib.mkForce false; # fixes permission issues
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [
-      "/var/lib/private/gonic"
+      "/var/lib/gonic"
     ];
   };
 }

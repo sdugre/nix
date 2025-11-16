@@ -11,7 +11,7 @@
   programs.lf = {
     enable = true;
     commands = {
-      dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
+      dragon-out = ''%${pkgs.dragon-drop}/bin/dragon-drop -a -x "$fx"'';
       editor-open = ''$$EDITOR $f'';
       mkdir = ''
         ''${{
@@ -121,7 +121,7 @@
         if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" == "application/pdf" ]]; then
           # Convert the first page of the PDF to a PNG image using pdftoppm
           tmp_image="/tmp/preview"
-          ${pkgs.poppler_utils}/bin/pdftoppm -png -r 72 -f 1 -l 1 "$file" "$tmp_image" && \
+          ${pkgs.poppler-utils}/bin/pdftoppm -png -r 72 -f 1 -l 1 "$file" "$tmp_image" && \
           ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "''${tmp_image}-1.png" < /dev/null > /dev/tty
           exit 1
         fi
