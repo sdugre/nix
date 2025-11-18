@@ -1,6 +1,11 @@
-{config, ...}: {
-  # NOTE:  For this to work, had to add 192.168.1.66 to trusted proxies under http in
-  #        Home Assistent configuration.yaml config.
+{config, ...}: 
+  let 
+    haIP = "192.168.1.201";
+  in {
+
+  # NOTE:  For this to work, had to add nginx proxy ip (192.168.1.200) to
+  #        trusted proxies under http in Home Assistant configuration.yaml config.
+
   services.nginx.virtualHosts."ha.seandugre.com" = {
     useACMEHost = "seandugre.com";
     forceSSL = true;
@@ -8,14 +13,14 @@
     extraConfig = ''
     '';
     locations."/" = {
-      proxyPass = "http://192.168.1.43:8123/";
+      proxyPass = "http://${haIP}:8123/";
       proxyWebsockets = true;
       extraConfig = ''
         resolver 127.0.0.11 valid=30s;
       '';
     };
     locations."/api/websocket" = {
-      proxyPass = "http://192.168.1.43:8123/api/websocket";
+      proxyPass = "http://${haIP}:8123/api/websocket";
       proxyWebsockets = true;
       extraConfig = ''
         resolver 127.0.0.11 valid=30s;
