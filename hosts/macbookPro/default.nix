@@ -72,4 +72,9 @@
     extra-substituters = [ "http://bin-cache" ];
     extra-trusted-public-keys = [ "bin-cache:O7CCOIP4nu44qHdDzUuf1cEDSiCe0ArU8EM3QDJSLPY=" ];
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "broadcom-sta-6.30.223.271-59-6.12.57"
+  ];
+
 }
