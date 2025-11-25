@@ -10,6 +10,7 @@
     #  ./calibre-web.nix      # use native nix package
     ./chowdown.nix            # recipe wiki
     ./dawarich.nix            # location tracking
+    ./fossflow.nix            # isometric diagramming tool
     #  ./frigate.nix          # use native nix package
     #  ./jellyfin.nix         # use native nix package
     ./jelu.nix                # goodreads alternative
