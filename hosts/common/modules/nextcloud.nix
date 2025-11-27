@@ -32,7 +32,6 @@
     extraApps = with config.services.nextcloud.package.packages.apps; {
       # List of apps we want to install and are already packaged in
       # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-      #      inherit calendar contacts notes onlyoffice tasks cookbook qownnotesapi;
       inherit calendar contacts richdocuments;
       # Custom app example.
       #      socialsharing_telegram = pkgs.fetchNextcloudApp rec {
@@ -41,6 +40,11 @@
       #        license = "agpl3";
       #        sha256 = "sha256-8XyOslMmzxmX2QsVzYzIJKNw6rVWJ7uDhU1jaKJ0Q8k=";
       #     };
+      drawio = pkgs.fetchNextcloudApp {
+        sha256 = "sha256-yl9/OuJ7fHDcp8Jk4oW3we3cdmK9BW3N0/v+Dbw6J6M=";
+        url = "https://github.com/jgraph/drawio-nextcloud/releases/download/v3.1.2/drawio-v3.1.2.tar.gz";
+        license = "gpl3";
+      };
     };
     config = {
       dbtype = "pgsql";

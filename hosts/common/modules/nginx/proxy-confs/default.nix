@@ -34,5 +34,6 @@
     ./sonarr.seandugre.nix
     ./transmission.seandugre.nix
     ./tv.seandugre.nix
+    ./cont.nix # TEST
   ];
 }

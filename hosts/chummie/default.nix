@@ -47,6 +47,7 @@
     ../common/modules/stirling-pdf.nix  # pdf tools
     ../common/modules/wiki-js.nix       # Personal Wiki
     #../common/modules/wireguard.nix    # vpn
+    ../common/modules/nix-container.nix # TESTING NIX CONTAINERS
   ];
 
   # FOR QUICKSYNC
