@@ -20,6 +20,7 @@
     ../common/modules/binary-cache.nix  # Binary Cache for nix builds
     ../common/modules/calibre.nix       # eBooks
     ../common/modules/containers        # Podman Containers
+    ../common/modules/cloudflared.nix   # Cloudflare Tunnel
     #../common/modules/dokuwiki.nix     # Personal Wiki - works. don't like it.
     ../common/modules/ddclient.nix      # DDNS updating
     ../common/modules/forgejo.nix       # Git repository
@@ -47,6 +48,7 @@
     ../common/modules/stirling-pdf.nix  # pdf tools
     ../common/modules/wiki-js.nix       # Personal Wiki
     #../common/modules/wireguard.nix    # vpn
+    #../common/modules/wordpress.nix     # website
     ../common/modules/nix-container.nix # TESTING NIX CONTAINERS
   ];
 
