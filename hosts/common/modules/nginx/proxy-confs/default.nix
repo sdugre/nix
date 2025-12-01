@@ -30,6 +30,7 @@
     ./recipe.seandugre.nix
     ./rss.seandugre.nix
     ./rss-bridge.seandugre.nix
+    ./seandugre.com               # WEBSITE
     ./search.seandugre.nix
     ./sonarr.seandugre.nix
     ./transmission.seandugre.nix
