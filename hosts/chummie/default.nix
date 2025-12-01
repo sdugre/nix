@@ -132,6 +132,7 @@
     "/persist".directories = [
       "/var/lib/libvirt"
       "/etc/vmimages"
+      "/var/www"
     ];
   };
 
