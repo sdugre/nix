@@ -24,16 +24,16 @@
     });
 
     # This is for mealie build failure 2025-11-15
-    python3Packages = prev.python3Packages.overrideScope (self: super: {
-      pint = super.pint.overridePythonAttrs (old: rec {
-        version = "0.24.4";
-        src = super.fetchPypi {
-          pname = "pint";
-          version = "0.24.4";
-          sha256 = "NSdUObV0g3ps0wIKWkpzZF6xJc5BUqc6LxJr8WS5G4A=";
-        };
-      });
-    });
+#    python3Packages = prev.python3Packages.overrideScope (self: super: {
+#      pint = super.pint.overridePythonAttrs (old: rec {
+#        version = "0.24.4";
+#        src = super.fetchPypi {
+#          pname = "pint";
+#          version = "0.24.4";
+#          sha256 = "NSdUObV0g3ps0wIKWkpzZF6xJc5BUqc6LxJr8WS5G4A=";
+#        };
+#      });
+#    });
 
   };
 
