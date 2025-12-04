@@ -89,6 +89,13 @@ in {
             updateInterval = 24 * 60 * 60 * 1000; # every day
             definedAliases = ["@sx"];
           };
+
+          "home-manager Options" = {
+            urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}";}];
+            icon = "https://home-manager-options.extranix.com/images/favicon.png";
+            definedAliases = ["hmo"];
+          };
+
           perplexity.metaData.alias = "@pp"; # builtin engines only support specifying one additional alias
           # Hide all other search engines
           amazondotcom-us.metaData.hidden = true;
