@@ -57,11 +57,7 @@ in {
         engines = {
           "NixOS Packages" = {
             urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
-#            icon = ''${pkgs.fetchurl {
-              #  url = "https://nixos.org/favicon.png";
-#                sha256 = "sha256-17/8nOSLmkDyABW9LdHhTqPykqYDtCFuqFeGTT4sqLo=";
-                #              sha256 = "sha256-awcsDbbpRcDJnJpRavj/IcKMReEektRcqKbE35IJTKQ=";
-#              }}'';
+            icon = "https://nixos.wiki/favicon.png";
             definedAliases = ["@nixpkgs" "@np"];
           };
 
@@ -76,10 +72,7 @@ in {
 
           "Github Nix" = {
             urls = [{template = "https://github.com/search?q=lang%3Anix+{searchTerms}&type=code";}];
-            # icon = ''${pkgs.fetchurl {
-            #url = "https://www.youtube.com/s/desktop/280a3f09/img/favicon.ico";
-            #sha256 = "sha256-i7HQ+kOhdDbVndVG9vdMdtxEc13vdSLCLYAxFm24kR0=";
-            #}}'';
+            icon = "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png";
             definedAliases = ["@ghn"];
           };
 
@@ -92,10 +85,18 @@ in {
 
           "SearX" = {
             urls = [{template = "https://search.seandugre.com/?q={searchTerms}";}];
-            icon = "https://nixos.wiki/favicon.png";
+            icon = "https://docs.searxng.org/_static/searxng-wordmark.svg";
             updateInterval = 24 * 60 * 60 * 1000; # every day
             definedAliases = ["@sx"];
           };
+
+          "home-manager Options" = {
+            urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}";}];
+            icon = "https://home-manager-options.extranix.com/images/favicon.png";
+            definedAliases = ["hmo"];
+          };
+
+          perplexity.metaData.alias = "@pp"; # builtin engines only support specifying one additional alias
           # Hide all other search engines
           amazondotcom-us.metaData.hidden = true;
           google.metaData.hidden = true;
