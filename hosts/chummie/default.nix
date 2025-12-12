@@ -22,7 +22,7 @@
     ../common/modules/containers        # Podman Containers
     ../common/modules/cloudflared.nix   # Cloudflare Tunnel
     #../common/modules/dokuwiki.nix     # Personal Wiki - works. don't like it.
-    ../common/modules/ddclient.nix      # DDNS updating
+    #../common/modules/ddclient.nix      # DDNS updating - works. not needed after installing cloudflared
     ../common/modules/forgejo.nix       # Git repository
     ../common/modules/frigate.nix       # NVR
     ../common/modules/gonic.nix         # Music Server
