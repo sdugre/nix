@@ -5,7 +5,7 @@
   hostname,
   ...
 }: {
-  sops.secrets."cloudfare-creds" = {
+  sops.secrets."cloudflare-creds" = {
     sopsFile = ../../${hostname}/secrets.yaml;
   };
 
@@ -14,13 +14,16 @@
     defaults = {
       group = "nginx";
       email = "sdugre@gmail.com";
-      credentialsFile = config.sops.secrets.cloudfare-creds.path;
-      dnsProvider = "cloudflare";
-      dnsResolver = "1.1.1.1:53";
     };
 
     certs."seandugre.com" = {
-      extraDomainNames = ["*.seandugre.com"];
+      extraDomainNames = [
+        "*.seandugre.com"
+      ];
+      environmentFile = config.sops.secrets.cloudflare-creds.path;
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      dnsPropagationCheck = true;
     };
   };
 

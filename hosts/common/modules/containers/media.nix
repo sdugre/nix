@@ -24,8 +24,15 @@
       install -d -m 755 /var/lib/containers/media/tube-archivist -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/qbittorrent -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/whisparr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/dispatcharr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/epg -o sdugre -g media
     '';
   };
+
+  environment.systemPackages = [
+    pkgs.serve      # needed for iptv-org-epg
+    pkgs.nodejs_25  # needed for iptv-org-epg
+  ];
 
   networking.firewall.allowedUDPPorts = [49688]; # gluetun wireguard
 
@@ -239,5 +246,47 @@
       ];
       autoStart = true;
     };
+
+    dispatcharr = {
+      image =  "ghcr.io/dispatcharr/dispatcharr:latest";
+      ports = [
+        "9191:9191"
+      ];
+      volumes = [
+        "/var/lib/containers/media/dispatcharr:/data"
+      ];
+      environment = {
+        DISPATCHARR_ENV = "aio";
+        REDIS_HOST = "localhost";
+        CELERY_BROKER_URL = "redis://localhost:6379/0";
+        DISPATCHARR_LOG_LEVEL  = "info";
+        # Process Priority Configuration (Optional)
+        # Lower values = higher priority. Range: -20 (highest) to 19 (lowest)
+        # Negative values require cap_add: SYS_NICE (uncomment below)
+        #- UWSGI_NICE_LEVEL=-5   # uWSGI/FFmpeg/Streaming (default: 0, recommended: -5 for high priority)
+        #- CELERY_NICE_LEVEL=5   # Celery/EPG/Background tasks (default: 5, low priority)
+      };
+      extraOptions = [
+        "--device=/dev/dri:/dev/dri"
+      ];
+      #
+      # Uncomment to enable high priority for streaming (required if UWSGI_NICE_LEVEL < 0)
+      #cap_add:
+      #  - SYS_NICE
+    };
+
+    epg = {
+      image = "git.claeyscloud.com/david/epg-info:latest";
+      ports = [
+        "9192:3000"
+      ];
+      volumes = [
+        "/var/lib/containers/media/epg:/config"
+      ];
+      environment = {
+        TZ = "America/New_York";
+      };
+    };
+
   };
 }
