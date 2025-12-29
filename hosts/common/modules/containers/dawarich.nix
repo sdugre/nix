@@ -6,6 +6,9 @@
   ...
 }: let
   basePath = "/var/lib/containers/dawarich";
+  domain = "seandugre.com";
+  subdomain = "loc";
+  port = 3070;
 in {
   sops.secrets."dawarich.env" = {
     sopsFile = ../../../${hostname}/secrets.yaml;
@@ -25,7 +28,7 @@ in {
     ];
     script = ''
             ${pkgs.podman}/bin/podman pod exists dawarich || \
-            ${pkgs.podman}/bin/podman pod create -n dawarich -p '0.0.0.0:3070:3000'
+            ${pkgs.podman}/bin/podman pod create -n dawarich -p '0.0.0.0:${toString port}:3000'
     '';
   };
 
@@ -116,7 +119,7 @@ in {
       cmd = [ "bin/rails" "server" "-p" "3000" "-b" "0.0.0.0" ];
       autoStart = true; 
       environment = {
-        "APPLICATION_HOSTS" = "loc.seandugre.com,localhost";
+        "APPLICATION_HOSTS" = "${subdomain}.${domain},localhost";
         "APPLICATION_PROTOCOL" = "http";
         "DATABASE_HOST" = "dawarich_db";
         "DATABASE_NAME" = "dawarich_development";
@@ -195,6 +198,18 @@ in {
         "dawarich_db"
         "dawarich_redis"
       ];
+    };
+  };
+
+  services.nginx.virtualHosts."${subdomain}.${domain}" = {
+    useACMEHost = "${domain}";
+    forceSSL = true;
+    enableAuthelia = true;
+    extraConfig = ''
+    '';
+    locations."/" = {
+      proxyPass = "http://192.168.1.200:${toString port}";
+      proxyWebsockets = true;
     };
   };
 }
