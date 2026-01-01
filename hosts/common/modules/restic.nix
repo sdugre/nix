@@ -31,6 +31,7 @@ in {
     initialize = true;
     paths = [ 
       "/var/lib"
+      "/var/backup"
       "/home/sdugre"
       "/mnt/photos"
       "/mnt/data/media"

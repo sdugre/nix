@@ -46,6 +46,7 @@
     ../common/modules/rss.nix           # miniflux & rss-bridge
     ../common/modules/searxng.nix       # private search engine
     ../common/modules/stirling-pdf.nix  # pdf tools
+    ../common/modules/vaultwarden.nix   # password manager
     ../common/modules/wiki-js.nix       # Personal Wiki
     #../common/modules/wireguard.nix    # vpn
     #../common/modules/wordpress.nix     # website

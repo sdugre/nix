@@ -7,10 +7,13 @@
   programs,
   ...
 }: {
+  users.groups.mail = {};
+
   sops.secrets."msmtp/gmail_token" = {
     sopsFile = ../../${hostname}/secrets.yaml;
     owner = "${username}";
-    group = "users";
+    group = "mail";
+    mode = "0440";
   };
 
   programs.msmtp = {
