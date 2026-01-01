@@ -4,6 +4,7 @@
     duf
     figurine
     git
+    libva-utils
     lm_sensors
     nano
     nmap
@@ -12,7 +13,7 @@
     python3
     tmux
     tree
-    libva-utils
+    vim
     wl-clipboard # needed for copy/paste in wayland
     #    zathura   see home manager package
   ];
