@@ -58,13 +58,9 @@
     # Suggested by Nextcloud's health check.
     phpOptions."opcache.interned_strings_buffer" = "16";
   };
-  # Nightly database backups.
-  services.postgresqlBackup = {
-    enable = true;
-    startAt = "*-*-* 01:15:00";
-  };
 
-#  WAITING FOR https://github.com/NixOS/nixpkgs/issues/383483 TO BE RESOLVED
+  # Nightly database backups. See /hosts/common/modules/backups.nix
+
 #  REF:  https://diogotc.com/blog/collabora-nextcloud-nixos/
   services.collabora-online = {
     enable = true;

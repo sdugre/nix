@@ -23,7 +23,14 @@ in {
     owner = "sdugre";
     group = "users";
   };
-  
+
+
+  # backup any postgres DBs
+  services.postgresqlBackup = {
+    enable = config.services.postgresql.enable;
+    startAt = "*-*-* 01:15:00";
+  };
+
   # note: this runs as root.  Need to make ssh key and copy to nas
   services.restic.backups.daily = {
     passwordFile = config.sops.secrets.restic.path;

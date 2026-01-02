@@ -17,11 +17,12 @@
     ../common/modules/acme.nix          # certs
     ../common/modules/actual-budget.nix # Personal finance
     ../common/modules/authelia.nix      # SSO
+    ../common/modules/backup.nix        # Restic and postgresql backups
     ../common/modules/binary-cache.nix  # Binary Cache for nix builds
     ../common/modules/calibre.nix       # eBooks
     ../common/modules/containers        # Podman Containers
     ../common/modules/cloudflared.nix   # Cloudflare Tunnel
-    #../common/modules/dokuwiki.nix     # Personal Wiki - works. don't like it.
+    #../common/modules/dokuwiki.nix      # Personal Wiki - works. don't like it.
     #../common/modules/ddclient.nix      # DDNS updating - works. not needed after installing cloudflared
     ../common/modules/forgejo.nix       # Git repository
     ../common/modules/frigate.nix       # NVR
@@ -37,18 +38,17 @@
     ../common/modules/nextcloud.nix     # Cloud
     ../common/modules/nfs.nix           # NFS server
     ../common/modules/nginx             # reverse proxy
-    #../common/modules/nixarr.nix       # Media aquisition - use containers instead
+    #../common/modules/nixarr.nix        # Media aquisition - use containers instead
     ../common/modules/ntfy.nix          # Notification service
     ../common/modules/paperless.nix     # Documents
     ../common/modules/plex.nix          # Plex Media Server
-    ../common/modules/remote-builder.nix # Distributed Nix Builds
-    ../common/modules/restic.nix        # Backups
+    ../common/modules/remote-builder.nix# Distributed Nix Builds
     ../common/modules/rss.nix           # miniflux & rss-bridge
     ../common/modules/searxng.nix       # private search engine
     ../common/modules/stirling-pdf.nix  # pdf tools
     ../common/modules/vaultwarden.nix   # password manager
     ../common/modules/wiki-js.nix       # Personal Wiki
-    #../common/modules/wireguard.nix    # vpn
+    #../common/modules/wireguard.nix     # vpn
     #../common/modules/wordpress.nix     # website
     ../common/modules/nix-container.nix # TESTING NIX CONTAINERS
   ];
