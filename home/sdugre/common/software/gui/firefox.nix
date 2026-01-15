@@ -115,6 +115,7 @@ in {
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.socialtracking.enabled" = true;
         "privacy.partition.network_state.ocsp_cache" = true;
+        "privacy.resistFingerprinting.exemptedDomains" = "*.seandugre.com";  # Overrides betterfox RFP for these only
         # Disable all sorts of telemetry
         "browser.newtabpage.activity-stream.feeds.telemetry" = false;
         "browser.newtabpage.activity-stream.telemetry" = false;
