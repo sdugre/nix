@@ -60,18 +60,31 @@ in {
     ];
 
     backupCleanupCommand = ''
-      if [ $EXIT_STATUS -ne 0 ]; then
+      BACKUP_EXIT=$EXIT_STATUS
+      
+      if ! ${pkgs.restic}/bin/restic -r "sftp:sdugre@${nasIP}:${backupDir}" \
+        --password-file "${config.sops.secrets.restic.path}" snapshots >/dev/null 2>&1; then
+       
         ${pkgs.curl}/bin/curl \
-        -u ":$(cat /run/secrets/ntfy/token)" \
-        -H 'Title: Backup failed' \
-        -H 'Tags: warning,backup,restic' \
-        -d "Restic backup error on ${hostname}!" https://ntfy.seandugre.com/backups
+          -u ":$(cat /run/secrets/ntfy/token)" \
+          -H 'Title: Backup Repo Unreachable' \
+          -H 'Tags: warning,backup,restic' \
+          -d "Restic repo unreachable from ${hostname}! NAS offline?" https://ntfy.seandugre.com/backups
+        exit 1
+      fi
+
+      if [ $BACKUP_EXIT -ne 0 ]; then
+        ${pkgs.curl}/bin/curl \
+          -u ":$(cat /run/secrets/ntfy/token)" \
+          -H 'Title: Backup failed' \
+          -H 'Tags: warning,backup,restic' \
+          -d "Restic backup error on ${hostname}!" https://ntfy.seandugre.com/backups
       else
         ${pkgs.curl}/bin/curl \
-        -u ":$(cat /run/secrets/ntfy/token)" \
-        -H 'Title: Backup successful' \
-        -H 'Tags: heavy_check_mark,backup,restic' \
-        -d "Restic backup success on ${hostname}" https://ntfy.seandugre.com/backups
+          -u ":$(cat /run/secrets/ntfy/token)" \
+          -H 'Title: Backup successful' \
+          -H 'Tags: heavy_check_mark,backup,restic' \
+          -d "Restic backup success on ${hostname}" https://ntfy.seandugre.com/backups
       fi
     '';
   };

@@ -40,6 +40,7 @@
     ../common/modules/nginx             # reverse proxy
     #../common/modules/nixarr.nix        # Media aquisition - use containers instead
     ../common/modules/ntfy.nix          # Notification service
+    ../common/modules/privatebin.nix    # Pastebin
     ../common/modules/paperless.nix     # Documents
     ../common/modules/plex.nix          # Plex Media Server
     ../common/modules/remote-builder.nix# Distributed Nix Builds
