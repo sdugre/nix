@@ -36,6 +36,7 @@
     ../common/modules/mealie.nix        # Meal planning and recipies
     ../common/modules/meshSidecar.nix   # Tailscale sidecar for containers
     ../common/modules/nextcloud.nix     # Cloud
+    ../common/modules/owntone.nix       # # DAAP audio server (for Soundbridge M1000)
     ../common/modules/nfs.nix           # NFS server
     ../common/modules/nginx             # reverse proxy
     #../common/modules/nixarr.nix        # Media aquisition - use containers instead
