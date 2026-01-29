@@ -24,6 +24,8 @@ in {
     };
   };
 
+  users.groups.media = {};
+
   systemd.services.calibre-lib.serviceConfig = {
     User = "calibre-server";
     Group = "media";

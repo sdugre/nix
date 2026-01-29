@@ -36,14 +36,14 @@
     ../common/modules/mealie.nix        # Meal planning and recipies
     ../common/modules/meshSidecar.nix   # Tailscale sidecar for containers
     ../common/modules/nextcloud.nix     # Cloud
-    ../common/modules/owntone.nix       # # DAAP audio server (for Soundbridge M1000)
+    ../common/modules/owntone.nix       # DAAP audio server (for Soundbridge M1000)
     ../common/modules/nfs.nix           # NFS server
     ../common/modules/nginx             # reverse proxy
     #../common/modules/nixarr.nix        # Media aquisition - use containers instead
     ../common/modules/ntfy.nix          # Notification service
     ../common/modules/privatebin.nix    # Pastebin
     ../common/modules/paperless.nix     # Documents
-    ../common/modules/plex.nix          # Plex Media Server
+    #../common/modules/plex.nix          # Plex Media Server - works. using Jellyfin
     ../common/modules/remote-builder.nix# Distributed Nix Builds
     ../common/modules/rss.nix           # miniflux & rss-bridge
     ../common/modules/searxng.nix       # private search engine
@@ -67,9 +67,7 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      #... # your Open GL, Vulkan and VAAPI drivers
-#      intel-media-sdk # for older GPUs
-      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      intel-vaapi-driver    # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       libvdpau-va-gl
       intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
     ];
@@ -99,7 +97,7 @@
 
   # START VMs
   networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = ["192.168.1.1" "8.8.8.8"];
+  networking.nameservers = ["192.168.1.1" "9.9.9.9"];
   networking.useDHCP = false;
   networking.bridges.br0.interfaces = ["eno2"];
   networking.interfaces.br0 = {
@@ -145,9 +143,8 @@
     5902 
     1935 
     2489    # lemonade
-    5000 ]; 
-
-  # 5000 frigate (test)
+    5000    # frigate (test)
+  ]; 
   # END VMs
 
   services.persistence = {
@@ -171,8 +168,6 @@
     provider = "tailscale";
     authKeyFile = config.sops.secrets.meshSidecar_key.path;
     outboundInterface = "eno2";
-
-#    services.wiki-js = { };
   };
 
   sops.secrets.meshSidecar_key = {
@@ -200,7 +195,6 @@
       inxi
       intel-gpu-tools
       lemonade
-#      pia-wg-config
       pciutils
       nextcloud-backup-helper
       smartmontools
