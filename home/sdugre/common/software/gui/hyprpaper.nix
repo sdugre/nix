@@ -7,8 +7,14 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = [ config.wallpaper ];
-      wallpaper = [ ",${config.wallpaper}" ];
+      splash = false;
+      wallpaper = [
+        {
+          monitor = "";
+          path = "${config.wallpaper}";
+          fit_mode = "cover";
+        }
+      ];
     };
   };
 }
