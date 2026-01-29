@@ -22,7 +22,7 @@ in {
     '';
   };
 
-  services.nginx.virtualHosts."owntown.${domain}" = {
+  services.nginx.virtualHosts."owntone.${domain}" = {
     useACMEHost = "${domain}";
     forceSSL = true;
     enableAuthelia = false;
