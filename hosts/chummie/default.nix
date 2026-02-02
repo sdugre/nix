@@ -192,6 +192,7 @@
     [
     ]
     ++ (with pkgs; [
+      abcde # cd ripper
       inxi
       intel-gpu-tools
       lemonade
