@@ -46,6 +46,7 @@
     #../common/modules/plex.nix          # Plex Media Server - works. using Jellyfin
     ../common/modules/remote-builder.nix# Distributed Nix Builds
     ../common/modules/rss.nix           # miniflux & rss-bridge
+    ../common/modules/samba.nix         # Samba server
     ../common/modules/searxng.nix       # private search engine
     ../common/modules/stirling-pdf.nix  # pdf tools
     ../common/modules/vaultwarden.nix   # password manager

@@ -86,6 +86,20 @@
     };
   };
 
+  services.samba = {
+    enable = true;
+    settings.paperless_consume = {
+      path = "/var/lib/paperless/consume";
+      "read only" = "no";
+      browseable = "yes";
+      "guest ok" = "yes";
+      "directory mask" = "0755";
+      "create mask" = "0644";
+      "force user" = "paperless";
+      "force group" = "paperless";
+    };
+  };
+  
   environment.persistence = lib.mkIf config.services.persistence.enable {
     "/persist".directories = [
       "/var/lib/paperless"
