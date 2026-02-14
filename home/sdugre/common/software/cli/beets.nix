@@ -69,7 +69,7 @@
 
       paths = {
         default = "%the{$albumartist}/[$original_year] $album/$track - $title";
-        comp = "_Compilations/[$original_year] $album/$track - $albumartist - $title";
+        comp = "_Compilations/[$original_year] $album/$track - $artist - $title";
         "albumtype:live" = "%the{$albumartist}/$atypes[$year] $album/$track - $title";
         "albumtype:ep" = "%the{$albumartist}/[$original_year]$atypes $album/$track - $title";
       };
