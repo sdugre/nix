@@ -26,6 +26,7 @@
     #../common/modules/ddclient.nix      # DDNS updating - works. not needed after installing cloudflared
     ../common/modules/forgejo.nix       # Git repository
     ../common/modules/frigate.nix       # NVR
+    ../common/modules/ftp.nix           # FTP server necessary for scanner
     ../common/modules/gonic.nix         # Music Server
     ../common/modules/headphones.nix    # Music Downloader
     ../common/modules/homebox.nix       # Inventory Management

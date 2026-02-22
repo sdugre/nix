@@ -6,7 +6,17 @@
   environment,
   programs,
   ...
-}: {
+}: 
+  let 
+    sops_config = { 
+      sopsFile = ../../${hostname}/secrets.yaml;
+      mode = "0400";
+      owner = config.users.users.smtpd.name;
+      group = config.users.users.smtpd.group;
+      restartUnits = [ "opensmtpd.service" ];
+    }; 
+  in 
+{
   users.groups.mail = {};
 
   sops.secrets."msmtp/gmail_token" = {
@@ -42,4 +52,25 @@
       mode = "0644";
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    mailutils
+  ];
+
+  sops.secrets."opensmtpd/gmail_token" = sops_config;
+  sops.secrets."opensmtpd/clients" = sops_config;
+
+  services.opensmtpd = {
+    enable = true;
+    setSendmail = false;
+    serverConfiguration = ''
+      listen on 0.0.0.0
+      table secrets file:${config.sops.secrets."opensmtpd/gmail_token".path}
+      table allowed_clients file:${config.sops.secrets."opensmtpd/clients".path}
+      action "relay" relay host smtp+tls://gmailcreds@smtp.gmail.com:587 auth <secrets> # mail-from "sdugre@gmail.com"
+      match from src <allowed_clients> for any action "relay"
+    '';
+  };
+
+  networking.firewall.allowedTCPPorts = [ 25 ];  
 }
