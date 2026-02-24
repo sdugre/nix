@@ -26,6 +26,7 @@
       PAPERLESS_ENABLE_UPDATE_CHECK = true;
       PAPERLESS_DATE_ORDER = "MDY";
       PAPERLESS_EMAIL_TASK_CRON = "*/5 * * * *";
+      PAPERLESS_CONSUMER_ENABLE_BARCODES = true;
     };
     exporter = {
       enable = true;
