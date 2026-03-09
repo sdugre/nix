@@ -156,7 +156,7 @@
         # Basic Binds
         "SUPER, q, killactive"
         "SUPERSHIFT, e, exit"
-        "SUPER, s, togglesplit"
+        "SUPER, s, layoutmsg, swapsplit"
         "SUPER, f, fullscreen, 1"
         "SUPERSHIFT, f, fullscreen, 0"
         "SUPERSHIFT, Space, togglefloating"
