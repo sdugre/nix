@@ -78,7 +78,7 @@
       general = {
         gaps_in = 3;
         gaps_out = 5;
-        border_size = 2;
+        border_size = 3;
 #       "col.active_border" = "0xff${config.colorscheme.palette.base0C}";
 #       "col.inactive_border" = "0xff${config.colorscheme.palette.base02}";
       };
@@ -103,7 +103,7 @@
         active_opacity = 0.94;
         inactive_opacity = 0.75;
         fullscreen_opacity = 1.0;
-        rounding = 5;
+        rounding = 10;
         blur = {
           enabled = true;
           size = 5;
