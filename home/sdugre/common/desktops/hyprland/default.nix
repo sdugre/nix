@@ -147,7 +147,7 @@
         gtk-launch = "${pkgs.gtk3}/bin/gtk-launch";
         xdg-mime = "${pkgs.xdg-utils}/bin/xdg-mime";
         defaultApp = type: "${gtk-launch} $(${xdg-mime} query default ${type})";
-
+        calculator = "${pkgs.pinned.galculator}/bin/galculator";
         terminal = config.home.sessionVariables.TERMINAL;
         browser = defaultApp "x-scheme-handler/https";
         editor = defaultApp "text/plain";
@@ -160,6 +160,7 @@
         "SUPER, Space, exec, ${rofi} -modes \"drun,window,run\" -show drun"
         "SUPER, d, exec, nautilus &"
         "SUPER, l, exec, ${rofi-logout}"
+        "SUPER, c, exec, ${calculator}"
         # Basic Binds
         "SUPER, q, killactive"
         "SUPERSHIFT, e, exit"
@@ -247,6 +248,9 @@
       windowrule = [
         "match:class ^(galculator)$, float on"
         "match:class ^(galculator)$, move ((monitor_w-window_w)-10) ((monitor_h-window_h)-10)" 
+        "match:class ^(firefox)$, match:title ^(Extension: (Bitwarden Password Manager)), float on"
+        "match:class ^(nm-connection-editor)$, float on"
+        "match:class ^(org.pulseaudio.pavucontrol)$, float on"
       ];
     };
   };
