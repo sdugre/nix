@@ -61,6 +61,13 @@
 #    };
   };
 
+  xdg.mimeApps.defaultApplications = {
+    "image/png"  = "mpv.desktop";
+    "image/jpeg" = "mpv.desktop";
+    "image/jpg" = "mpv.desktop";
+    "image/webp" = "mpv.desktop";
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
