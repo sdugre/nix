@@ -243,6 +243,11 @@
         lib.filter (m: m.enabled && m.workspace != null) (config.monitors)
       ) ++ [ "9,layout:scrolling" ]
         ++ [ "8,layout:monocle" ];
+
+      windowrule = [
+        "match:class ^(galculator)$, float on"
+        "match:class ^(galculator)$, move ((monitor_w-window_w)-10) ((monitor_h-window_h)-10)" 
+      ];
     };
   };
 }
