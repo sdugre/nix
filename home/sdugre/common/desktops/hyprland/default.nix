@@ -249,7 +249,7 @@
       windowrule = [
         "match:class ^(galculator)$, float on"
         "match:class ^(galculator)$, move ((monitor_w-window_w)-10) ((monitor_h-window_h)-10)" 
-        "match:class ^(firefox)$, match:title ^(Extension: (Bitwarden Password Manager)), float on"
+        "match:class ^(firefox)$, match:title ^(Extension: \\(Bitwarden Password Manager\\)), float on"
         "match:class ^(nm-connection-editor)$, float on"
         "match:class ^(org.pulseaudio.pavucontrol)$, float on"
       ];
