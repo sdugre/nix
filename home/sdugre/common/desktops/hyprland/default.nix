@@ -198,8 +198,8 @@
         "ALT, Print, exec, ${grimblast} --notify --freeze copy area"
         # Scrolling Mode
         # Move the view left/right by columns
-        "SUPER, bracketleft,  layoutmsg, move -col"
-        "SUPER, bracketright, layoutmsg, move +col"
+        "ALT SHIFT, TAB,  layoutmsg, move -col"
+        "ALT, TAB, layoutmsg, move +col"
         # Move focus between columns and wrap
         "SUPER, h, layoutmsg, focus l"
         "SUPER, l, layoutmsg, focus r"
@@ -210,7 +210,8 @@
         "SUPER, minus, layoutmsg, colresize -0.1"
         "SUPER, equal, layoutmsg, colresize +0.1"
         # Monocle Mode
-        "ALT, TAB, layoutmsg, cyclenext "
+        "ALT, TAB, layoutmsg, cyclenext"
+        "ALT SHIFT, TAB, layoutmsg, cycleprev"
       ];
 
       bindm = [
