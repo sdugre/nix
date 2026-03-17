@@ -151,6 +151,7 @@
         terminal = config.home.sessionVariables.TERMINAL;
         browser = defaultApp "x-scheme-handler/https";
         editor = defaultApp "text/plain";
+        notepad = "${pkgs.mousepad}/bin/mousepad";
       in [
         # Program bindings
         "SUPER,Return,exec,${terminal}"
@@ -161,6 +162,7 @@
         "SUPER, d, exec, nautilus &"
         "SUPER, l, exec, ${rofi-logout}"
         "SUPER, c, exec, ${calculator}"
+        "SUPER, n, exec, ${notepad}"
         # Basic Binds
         "SUPER, q, killactive"
         "SUPERSHIFT, e, exit"
