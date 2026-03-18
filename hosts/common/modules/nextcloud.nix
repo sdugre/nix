@@ -41,8 +41,8 @@
       #        sha256 = "sha256-8XyOslMmzxmX2QsVzYzIJKNw6rVWJ7uDhU1jaKJ0Q8k=";
       #     };
       drawio = pkgs.fetchNextcloudApp {
-        sha256 = "sha256-yl9/OuJ7fHDcp8Jk4oW3we3cdmK9BW3N0/v+Dbw6J6M=";
-        url = "https://github.com/jgraph/drawio-nextcloud/releases/download/v3.1.2/drawio-v3.1.2.tar.gz";
+        sha256 = "sha256-XLcDIcb7nr4oW7OtYC1FrF1lOsZTddhFT0HgjFsXXvg=";
+        url = "https://github.com/jgraph/drawio-nextcloud/releases/download/v4.2.3/drawio-v4.2.3.tar.gz";
         license = "gpl3";
       };
     };
@@ -137,8 +137,9 @@
   };
     
   services.nginx.virtualHosts."office.seandugre.com" =  {
-    enableACME = true;
+    useACMEHost = "seandugre.com";
     forceSSL = true;
+    enableAuthelia = false;
     locations."/" = {
       proxyPass = "http://[::1]:${toString config.services.collabora-online.port}";
       proxyWebsockets = true; # collabora uses websockets
