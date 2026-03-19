@@ -39,14 +39,14 @@
 
   stable-packages = final: _prev: {
     stablePkgs = import inputs.nixpkgs-stable {
-      system = final.system;
+      system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };
   };
 
   pinned-packages = final: _prev: {
     pinned = import inputs.nixpkgs-pinned {
-      system = final.system;
+      system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };
   };
