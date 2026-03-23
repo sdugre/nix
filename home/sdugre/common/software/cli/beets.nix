@@ -31,7 +31,6 @@
       plugins = "
         edit 
         fetchart 
-        plexupdate 
         info 
         discogs 
         hook 
@@ -41,7 +40,8 @@
         albumtypes 
         permissions
         musicbrainz
-      "; # discogs removed...
+        discogs
+      ";
 
       import = {
         move = true;
@@ -55,17 +55,14 @@
         lastfm_key = config.sops.secrets."lastfm_key".path;
       };
 
-      plex = {
-        host = "192.168.1.200";
-        port = "32400";
-        token = config.sops.secrets."plex_token".path;
+      discogs = {
+        user_token = config.sops.secrets."discogs_token".path;
+        data_source_mismatch_penalty = 0.3; # prefer disgogs over musicbrainz
       };
 
-#      discogs = {
-#        user_token = config.sops.secrets."discogs_token".path;
-#      };
-
-      musicbrainz = { };
+      musicbrainz = {
+        data_source_mismatch_penalty = 0.5; 
+      };
 
       paths = {
         default = "%the{$albumartist}/[$original_year] $album/$track - $title";
