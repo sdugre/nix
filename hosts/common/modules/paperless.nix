@@ -11,7 +11,7 @@
 
   services.paperless = {
     enable = true;
-#    package = pkgs.stable.paperless-ngx;
+    package = pkgs.pinned.paperless-ngx; # pinned 2026-03-23 due to failed python tests
     address = "0.0.0.0";
     port = 6382;
     consumptionDirIsPublic = true;

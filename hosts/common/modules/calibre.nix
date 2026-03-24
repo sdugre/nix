@@ -14,6 +14,7 @@ in {
     };
     calibre-web = {
       enable = true;
+      package = pkgs.pinned.calibre-web; # pinned 2026-03-23 due to dependency issue with wave
       group = "media";
       listen.ip = "0.0.0.0";
       options = {
