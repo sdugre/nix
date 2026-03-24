@@ -147,7 +147,7 @@
         gtk-launch = "${pkgs.gtk3}/bin/gtk-launch";
         xdg-mime = "${pkgs.xdg-utils}/bin/xdg-mime";
         defaultApp = type: "${gtk-launch} $(${xdg-mime} query default ${type})";
-        calculator = "${pkgs.pinned.galculator}/bin/galculator";
+        calculator = "${pkgs.pinned2501.galculator}/bin/galculator";
         terminal = config.home.sessionVariables.TERMINAL;
         browser = defaultApp "x-scheme-handler/https";
         editor = defaultApp "text/plain";

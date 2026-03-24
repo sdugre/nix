@@ -40,6 +40,7 @@ in {
       outputs.overlays.modifications
       outputs.overlays.stable-packages
       outputs.overlays.pinned-packages
+      outputs.overlays.pinned-packages2501
     ];
     # Configure your nixpkgs instance
     config = {

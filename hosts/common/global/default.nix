@@ -26,6 +26,7 @@
       outputs.overlays.modifications
       outputs.overlays.stable-packages
       outputs.overlays.pinned-packages
+      outputs.overlays.pinned-packages2501
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default

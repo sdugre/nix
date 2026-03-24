@@ -44,6 +44,13 @@
     };
   };
 
+  pinned-packages2501 = final: _prev: {
+    pinned2501 = import inputs.nixpkgs-pinned2501 {
+      system = final.stdenv.hostPlatform.system;
+      config.allowUnfree = true;
+    };
+  };
+
   pinned-packages = final: _prev: {
     pinned = import inputs.nixpkgs-pinned {
       system = final.stdenv.hostPlatform.system;

@@ -24,7 +24,7 @@
   };
   home.packages = with pkgs; [
     backlight # personal scrtip for adjusting brightness
-    pinned.galculator # calculator
+    pinned2501.galculator # calculator
     obsidian # notes
     vlc # video player
     test-pkg
