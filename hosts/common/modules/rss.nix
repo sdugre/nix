@@ -26,6 +26,7 @@ in {
       OAUTH2_REDIRECT_URL = "https://${domain}/oauth2/oidc/callback";
       OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://${authDomain}";
       OAUTH2_USER_CREATION = "1";
+      FETCHER_ALLOW_PRIVATE_NETWORKS = 1;
     };
     # Set initial admin user/password and OAUTH2_CLIENT_SECRET
     adminCredentialsFile = config.sops.secrets."miniflux-creds".path;
