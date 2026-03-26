@@ -100,6 +100,10 @@
 
     nixosConfigurations = {
       chummie = libx.mkHost {hostname = "chummie";}; # server
+      soteria = libx.mkHost {
+        hostname = "soteria";
+        stateVer = "25.11";
+      }; # backup server
       nixos = libx.mkHost {
         hostname = "nixos";
         desktop = "gnome";
@@ -137,6 +141,10 @@
 
     homeConfigurations = {
       "sdugre@chummie" = libx.mkHome {hostname = "chummie";};
+      "sdugre@soteria" = libx.mkHome {
+        hostname = "soteria";
+        hmStateVer = "25.11";
+      };
       "sdugre@chromebook" = libx.mkHome {
         hostname = "chromebook";
         desktop = "cinnamon";
