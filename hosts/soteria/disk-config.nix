@@ -1,7 +1,8 @@
+{ ... }:
 {
   disko.devices = {
     disk = {
-      nvme0n1 = {
+      main = {
         type = "disk";
         device = "/dev/nvme0n1";
         content = {
@@ -23,32 +24,30 @@
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "btrfs";
+                type = "btrfs";
                 extraArgs = [ "-L" "nixos" "-f" ]; # -f to override existing partition
-
                 subvolumes = {
-                  "/root" = {
+                  "root" = {
                     mountpoint = "/";
                     mountOptions = [ "subvol=root" "compress=zstd" "noatime" ];
                   };
 
-                  "/home" = {
+                  "home" = {
                     mountpoint = "/home";
                     mountOptions = [ "subvol=home" "compress=zstd" "noatime" ];
                   };
 
-                  "/nix" = {
+                  "nix" = {
                     mountpoint = "/nix";
                     mountOptions = [ "subvol=nix" "compress=zstd" "noatime" ];
                   };
 
-                  "/persist" = {
+                  "persist" = {
                     mountpoint = "/persist";
                     mountOptions = [ "subvol=persist" "compress=zstd" "noatime" ];
                   };
 
-                  "/log" = {
+                  "log" = {
                     mountpoint = "/var/log";
                     mountOptions = [ "subvol=log" "compress=zstd" "noatime" ];
                   };
@@ -58,44 +57,44 @@
           };
         };
       };
+  
+      # First 6 TB HDD
+      hdd1 = {
+        type = "disk";
+        device = "/dev/sda";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "tank";
+              };
+            };
+          };
+        };
+      };
+  
+      # Second 6 TB HDD (mirror)
+      hdd2 = {
+        type = "disk";
+        device = "/dev/sdb";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "tank";
+              };
+            };
+          };
+        };
+      };
     };
   
-    # First 6 TB HDD
-    hdd1 = {
-      type = "disk";
-      device = "/dev/sda";
-      content = {
-        type = "gpt";
-        partitions = {
-          zfs = {
-            size = "100%";
-            content = {
-              type = "zfs";
-              pool = "tank";
-            };
-          };
-        };
-      };
-    };
-
-    # Second 6 TB HDD (mirror)
-    hdd2 = {
-      type = "disk";
-      device = "/dev/sdb";
-      content = {
-        type = "gpt";
-        partitions = {
-          zfs = {
-            size = "100%";
-            content = {
-              type = "zfs";
-              pool = "tank";
-            };
-          };
-        };
-      };
-    };
-
     # ZFS pool definition (mirror)
     zpool = {
       tank = {
@@ -112,20 +111,20 @@
           xattr = "sa";
           acltype = "posixacl";
         };
-        mountpoint = "none";  # datasets handle mounts
+        mountpoint = null; # datasets handle mounts
       };
     };
   };
-
-  # Very basic placeholder mount for the pool itself (optional)
-  # not needed for `disko‑zfs` datasets, but sometimes convenient
-  # fileSystems."/tank" = {
-  #   device = "tank";
-  #   fsType = "zfs";
-  #   options = [ "xattr" "atime" ];
-  #   neededForBoot = false;
-  # };  
-
+  
+    # Very basic placeholder mount for the pool itself (optional)
+    # not needed for `disko‑zfs` datasets, but sometimes convenient
+    # fileSystems."/tank" = {
+    #   device = "tank";
+    #   fsType = "zfs";
+    #   options = [ "xattr" "atime" ];
+    #   neededForBoot = false;
+    # };  
+  
 
   fileSystems."/persist".neededForBoot = true;
   fileSystems."/var/log".neededForBoot = true;
