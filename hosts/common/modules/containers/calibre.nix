@@ -21,7 +21,7 @@
 
       volumes = [
         "/var/lib/calibre-lib:/config"
-        "/mnt/data/media/books:/books"
+        "/mnt/data/media/books/ebooks:/books"
       ];
 
       ports = [

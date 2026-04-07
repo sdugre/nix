@@ -57,6 +57,21 @@
     fsType = "zfs";
   };
 
+  fileSystems."/mnt/data/media/books" = {
+    device = "tank/data/media/books";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/data/media/videos" = {
+    device = "tank/data/media/videos";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/data/media/videos/home-videos" = {
+    device = "tank/data/media/videos/home-videos";
+    fsType = "zfs";
+  };
+
   fileSystems."/mnt/photos" = {
     device = "tank/photos";
     fsType = "zfs";
