@@ -5,6 +5,7 @@ keys:
     - &sdugre_chummie age1vulqhl4axmf07h0hczw68s3yegz9kv3daunsw34tqnnw8eyuyfns3ajqxp
     - &sdugre_optiplex age1xh95w5mu5p8xm3xeyc0nwcgw8eg2fe2wlzall3qngwchwh2eue3sx2yw28
     - &sdugre_macbookPro age1jcyj9vtydj7uejzxda7rq5gyd456jeru8f87lvamnu9flulukypq0xuj82
+    - &sdugre_soteria age1mutdea2lyjphyg342mjna49vq7zzmmny65amrf32klw9fd6kypcq96xud9
 
   # hosts
   - &hosts:
@@ -14,6 +15,7 @@ keys:
     - &chromebook age1y5ue0jn8j0aryul67lzkakltn287sgcdl8jjzxg6fmemed8pruhss45ymu
     - &optiplex age1x8h0f4km2fuunmzmr0gfl4843lc4d23tc34qjt9nxqmtspcsrulque3ymg
     - &macbookPro age1jqc7ptr68gzfatv6thkcnleqnj6tsmxc2e6hagcyaxtngnlheujqkwxp6s
+    - &soteria age1uc896vge9weqzg3pawkqlht4qcscagtsp56xzha4lkpngq4f7q8qljd8mr
 
 creation_rules:
   - path_regex: hosts/thinkpad/secrets.yaml$
@@ -27,6 +29,7 @@ creation_rules:
     - age:
       - *chummie
       - *sdugre_chummie
+
   - path_regex: hosts/nixos/secrets.yaml$
     key_groups:
     - age:
@@ -49,6 +52,12 @@ creation_rules:
       - *macbookPro
       - *sdugre_macbookPro
 
+  - path_regex: hosts/soteria/secrets.yaml$
+    key_groups:
+    - age:
+      - *soteria
+      - *sdugre_soteria
+
   - path_regex: hosts/common/secrets.yaml$
     key_groups:
     - age:
@@ -58,10 +67,12 @@ creation_rules:
       - *optiplex
       - *chromebook
       - *macbookPro
+      - *soteria
       - *sdugre_thinkpad
       - *sdugre_chummie
       - *sdugre_optiplex
       - *sdugre_macbookPro
+      - *sdugre_soteria
 
   - path_regex: home/sdugre/secrets.yaml$
     key_groups:
@@ -70,3 +81,4 @@ creation_rules:
       - *sdugre_chummie
       - *sdugre_optiplex
       - *sdugre_macbookPro
+      - *sdugre_soteria

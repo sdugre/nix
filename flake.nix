@@ -41,6 +41,9 @@
     impermanence.url = "github:nix-community/impermanence";
 
     stylix.url = "github:danth/stylix";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -55,6 +58,7 @@
     nix-colors,
     nixos-hardware,
     betterfox,
+    disko,
     ...
   } @ inputs: let
     inherit (self) outputs;

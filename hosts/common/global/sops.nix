@@ -15,4 +15,9 @@ in {
   sops = {
     age.sshKeyPaths = map getKeyPath keys;
   };
+
+  environment.persistence = lib.mkIf config.services.persistence.enable {
+    "/persist".directories = ["/var/lib/sops-nix"];
+  };
+
 }
