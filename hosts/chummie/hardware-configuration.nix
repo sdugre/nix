@@ -67,6 +67,21 @@
     fsType = "zfs";
   };
 
+  fileSystems."/mnt/data/media/movies" = {
+    device = "tank/data/media/movies";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/data/media/movies/ski-movies" = {
+    device = "tank/data/media/movies/ski-movies";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/data/media/tv" = {
+    device = "tank/data/media/tv";
+    fsType = "zfs";
+  };
+
   fileSystems."/mnt/data/media/videos/home-videos" = {
     device = "tank/data/media/videos/home-videos";
     fsType = "zfs";
@@ -74,6 +89,11 @@
 
   fileSystems."/mnt/photos" = {
     device = "tank/photos";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/data/media/music" = {
+    device = "tank/data/media/music";
     fsType = "zfs";
   };
 

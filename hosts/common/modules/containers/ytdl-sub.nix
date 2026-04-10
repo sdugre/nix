@@ -19,8 +19,8 @@
       ];
       volumes = [
         "/var/lib/containers/ytdl-sub:/config"
-        "/mnt/data/media/videos-youtube:/youtube"
-        "/mnt/data/media/videos-music:/music-videos"
+        "/mnt/data/media/videos/youtube:/youtube"
+        "/mnt/data/media/videos/music-videos:/music-videos"
       ];
       environment = {
         PUID = "1000";
