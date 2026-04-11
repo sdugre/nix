@@ -189,6 +189,20 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  backups.enable = true;
+  backups.zfs.datasets = {
+    "tank/data" = { 
+      useTemplate = [ "storage" ]; 
+      recursive = "zfs";
+    };
+    "tank/photos" = { 
+      useTemplate = [ "storage" ]; 
+    };
+    "tank/test" = { 
+      useTemplate = [ "data" ]; 
+    };
+  };
+
   # Packages specific to this machine
   environment.systemPackages =
     [

@@ -57,6 +57,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/mnt/test" = {
+    device = "tank/test";
+    fsType = "zfs";
+  };
+
   fileSystems."/mnt/data/media/books" = {
     device = "tank/data/media/books";
     fsType = "zfs";

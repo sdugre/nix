@@ -2,6 +2,7 @@
 # These should be stuff you would like to share with others, not your personal configurations.
 {
   # List your module files here
+  backups = import ./backups;
   persistence = import ./persistence.nix;
   tailscale-autoconnect = import ./tailscale-autoconnect.nix;
 }
