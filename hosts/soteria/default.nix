@@ -45,6 +45,58 @@
   # this option does not work; will return error
   services.zfs.zed.enableMail = false;
 
+  backups.enable = true;
+  backups.zfs.datasets = {
+    "tank/backups" = { 
+      useTemplate = [ "backup" ]; 
+      recursive = "zfs";
+    };
+  };
+
+  services.syncoid = {
+    enable = true;
+    user = "root";
+    commonArgs = [ "--debug" ];
+    commands = {
+      "chummie/tank/test" = {
+        source = "root@chummie:tank/test";
+        target = "tank/backups/chummie/test";
+      };
+      "chummie/tank/photos" = {
+        source = "root@chummie:tank/photos";
+        target = "tank/backups/chummie/photos";
+      };
+      "chummie/tank/data/media/videos/home-videos" = {
+        source = "root@chummie:tank/data/media/videos/home-videos";
+        target = "tank/backups/chummie/data/media/videos/home-videos";
+      };
+      "chummie/tank/data/media/books" = {
+        source = "root@chummie:tank/data/media/books";
+        target = "tank/backups/chummie/data/media/books";
+      };
+      "chummie/tank/data/media/music" = {
+        source = "root@chummie:tank/data/media/music";
+        target = "tank/backups/chummie/data/media/music";
+      };
+      "chummie/tank/data/media/movies/movies" = {
+        source = "root@chummie:tank/data/media/movies/movies";
+        target = "tank/backups/chummie/data/media/movies/movies";
+      };
+      "chummie/tank/data/media/movies/ski-movies" = {
+        source = "root@chummie:tank/data/media/movies/ski-movies";
+        target = "tank/backups/chummie/data/media/movies/ski-movies";
+      };
+    };
+  };
+  
+  # This is necessary for syncoid service to ssh into chummie
+  services.openssh = {
+    enable = true;
+    knownHosts = {
+      "chummie".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKIhMUStyszEHq+pkJ+6pblAX8/emW1eNZRXcpAxiVfD root@chummie";
+    };
+  };
+
   services.persistence = {
     enable = true;
     partition = "nvme0n1p2";
