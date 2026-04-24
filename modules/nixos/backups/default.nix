@@ -6,6 +6,7 @@
 {
   imports = [
     ./zfs.nix
+    ./btrfs.nix
   ];
 
   options.backups = {

@@ -52,6 +52,10 @@
       recursive = "zfs";
     };
   };
+  backups.btrfs = {
+    role = "target";
+    btrbkKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZ4VoI3T2+SyrXRsfd6zLfiFopO/SWGzNjU48sMM1y8 btrbk@chummie" ];
+  };
 
   services.syncoid = {
     enable = true;

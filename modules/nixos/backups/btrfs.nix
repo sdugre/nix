@@ -26,7 +26,7 @@ in
     };
 
     role = lib.mkOption {
-      type = types.enum [ "source" "target" "both" ];
+      type = lib.types.enum [ "source" "target" "both" ];
       default = "source";
       description = "Whether the machine is a source of or target for btrfs snapshots";
     };
@@ -40,18 +40,18 @@ in
     subvolume = lib.mkOption {
       description = "Btrbk subvolumes declarations";
       default = { };
-      example = "{  home = { snapshot_create = "always"; };
-                    nixos = {};  }";
+      example = {  home = { snapshot_create = "always"; };
+                    nixos = {};  };
     };
 
     targetHost = lib.mkOption {
-      type = types.str;
+      type = lib.types.str;
       description = "hostname or IP of backup server";
       default = "";
     };
 
     targetPath = lib.mkOption {
-      type = types.str;
+      type = lib.types.str;
       description = "path to store snapshots on target host";
       default = "/tank/backups/${hostname}";
     };
@@ -158,6 +158,6 @@ in
         };   
 
       })
-    ]
+    ];
   };
 }
