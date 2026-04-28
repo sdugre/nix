@@ -77,7 +77,6 @@
   environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
 
   # FOR ZFS
-  boot.supportedFilesystems = ["zfs"];
   boot.zfs.forceImportRoot = false;
   networking.hostId = "a610158c";
 
@@ -184,6 +183,7 @@
   fileSystems."/persist".neededForBoot = true;
   fileSystems."/var/log".options = ["compress=zstd" "noatime"];
   fileSystems."/var/log".neededForBoot = true;
+  boot.supportedFilesystems = [ "zfs" "btrfs"];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -200,6 +200,15 @@
     };
     "tank/test" = { 
       useTemplate = [ "data" ]; 
+    };
+  };
+  backups.btrfs = {
+    enable = true;
+    role = "source";
+    targetHost = "soteria";
+    subvolume = {
+      home = { };
+      persist = { };
     };
   };
 

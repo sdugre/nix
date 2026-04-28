@@ -20,7 +20,8 @@ in
 {
   options.backups.btrfs = {
     enable = lib.mkOption {
-      default = backupCfg.enable && hasBtrfs; # auto enable if backups = enable AND the system has btrfs support
+#      default = backupCfg.enable && hasBtrfs; # auto enable if backups = enable AND the system has btrfs support
+      default = false;
       type = lib.types.bool;
       description = "Whether to enable btrfs snapshots and backups.";
     };
@@ -68,96 +69,102 @@ in
 
   };
 
-  config = lib.mkIf cfg.enable {
-    lib.mkMerge = [
-  
-      # --- Source Role ---
-      (lib.mkIf (cfg.role == "source" || cfg.role == "both") {
+  config = lib.mkIf (cfg.enable && backupCfg.enable) (lib.mkMerge [
 
-        assertions = [
-          {
-            assertion = cfg.subvolume != { };
-            message = "backups.btrfs enabled as source but no subvolumes are declared";
-          }
-          {
-            assertion = cfg.targetHost != "";
-            message = "You must specify and target host when role is 'source'";
-          }
-        ];
+    {
+      assertions = [
+        {
+          assertion = hasBtrfs;
+          message = "backups.btrfs enabled but btrfs does not appear to be supported. `boot.supportedFilesystems` must include btrfs";
+        }
+      ];
+    }
 
-        # mount the btrfs filesystem for snapshotting
-        fileSystems = {
-          "/btrfs_pool" = {
-            device = cfg.partition;
-            fsType = "btrfs";
-            options = [ "subvolid=5" ];
-          };
+    # --- Source Role ---
+    (lib.mkIf (cfg.role == "source" || cfg.role == "both") {
+
+      assertions = [
+        {
+          assertion = cfg.subvolume != { };
+          message = "backups.btrfs enabled as source but no subvolumes are declared";
+        }
+        {
+          assertion = cfg.targetHost != "";
+          message = "You must specify and target host when role is 'source'";
+        }
+      ];
+
+      # mount the btrfs filesystem for snapshotting
+      fileSystems = {
+        "/btrfs_pool" = {
+          device = cfg.partition;
+          fsType = "btrfs";
+          options = [ "subvolid=5" ];
         };
+      };
 
-        # btrbk doesn't create snapshot directory by default
-        system.activationScripts = {
-          script.text = ''
-            install -d -m 755 /btrfs_pool/.snapshots -o root -g root
-          '';
-        };
+      # btrbk doesn't create snapshot directory by default
+      system.activationScripts = {
+        script.text = ''
+          install -d -m 755 /btrfs_pool/.snapshots -o root -g root
+        '';
+      };
 
-        sops.secrets."btrbk_key" = {
-          sopsFile = ../../hosts/${hostname}/secrets.yaml;
-        };
+      sops.secrets."btrbk_key" = {
+        sopsFile = ../../../hosts/${hostname}/secrets.yaml;
+      };
 
-        services.btrbk = {
-          instances."btrbk" = {
-            onCalendar = "hourly";
-            settings = {
-              # generate a key with:
-              # ssh-keygen -t ed25519 -f "/tmp/btrbk-key" -N "" -C "btrbk@$<config.networking.hostName>"
-              # copy public key to backup server config
-              ssh_identity = config.sops.secrets."btrbk_key".path;
-              ssh_user = "btrbk";
-              stream_compress = "lz4";
-              snapshot_preserve_min = "1d";
-              snapshot_preserve = "7d 3w 3m";
-              target_preserve_min = "no";
-              target_preserve = "7d 3w 11m";
-              snapshot_dir = "/btrfs_pool/.snapshots";
-              volume."/btrfs_pool" = {
-                target = "ssh://${cfg.targetHost}/${cfg.targetPath}";
-                inherit (cfg) subvolume;
-              };
+      services.btrbk = {
+        instances."btrbk" = {
+          onCalendar = "hourly";
+          settings = {
+            # generate a key with:
+            # ssh-keygen -t ed25519 -f "/tmp/btrbk-key" -N "" -C "btrbk@$<config.networking.hostName>"
+            # copy public key to backup server config
+            ssh_identity = config.sops.secrets."btrbk_key".path;
+            ssh_user = "btrbk";
+            stream_compress = "lz4";
+            snapshot_preserve_min = "1d";
+            snapshot_preserve = "7d 3w 3m";
+            target_preserve_min = "no";
+            target_preserve = "7d 3w 11m";
+            snapshot_dir = "/btrfs_pool/.snapshots";
+            volume."/btrfs_pool" = {
+              target = "ssh://${cfg.targetHost}/${cfg.targetPath}";
+              inherit (cfg) subvolume;
             };
           };
-        }; 
-      })
+        };
+      }; 
+    })
 
-      # --- Target Role ---
+    # --- Target Role ---
 
-      (lib.mkIf (cfg.role == "target" || cfg.role == "both") {
+    (lib.mkIf (cfg.role == "target" || cfg.role == "both") {
 
-        assertions = [
-          {
-            assertion = cfg.btrbkKeys != [ ];
-            message = "You must add a public key when Role is 'Target'";
-          }
+      assertions = [
+        {
+          assertion = cfg.btrbkKeys != [ ];
+          message = "You must add a public key when Role is 'Target'";
+        }
+      ];
+
+      services.btrbk = {
+        sshAccess = lib.mkIf (cfg.btrbkKeys != [ ]) [
+          (lib.map (key: {
+            key = key;
+            roles = [
+              "info" # `btrfs subvolume find-new` and `btrfs filesystem usage`
+              # "source" # `btrfs subvolume snapshot` and `btrfs send`
+              "target" # `btrfs receive` and `mkdir`
+              "delete" # `btrfs subvolume delete` FIXME: This is a bit dangerous
+              # "snapshot" # `btrfs subvolume snapshot`
+              # "send" # `btrfs send`
+              "receive" # `btrfs receive`
+            ];
+          }) cfg.btrbkKeys)
         ];
-
-        services.btrbk = {
-          sshAccess = lib.mkIf (cfg.btrbkKeys != [ ]) [
-            (lib.map (key: {
-              key = key;
-              roles = [
-                "info" # `btrfs subvolume find-new` and `btrfs filesystem usage`
-                # "source" # `btrfs subvolume snapshot` and `btrfs send`
-                "target" # `btrfs receive` and `mkdir`
-                "delete" # `btrfs subvolume delete` FIXME: This is a bit dangerous
-                # "snapshot" # `btrfs subvolume snapshot`
-                # "send" # `btrfs send`
-                "receive" # `btrfs receive`
-              ];
-            }) cfg.btrbkKeys)
-          ];
-        };   
-
-      })
-    ];
-  };
+      };   
+    })
+  ]);
 }
