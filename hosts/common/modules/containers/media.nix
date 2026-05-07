@@ -21,6 +21,7 @@
       install -d -m 755 /var/lib/containers/media/bookshelf -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/recyclarr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/sonarr -o sdugre -g media
+      install -d -m 755 /var/lib/containers/media/seerr -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/tube-archivist -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/qbittorrent -o sdugre -g media
       install -d -m 755 /var/lib/containers/media/whisparr -o sdugre -g media
@@ -116,8 +117,8 @@
       autoStart = true;
     };
 
-    overseerr = {
-      image = "lscr.io/linuxserver/overseerr:latest";
+    seerr = {
+      image = "ghcr.io/seerr-team/seerr:latest";
       environment = {
         PUID = "1000";
         PGID = "986";
@@ -125,10 +126,18 @@
         TZ = "America/New_York";
       };
       volumes = [
-        "/var/lib/containers/media/overseerr:/config"
+        "/var/lib/containers/media/seerr:/app/config"
       ];
       ports = [
         "5056:5055"
+      ];
+      extraOptions = [
+        "--health-cmd=\"wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1\""
+        "--health-interval=15s"
+        "--health-retries=3"
+        "--health-start-period=90s"
+        "--health-timeout=3s"
+        "--init"
       ];
       autoStart = true;
     };
