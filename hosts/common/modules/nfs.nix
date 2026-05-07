@@ -20,31 +20,37 @@
 
   fileSystems."/svr/nfs/paperless-import" = {
     device = "/var/lib/paperless/consume";
+    fsType = "nfs";
     options = ["bind"];
   };
 
   fileSystems."/svr/nfs/media" = {
     device = "/mnt/data/media";
+    fsType = "nfs";
     options = ["bind"];
   };
 
   fileSystems."/svr/nfs/files" = {
     device = "/mnt/data/files";
+    fsType = "nfs";
     options = ["bind"];
   };
 
   fileSystems."/svr/nfs/music" = {
     device = "/mnt/data/media/music";
+    fsType = "nfs";
     options = ["bind"];
   };
 
   fileSystems."/svr/nfs/photos" = {
     device = "/mnt/photos";
+    fsType = "nfs";
     options = ["bind"];
   };
 
   fileSystems."/svr/nfs/docs" = {
     device = "/mnt/docs";
+    fsType = "nfs";
     options = ["bind"];
   };
   networking.firewall.allowedTCPPorts = [ 111 2049 4000 4001 4002 20048 ];
