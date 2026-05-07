@@ -150,7 +150,7 @@ in
       ];
 
       services.btrbk = {
-        sshAccess = lib.mkIf (cfg.btrbkKeys != [ ]) [
+        sshAccess = lib.mkIf (cfg.btrbkKeys != [ ])
           (lib.map (key: {
             key = key;
             roles = [
@@ -162,8 +162,7 @@ in
               # "send" # `btrfs send`
               "receive" # `btrfs receive`
             ];
-          }) cfg.btrbkKeys)
-        ];
+          }) cfg.btrbkKeys);
       };   
     })
   ]);

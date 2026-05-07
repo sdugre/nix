@@ -18,7 +18,7 @@
     # services
     #../common/modules/backup.nix        # Restic and postgresql backups
   #  ../common/modules/binary-cache.nix  # Binary Cache for nix builds
-    #../common/modules/mail.nix          # Mail server for notifications
+    ../common/modules/mail.nix          # Mail server for notifications
   #  ../common/modules/ntfy.nix          # Notification service
   #  ../common/modules/remote-builder.nix# Distributed Nix Builds
   #  ../common/modules/samba.nix         # Samba server
@@ -53,6 +53,7 @@
     };
   };
   backups.btrfs = {
+    enable = true;
     role = "target";
     btrbkKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZ4VoI3T2+SyrXRsfd6zLfiFopO/SWGzNjU48sMM1y8 btrbk@chummie" ];
   };
