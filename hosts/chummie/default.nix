@@ -17,7 +17,7 @@
     ../common/modules/acme.nix          # certs
     ../common/modules/actual-budget.nix # Personal finance
     ../common/modules/authelia.nix      # SSO
-    ../common/modules/backup.nix        # Restic and postgresql backups
+    #../common/modules/backup.nix        # Restic and postgresql backups
     ../common/modules/binary-cache.nix  # Binary Cache for nix builds
     ../common/modules/calibre.nix       # eBooks
     ../common/modules/containers        # Podman Containers
@@ -205,10 +205,30 @@
   backups.btrfs = {
     enable = true;
     role = "source";
-    targetHost = "soteria";
     subvolume = {
       home = { };
       persist = { };
+    };
+  };
+  backups.restic = {
+    enable = true;
+    subvolumes = [
+      "home"
+      "persist"
+    ];
+    targetHost = "soteria";
+    paths = [
+      "/var/backup"
+    ];
+    exclude = [
+    ];
+  };
+
+  # This is necessary for syncoid service to ssh into chummie
+  services.openssh = {
+    enable = true;
+    knownHosts = {
+      "soteria".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEri3jEyV9cZ1AUq5U+25QaYax+S13bicVvw0lV634bJ root@soteria";
     };
   };
 

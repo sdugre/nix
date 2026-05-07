@@ -88,10 +88,6 @@ in
           assertion = cfg.subvolume != { };
           message = "backups.btrfs enabled as source but no subvolumes are declared";
         }
-        {
-          assertion = cfg.targetHost != "";
-          message = "You must specify and target host when role is 'source'";
-        }
       ];
 
       # mount the btrfs filesystem for snapshotting
@@ -104,11 +100,14 @@ in
       };
 
       # btrbk doesn't create snapshot directory by default
-      system.activationScripts = {
-        script.text = ''
-          install -d -m 755 /btrfs_pool/.snapshots -o root -g root
-        '';
-      };
+#      system.activationScripts = {
+#        script.text = ''
+#          install -d -m 755 /btrfs_pool/.snapshots -o root -g root
+#        '';
+#      };
+      systemd.tmpfiles.rules = [
+        "d /btrfs_pool/.snapshots 0755 root root - -"
+      ];
 
       sops.secrets."btrbk_key" = {
         sopsFile = ../../../hosts/${hostname}/secrets.yaml;
@@ -124,14 +123,15 @@ in
             ssh_identity = config.sops.secrets."btrbk_key".path;
             ssh_user = "btrbk";
             stream_compress = "lz4";
-            snapshot_preserve_min = "1d";
+            snapshot_preserve_min = "12h";
             snapshot_preserve = "7d 3w 3m";
             target_preserve_min = "no";
             target_preserve = "7d 3w 11m";
             snapshot_dir = "/btrfs_pool/.snapshots";
             volume."/btrfs_pool" = {
-              target = "ssh://${cfg.targetHost}/${cfg.targetPath}";
               inherit (cfg) subvolume;
+            } // lib.optionalAttrs (cfg.targetHost != "") {
+              target = "ssh://${cfg.targetHost}/${cfg.targetPath}";
             };
           };
         };
