@@ -14,7 +14,7 @@
     driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
     back = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
     back_sub = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
-    porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd=\${FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
+#    porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd=\${FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
   };
 
   # hardware encode/decode with amdgpu vaapi
@@ -32,7 +32,7 @@
     vaapiDriver = "i965";
     checkConfig = false; # temp disable due to key error with FRIGATE_MQTT_USER
     settings = {
-      auth.enabled = false;
+      auth.enabled = true;
       tls.enabled = false;
 
       #      ffmpeg = { hwaccel_args = "preset-vaapi"; };
@@ -50,7 +50,7 @@
         driveway_sub = ["ffmpeg:http://192.168.1.42/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
         back = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_main.bcs&user=admin&password="];
         back_sub = ["ffmpeg:http://192.168.1.65/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user=admin&password="];
-        porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd={FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
+#        porch = ["ffmpeg:http://192.168.1.40:8081/videostream.cgi?user=sdugre&pwd={FRIGATE_RTSP_PASSWORD}#video=h264#hardware"];
       };
 
       go2rtc.webrtc = {
@@ -61,6 +61,8 @@
         ];
       };
 
+      detect.enabled = true;
+      motion.enabled = true;
       record = {
         enabled = true;
         retain.days = 3;
@@ -76,26 +78,26 @@
       };
 
       cameras = {
-        porch = {
-          ffmpeg = {
-            inputs = [
-              {
-                path = "rtsp://127.0.0.1:8554/porch";
-                input_args = "preset-rtsp-restream";
-                roles = ["record" "detect"];
-              }
-            ];
-          };
-          detect = {
-            height = 480;
-            width = 640;
-            fps = 7;
-          };
-          objects = {
-            track = ["person"];
-            filters.person.min_area = 2000;
-          };
-        };
+#        porch = {
+#          ffmpeg = {
+#            inputs = [
+#              {
+#                path = "rtsp://127.0.0.1:8554/porch";
+#                input_args = "preset-rtsp-restream";
+#                roles = ["record" "detect"];
+#              }
+#            ];
+#          };
+#          detect = {
+#            height = 480;
+#            width = 640;
+#            fps = 7;
+#          };
+#          objects = {
+#            track = ["person"];
+#            filters.person.min_area = 2000;
+#          };
+#        };
         
         back = {
           ffmpeg = {
