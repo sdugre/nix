@@ -27,6 +27,7 @@
   # FOR ZFS
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.forceImportRoot = false;
+  boot.zfs.extraPools = [ "tank" ]; # need if not using legacy mountpoints 
   networking.hostId = "a610158c";
 
   services.zfs.autoScrub.enable = true;
