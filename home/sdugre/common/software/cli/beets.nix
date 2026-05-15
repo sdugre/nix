@@ -13,6 +13,8 @@
   sops.secrets."discogs_token" = {
     sopsFile = ../../../secrets.yaml;
   };
+  sops.templates."discogs_token".content = ''"${config.sops.placeholder."discogs_token"}"'';
+
   sops.secrets."gonic_password" = {
     sopsFile = ../../../secrets.yaml;
   };
@@ -40,7 +42,6 @@
         albumtypes 
         permissions
         musicbrainz
-        discogs
       ";
 
       import = {
@@ -51,12 +52,12 @@
       original_date = true;
       fetchart = {
         auto = "yes";
-        sources = "filesystem coverart lastfm itunes amazon wikipedia";
+        sources = ["filesystem" "coverart" "lastfm" "itunes" "amazon" "wikipedia"];
         lastfm_key = config.sops.secrets."lastfm_key".path;
       };
 
       discogs = {
-        user_token = config.sops.secrets."discogs_token".path;
+       # user_token = config.sops.templates."discogs_token".content;
         data_source_mismatch_penalty = 0.3; # prefer disgogs over musicbrainz
       };
 
