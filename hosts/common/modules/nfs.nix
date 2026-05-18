@@ -26,8 +26,11 @@
 
   fileSystems."/svr/nfs/media" = {
     device = "/mnt/data/media";
-    fsType = "nfs";
-    options = ["bind"];
+    fsType = "none";
+    options = [
+      "bind"
+      "x-systemd.requires-mounts-for=/mnt/data/media"
+    ];
   };
 
   fileSystems."/svr/nfs/files" = {
