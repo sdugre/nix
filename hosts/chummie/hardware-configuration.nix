@@ -52,66 +52,6 @@
     fsType = "vfat";
   };
 
-  fileSystems."/mnt/data" = {
-    device = "tank/data";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/test" = {
-    device = "tank/test";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/books" = {
-    device = "tank/data/media/books";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/videos" = {
-    device = "tank/data/media/videos";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/movies" = {
-    device = "tank/data/media/movies";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/movies/movies" = {
-    device = "tank/data/media/movies/movies";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/movies/ski-movies" = {
-    device = "tank/data/media/movies/ski-movies";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/tv" = {
-    device = "tank/data/media/tv";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/videos/home-videos" = {
-    device = "tank/data/media/videos/home-videos";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/photos" = {
-    device = "tank/photos";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/data/media/music" = {
-    device = "tank/data/media/music";
-    fsType = "zfs";
-  };
-
-  fileSystems."/mnt/geo" =
-    { device = "tank/geo";
-      fsType = "zfs";
-    };
-
   swapDevices = [
     {device = "/dev/disk/by-uuid/b2e52443-a32a-46c4-ad5e-2585659cf8ee";}
   ];

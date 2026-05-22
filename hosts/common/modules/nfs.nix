@@ -7,7 +7,7 @@
   services.nfs.server.exports = ''
     /svr/nfs                   100.0.0.0/8(insecure,rw,no_subtree_check,crossmnt,fsid=0)
     /svr/nfs/paperless-import  100.0.0.0/8(insecure,rw,no_subtree_check)
-    /svr/nfs/media             100.0.0.0/8(insecure,rw,no_subtree_check,all_squash,anonuid=1001,anongid=986)
+    /svr/nfs/media             100.0.0.0/8(insecure,rw,no_subtree_check,all_squash,anonuid=1001,anongid=986,crossmnt)
     /svr/nfs/files             100.0.0.0/8(insecure,rw,no_subtree_check)
     /svr/nfs/photos            100.0.0.0/8(insecure,rw,no_subtree_check)
     /svr/nfs/docs              100.0.0.0/8(insecure,rw,no_subtree_check)
@@ -26,10 +26,74 @@
 
   fileSystems."/svr/nfs/media" = {
     device = "/mnt/data/media";
-    fsType = "none";
+    fsType = "nfs";
     options = [
       "bind"
       "x-systemd.requires-mounts-for=/mnt/data/media"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/books" = {
+    device = "/mnt/data/media/books";
+    fsType = "nfs";
+    options = [
+      "bind"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/movies" = {
+    device = "/mnt/data/media/movies";
+    fsType = "nfs";
+    options = [
+      "bind"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/movies/movies" = {
+    device = "/mnt/data/media/movies/movies";
+    fsType = "nfs";
+    options = [
+      "bind"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/movies/ski-movies" = {
+    device = "/mnt/data/media/movies/ski-movies";
+    fsType = "nfs";
+    options = [
+      "bind"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/music" = {
+    device = "/mnt/data/media/music";
+    fsType = "nfs";
+    options = [
+      "bind"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/tv" = {
+    device = "/mnt/data/media/tv";
+    fsType = "nfs";
+    options = [
+      "bind"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/videos" = {
+    device = "/mnt/data/media/videos";
+    fsType = "nfs";
+    options = [
+      "bind"
+    ];
+  };
+
+  fileSystems."/svr/nfs/media/videos/home-videos" = {
+    device = "/mnt/data/media/videos/home-videos";
+    fsType = "nfs";
+    options = [
+      "bind"
     ];
   };
 
