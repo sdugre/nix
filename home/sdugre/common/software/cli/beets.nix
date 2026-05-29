@@ -43,6 +43,7 @@
         permissions
         musicbrainz
         inline
+        fromfilename
       ";
 
       import = {
