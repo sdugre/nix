@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }: let
   addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
@@ -10,6 +11,7 @@ in {
 
   programs.firefox = {
     enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     policies = {
       DisableTelemetry = true;
       DisablePocket = true;

@@ -12,7 +12,8 @@
       image = "rtuszik/photon-docker:latest";
       environment = {
         UPDATE_STRATEGY = "PARALLEL";
-        UPDATE_INTERVAL = "24h";
+        UPDATE_INTERVAL = "30d";
+        BASE_URL = "https://download1.graphhopper.com/public";
       };
       volumes = [
         "/mnt/geo:/photon/photon_data"
