@@ -72,6 +72,7 @@
     enable = true;
     package = null;
     portalPackage = null;
+    configType = "hyprlang";
     systemd = {
       enable = true;
       # Same as default, but stop graphical-session too
