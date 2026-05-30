@@ -21,7 +21,7 @@
     ../common/modules/mail.nix          # Mail server for notifications
   #  ../common/modules/ntfy.nix          # Notification service
   #  ../common/modules/remote-builder.nix# Distributed Nix Builds
-  #  ../common/modules/samba.nix         # Samba server
+    ../common/modules/samba.nix         # Samba server
   ];
 
   # FOR ZFS
@@ -45,6 +45,49 @@
   };
   # this option does not work; will return error
   services.zfs.zed.enableMail = false;
+  services.nfs.server = { # needed to use sharenfs property
+    enable = true;
+    lockdPort = 4001;
+    mountdPort = 4002;
+    statdPort = 4000;
+  };
+  networking.firewall = {
+    allowedTCPPorts = [
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
+    allowedUDPPorts = [
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
+  };
+  # create zfs dataset and nfs share for homeassistant:
+  # sudo zfs create -p tank/backups/homeassistant
+  # sudo zfs set sharenfs='rw=192.168.1.201/32,no_root_squash,sync,no_subtree_check' tank/backups/homeassistant
+
+  services.samba.settings.global."server string" = lib.mkForce "soteria";
+  services.samba.settings.global."netbios name" = lib.mkForce "soteria";
+  services.samba = {
+    enable = true;
+    settings.ha_backups = {
+      path = "/tank/backups/homeassistant";
+      "read only" = "no";
+      browseable = "yes";
+      "guest ok" = "yes";
+      "directory mask" = "0755";
+      "create mask" = "0644";
+      "force user" = "sdugre";
+      "force group" = "users";
+    };
+  };
 
   backups.enable = true;
   backups.zfs.datasets = {
