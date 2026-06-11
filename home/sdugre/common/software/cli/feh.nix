@@ -11,8 +11,8 @@
   home.shellAliases = {
     fehk = ''
       feh -F --edit \
-        --action1 "mv '%f' /mnt/photos/\!work/" \
-        --action2 "mv '%f' /mnt/photos/\!house/" \
+        --action1 "mv %F /mnt/photos/!work/" \
+        --action2 "mv %F /mnt/photos/!house/" \
         .
     '';
     # Used to process photos,
