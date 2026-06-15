@@ -26,12 +26,14 @@
     enable = true;
     settings = {
       default_session = {
-        command = ''
-          ${pkgs.tuigreet}/bin/tuigreet \
-            --time \
-            --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' \
-            --cmd start-hyprland
-        '';
+        # note:  command must be on a single line or it breaks.  See: https://github.com/nixos/nixpkgs/issues/527565
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' --cmd start-hyprland";
+      #  command = ''
+      #    ${pkgs.tuigreet}/bin/tuigreet \
+      #      --time \
+      #      --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' \
+      #      --cmd start-hyprland
+      #  '';
         user = "greeter";
       };
     };
