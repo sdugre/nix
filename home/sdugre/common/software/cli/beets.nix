@@ -68,7 +68,7 @@
       };
 
       paths = {
-        default = "%the{$albumartist}/[$original_year] $album/%if{$multidisc,Disc $disc/}$track - $title";
+        default = "%the{$albumartist}/[$original_year] $album/$disc_and_track - $title";
         comp = "_Compilations/[$original_year] $album/%if{$multidisc,Disc $disc/}$track - $artist - $title";
         "albumtype:live" = "%the{$albumartist}/$atypes[$year] $album/$track - $title";
         "albumtype:ep" = "%the{$albumartist}/[$original_year]$atypes $album/$track - $title";
@@ -76,6 +76,7 @@
 
       item_fields = {
         multidisc = "1 if disctotal > 1 else 0";
+        disc_and_track = "u'%i-%02i' % (disc, track) if disctotal > 1 else u'%02i' % (track)";
       };
 
       subsonic = {
