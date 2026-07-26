@@ -68,10 +68,10 @@
       };
 
       paths = {
-        default = "%the{$albumartist}/[$original_year] $album/$disc_and_track - $title";
-        comp = "_Compilations/[$original_year] $album/%if{$multidisc,Disc $disc/}$track - $artist - $title";
-        "albumtype:live" = "%the{$albumartist}/$atypes[$year] $album/$track - $title";
-        "albumtype:ep" = "%the{$albumartist}/[$original_year]$atypes $album/$track - $title";
+        default = "%the{$albumartist}/[$original_year] $album%aunique{}/$disc_and_track - $title";
+        comp = "_Compilations/[$original_year] $album/$disc_and_track - $artist - $title";
+        "albumtype:live" = "%the{$albumartist}/$atypes[$year] $album/$disc_and_track - $title";
+        "albumtype:ep" = "%the{$albumartist}/[$original_year]$atypes $album/$disc_and_track - $title";
       };
 
       item_fields = {

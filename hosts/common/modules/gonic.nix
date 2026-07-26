@@ -22,7 +22,7 @@
       scan-at-start-enabled = false;
       scan-watcher-enabled = true;
       jukebox-enabled = true;
-      exclude-pattern = "/@"; # exclude @eaDir's
+      exclude-pattern = "/@"; # exclude @eaDir's & /tmp
       expvar = true;
     };
   };
