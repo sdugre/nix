@@ -55,6 +55,7 @@
       wake      # personal wake on lan script
       wireshark # network monitoring tool
       xournalpp # annotate pdfs
+      audacity  # audio editor
     ]);
 
   # udev rule to allow adjusting brightness
