@@ -69,11 +69,55 @@
     "image/webp" = "mpv.desktop";
   };
 
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = let
+
+    lua = lib.generators.mkLuaInline;
+  
+    dsp = {
+      exec =            cmd: lua ''hl.dsp.exec_cmd("${cmd}")'';
+      close =           lua "hl.dsp.window.close()";
+      exit =            lua "hl.dsp.exit()";
+      float =           lua ''hl.dsp.window.float({ action = "toggle" })'';
+      fullscreen =      lua "hl.dsp.window.fullscreen()";
+      pseudo =          lua "hl.dsp.window.pseudo()";
+      layout =          msg: lua ''hl.dsp.layout("${msg}")'';
+      focus =           dir: lua ''hl.dsp.focus({ direction = "${dir}" })'';
+      swap =            dir: lua ''hl.dsp.window.swap({ direction = "${dir}" })'';
+      toggleSpecial =   name: lua ''hl.dsp.workspace.toggle_special("${name}")'';
+      moveToSpecial =   name: lua ''hl.dsp.window.move({ workspace = "special:${name}" })'';
+      focusWorkspace =  ws: lua ''hl.dsp.focus({ workspace = "${toString ws}" })'';
+      moveToWorkspace = ws: lua ''hl.dsp.window.move({ workspace = "${toString ws}" })'';
+      drag =            lua "hl.dsp.window.drag()";
+      resize =          lua "hl.dsp.window.resize()";
+      sendshortcut =    mod: key: lua ''hl.dsp.send_shortcut({ mods = "${mod}", key = "${key}" })'';
+    };
+
+    bind = keys: dispatcher: { _args = [keys dispatcher]; };
+    bindOpts = keys: dispatcher: opts: { _args = [keys dispatcher opts]; };
+  
+    workspaceBinds = lib.concatMap (i:
+      let key = toString (lib.mod i 10);
+      in [
+        (bind "SUPER + ${key}"          (dsp.focusWorkspace i))
+        (bind "SUPER + SHIFT + ${key}"  (dsp.moveToWorkspace i))
+      ]
+    ) (lib.range 1 9);
+  
+    startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
+      ${config.services.mako.package}/bin/makoctl &
+      nm-applet --indicator
+      ${pkgs.hypridle}/bin/hypridle
+      hyprctl setcursor Bibata-Modern-Classic 24
+      blueman-applet
+      ${lib.optionalString (!config.device.isLaptop) ''wayvnc -o DP-1 0.0.0.0''}
+    '';
+
+  in
+  {
     enable = true;
     package = null;
     portalPackage = null;
-    configType = "hyprlang";
+    configType = "lua";
     systemd = {
       enable = true;
       # Same as default, but stop graphical-session too
@@ -83,179 +127,206 @@
       ];
     };
 
+    extraLuaFiles."cycle-window" = {
+      content = ''
+        hl.bind("ALT + TAB", function()
+          local ws = hl.get_active_workspace()
+        
+          if ws.tiled_layout == "scrolling" then
+            hl.dispatch(hl.dsp.layout("move +col"))
+          elseif ws.tiled_layout == "monocle" then
+            hl.dispatch(hl.dsp.layout("cyclenext"))
+          end  
+        end)
+
+        hl.bind("ALT + SHIFT + TAB", function()
+          local ws = hl.get_active_workspace()
+        
+          if ws.tiled_layout == "scrolling" then
+            hl.dispatch(hl.dsp.layout("move -col"))
+          elseif ws.tiled_layout == "monocle" then
+            hl.dispatch(hl.dsp.layout("cycleprev"))
+          end
+        end)
+      '';
+      autoLoad = true;
+    };
+
     settings = {
-      general = {
-        gaps_in = 3;
-        gaps_out = 5;
-        border_size = 3;
-#       "col.active_border" = "0xff${config.colorscheme.palette.base0C}";
-#       "col.inactive_border" = "0xff${config.colorscheme.palette.base02}";
-      };
-      cursor = {
-        inactive_timeout = 4;
-      };
-
-      group = {
-#       "col.border_active" = "0xff${config.colorscheme.palette.base0B}";
-#        "col.border_inactive" = "0xff${config.colorscheme.palette.base04}";
-        groupbar = {
-          font_size = 11;
-        };
-      };
-      input = {
-        kb_layout = "us";
-        touchpad.disable_while_typing = false;
-	repeat_delay = 350;
-	repeat_rate = 50;
-      };
-      decoration = {
-        active_opacity = 0.94;
-        inactive_opacity = 0.75;
-        fullscreen_opacity = 1.0;
-        rounding = 10;
-        blur = {
-          enabled = true;
-          size = 5;
-          passes = 3;
-          new_optimizations = true;
-          ignore_opacity = true;
-        };
-        shadow = {
-          enabled = true;
-          range = 12;
-          offset = "3 3";
-#          color = "0x44000000";
-#          color_inactive = "0x66000000";
-        };
+      on = {
+        _args = [
+          "hyprland.start"
+          (lua ''
+            function()
+              hl.exec_cmd("${startupScript}/bin/start")
+            end'')
+        ];
       };
 
-      exec-once = [
-        "${config.services.mako.package}/bin/makoctl &"
-        "nm-applet --indicator"
-        "${pkgs.hypridle}/bin/hypridle"
-        "hyprctl setcursor Bibata-Modern-Classic 24"
-        "blueman-applet"
-        (if !config.device.isLaptop then "wayvnc -o DP-1 0.0.0.0" else "")
-      ];
-
-      bind = let
-        makoctl = "${config.services.mako.package}/bin/makoctl";
-        rofi = "${config.programs.rofi.package}/bin/rofi";
-        rofi-logout = "${pkgs.rofi-logout}/bin/rofi-logout";
-        grimblast = "${pkgs.grimblast}/bin/grimblast";
-        pactl = "${pkgs.pulseaudio}/bin/pactl";
-        notify-send = "${pkgs.libnotify}/bin/notify-send";
-        backlight = "${pkgs.backlight}/bin/backlight";
-        gtk-launch = "${pkgs.gtk3}/bin/gtk-launch";
-        xdg-mime = "${pkgs.xdg-utils}/bin/xdg-mime";
-        defaultApp = type: "${gtk-launch} $(${xdg-mime} query default ${type})";
-        calculator = "${pkgs.pinned2501.galculator}/bin/galculator";
-        terminal = config.home.sessionVariables.TERMINAL;
-        browser = defaultApp "x-scheme-handler/https";
-        editor = defaultApp "text/plain";
-        notepad = "${pkgs.mousepad}/bin/mousepad";
-      in [
-        # Program bindings
-        "SUPER,Return,exec,${terminal}"
-        "SUPER,e,exec,${editor}"
-        "SUPER,v,exec,${editor}"
-        "SUPER,b,exec,${browser}"
-        "SUPER, Space, exec, ${rofi} -modes \"drun,window,run\" -show drun"
-        "SUPER, d, exec, nautilus &"
-        "SUPER, l, exec, ${rofi-logout}"
-        "SUPER, c, exec, ${calculator}"
-        "SUPER, n, exec, ${notepad}"
-        # Basic Binds
-        "SUPER, q, killactive"
-        "SUPERSHIFT, e, exit"
-        "SUPER, s, layoutmsg, swapsplit"
-        "SUPER, f, fullscreen, 1"
-        "SUPERSHIFT, f, fullscreen, 0"
-        "SUPERSHIFT, Space, togglefloating"
-        # Switch workspaces with mainMod + [0-9]
-        "SUPER, 1, workspace, 1"
-        "SUPER, 2, workspace, 2"
-        "SUPER, 3, workspace, 3"
-        "SUPER, 4, workspace, 4"
-        "SUPER, 8, workspace, 8"
-        "SUPER, 9, workspace, 9"
-        "SUPER, Tab, workspace, e+1"
-        "SUPER SHIFT, Tab, workspace, e-1"
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        "SUPER SHIFT, 1, movetoworkspace, 1"
-        "SUPER SHIFT, 2, movetoworkspace, 2"
-        "SUPER SHIFT, 3, movetoworkspace, 3"
-        "SUPER SHIFT, 4, movetoworkspace, 4"
-        "SUPER SHIFT, 8, movetoworkspace, 8"
-        "SUPER SHIFT, 9, movetoworkspace, 9"
-        # Scroll through existing workspaces with mainMod + scroll
-        "SUPER, mouse_down, workspace, e+1"
-        "SUPER, mouse_up, workspace, e-1"
-        # Brightness control (custom script)
-        ", XF86MonBrightnessUp, exec, ${backlight} -inc 5"
-        ", XF86MonBrightnessDown, exec, ${backlight} -dec 5"
-        # Screenshots
-        ", Print , exec, ${grimblast} --notify --freeze copy output"
-        "SHIFT, Print, exec, ${grimblast} --notify --freeze copy active"
-        "CONTROL, Print, exec, ${grimblast} --notify --freeze copy screen"
-        "SUPER, Print, exec, ${grimblast} --notify --freeze copy area"
-        "ALT, Print, exec, ${grimblast} --notify --freeze copy area"
-        # Scrolling Mode
-        # Move the view left/right by columns
-        "ALT SHIFT, TAB,  layoutmsg, move -col"
-        "ALT, TAB, layoutmsg, move +col"
-        # Move focus between columns and wrap
-        "SUPER, h, layoutmsg, focus l"
-        "SUPER, l, layoutmsg, focus r"
-        # Swap columns
-        "SUPER SHIFT, h, layoutmsg, swapcol l"
-        "SUPER SHIFT, l, layoutmsg, swapcol r"
-        # Resize current column (wider/narrower)
-        "SUPER, minus, layoutmsg, colresize -0.1"
-        "SUPER, equal, layoutmsg, colresize +0.1"
-        # Monocle Mode
-        "ALT, TAB, layoutmsg, cyclenext"
-        "ALT SHIFT, TAB, layoutmsg, cycleprev"
-      ];
-
-      bindm = [
-        # Mouse Binds
-        "SUPER, mouse:272, movewindow"
-        "SUPER, mouse:273, resizewindow"
-      ];
-
-      # Volume
-      # Example volume button that allows press and hold, volume limited to 150%
-      bindle = [
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ];
-      bindl = let
-        hyprlock = "${config.programs.hyprlock.package}/bin/hyprlock";
-      in [
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", switch:on:Lid Switch, exec, pidof hyprlock || ${hyprlock}"
-      ];
-#      monitor = ["eDP-1,1920x1080,0x0,1"];
-      monitor = map (
-        m: "${m.name},${
-          if m.enabled
-          then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},1"
-          else "disable"
-        }"
+      monitor = map (m: 
+        { 
+          output = "${m.name}"; 
+        } // ( if m.enabled then {
+          mode = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+          position = "${m.position}";
+          scale = 1;
+        } else {
+          disabled = true;
+        })
       ) (config.monitors);
 
-      workspace = map (m: "name:${m.workspace},monitor:${m.name}") (
-        lib.filter (m: m.enabled && m.workspace != null) (config.monitors)
-      ) ++ [ "9,layout:scrolling" ]
-        ++ [ "8,layout:monocle" ];
+      config = {
+        general = {
+          gaps_in = 3;
+          gaps_out = 5;
+          border_size = 3;
+  #       "col.active_border" = "0xff${config.colorscheme.palette.base0C}";
+  #       "col.inactive_border" = "0xff${config.colorscheme.palette.base02}";
+        };
 
-      windowrule = [
-        "match:class ^(galculator)$, float on"
-        "match:class ^(galculator)$, move ((monitor_w-window_w)-10) ((monitor_h-window_h)-10)" 
-        "match:class ^(firefox)$, match:title ^(Extension: \\(Bitwarden Password Manager\\)), float on"
-        "match:class ^(nm-connection-editor)$, float on"
-        "match:class ^(org.pulseaudio.pavucontrol)$, float on"
+        input = {
+          kb_layout = "us";
+          touchpad.disable_while_typing = false;
+        	repeat_delay = 350;
+        	repeat_rate = 50;
+        };
+
+        decoration = {
+          active_opacity = 0.94;
+          inactive_opacity = 0.75;
+          fullscreen_opacity = 1.0;
+          rounding = 10;
+          blur = {
+            enabled = true;
+            size = 5;
+            passes = 3;
+            new_optimizations = true;
+            ignore_opacity = true;
+          };
+          shadow = {
+            enabled = true;
+            range = 12;
+            offset = "3 3";
+  #          color = "0x44000000";
+  #          color_inactive = "0x66000000";
+          };
+        };
+
+        cursor.inactive_timeout = 4;
+  
+        group = {
+  #       "col.border_active" = "0xff${config.colorscheme.palette.base0B}";
+  #       "col.border_inactive" = "0xff${config.colorscheme.palette.base04}";
+          groupbar = {
+            font_size = 11;
+          };
+        };
+
+        ecosystem.no_donation_nag = true;
+      };
+
+      bind = let
+        makoctl =     "${config.services.mako.package}/bin/makoctl";
+        rofi =        "${config.programs.rofi.package}/bin/rofi";
+        rofi-logout = "${pkgs.rofi-logout}/bin/rofi-logout";
+        grimblast =   "${pkgs.grimblast}/bin/grimblast";
+        pactl =       "${pkgs.pulseaudio}/bin/pactl";
+        notify-send = "${pkgs.libnotify}/bin/notify-send";
+        backlight =   "${pkgs.backlight}/bin/backlight";
+        gtk-launch =  "${pkgs.gtk3}/bin/gtk-launch";
+        xdg-mime =    "${pkgs.xdg-utils}/bin/xdg-mime";
+        defaultApp =  type: "${gtk-launch} $(${xdg-mime} query default ${type})";
+        calculator =  "${pkgs.pinned2501.galculator}/bin/galculator";
+        terminal =    config.home.sessionVariables.TERMINAL;
+        browser =     defaultApp "x-scheme-handler/https";
+        editor =      defaultApp "text/plain";
+        notepad =     "${pkgs.mousepad}/bin/mousepad";
+        hyprlock =    "${config.programs.hyprlock.package}/bin/hyprlock";
+      in [
+        (bind "SUPER + T"  (dsp.exec "kitty"))
+        # Basic binds
+        (bind "SUPER + Q"             dsp.close)
+        (bind "SUPER + SHIFT + e"     dsp.exit)
+        (bind "SUPER + S"             (dsp.layout "togglesplit"))
+        (bind "SUPER + F"             dsp.fullscreen)
+        (bind "SUPER + SHIFT + SPACE" dsp.float)
+
+        # Program bindings
+        (bind "SUPER + RETURN"      (dsp.exec "${terminal}"))
+        (bind "SUPER + e"           (dsp.exec "${editor}"))
+        (bind "SUPER + v"           (dsp.exec "${editor}"))
+        (bind "SUPER + b"           (dsp.exec "${browser}"))
+        (bind "SUPER + SPACE"       (dsp.exec "${rofi} -modes \'drun,window,run\' -show drun"))
+        (bind "SUPER + d"           (dsp.exec "nautilus &"))
+        (bind "SUPER + l"           (dsp.exec "${rofi-logout}"))
+        (bind "SUPER + c"           (dsp.exec "${calculator}"))
+        (bind "SUPER + n"           (dsp.exec "${notepad}"))
+
+        # Volume
+        (bindOpts "XF86AudioMute"         (dsp.exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") 
+          { locked = true; })
+        (bindOpts "XF86AudioRaiseVolume"  (dsp.exec "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+") 
+          { locked = true; repeating = true; })
+        (bindOpts "XF86AudioLowerVolume"  (dsp.exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") 
+          { locked = true; repeating = true; })
+
+        (bindOpts "switch:on:Lid Switch"   (dsp.exec "pidof hyprlock || ${hyprlock}") { locked = true; })
+
+        # Brightness
+        (bind "XF86MonBrightnessUp"   (dsp.exec "${backlight} -inc 5"))
+        (bind "XF86MonBrightnessDown" (dsp.exec "${backlight} -dec 5"))
+
+        # Workspace scroll
+        (bind "SUPER + TAB"         (dsp.focusWorkspace "e+1"))
+        (bind "SUPER + SHIFT + TAB" (dsp.focusWorkspace "e-1"))
+        (bind "SUPER + mouse_down"  (dsp.focusWorkspace "e+1"))
+        (bind "SUPER + mouse_up"    (dsp.focusWorkspace "e-1"))
+        
+        # Scrolling Mode
+        # See extraLuaFiles."cycle-window" for more
+        (bind "SUPER + H"         (dsp.layout "focus l")) # move focus btw columns & wrap
+        (bind "SUPER + L"         (dsp.layout "focus r"))
+        (bind "SUPER + SHIFT + H" (dsp.layout "swapcol l")) # swap columns
+        (bind "SUPER + SHIFT + L" (dsp.layout "swapcol r"))
+        (bind "SUPER + minus"     (dsp.layout "colresize -0.1"))
+        (bind "SUPER + equal"     (dsp.layout "colresize +0.1"))
+
+        # Monocle Mode
+        # See extraLuaFiles."cycle-window" for more
+
+        # Mouse binds (272=LMB, 273=RMB, 274=MMB)
+        (bindOpts "SUPER + mouse:272" dsp.drag { mouse = true; })
+        (bindOpts "SUPER + mouse:273" dsp.resize { mouse = true; })
+        (bindOpts "SUPER + CTRL_L"    dsp.drag { mouse = true; })
+        (bindOpts "SUPER + ALT_L"     dsp.resize { mouse = true; })
+
+        # Screenshots
+        (bind "Print"           (dsp.exec "${grimblast} --notify --freeze copy active"))
+        (bind "SHIFT + Print"   (dsp.exec "${grimblast} --notify --freeze copy output"))
+        (bind "CONTROL + Print" (dsp.exec "${grimblast} --notify --freeze copy screen"))
+        (bind "SUPER + Print"   (dsp.exec "${grimblast} --notify --freeze copy area"))
+        (bind "ALT + Print"     (dsp.exec "${grimblast} --notify --freeze copy area"))
+      ] ++ workspaceBinds;
+
+      window_rule = [
+        { match.class = "^(galculator)$"; float = true;
+          move = [ "(monitor_w-window_w)-10" "(monitor_h-window_h)-10" ]; }
+        { match = {
+            class = "^(firefox)$";
+            title = "^Extension: \\(Bitwarden Password Manager\\)$";
+          }; float = true; }
+
+        { match.class = "^(nm-connection-editor)$"; float = true; }
+        { match.class = "^(org.pulseaudio.pavucontrol)$"; float = true; }
+      ];
+
+      workspace_rule = ( 
+        map (m: { workspace = toString m.workspace; monitor = m.name; }) 
+          ( lib.filter (m: m.enabled && m.workspace != null) config.monitors )
+      ) ++
+      [
+        { workspace = "9"; layout = "scrolling"; }
+        { workspace = "8"; layout = "monocle"; }
       ];
     };
   };
