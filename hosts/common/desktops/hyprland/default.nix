@@ -15,7 +15,14 @@
   environment.systemPackages = with pkgs; [
     nautilus
     networkmanagerapplet
+    networkmanager-openvpn
   ];
+
+  networking = {
+    networkmanager.plugins = with pkgs; [
+      networkmanager-openvpn # Required by airVPN GUI
+    ];
+  };
 
   services.udisks2.enable = true; # needed for auto mounting USB drives;  See also Home Manager hyprland config.
 
