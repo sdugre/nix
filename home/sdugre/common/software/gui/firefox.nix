@@ -48,7 +48,7 @@ in {
         linkding-extension
         linkding-injector
         ublock-origin
-        #        bypass-paywalls-clean
+#        bypass-paywalls-clean
         istilldontcareaboutcookies
         vimium-c
       ];
