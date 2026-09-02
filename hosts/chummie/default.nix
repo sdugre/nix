@@ -49,7 +49,7 @@
     ../common/modules/rss.nix           # miniflux & rss-bridge
     ../common/modules/samba.nix         # Samba server
     ../common/modules/searxng.nix       # private search engine
-    ../common/modules/stirling-pdf.nix  # pdf tools
+#    ../common/modules/stirling-pdf.nix  # pdf tools  TEMP DISABLE (FAILING TESTS, WON'T BUILD)
     ../common/modules/vaultwarden.nix   # password manager
     ../common/modules/wiki-js.nix       # Personal Wiki
     #../common/modules/wireguard.nix     # vpn
