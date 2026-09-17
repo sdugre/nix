@@ -44,6 +44,7 @@
         musicbrainz
         inline
         fromfilename
+        zero
       ";
 
       import = {
@@ -106,7 +107,33 @@
         file = "644";
         dir = "755";
       };
-      
+
+      zero = {
+        auto = true;
+        update_database = true;
+        fields = [
+          "mb_albumartistid"
+          "mb_albumartistids" 
+          "mb_albumid" 
+          "mb_artistid" 
+          "mb_artistids" 
+          "mb_releasegroupid"
+          "mb_releasetrackid"
+          "mb_trackid" 
+          "mb_workid"
+          "comments"
+        ];
+        mb_albumartistid =  ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_albumartistids = ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_albumid =        ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_artistid =       ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_artistids =      ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_releasegroupid = ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_releasetrackid = ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_trackid =        ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_workid =         ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+      };
+
       hook.hooks = [
         {
           event = "album_imported";
