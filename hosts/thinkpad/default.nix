@@ -56,6 +56,7 @@
       wireshark # network monitoring tool
       xournalpp # annotate pdfs
       audacity  # audio editor
+      yt-dlp    # youtube downloader
     ]);
 
   # udev rule to allow adjusting brightness
