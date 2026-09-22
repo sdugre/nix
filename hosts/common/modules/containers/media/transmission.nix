@@ -11,7 +11,7 @@
     LOCAL_NETWORK = "192.168.0.0/16";
     DISABLE_PORT_UPDATER = "true";
     OPENVPN_OPTS = "--inactive 3600 --ping 10 --ping-exit 60 --pull-filter ignore ping";
-    TRANSMISSION_DOWNLOAD_DIR = "/data/torrents";
+    TRANSMISSION_DOWNLOAD_DIR = "/data/torrents/tv-whisparr";
     TRANSMISSION_INCOMPLETE_DIR = "/data/torrents/_incomplete";
     TRANSMISSION_INCOMPLETE_DIR_ENABLED = "true";
     TRANSMISSION_WATCH_DIR = "/data/torrents/_watch";

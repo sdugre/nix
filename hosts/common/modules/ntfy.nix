@@ -7,7 +7,7 @@
   app = "ntfy";
   domain = "seandugre.com";
   port = 5600;
-  dataDir = "/var/lib/ntfy";
+  dataDir = "/var/lib/ntfy-sh";
 in {
   services.ntfy-sh = {
     enable = true;

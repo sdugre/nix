@@ -47,6 +47,7 @@
         TZ = "America/New_York";
         VPN_SERVICE_PROVIDER = "airvpn";
         VPN_TYPE = "wireguard"; # see below for wireguard environmental file
+        FIREWALL_INPUT_PORTS = "8283,9091";
       };
       environmentFiles = [config.sops.secrets.gluetun-wg-env.path];
       extraOptions = [
@@ -58,6 +59,10 @@
       ];
       ports = [
         "8283:8283/tcp"
+
+        "9092:9091"          # Transmission Web UI
+        "51413:51413"        # Transmission peer TCP
+        "51413:51413/udp"    # Transmission peer UDP        
       ];
       autoStart = true;
     };
@@ -253,6 +258,27 @@
       ports = [
         "6969:6969"
       ];
+      autoStart = true;
+    };
+
+    transmission = {
+      image = "lscr.io/linuxserver/transmission:latest";
+      environment = {
+        PUID = "1000";
+        PGID = "986";
+        UMASK = "002";
+        TZ = "America/New_York";
+      };
+      environmentFiles = [];
+      extraOptions = [
+        "--network=container:gluetun"
+      ];
+      volumes = [
+        "/var/lib/containers/media/transmission:/config"
+        "/mnt/data/files:/downloads"
+        "/mnt/data/torrents/_watch:/watch"
+      ];
+      dependsOn = ["gluetun"];
       autoStart = true;
     };
 
