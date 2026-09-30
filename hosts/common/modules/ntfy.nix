@@ -9,8 +9,14 @@
   port = 5600;
   dataDir = "/var/lib/ntfy-sh";
 in {
+
+  sops.secrets."ntfy.env" = {
+    sopsFile = ../../${hostname}/secrets.yaml;
+  };
+
   services.ntfy-sh = {
     enable = true;
+    environmentFile = config.sops.secrets."ntfy.env".path;
     settings = {
       listen-http = "127.0.0.1:${toString port}";
       base-url = "https://${app}.${domain}";

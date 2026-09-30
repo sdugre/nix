@@ -137,7 +137,7 @@
         "5056:5055"
       ];
       extraOptions = [
-        "--health-cmd=\"wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1\""
+        "--health-cmd=wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/settings/public || exit 1"
         "--health-interval=15s"
         "--health-retries=3"
         "--health-start-period=90s"
