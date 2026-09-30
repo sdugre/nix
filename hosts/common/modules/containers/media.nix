@@ -275,7 +275,7 @@
       ];
       volumes = [
         "/var/lib/containers/media/transmission:/config"
-        "/mnt/data/files:/downloads"
+        "/mnt/data/torrents/:/downloads"
         "/mnt/data/torrents/_watch:/watch"
       ];
       dependsOn = ["gluetun"];
