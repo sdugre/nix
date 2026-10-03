@@ -1,12 +1,14 @@
 {
   imports = [
+    ./adguard.seandugre.nix
     ./auth.seandugre.nix
 #    ./books.seandugre.nix
     ./calibre.seandugre.nix
     ./calibre-web.seandugre.nix
     ./cars.seandugre.nix
-#    ./cloud.seandugre.nix
+#    ./cloud.seandugre.nix # nextcloud config
 #    ./docs.seandugre.nix
+    ./firewall.seandugre.nix
 #    ./food.seandugre.nix  # see mealie config
     ./ha.seandugre.nix
     ./jackett.seandugre.nix
@@ -22,7 +24,7 @@
     ./nvr.seandugre.nix
 #    ./nvr2.seandugre.nix
     ./pdf.seandugre.nix
-    ./plex.seandugre.nix
+#    ./plex.seandugre.nix  # not running plex anymore
     ./pve.seandugre.nix
     ./qbit.seandugre.nix
     ./radarr.seandugre.nix

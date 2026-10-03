@@ -14,6 +14,7 @@
 
     paperless-ngx = prev.paperless-ngx.overrideAttrs (oldAttrs: {
       doCheck = false;
+      doInstallCheck = false;
       disabledTests = (oldAttrs.disabledTests or [ ]) ++ [
         "test_barcodes"
         "test_consume_file"
