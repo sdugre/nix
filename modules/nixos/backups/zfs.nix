@@ -51,52 +51,54 @@ in
       inherit (cfg) datasets;
 
       # Home snapshotting rules
-      templates.home = {
-        autosnap = true;
-        autoprune = true;
-        frequently = 3;
-        hourly = 23;
-        daily = 6;
-        weekly = 3;
-        monthly = 11;
-        yearly = 1;
-      };
+      templates = lib.recursiveUpdate {
+        home = {
+          autosnap = true;
+          autoprune = true;
+          frequently = 3;
+          hourly = 23;
+          daily = 6;
+          weekly = 3;
+          monthly = 11;
+          yearly = 1;
+        };
 
-      # Data snapshotting rules
-      templates.data = {
-        autosnap = true;
-        autoprune = true;
-        frequently = 3;
-        hourly = 12;
-        daily = 6;
-        weekly = 3;
-        monthly = 11;
-        yearly = 0;
-      };
+        # Data snapshotting rules
+        data = {
+          autosnap = true;
+          autoprune = true;
+          frequently = 3;
+          hourly = 12;
+          daily = 6;
+          weekly = 3;
+          monthly = 11;
+          yearly = 0;
+        };
 
-      # Bulk storage snapshotting rules
-      templates.storage = {
-        autosnap = true;
-        autoprune = true;
-        frequently = 0;
-        hourly = 0;
-        daily = 6;
-        weekly = 3;
-        monthly = 3;
-        yearly = 0;
-      };
+        # Bulk storage snapshotting rules
+        storage = {
+          autosnap = true;
+          autoprune = true;
+          frequently = 0;
+          hourly = 0;
+          daily = 6;
+          weekly = 3;
+          monthly = 3;
+          yearly = 0;
+        };
 
-      # Storage snapshotting rules for backup servers
-      templates.backup = {
-        autosnap = false;
-        autoprune = true;
-        frequently = 0;
-        hourly = 0;
-        daily = 6;
-        weekly = 3;
-        monthly = 3;
-        yearly = 0;
-      };
-    } // cfg.templates;
+        # Storage snapshotting rules for backup servers
+        backup = {
+          autosnap = false;
+          autoprune = true;
+          frequently = 0;
+          hourly = 0;
+          daily = 6;
+          weekly = 3;
+          monthly = 3;
+          yearly = 0;
+        };
+      } cfg.templates;
+    };
   };
 }
