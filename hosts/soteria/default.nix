@@ -69,7 +69,7 @@
       20048
     ];
   };
-  # create zfs dataset and nfs share for homeassistant:
+  # create zfs dataset and nfs share for homeassistant & firewall:
   # sudo zfs create -p tank/backups/homeassistant
   # sudo zfs set sharenfs='rw=192.168.1.201/32,no_root_squash,sync,no_subtree_check' tank/backups/homeassistant
 
@@ -93,7 +93,10 @@
   backups.zfs.datasets = {
     "tank/backups" = { 
       useTemplate = [ "backup" ]; 
-      recursive = "zfs";
+      recursive = true;
+    };
+    "tank/backups/firewall" = { 
+      useTemplate = [ "storage" ]; 
     };
   };
   backups.btrfs = {
@@ -143,6 +146,28 @@
     enable = true;
     knownHosts = {
       "chummie".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKIhMUStyszEHq+pkJ+6pblAX8/emW1eNZRXcpAxiVfD root@chummie";
+    };
+  };
+
+  # Relies on tailscale ACL allowing ssh'ing to firewall
+  services.rsync.enable = true;
+  services.rsync.jobs.firewall = {
+    sources = [
+      "root@firewall:/usr/local/AdGuardHome/AdGuardHome.yaml"
+      "root@firewall:/conf/config.xml"
+    ];
+    destination = "/tank/backups/firewall/";
+    user = "root";
+    group = "root";
+    timerConfig = {
+      OnCalendar = "*-*-* 02:17:00";
+      Persistent = true;
+    };
+    settings = {
+      # Syncs recursively, copy permissions and modification times
+      archive = true;
+      # Set SSH command, fix rsync being unable to find it otherwise
+      rsh = "${pkgs.openssh}/bin/ssh";
     };
   };
 
