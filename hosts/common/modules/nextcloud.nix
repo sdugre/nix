@@ -19,7 +19,7 @@
     enable = true;
     hostName = "cloud.seandugre.com";
     # Need to manually increment with every major upgrade.
-    package = pkgs.nextcloud34;
+    package = pkgs.nextcloud35;
     # Let NixOS install and configure the database automatically.
     database.createLocally = true;
     # Let NixOS install and configure Redis caching automatically.
@@ -41,8 +41,9 @@
       #        sha256 = "sha256-8XyOslMmzxmX2QsVzYzIJKNw6rVWJ7uDhU1jaKJ0Q8k=";
       #     };
       drawio = pkgs.fetchNextcloudApp {
-        sha256 = "sha256-0Y4nFeZcgfgNnEdgEZeJbVYNsM7prdjdCzFeUieUQbc=";
-        url = "https://github.com/arnowelzel/drawio-nextcloud/releases/download/v4.3.8/drawio-v4.3.8.tar.gz";
+#        sha256 = "sha256-0Y4nFeZcgfgNnEdgEZeJbVYNsM7prdjdCzFeUieUQbc=";
+        sha256 = "sha256-OsNNda1TjQZ8TRGdRkKBtCTBlYosfvEU3h0dUv6omBw=";
+        url = "https://github.com/arnowelzel/drawio-nextcloud/releases/download/v4.3.9/drawio-v4.3.9.tar.gz";
         license = "gpl3";
       };
     };

@@ -24,6 +24,20 @@
       ];
     });
 
+    # 2026-10-08 Temp fix for build failure
+    authelia = prev.authelia.override {
+      authelia-web =
+        (prev.callPackage
+          "${prev.path}/pkgs/by-name/au/authelia/web.nix"
+          { }
+        ).overrideAttrs (old: {
+          pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
+            outputHash =
+              "sha256-zIaVEjbh/LIQMqnryrgVm+46GP+9gM91WCMyAqeDnaA=";
+          });
+        });
+    };
+
     # This is for mealie build failure 2025-11-15
 #    python3Packages = prev.python3Packages.overrideScope (self: super: {
 #      pint = super.pint.overridePythonAttrs (old: rec {

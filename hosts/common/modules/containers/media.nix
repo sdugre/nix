@@ -276,7 +276,7 @@
       volumes = [
         "/var/lib/containers/media/transmission:/config"
         "/mnt/data/torrents/:/downloads"
-        "/mnt/data/torrents/_watch:/watch"
+        "/mnt/data/torrents/transmission/_watch:/watch"
       ];
       dependsOn = ["gluetun"];
       autoStart = true;
