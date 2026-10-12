@@ -55,7 +55,8 @@
       wake      # personal wake on lan script
       wireshark # network monitoring tool
       xournalpp # annotate pdfs
-      audacity  # audio editor
+#      audacity  # audio editor
+      audacity_3 # since they inexplicably removed export based on labels in new version
       yt-dlp    # youtube downloader
     ]);
 
