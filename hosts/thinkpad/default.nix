@@ -22,6 +22,8 @@
 
   ];
 
+  services.upower.enable = true;  # required by throttled, which is enabled from lenovo-thinkpad-t490 input
+
   services.tailscaleAutoconnect = {
     enable = true;
     authkeyFile = config.sops.secrets.tailscale_key.path;
