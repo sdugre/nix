@@ -103,15 +103,6 @@
       ]
     ) (lib.range 1 9);
   
-    startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-      ${config.services.mako.package}/bin/makoctl &
-      nm-applet --indicator
-      ${pkgs.hypridle}/bin/hypridle
-      hyprctl setcursor Bibata-Modern-Classic 24
-      blueman-applet
-      ${lib.optionalString (!config.device.isLaptop) ''wayvnc -o DP-1 0.0.0.0''}
-    '';
-
   in
   {
     enable = true;
@@ -158,7 +149,13 @@
           "hyprland.start"
           (lua ''
             function()
-              hl.exec_cmd("${startupScript}/bin/start")
+              hl.exec_cmd("${pkgs.networkmanagerapplet}/bin/nm-applet --indicator")
+              hl.exec_cmd("${pkgs.hypridle}/bin/hypridle")
+              hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 24")
+              hl.exec_cmd("${pkgs.blueman}/bin/blueman-applet")
+              ${lib.optionalString (!config.device.isLaptop) ''
+                hl.exec_cmd("${pkgs.wayvnc}/bin/wayvnc -o DP-1 0.0.0.0")
+              ''}
             end'')
         ];
       };
