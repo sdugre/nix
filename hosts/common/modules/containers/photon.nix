@@ -16,7 +16,7 @@
         BASE_URL = "https://download1.graphhopper.com/public";
       };
       volumes = [
-        "/mnt/geo:/photon/photon_data"
+        "/mnt/geo/photon-current:/photon/data"
       ];
       ports = [ "2322:2322" ];
       autoStart = true;
