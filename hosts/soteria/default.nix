@@ -140,6 +140,15 @@
       };
     };
   };
+
+  # Work around the module's hard-coded users.users.syncoid.home lookup.
+  users.groups.syncoid = {};
+  users.users.syncoid = {
+    isSystemUser = true;
+    group = "syncoid";
+    home = "/var/lib/syncoid";
+    createHome = true;
+  };
   
   # This is necessary for syncoid service to ssh into chummie
   services.openssh = {
