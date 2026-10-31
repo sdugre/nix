@@ -49,8 +49,8 @@
     };
     config = {
       dbtype = "pgsql";
-      adminuser = "admin";
-      adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
+    #  adminuser = "admin";
+    #  adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
     };
     settings = {
       overwriteprotocol = "https";

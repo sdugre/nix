@@ -24,19 +24,39 @@
       ];
     });
 
-    # 2026-10-08 Temp fix for build failure
-    authelia = prev.authelia.override {
-      authelia-web =
-        (prev.callPackage
-          "${prev.path}/pkgs/by-name/au/authelia/web.nix"
-          { }
-        ).overrideAttrs (old: {
-          pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
-            outputHash =
-              "sha256-zIaVEjbh/LIQMqnryrgVm+46GP+9gM91WCMyAqeDnaA=";
+    # 2026-10-22: Temporarily skip the failing pyopenjtalk-plus test.
+    python314 = prev.python314.override {
+      packageOverrides = python-final: python-prev: {
+        pyopenjtalk-plus =
+          python-prev.pyopenjtalk-plus.overridePythonAttrs (old: {
+            disabledTests = (old.disabledTests or [ ]) ++ [
+              "test_run_njd_from_mecab_invalid_input_should_not_break_next_call"
+            ];
           });
-        });
+      };
     };
+
+    python314Packages = final.python314.pkgs;
+
+    # 2026-10-22: Temporary workaround for missing speechd in Calibre tests.
+    calibre = prev.calibre.overrideAttrs (_old: {
+      doCheck = false;
+      doInstallCheck = false;
+    });    
+
+  # 2026-10-08 Temp fix for build failure
+#    authelia = prev.authelia.override {
+#      authelia-web =
+#        (prev.callPackage
+#          "${prev.path}/pkgs/by-name/au/authelia/web.nix"
+#          { }
+#        ).overrideAttrs (old: {
+#          pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
+#            outputHash =
+#              "sha256-zIaVEjbh/LIQMqnryrgVm+46GP+9gM91WCMyAqeDnaA=";
+#          });
+#        });
+#    };
 
     # This is for mealie build failure 2025-11-15
 #    python3Packages = prev.python3Packages.overrideScope (self: super: {

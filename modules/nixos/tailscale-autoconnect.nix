@@ -65,8 +65,9 @@ in {
       description = "Automatic connection to Tailscale";
 
       # make sure tailscale is running before trying to connect to tailscale
-      after = ["network-pre.target" "tailscale.service"];
-      wants = ["network-pre.target" "tailscale.service"];
+      after = ["network-online.target" "tailscaled.service"];
+      wants = ["network-online.target"];
+      requires = ["tailscaled.service"];
       wantedBy = ["multi-user.target"];
 
       serviceConfig.Type = "oneshot";

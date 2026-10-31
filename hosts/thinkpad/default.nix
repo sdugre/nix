@@ -22,6 +22,8 @@
 
   ];
 
+  services.upower.enable = true;  # required by throttled, which is enabled from lenovo-thinkpad-t490 input
+
   services.tailscaleAutoconnect = {
     enable = true;
     authkeyFile = config.sops.secrets.tailscale_key.path;
@@ -55,7 +57,8 @@
       wake      # personal wake on lan script
       wireshark # network monitoring tool
       xournalpp # annotate pdfs
-      audacity  # audio editor
+#      audacity  # audio editor
+      audacity_3 # since they inexplicably removed export based on labels in new version
       yt-dlp    # youtube downloader
     ]);
 

@@ -21,6 +21,12 @@
       "chummie" = {
         credentialsFile = config.sops.secrets."cloudflare-tunnel".path;
         certificateFile = config.sops.secrets."cloudflare-cert".path;
+
+        # Temporarily block Nextcloud before requests reach nginx/PHP.
+#        ingress."cloud.seandugre.com" = {
+#          service = "http_status:403";
+#        };
+
         # forward all requests to local nginx proxy
         default = "https://127.0.0.1:443";
         # this line needed to prevent redirect loop.  nginx handles tls
