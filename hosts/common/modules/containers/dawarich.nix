@@ -22,14 +22,30 @@ in {
   # systemd.services.create-tube-archivist-network = with config.virtualisation.oci-containers; {
   systemd.services.create-dawarich-pod = with config.virtualisation.oci-containers; {
     serviceConfig.Type = "oneshot";
+    serviceConfig.RemainAfterExit = true;
     wantedBy = [
       "${backend}-dawarich.service"
-      "${backend}-dawarich-db.service"
+      "${backend}-dawarich_db.service"
     ];
     script = ''
             ${pkgs.podman}/bin/podman pod exists dawarich || \
             ${pkgs.podman}/bin/podman pod create -n dawarich -p '0.0.0.0:${toString port}:3000'
     '';
+  };
+
+  systemd.services.podman-dawarich = {
+    requires = [ "create-dawarich-pod.service" ];
+    after = [ "create-dawarich-pod.service" ];
+  };
+
+  systemd.services.podman-dawarich_db = {
+    requires = [ "create-dawarich-pod.service" ];
+    after = [ "create-dawarich-pod.service" ];
+  };
+
+  systemd.services.podman-dawarich_redis = {
+    requires = [ "create-dawarich-pod.service" ];
+    after = [ "create-dawarich-pod.service" ];
   };
 
   # Create folders for the containers
@@ -44,26 +60,6 @@ in {
   ];
 
   virtualisation.oci-containers.containers = {
-
-#    tailscale = {
-#      image = "tailscale/tailscale:latest";
-#      hostname = "loc";
-#      extraOptions = [
-#        "--pod=dawarich"
-#        "--env=TS_STATE_DIR=/var/lib/containers/dawarich/ts"
-#        "--system_caps=true" 
-#        "--cap_net_admin=true" 
-#        "--cap_net_raw=true"
-#      #  "--env=TS_AUTHKEY=${builtins.readFile /etc/nixos/secrets/ts.key}"
-#      ];
-#      volumes = [ 
-#        "/dev/net/tun:/dev/net/tun" 
-#        "/var/lib/containers/dawarich/ts:/var/lib/tailscale" 
-#      ];
-#      environmentFiles = [
-#        config.sops.secrets."dawarich.env".path
-#      ];
-#    };
 
     dawarich_redis = {
       image = "redis:7.4-alpine";
@@ -128,14 +124,16 @@ in {
         "ENABLE_TELEMETRY" = "false";
         "MIN_MINUTES_SPENT_IN_CITY" = "60";
         "PROMETHEUS_EXPORTER_ENABLED" = "false";
-        "PROMETHEUS_EXPORTER_HOST" = "0.0.0.0";
-        "PROMETHEUS_EXPORTER_PORT" = "9394";
         "RAILS_ENV" = "development";
         "TIME_ZONE" = "America/Toronto";
         "PHOTON_API_HOST" = "192.168.1.200:2322";
         "PHOTON_API_USE_HTTPS" = "false";
         "SELF_HOSTED" = "true";
         "REDIS_URL" = "redis://dawarich_redis:6379";
+        "SIDEKIQ_EMBEDDED" = "true";
+        "WEB_CONCURRENCY" = "0";
+        "BACKGROUND_PROCESSING_CONCURRENCY" = "2";
+        "STORE_GEODATA" = "true";
       };
       extraOptions = [
         "--pod=dawarich"
@@ -145,62 +143,16 @@ in {
         "--health-retries=30"
         "--health-start-period=30s"
         "--health-timeout=10s"
+        "--stop-timeout=60"
       ];
       log-driver = "journald";
       dependsOn = [
-        "dawarich_db"
-        "dawarich_redis"
-      ];
-    };
-
-    dawarich_sidekiq = {
-      image = "freikin/dawarich:latest";
-      volumes = [
-        "${basePath}/public:/var/app/public"
-        "${basePath}/watched:/var/app/tmp/imports/watched"
-        "${basePath}/storage:/var/app/storage"
-      ];
-      cmd = [ "sidekiq" ];
-      autoStart = true;
-      environment = {
-        "APPLICATION_HOSTS" = "localhost";
-        "APPLICATION_PROTOCOL" = "http";
-        "BACKGROUND_PROCESSING_CONCURRENCY" = "10";
-        "DATABASE_HOST" = "dawarich_db";
-        "DATABASE_NAME" = "dawarich_development";
-        "DISTANCE_UNIT" = "mi";
-        "ENABLE_TELEMETRY" = "false";
-        "PROMETHEUS_EXPORTER_ENABLED" = "false";
-        "PROMETHEUS_EXPORTER_HOST" = "dawarich";
-        "PROMETHEUS_EXPORTER_PORT" = "9394";
-        "RAILS_ENV" = "development";
-        "REDIS_URL" = "redis://dawarich_redis:6379";
-        "PHOTON_API_HOST" = "192.168.1.200:2322";
-        "PHOTON_API_USE_HTTPS" = "false";
-        "SELF_HOSTED" = "true";
-        "STORE_GEODATA" = "true";
-      };
-      environmentFiles = [
-        config.sops.secrets."dawarich.env".path
-      ];
-      extraOptions = [
-        "--pod=dawarich"
-        "--entrypoint=sidekiq-entrypoint.sh"
-        "--health-cmd=pgrep -f sidekiq"
-        "--health-interval=10s"
-        "--health-retries=30"
-        "--health-start-period=30s"
-        "--health-timeout=10s"
-      ];
-      log-driver = "journald";
-      dependsOn = [
-        "dawarich"
         "dawarich_db"
         "dawarich_redis"
       ];
     };
   };
-
+  
   services.nginx.virtualHosts."${subdomain}.${domain}" = {
     useACMEHost = "${domain}";
     forceSSL = true;
