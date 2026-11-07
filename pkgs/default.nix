@@ -3,8 +3,9 @@
 {pkgs ? (import ../nixpkgs.nix) {}}: {
   # Packages with an actual source
   figurine = pkgs.callPackage ./figurine {};
-  tinyMediaManager = pkgs.callPackage ./tinyMediaManager {};
+  mailclean = pkgs.callPackage ./mailclean {};
   pia-wg-config = pkgs.callPackage ./pia-wg-config {};
+  #tinyMediaManager = pkgs.callPackage ./tinyMediaManager {};
 
   # Personal scripts
   backlight = pkgs.callPackage ./backlight {};

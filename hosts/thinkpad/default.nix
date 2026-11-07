@@ -52,6 +52,7 @@
       lemonade                    # copy paste for nvim
       libreoffice-qt              # office suite
       libimobiledevice            # iphone mount
+      mailclean                   # email cleanup tool
       python311Packages.requests  # may be necessary for beets plugin
       remmina                     # RDP
       screen                      # window manager for console port access
