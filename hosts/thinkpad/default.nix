@@ -45,21 +45,21 @@
     [
     ]
     ++ (with pkgs; [
-      backlight # personal script for brightness control
-#      config.nur.repos.shados.tmm
-      ifuse # optional, to mount using 'ifuse'
-      lemonade # copy paste for nvim
-      libreoffice-qt # office suite
-      libimobiledevice # iphone mount
-      python311Packages.requests # may be necessary for beets plugin
-      remmina   # RDP
+#      audacity                   # audio editor - this will install version 4
+      audacity_3                  # since they inexplicably removed export based on labels in new version
+      backlight                   # personal script for brightness control
+      ifuse                       # optional, to mount using 'ifuse'
+      lemonade                    # copy paste for nvim
+      libreoffice-qt              # office suite
+      libimobiledevice            # iphone mount
+      python311Packages.requests  # may be necessary for beets plugin
+      remmina                     # RDP
+      screen                      # window manager for console port access
       virt-viewer
-      wake      # personal wake on lan script
-      wireshark # network monitoring tool
-      xournalpp # annotate pdfs
-#      audacity  # audio editor
-      audacity_3 # since they inexplicably removed export based on labels in new version
-      yt-dlp    # youtube downloader
+      wake                        # personal wake on lan script
+      wireshark                   # network monitoring tool
+      xournalpp                   # annotate pdfs
+      yt-dlp                      # youtube downloader
     ]);
 
   # udev rule to allow adjusting brightness
