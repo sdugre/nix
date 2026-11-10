@@ -48,6 +48,7 @@
         VPN_SERVICE_PROVIDER = "airvpn";
         VPN_TYPE = "wireguard"; # see below for wireguard environmental file
         FIREWALL_INPUT_PORTS = "8283,9091";
+        FIREWALL_OUTBOUND_SUBNETS = "192.168.1.0/24";
       };
       environmentFiles = [config.sops.secrets.gluetun-wg-env.path];
       extraOptions = [
