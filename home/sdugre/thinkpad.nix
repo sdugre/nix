@@ -10,6 +10,7 @@ in {
     # Optional machine specific packages
     ./common/software/gui/vscodium.nix
     ./common/software/cli/feh.nix
+    ./common/software/cli/nvf-test.nix
     inputs.stylix.homeModules.stylix
   ];
   device.isLaptop = true;

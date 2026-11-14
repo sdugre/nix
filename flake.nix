@@ -23,13 +23,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #    hyprland.url = "github:hyprwm/hyprland";
-#    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    hyprland-contrib.url = "github:hyprwm/contrib";
-    hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-colors.url = "github:misterio77/nix-colors";
 
@@ -42,8 +44,15 @@
 
     stylix.url = "github:danth/stylix";
 
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -59,6 +68,7 @@
     nixos-hardware,
     betterfox,
     disko,
+    nvf,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -76,7 +86,9 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in
-        import ./pkgs {inherit pkgs;}
+        import ./pkgs { 
+          inherit pkgs nvf;
+        }
     );
     # Devshell for bootstrapping
     # Acessible through 'nix develop' or 'nix-shell' (legacy)
