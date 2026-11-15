@@ -1,9 +1,8 @@
 {
-  config,
   pkgs,
   inputs,
   ...
-}: 
+}:
 {
   imports = [
     inputs.nvf.homeModules.default
@@ -18,38 +17,41 @@
         withRuby = false;
         withPython3 = true;
         globals.mapleader = " ";
-    
+
         options = {
           clipboard = "unnamedplus";
           number = true;
           relativenumber = true;
           scrolloff = 10;
-    
+
           expandtab = true;
           tabstop = 2;
           shiftwidth = 2;
           softtabstop = 2;
           autoindent = true;
         };
-    
+
         languages.nix = {
           enable = true;
           treesitter.enable = true;
           lsp.enable = true;
-    
+
           format = {
             enable = true;
             type = [ "nixfmt" ];
           };
         };
-    
+
         treesitter.enable = true;
-    
+        telescope.enable = true;
+        binds.whichKey.enable = true;
+        git.gitsigns.enable = true;
+
         lsp = {
           enable = true;
           formatOnSave = true;
         };
-    
+
         autocomplete.blink-cmp = {
           enable = true;
           setupOpts = {
@@ -71,7 +73,7 @@
             };
           };
         };
-    
+
         extraPlugins.oscyank = {
           package = pkgs.vimPlugins.vim-oscyank;
           setup = ''
@@ -83,7 +85,7 @@
       };
     };
   };
-  
+
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
