@@ -57,7 +57,6 @@ in {
     sessionPath = ["/home/${username}/.local/bin"];
     sessionVariables = {
       TERMINAL = "kitty";
-      EDITOR = "nvim";
       BROWSER = "firefox";
     };
   };
