@@ -3,16 +3,17 @@
   config,
   nix-config-path,
   ...
-}: {
+}:
+{
   # for this to work, need to download icons using:
-  # nix run nixpkgs#wget https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example  
+  # nix run nixpkgs#wget https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example
   xdg.configFile."lf/icons".source = ./icons.example;
 
   programs.lf = {
     enable = true;
     commands = {
       dragon-out = ''%${pkgs.dragon-drop}/bin/dragon-drop -a -x "$fx"'';
-      editor-open = ''$$EDITOR $f'';
+      editor-open = "$$EDITOR $f";
       mkdir = ''
         ''${{
           printf "Directory Name: "
@@ -31,7 +32,7 @@
           read ans
           [ $ans = "y" ] && rm -rf -- $fx
         }}
-      '';    
+      '';
       fzf_jump = ''
         ''${{
           res="$(find . | ${pkgs.fzf}/bin/fzf --reverse --header='Jump to location')"
@@ -67,22 +68,20 @@
           done &&
           ${pkgs.libnotify}/bin/notify-send "🚚 File(s) moved." "File(s) moved to $dest."
         }}
-      '';    
+      '';
     };
 
-    
     keybindings = {
-      "\\\"" = "";
+      "\\\"" = "mark-remove";
       o = "";
-      c = "mkdir";
       "." = "set hidden!";
       "`" = "mark-load";
       "\\'" = "mark-load";
       "<enter>" = "open";
       D = "delete";
-      do = "dragon-out";
       M = ":moveto";
 
+      # g for goto
       "g~" = "cd";
       gh = "cd ~";
       "g/" = "cd /";
@@ -91,7 +90,15 @@
       gD = "cd ~/Downloads";
 
       ee = "editor-open";
-      V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
+
+      # x for action
+      x = "";
+      xz = ''!${pkgs.unzip}/bin/unzip "$f" -d "''${f%.zip}"'';
+      xo = "dragon-out";
+      xd = "mkdir";
+
+      sr = "set reverse!";
+      V = ''$ ${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
       "<c-f>" = ":fzf_jump";
     };
 
@@ -103,43 +110,45 @@
       ignorecase = true;
     };
 
-    extraConfig = let
-      previewer = pkgs.writeShellScriptBin "pv.sh" ''
-        file=$1
-        w=$2
-        h=$3
-        x=$4
-        y=$5
+    extraConfig =
+      let
+        previewer = pkgs.writeShellScriptBin "pv.sh" ''
+          file=$1
+          w=$2
+          h=$3
+          x=$4
+          y=$5
 
-        # if its an image, use kitty's icat feature to display the image in the terminal
-        if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
-            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
+          # if its an image, use kitty's icat feature to display the image in the terminal
+          if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
+              ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
+              exit 1
+          fi
+
+          # Check if it's a PDF file
+          if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" == "application/pdf" ]]; then
+            # Convert the first page of the PDF to a PNG image using pdftoppm
+            tmp_image="/tmp/preview"
+            ${pkgs.poppler-utils}/bin/pdftoppm -png -r 72 -f 1 -l 1 "$file" "$tmp_image" && \
+            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "''${tmp_image}-1.png" < /dev/null > /dev/tty
             exit 1
-        fi
+          fi
 
-        # Check if it's a PDF file
-        if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" == "application/pdf" ]]; then
-          # Convert the first page of the PDF to a PNG image using pdftoppm
-          tmp_image="/tmp/preview"
-          ${pkgs.poppler-utils}/bin/pdftoppm -png -r 72 -f 1 -l 1 "$file" "$tmp_image" && \
-          ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "''${tmp_image}-1.png" < /dev/null > /dev/tty
-          exit 1
-        fi
-
-        ${pkgs.pistol}/bin/pistol "$file"
+          ${pkgs.pistol}/bin/pistol "$file"
+        '';
+        # clears any displayed images
+        cleaner = pkgs.writeShellScriptBin "clean.sh" ''
+          ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
+        '';
+      in
+      ''
+        set cleaner ${cleaner}/bin/clean.sh
+        set previewer ${previewer}/bin/pv.sh
+        set ifs "\n"
+        set scrolloff 10
+        set period 1
+        set hiddenfiles ".*:*.log:*.run.xml"
+        set autoquit true
       '';
-      # clears any displayed images
-      cleaner = pkgs.writeShellScriptBin "clean.sh" ''
-        ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
-      '';
-    in ''
-      set cleaner ${cleaner}/bin/clean.sh
-      set previewer ${previewer}/bin/pv.sh
-      set ifs "\n"
-      set scrolloff 10
-      set period 1
-      set hiddenfiles ".*:*.log:*.run.xml"
-      set autoquit true
-    '';
   };
 }
