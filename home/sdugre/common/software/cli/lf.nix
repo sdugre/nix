@@ -113,7 +113,7 @@
 
         # if its an image, use kitty's icat feature to display the image in the terminal
         if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
-            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
+            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode stream --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
             exit 1
         fi
 
@@ -122,7 +122,7 @@
           # Convert the first page of the PDF to a PNG image using pdftoppm
           tmp_image="/tmp/preview"
           ${pkgs.poppler-utils}/bin/pdftoppm -png -r 72 -f 1 -l 1 "$file" "$tmp_image" && \
-          ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "''${tmp_image}-1.png" < /dev/null > /dev/tty
+          ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode stream --place "''${w}x''${h}@''${x}x''${y}" "''${tmp_image}-1.png" < /dev/null > /dev/tty
           exit 1
         fi
 
@@ -130,7 +130,7 @@
       '';
       # clears any displayed images
       cleaner = pkgs.writeShellScriptBin "clean.sh" ''
-        ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
+        ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode stream < /dev/null > /dev/tty
       '';
     in ''
       set cleaner ${cleaner}/bin/clean.sh
