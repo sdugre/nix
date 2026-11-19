@@ -3,16 +3,17 @@
   config,
   nix-config-path,
   ...
-}: {
+}:
+{
   # for this to work, need to download icons using:
-  # nix run nixpkgs#wget https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example  
+  # nix run nixpkgs#wget https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example
   xdg.configFile."lf/icons".source = ./icons.example;
 
   programs.lf = {
     enable = true;
     commands = {
       dragon-out = ''%${pkgs.dragon-drop}/bin/dragon-drop -a -x "$fx"'';
-      editor-open = ''$$EDITOR $f'';
+      editor-open = "$$EDITOR $f";
       mkdir = ''
         ''${{
           printf "Directory Name: "
@@ -31,7 +32,7 @@
           read ans
           [ $ans = "y" ] && rm -rf -- $fx
         }}
-      '';    
+      '';
       fzf_jump = ''
         ''${{
           res="$(find . | ${pkgs.fzf}/bin/fzf --reverse --header='Jump to location')"
@@ -67,22 +68,20 @@
           done &&
           ${pkgs.libnotify}/bin/notify-send "🚚 File(s) moved." "File(s) moved to $dest."
         }}
-      '';    
+      '';
     };
 
-    
     keybindings = {
-      "\\\"" = "";
+      "\\\"" = "mark-remove";
       o = "";
-      c = "mkdir";
       "." = "set hidden!";
       "`" = "mark-load";
       "\\'" = "mark-load";
       "<enter>" = "open";
       D = "delete";
-      do = "dragon-out";
       M = ":moveto";
 
+      # g for goto
       "g~" = "cd";
       gh = "cd ~";
       "g/" = "cd /";
@@ -91,7 +90,15 @@
       gD = "cd ~/Downloads";
 
       ee = "editor-open";
-      V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
+
+      # x for action
+      x = "";
+      xz = ''!${pkgs.unzip}/bin/unzip "$f" -d "''${f%.zip}"'';
+      xo = "dragon-out";
+      xd = "mkdir";
+
+      sr = "set reverse!";
+      V = ''$ ${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
       "<c-f>" = ":fzf_jump";
     };
 
@@ -103,13 +110,14 @@
       ignorecase = true;
     };
 
-    extraConfig = let
-      previewer = pkgs.writeShellScriptBin "pv.sh" ''
-        file=$1
-        w=$2
-        h=$3
-        x=$4
-        y=$5
+    extraConfig =
+      let
+        previewer = pkgs.writeShellScriptBin "pv.sh" ''
+          file=$1
+          w=$2
+          h=$3
+          x=$4
+          y=$5
 
         # if its an image, use kitty's icat feature to display the image in the terminal
         if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then

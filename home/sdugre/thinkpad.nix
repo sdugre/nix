@@ -3,14 +3,15 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   wallpaperPath = "~/Documents/nix-config/home/sdugre/wallpapers/gruvbox/abstract.jpg";
-in {
+in
+{
   imports = [
     # Optional machine specific packages
     ./common/software/gui/vscodium.nix
     ./common/software/cli/feh.nix
-    ./common/software/cli/nvf-test.nix
     inputs.stylix.homeModules.stylix
   ];
   device.isLaptop = true;
@@ -21,8 +22,8 @@ in {
   #  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/atlas.yaml";
   #  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
   stylix.polarity = "dark";
-  stylix.targets.vscode.profileNames = ["Default"];
-  stylix.targets.firefox.profileNames = ["default"];
+  stylix.targets.vscode.profileNames = [ "Default" ];
+  stylix.targets.firefox.profileNames = [ "default" ];
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Classic";
   stylix.cursor.size = 20;
