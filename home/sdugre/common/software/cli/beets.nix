@@ -3,7 +3,8 @@
   username,
   config,
   ...
-}: {
+}:
+{
   sops.secrets."lastfm_key" = {
     sopsFile = ../../../secrets.yaml;
   };
@@ -13,8 +14,13 @@
   sops.secrets."discogs_token" = {
     sopsFile = ../../../secrets.yaml;
   };
-  sops.templates."discogs_token".content = ''"${config.sops.placeholder."discogs_token"}"'';
-
+  sops.templates."beets_secrets.yaml" = {
+    mode = "0600";
+    content = ''
+      discogs:
+        user_token: "${config.sops.placeholder."discogs_token"}"
+    '';
+  };
   sops.secrets."gonic_password" = {
     sopsFile = ../../../secrets.yaml;
   };
@@ -22,6 +28,9 @@
   programs.beets = {
     enable = true;
     settings = {
+      include = [
+        config.sops.templates."beets_secrets.yaml".path
+      ];
       directory = "/mnt/data/media/music";
       library = "/home/${username}/.config/beets/library.blb";
       asciify_paths = "yes";
@@ -55,17 +64,24 @@
       original_date = true;
       fetchart = {
         auto = "yes";
-        sources = ["filesystem" "coverart" "lastfm" "itunes" "amazon" "wikipedia"];
+        sources = [
+          "filesystem"
+          "coverart"
+          "lastfm"
+          "itunes"
+          "amazon"
+          "wikipedia"
+        ];
         lastfm_key = config.sops.secrets."lastfm_key".path;
       };
 
       discogs = {
-       # user_token = config.sops.templates."discogs_token".content;
-        data_source_mismatch_penalty = 0.3; # prefer disgogs over musicbrainz
+        data_source_mismatch_penalty = 0.1; # prefer disgogs over musicbrainz
+        search_limit = 20;
       };
 
       musicbrainz = {
-        data_source_mismatch_penalty = 0.5; 
+        data_source_mismatch_penalty = 0.7;
       };
 
       paths = {
@@ -93,11 +109,11 @@
 
       albumtypes = {
         types = [
-          {ep = "EP";}
-          {single = "Single";}
-          {soundtrack = "OST";}
-          {live = "Live";}
-          {compilation = "Anthology";}
+          { ep = "EP"; }
+          { single = "Single"; }
+          { soundtrack = "OST"; }
+          { live = "Live"; }
+          { compilation = "Anthology"; }
         ];
         ignore_va = "compilation";
         bracket = "[]";
@@ -113,25 +129,43 @@
         update_database = true;
         fields = [
           "mb_albumartistid"
-          "mb_albumartistids" 
-          "mb_albumid" 
-          "mb_artistid" 
-          "mb_artistids" 
+          "mb_albumartistids"
+          "mb_albumid"
+          "mb_artistid"
+          "mb_artistids"
           "mb_releasegroupid"
           "mb_releasetrackid"
-          "mb_trackid" 
+          "mb_trackid"
           "mb_workid"
           "comments"
         ];
-        mb_albumartistid =  ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_albumartistids = ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_albumid =        ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_artistid =       ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_artistids =      ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_releasegroupid = ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_releasetrackid = ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_trackid =        ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
-        mb_workid =         ["^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"];
+        mb_albumartistid = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_albumartistids = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_albumid = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_artistid = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_artistids = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_releasegroupid = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_releasetrackid = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_trackid = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
+        mb_workid = [
+          "^(?![0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}).*$"
+        ];
       };
 
       hook.hooks = [

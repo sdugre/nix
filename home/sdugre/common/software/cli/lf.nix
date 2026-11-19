@@ -2,6 +2,7 @@
   pkgs,
   config,
   nix-config-path,
+  lib,
   ...
 }:
 {
@@ -69,6 +70,18 @@
           ${pkgs.libnotify}/bin/notify-send "🚚 File(s) moved." "File(s) moved to $dest."
         }}
       '';
+    }
+    // lib.optionalAttrs config.programs.beets.enable {
+
+      beet-import = ''
+        ''${{
+          if [ -d "$f" ]; then
+            ${config.programs.beets.package}/bin/beet import "$f"
+          else
+            ${config.programs.beets.package}/bin/beet import .
+          fi
+        }}
+      '';
     };
 
     keybindings = {
@@ -100,6 +113,9 @@
       sr = "set reverse!";
       V = ''$ ${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
       "<c-f>" = ":fzf_jump";
+    }
+    // lib.optionalAttrs config.programs.beets.enable {
+      xb = "beet-import";
     };
 
     settings = {
@@ -113,41 +129,42 @@
     extraConfig =
       let
         previewer = pkgs.writeShellScriptBin "pv.sh" ''
-          file=$1
-          w=$2
-          h=$3
-          x=$4
-          y=$5
+            file=$1
+            w=$2
+            h=$3
+            x=$4
+            y=$5
 
-        # if its an image, use kitty's icat feature to display the image in the terminal
-        if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
-            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode stream --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
+          # if its an image, use kitty's icat feature to display the image in the terminal
+          if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
+              ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode stream --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
+              exit 1
+          fi
+
+          # Check if it's a PDF file
+          if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" == "application/pdf" ]]; then
+            # Convert the first page of the PDF to a PNG image using pdftoppm
+            tmp_image="/tmp/preview"
+            ${pkgs.poppler-utils}/bin/pdftoppm -png -r 72 -f 1 -l 1 "$file" "$tmp_image" && \
+            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode stream --place "''${w}x''${h}@''${x}x''${y}" "''${tmp_image}-1.png" < /dev/null > /dev/tty
             exit 1
-        fi
+          fi
 
-        # Check if it's a PDF file
-        if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" == "application/pdf" ]]; then
-          # Convert the first page of the PDF to a PNG image using pdftoppm
-          tmp_image="/tmp/preview"
-          ${pkgs.poppler-utils}/bin/pdftoppm -png -r 72 -f 1 -l 1 "$file" "$tmp_image" && \
-          ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode stream --place "''${w}x''${h}@''${x}x''${y}" "''${tmp_image}-1.png" < /dev/null > /dev/tty
-          exit 1
-        fi
-
-        ${pkgs.pistol}/bin/pistol "$file"
+          ${pkgs.pistol}/bin/pistol "$file"
+        '';
+        # clears any displayed images
+        cleaner = pkgs.writeShellScriptBin "clean.sh" ''
+          ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode stream < /dev/null > /dev/tty
+        '';
+      in
+      ''
+        set cleaner ${cleaner}/bin/clean.sh
+        set previewer ${previewer}/bin/pv.sh
+        set ifs "\n"
+        set scrolloff 10
+        set period 1
+        set hiddenfiles ".*:*.log:*.run.xml"
+        set autoquit true
       '';
-      # clears any displayed images
-      cleaner = pkgs.writeShellScriptBin "clean.sh" ''
-        ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode stream < /dev/null > /dev/tty
-      '';
-    in ''
-      set cleaner ${cleaner}/bin/clean.sh
-      set previewer ${previewer}/bin/pv.sh
-      set ifs "\n"
-      set scrolloff 10
-      set period 1
-      set hiddenfiles ".*:*.log:*.run.xml"
-      set autoquit true
-    '';
   };
 }
