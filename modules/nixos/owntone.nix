@@ -1,8 +1,8 @@
-{ 
-  lib, 
-  pkgs, 
-  config, 
-  ... 
+{
+  lib,
+  pkgs,
+  config,
+  ...
 }:
 let
   cfg = config.services.owntone;
@@ -92,21 +92,31 @@ in
       default = "owntone";
       description = "Library name advertised via mDNS";
     };
-    
+
     musicDirectories = lib.mkOption {
       type = types.listOf types.str;
       default = [ ];
       description = "Music library directories";
     };
-    
+
     filepathIgnore = lib.mkOption {
       type = types.listOf types.str;
-      default = [ "^\\." "/\\." ];
+      default = [
+        "^\\."
+        "/\\."
+      ];
       description = "Filepath patterns to ignore";
     };
 
     logLevel = lib.mkOption {
-      type = lib.types.enum [ "fatal" "log" "warning" "info" "debug" "spam" ];
+      type = lib.types.enum [
+        "fatal"
+        "log"
+        "warning"
+        "info"
+        "debug"
+        "spam"
+      ];
       default = "log";
       description = lib.mdDoc ''
         Available levels: fatal, log, warning, info, debug, spam";
@@ -134,7 +144,11 @@ in
       description = "DAAP/DACP (iTunes), RSP and MPD server, supports AirPlay and Remote";
       documentation = [ "man:owntone(8)" ];
 
-      requires = [ "network.target" "local-fs.target" "avahi-daemon.socket" ];
+      requires = [
+        "network.target"
+        "local-fs.target"
+        "avahi-daemon.socket"
+      ];
       after = [ "network.target" ];
 
       unitConfig = {
@@ -173,10 +187,12 @@ in
     services.avahi.enable = true;
     # necessary for owntone to advertise DAAP mDNS
     # this allows Soundbridge to see the owntone media server
-    services.avahi.publish.enable = true;
-    services.avahi.publish.userServices = true;
+    services.avahi.settings.publish."disable-publishing" = false;
+    services.avahi.settings.publish.disable-user-service-publishing = false;
 
-    networking.firewall.allowedTCPPorts =
-      lib.mkIf cfg.openFirewall [ cfg.listenPort cfg.websocketPort ];
+    networking.firewall.allowedTCPPorts = lib.mkIf cfg.openFirewall [
+      cfg.listenPort
+      cfg.websocketPort
+    ];
   };
 }
