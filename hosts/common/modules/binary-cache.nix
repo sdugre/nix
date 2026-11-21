@@ -1,5 +1,7 @@
-{ config, 
+{
+  config,
   hostname,
+  pkgs,
   ...
 }:
 {
@@ -10,7 +12,7 @@
 
   services.nix-serve = {
     enable = true;
-    #secretKeyFile = "/var/secrets/cache-private-key.pem";
+    package = pkgs.nix-serve-ng;
     secretKeyFile = config.sops.secrets."nix-serve/private".path;
     port = 5511;
   };
@@ -19,7 +21,8 @@
     enable = true;
     recommendedProxySettings = true;
     virtualHosts.bin-cache = {
-      locations."/".proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
+      locations."/".proxyPass =
+        "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
     };
   };
 
