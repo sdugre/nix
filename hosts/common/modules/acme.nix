@@ -1,10 +1,10 @@
 {
   lib,
-  pkgs,
   config,
   hostname,
   ...
-}: {
+}:
+{
   sops.secrets."cloudflare-creds" = {
     sopsFile = ../../${hostname}/secrets.yaml;
   };
@@ -23,11 +23,12 @@
       environmentFile = config.sops.secrets.cloudflare-creds.path;
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
-      dnsPropagationCheck = true;
+      dnsAuthoritativePropagationCheck = true;
+      dnsRecursivePropagationCheck = true;
     };
   };
 
   environment.persistence = lib.mkIf config.services.persistence.enable {
-    "/persist".directories = ["/var/lib/acme"];
+    "/persist".directories = [ "/var/lib/acme" ];
   };
 }
