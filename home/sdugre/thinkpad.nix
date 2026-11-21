@@ -14,8 +14,11 @@ in
     ./common/software/cli/feh.nix
     inputs.stylix.homeModules.stylix
   ];
-  device.isLaptop = true;
-  device.cpuThermalZone = 7;
+  device = {
+    isLaptop = true;
+    cpuThermalZone = 7;
+    trackpad.name = "synaptics-tm3471-010";
+  };
   wallpaper = wallpaperPath;
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
