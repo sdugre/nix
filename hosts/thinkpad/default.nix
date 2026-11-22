@@ -6,7 +6,8 @@
   pkgs,
   nixos-hardware,
   ...
-}: {
+}:
+{
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
@@ -22,7 +23,8 @@
 
   ];
 
-  services.upower.enable = true;  # required by throttled, which is enabled from lenovo-thinkpad-t490 input
+  services.upower.enable = true; # required by throttled, which is enabled from lenovo-thinkpad-t490 input
+  services.fprintd.enable = true; # finger print reader support
 
   services.tailscaleAutoconnect = {
     enable = true;
@@ -41,37 +43,36 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  environment.systemPackages =
-    [
-    ]
-    ++ (with pkgs; [
-#      audacity                   # audio editor - this will install version 4
-      audacity_3                  # since they inexplicably removed export based on labels in new version
-      backlight                   # personal script for brightness control
-      ifuse                       # optional, to mount using 'ifuse'
-      lemonade                    # copy paste for nvim
-      libreoffice-qt              # office suite
-      libimobiledevice            # iphone mount
-      mailclean                   # email cleanup tool
-      python311Packages.requests  # may be necessary for beets plugin
-      remmina                     # RDP
-      screen                      # window manager for console port access
-      virt-viewer
-      wake                        # personal wake on lan script
-      wireshark                   # network monitoring tool
-      xournalpp                   # annotate pdfs
-      yt-dlp                      # youtube downloader
-    ]);
+  environment.systemPackages = [
+  ]
+  ++ (with pkgs; [
+    #      audacity                   # audio editor - this will install version 4
+    audacity_3 # since they inexplicably removed export based on labels in new version
+    backlight # personal script for brightness control
+    ifuse # optional, to mount using 'ifuse'
+    lemonade # copy paste for nvim
+    libreoffice-qt # office suite
+    libimobiledevice # iphone mount
+    mailclean # email cleanup tool
+    python311Packages.requests # may be necessary for beets plugin
+    remmina # RDP
+    screen # window manager for console port access
+    virt-viewer
+    wake # personal wake on lan script
+    wireshark # network monitoring tool
+    xournalpp # annotate pdfs
+    yt-dlp # youtube downloader
+  ]);
 
   # udev rule to allow adjusting brightness
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
 
-  networking.firewall.allowedTCPPorts = [ 
-    3389    # RDM for remmina
-    2489    # lemonade 
-  ]; 
+  networking.firewall.allowedTCPPorts = [
+    3389 # RDM for remmina
+    2489 # lemonade
+  ];
 
   services.usbmuxd.enable = true; # for iphone mount
 

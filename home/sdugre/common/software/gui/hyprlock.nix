@@ -2,18 +2,25 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   font-family = "${config.fontProfiles.regular.family}";
   wallpaper = "${config.wallpaper}";
   nowPlayingScript = pkgs.writeShellScript "hypr-nowplaying" ''
     exec ${playerctl} metadata --format "{{title}}   {{artist}}" 2>/dev/null || echo ""
   '';
-in {
+in
+{
   programs.hyprlock = {
     enable = true;
     settings = {
       general = {
+      };
+
+      auth = {
+        "fingerprint:enabled" = true;
+        # after install run: 'sudo fprintd-enroll -f right-index-finger [user]'
       };
 
       background = {
