@@ -1,6 +1,8 @@
 {
   config,
   pkgs,
+  lib,
+  osConfig,
   ...
 }:
 let
@@ -20,6 +22,8 @@ in
 
       auth = {
         "fingerprint:enabled" = true;
+        "fingerprint:ready_message" = "(Or scan fingerprint)";
+        "fingerprint:present_message" = "Scanning fingerprint...";
         # after install run: 'sudo fprintd-enroll -f right-index-finger [user]'
       };
 
@@ -60,7 +64,7 @@ in
         # USER
         {
           text = "$USER";
-          font_size = 20;
+          font_size = 24;
           font_family = "${font-family}";
           position = "0, -40";
           halign = "center";
@@ -75,6 +79,18 @@ in
           position = "0, 0";
           halign = "center";
           valign = "bottom";
+        }
+      ]
+      ++ lib.optionals osConfig.services.fprintd.enable [
+        # FINGERPRINT STATUS
+        # TODO:  build only if fprintd is enabled
+        {
+          text = "$FPRINTPROMPT";
+          font_size = 16;
+          font_family = "${font-family}";
+          position = "0, -180";
+          halign = "center";
+          valign = "center";
         }
       ];
     };
