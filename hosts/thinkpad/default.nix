@@ -24,7 +24,12 @@
   ];
 
   services.upower.enable = true; # required by throttled, which is enabled from lenovo-thinkpad-t490 input
+
   services.fprintd.enable = true; # finger print reader support
+  security.pam.services.hyprlock = {
+    fprintAuth = false; # prevent conflic with hyprlock's fingerprint support
+    unixAuth = true;
+  };
 
   services.tailscaleAutoconnect = {
     enable = true;
