@@ -54,6 +54,7 @@
         inline
         fromfilename
         zero
+        rewrite
       ";
 
       import = {
@@ -174,6 +175,11 @@
           command = "ssh -i /home/sdugre/.ssh/id_ed25519 volumio@192.168.1.32 /usr/bin/mpc update";
         }
       ];
+
+      rewrite = {
+        "albumartist that dog\\." = "That Dog";
+        "artist that dog\\." = "That Dog";
+      };
     };
   };
 }
