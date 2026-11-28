@@ -2,15 +2,16 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
-    inputs.hyprland.nixosModules.default
   ];
 
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   environment.systemPackages = with pkgs; [
     nautilus
@@ -27,7 +28,7 @@
   services.udisks2.enable = true; # needed for auto mounting USB drives;  See also Home Manager hyprland config.
 
   # Hyprlock should have access to passwords, etc.
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   services.greetd = {
     enable = true;
@@ -35,12 +36,12 @@
       default_session = {
         # note:  command must be on a single line or it breaks.  See: https://github.com/nixos/nixpkgs/issues/527565
         command = "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' --cmd start-hyprland";
-      #  command = ''
-      #    ${pkgs.tuigreet}/bin/tuigreet \
-      #      --time \
-      #      --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' \
-      #      --cmd start-hyprland
-      #  '';
+        #  command = ''
+        #    ${pkgs.tuigreet}/bin/tuigreet \
+        #      --time \
+        #      --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' \
+        #      --cmd start-hyprland
+        #  '';
         user = "greeter";
       };
     };

@@ -10,8 +10,6 @@ let
 in
 {
   imports = [
-    inputs.hyprland.homeManagerModules.default
-
     # wayland stuff necessary for hyprland
     ../../software/gui/gtk.nix
     ../../software/gui/kitty.nix
